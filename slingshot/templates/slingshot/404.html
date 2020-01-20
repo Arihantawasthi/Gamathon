@@ -1,0 +1,28 @@
+{% extends 'slingshot/base.html' %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    {% load static %}
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    {% block css %}
+    <link rel="stylesheet" href="{% static 'slingshot/404.css' %}">
+    {% endblock %}
+    <title>{% block title %} 404 Not Found | Gamathon{% endblock %}</title>
+</head>
+{% block body %}
+    <div class="bg-image"></div>
+    <div class='container'>
+        <div class="error-container">
+            <div class="error-logo-img">
+            </div>
+            <div class="error-head">404 <br>
+                <span style="font-size: 30px;">Out of the Hood!</span>
+            </div>
+            <div class="error-desc">You just walked out of the hood, Homie! Head back to the Playground!</div><br>
+            <a href="{% url 'index' %}" class="return-btn">Take Me Back</a>
+        </div>
+    </div>
+{% endblock %}
+</html>

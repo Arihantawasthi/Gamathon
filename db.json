@@ -1,0 +1,920 @@
+[
+{
+    "model": "organize.organization",
+    "pk": "Test Organization",
+    "fields": {
+        "org_owner": "ansh",
+        "org_desc": "This is the test literal test.",
+        "org_logo": "media/organazition/profile-pics/profile-back.jpg",
+        "org_email": "awas@gmail.com",
+        "org_website": "",
+        "org_insta": "",
+        "org_twitter": "",
+        "org_twitch": "",
+        "org_youtube": "",
+        "org_discord": ""
+    }
+},
+{
+    "model": "organize.notification",
+    "pk": 14,
+    "fields": {
+        "user_1": "arihant",
+        "user_2": "ansh",
+        "team": null,
+        "org": null,
+        "update": "arihant started following ansh",
+        "created": "2019-12-07T13:58:07.231Z"
+    }
+},
+{
+    "model": "organize.notification",
+    "pk": 15,
+    "fields": {
+        "user_1": "ansh",
+        "user_2": "arihant",
+        "team": null,
+        "org": null,
+        "update": "ansh started following arihant",
+        "created": "2019-12-07T14:03:42.329Z"
+    }
+},
+{
+    "model": "organize.notification",
+    "pk": 16,
+    "fields": {
+        "user_1": "shiva",
+        "user_2": "ansh",
+        "team": null,
+        "org": null,
+        "update": "shiva started following ansh",
+        "created": "2019-12-07T14:04:56.501Z"
+    }
+},
+{
+    "model": "organize.notification",
+    "pk": 17,
+    "fields": {
+        "user_1": "arihant",
+        "user_2": "shiva",
+        "team": null,
+        "org": null,
+        "update": "arihant started following shiva",
+        "created": "2019-12-07T14:07:42.234Z"
+    }
+},
+{
+    "model": "slingshot.user",
+    "pk": "ansh",
+    "fields": {
+        "name": "ansh",
+        "email": "kohlivirat45678@gmail.com",
+        "password": "123456",
+        "profile_pic": "user/profile/logo.png",
+        "profile_back": "user/profile/leaderbord_back_YmOIrhO.jpg",
+        "bio": "",
+        "date_joined": "2019-10-25T21:57:11.948Z",
+        "wallet": 0,
+        "earnings": 0,
+        "wins": 0,
+        "loss": 0,
+        "tie": 0,
+        "is_active": true,
+        "followers": [
+            "arihant"
+        ]
+    }
+},
+{
+    "model": "slingshot.user",
+    "pk": "arihant",
+    "fields": {
+        "name": "arihant",
+        "email": "kohlivirat@gmail.com",
+        "password": "kickandtony",
+        "profile_pic": "",
+        "profile_back": "",
+        "bio": "",
+        "date_joined": "2019-10-29T00:00:43.177Z",
+        "wallet": 0,
+        "earnings": 0,
+        "wins": 0,
+        "loss": 0,
+        "tie": 0,
+        "is_active": false,
+        "followers": [
+            "ansh",
+            "shiva"
+        ]
+    }
+},
+{
+    "model": "slingshot.user",
+    "pk": "shiva",
+    "fields": {
+        "name": "shiva",
+        "email": "kohlivirat456789@gmail.com",
+        "password": "kickandtony",
+        "profile_pic": "",
+        "profile_back": "",
+        "bio": "",
+        "date_joined": "2019-10-31T03:03:56.326Z",
+        "wallet": 10,
+        "earnings": 0,
+        "wins": 0,
+        "loss": 0,
+        "tie": 0,
+        "is_active": false,
+        "followers": [
+            "ansh"
+        ]
+    }
+},
+{
+    "model": "slingshot.team",
+    "pk": 2,
+    "fields": {
+        "name": "Warriors",
+        "logo": "team/profile/dota2-player.png",
+        "team_banner": "team/profile/leaderbord_back.jpg",
+        "password": "1234",
+        "captain": "ansh",
+        "wallet": 0,
+        "earnings": 0,
+        "wins": 0,
+        "loss": 0,
+        "tie": 0,
+        "members": [
+            "arihant",
+            "ansh"
+        ]
+    }
+},
+{
+    "model": "slingshot.team",
+    "pk": 4,
+    "fields": {
+        "name": "Dementors",
+        "logo": "",
+        "team_banner": "",
+        "password": "1234",
+        "captain": "ansh",
+        "wallet": 0,
+        "earnings": 0,
+        "wins": 0,
+        "loss": 0,
+        "tie": 0,
+        "members": [
+            "arihant",
+            "shiva",
+            "ansh"
+        ]
+    }
+},
+{
+    "model": "slingshot.invite",
+    "pk": 12,
+    "fields": {
+        "user": "arihant",
+        "team": 4,
+        "status": 1
+    }
+},
+{
+    "model": "slingshot.invite",
+    "pk": 13,
+    "fields": {
+        "user": "arihant",
+        "team": 2,
+        "status": 1
+    }
+},
+{
+    "model": "tourney.game",
+    "pk": "CSGO",
+    "fields": {
+        "fullname": "Counter Strike: Global Offensive",
+        "bg_image": "games/bg_images/csgo-bg.jpg",
+        "card_image": "games/card_images/CSGO-card-img.jpeg",
+        "water_image": "games/water_marks/CSGO-water.png"
+    }
+},
+{
+    "model": "tourney.game",
+    "pk": "CoD",
+    "fields": {
+        "fullname": "Call of Duty",
+        "bg_image": "games/bg_images/cod-bg.jpg",
+        "card_image": "games/card_images/COD-card-img.jpeg",
+        "water_image": "games/water_marks/COD-water-2.png"
+    }
+},
+{
+    "model": "tourney.game",
+    "pk": "Dota2",
+    "fields": {
+        "fullname": "Dota 2",
+        "bg_image": "games/bg_images/dota2-bg.jpg",
+        "card_image": "games/card_images/dota2.jpg",
+        "water_image": "games/water_marks/dota2-player.png"
+    }
+},
+{
+    "model": "tourney.game",
+    "pk": "PUBGM",
+    "fields": {
+        "fullname": "PUBG Mobile",
+        "bg_image": "games/bg_images/pubgm-bgimage.jpg",
+        "card_image": "games/card_images/pubgm.jpg",
+        "water_image": "games/water_marks/PUBG-water-2.png"
+    }
+},
+{
+    "model": "tourney.game_validate",
+    "pk": 1,
+    "fields": {
+        "userName": "ansh",
+        "gameName": "Dota2",
+        "gameId": "jaishreeallah"
+    }
+},
+{
+    "model": "tourney.game_validate",
+    "pk": 11,
+    "fields": {
+        "userName": "ansh",
+        "gameName": "PUBGM",
+        "gameId": "jaiho"
+    }
+},
+{
+    "model": "tourney.game_validate",
+    "pk": 12,
+    "fields": {
+        "userName": "shiva",
+        "gameName": "PUBGM",
+        "gameId": "na"
+    }
+},
+{
+    "model": "tourney.game_validate",
+    "pk": 13,
+    "fields": {
+        "userName": "arihant",
+        "gameName": "PUBGM",
+        "gameId": "jinda"
+    }
+},
+{
+    "model": "tourney.game_validate",
+    "pk": 14,
+    "fields": {
+        "userName": "ansh",
+        "gameName": "CSGO",
+        "gameId": "yoyo"
+    }
+},
+{
+    "model": "tourney.tournament",
+    "pk": 9,
+    "fields": {
+        "name": "Test Tournament",
+        "desc": null,
+        "announcement": null,
+        "participants": 7,
+        "sponsor": "",
+        "organizer": "Test Organization",
+        "entry_fee": 10,
+        "banner": "tournament/banners/leaderbord_back_YCqUA0m.jpg",
+        "prize_pool": 50000,
+        "start_date": "2019-11-23",
+        "start_time": "23:44:00",
+        "limit": 100,
+        "status": 1,
+        "rules": "<strong>This is the test</strong>\r\n<br>\r\nYou Dumb ass.",
+        "contact": "This is the test.",
+        "schedule": "This is the test.",
+        "tour_nature": "classic",
+        "tour_type": "Squad",
+        "tour_game": "PUBGM",
+        "place_1": 0,
+        "place_2": 0,
+        "place_3": 0,
+        "place_5": 0,
+        "place_6": 0,
+        "place_7": 0,
+        "place_8": 0,
+        "place_9": 0,
+        "place_10": 0,
+        "player": [],
+        "team": [
+            4
+        ],
+        "winner": []
+    }
+},
+{
+    "model": "tourney.tournament",
+    "pk": 10,
+    "fields": {
+        "name": "Test Tournament 2",
+        "desc": null,
+        "announcement": null,
+        "participants": 6,
+        "sponsor": "",
+        "organizer": "Test Organization",
+        "entry_fee": 10,
+        "banner": "tournament/banners/leaderbord_back.jpg",
+        "prize_pool": 50000,
+        "start_date": "2019-11-25",
+        "start_time": "18:43:00",
+        "limit": 100,
+        "status": 1,
+        "rules": "This is the test.",
+        "contact": "This is the test.",
+        "schedule": "This is the test.",
+        "tour_nature": "classic",
+        "tour_type": "Solo",
+        "tour_game": "PUBGM",
+        "place_1": 0,
+        "place_2": 0,
+        "place_3": 0,
+        "place_5": 0,
+        "place_6": 0,
+        "place_7": 0,
+        "place_8": 0,
+        "place_9": 0,
+        "place_10": 0,
+        "player": [
+            "shiva",
+            "ansh"
+        ],
+        "team": [],
+        "winner": []
+    }
+},
+{
+    "model": "tourney.tournament",
+    "pk": 32,
+    "fields": {
+        "name": "Test Tournament 3",
+        "desc": null,
+        "announcement": null,
+        "participants": 0,
+        "sponsor": "",
+        "organizer": "Test Organization",
+        "entry_fee": 0,
+        "banner": "",
+        "prize_pool": 50000,
+        "start_date": "2019-11-30",
+        "start_time": "03:05:00",
+        "limit": 60,
+        "status": 0,
+        "rules": "This is the test.",
+        "contact": "This is the test.",
+        "schedule": "This is the test.",
+        "tour_nature": "classic",
+        "tour_type": "Solo",
+        "tour_game": "PUBGM",
+        "place_1": 0,
+        "place_2": 0,
+        "place_3": 0,
+        "place_5": 0,
+        "place_6": 0,
+        "place_7": 0,
+        "place_8": 0,
+        "place_9": 0,
+        "place_10": 0,
+        "player": [],
+        "team": [],
+        "winner": []
+    }
+},
+{
+    "model": "tourney.gamestat",
+    "pk": 15,
+    "fields": {
+        "game": "PUBGM",
+        "user": null,
+        "team": 4,
+        "games_played": 0,
+        "kills": 0,
+        "wins": 0,
+        "loss": 0,
+        "tie": 0
+    }
+},
+{
+    "model": "tourney.gamestat",
+    "pk": 16,
+    "fields": {
+        "game": "PUBGM",
+        "user": "ansh",
+        "team": null,
+        "games_played": 0,
+        "kills": 0,
+        "wins": 0,
+        "loss": 0,
+        "tie": 0
+    }
+},
+{
+    "model": "tourney.stage",
+    "pk": 20,
+    "fields": {
+        "tour": 32,
+        "stage_name": "Phase-1",
+        "solo": [],
+        "team": []
+    }
+},
+{
+    "model": "tourney.stage",
+    "pk": 21,
+    "fields": {
+        "tour": 32,
+        "stage_name": "Phase-2",
+        "solo": [],
+        "team": []
+    }
+},
+{
+    "model": "tourney.stage",
+    "pk": 22,
+    "fields": {
+        "tour": 32,
+        "stage_name": "Phase-3",
+        "solo": [],
+        "team": []
+    }
+},
+{
+    "model": "tourney.round",
+    "pk": 45,
+    "fields": {
+        "tour": 32,
+        "stage": 20,
+        "round_name": "Group-1",
+        "start_date": null,
+        "start_time": null,
+        "total_participants": 20,
+        "solo": [],
+        "team": []
+    }
+},
+{
+    "model": "tourney.round",
+    "pk": 46,
+    "fields": {
+        "tour": 32,
+        "stage": 20,
+        "round_name": "Group-2",
+        "start_date": null,
+        "start_time": null,
+        "total_participants": 20,
+        "solo": [],
+        "team": []
+    }
+},
+{
+    "model": "tourney.round",
+    "pk": 47,
+    "fields": {
+        "tour": 32,
+        "stage": 20,
+        "round_name": "Group-3",
+        "start_date": null,
+        "start_time": null,
+        "total_participants": 20,
+        "solo": [],
+        "team": []
+    }
+},
+{
+    "model": "tourney.round",
+    "pk": 48,
+    "fields": {
+        "tour": 32,
+        "stage": 21,
+        "round_name": "Group-1",
+        "start_date": null,
+        "start_time": null,
+        "total_participants": 15,
+        "solo": [],
+        "team": []
+    }
+},
+{
+    "model": "tourney.round",
+    "pk": 49,
+    "fields": {
+        "tour": 32,
+        "stage": 21,
+        "round_name": "Group-2",
+        "start_date": null,
+        "start_time": null,
+        "total_participants": 15,
+        "solo": [],
+        "team": []
+    }
+},
+{
+    "model": "tourney.round",
+    "pk": 50,
+    "fields": {
+        "tour": 32,
+        "stage": 22,
+        "round_name": "Final Group",
+        "start_date": null,
+        "start_time": null,
+        "total_participants": 20,
+        "solo": [],
+        "team": []
+    }
+},
+{
+    "model": "tourney.match",
+    "pk": 114,
+    "fields": {
+        "tour": 32,
+        "stage": null,
+        "round_id": 45,
+        "match_name": "Match-1",
+        "match_number": 0,
+        "map_name": "Erangel",
+        "match_status": null,
+        "start_time": null,
+        "start_date": null,
+        "solo": [],
+        "team": []
+    }
+},
+{
+    "model": "tourney.match",
+    "pk": 115,
+    "fields": {
+        "tour": 32,
+        "stage": null,
+        "round_id": 45,
+        "match_name": "Match-2",
+        "match_number": 0,
+        "map_name": "Erangel",
+        "match_status": null,
+        "start_time": null,
+        "start_date": null,
+        "solo": [],
+        "team": []
+    }
+},
+{
+    "model": "tourney.match",
+    "pk": 116,
+    "fields": {
+        "tour": 32,
+        "stage": null,
+        "round_id": 45,
+        "match_name": "Match-3",
+        "match_number": 0,
+        "map_name": "Erangel",
+        "match_status": null,
+        "start_time": null,
+        "start_date": null,
+        "solo": [],
+        "team": []
+    }
+},
+{
+    "model": "tourney.match",
+    "pk": 117,
+    "fields": {
+        "tour": 32,
+        "stage": null,
+        "round_id": 46,
+        "match_name": "Match-1",
+        "match_number": 0,
+        "map_name": "Erangel",
+        "match_status": null,
+        "start_time": null,
+        "start_date": null,
+        "solo": [],
+        "team": []
+    }
+},
+{
+    "model": "tourney.match",
+    "pk": 118,
+    "fields": {
+        "tour": 32,
+        "stage": null,
+        "round_id": 46,
+        "match_name": "Match-2",
+        "match_number": 0,
+        "map_name": "Erangel",
+        "match_status": null,
+        "start_time": null,
+        "start_date": null,
+        "solo": [],
+        "team": []
+    }
+},
+{
+    "model": "tourney.match",
+    "pk": 119,
+    "fields": {
+        "tour": 32,
+        "stage": null,
+        "round_id": 46,
+        "match_name": "Match-3",
+        "match_number": 0,
+        "map_name": "Erangel",
+        "match_status": null,
+        "start_time": null,
+        "start_date": null,
+        "solo": [],
+        "team": []
+    }
+},
+{
+    "model": "tourney.match",
+    "pk": 120,
+    "fields": {
+        "tour": 32,
+        "stage": null,
+        "round_id": 47,
+        "match_name": "Match-1",
+        "match_number": 0,
+        "map_name": "Erangel",
+        "match_status": null,
+        "start_time": null,
+        "start_date": null,
+        "solo": [],
+        "team": []
+    }
+},
+{
+    "model": "tourney.match",
+    "pk": 121,
+    "fields": {
+        "tour": 32,
+        "stage": null,
+        "round_id": 47,
+        "match_name": "Match-2",
+        "match_number": 0,
+        "map_name": "Erangel",
+        "match_status": null,
+        "start_time": null,
+        "start_date": null,
+        "solo": [],
+        "team": []
+    }
+},
+{
+    "model": "tourney.match",
+    "pk": 122,
+    "fields": {
+        "tour": 32,
+        "stage": null,
+        "round_id": 47,
+        "match_name": "Match-3",
+        "match_number": 0,
+        "map_name": "Erangel",
+        "match_status": null,
+        "start_time": null,
+        "start_date": null,
+        "solo": [],
+        "team": []
+    }
+},
+{
+    "model": "tourney.match",
+    "pk": 123,
+    "fields": {
+        "tour": 32,
+        "stage": null,
+        "round_id": 48,
+        "match_name": "Match-1",
+        "match_number": 0,
+        "map_name": "Erangel",
+        "match_status": null,
+        "start_time": null,
+        "start_date": null,
+        "solo": [],
+        "team": []
+    }
+},
+{
+    "model": "tourney.match",
+    "pk": 124,
+    "fields": {
+        "tour": 32,
+        "stage": null,
+        "round_id": 48,
+        "match_name": "Match-2",
+        "match_number": 0,
+        "map_name": "Erangel",
+        "match_status": null,
+        "start_time": null,
+        "start_date": null,
+        "solo": [],
+        "team": []
+    }
+},
+{
+    "model": "tourney.match",
+    "pk": 125,
+    "fields": {
+        "tour": 32,
+        "stage": null,
+        "round_id": 48,
+        "match_name": "Match-3",
+        "match_number": 0,
+        "map_name": "Erangel",
+        "match_status": null,
+        "start_time": null,
+        "start_date": null,
+        "solo": [],
+        "team": []
+    }
+},
+{
+    "model": "tourney.match",
+    "pk": 126,
+    "fields": {
+        "tour": 32,
+        "stage": null,
+        "round_id": 49,
+        "match_name": "Match-1",
+        "match_number": 0,
+        "map_name": "Erangel",
+        "match_status": null,
+        "start_time": null,
+        "start_date": null,
+        "solo": [],
+        "team": []
+    }
+},
+{
+    "model": "tourney.match",
+    "pk": 127,
+    "fields": {
+        "tour": 32,
+        "stage": null,
+        "round_id": 49,
+        "match_name": "Match-2",
+        "match_number": 0,
+        "map_name": "Erangel",
+        "match_status": null,
+        "start_time": null,
+        "start_date": null,
+        "solo": [],
+        "team": []
+    }
+},
+{
+    "model": "tourney.match",
+    "pk": 128,
+    "fields": {
+        "tour": 32,
+        "stage": null,
+        "round_id": 49,
+        "match_name": "Match-3",
+        "match_number": 0,
+        "map_name": "Erangel",
+        "match_status": null,
+        "start_time": null,
+        "start_date": null,
+        "solo": [],
+        "team": []
+    }
+},
+{
+    "model": "tourney.match",
+    "pk": 129,
+    "fields": {
+        "tour": 32,
+        "stage": null,
+        "round_id": 50,
+        "match_name": "Match-1",
+        "match_number": 0,
+        "map_name": "Erangel",
+        "match_status": null,
+        "start_time": null,
+        "start_date": null,
+        "solo": [],
+        "team": []
+    }
+},
+{
+    "model": "tourney.match",
+    "pk": 130,
+    "fields": {
+        "tour": 32,
+        "stage": null,
+        "round_id": 50,
+        "match_name": "Match-2",
+        "match_number": 0,
+        "map_name": "Erangel",
+        "match_status": null,
+        "start_time": null,
+        "start_date": null,
+        "solo": [],
+        "team": []
+    }
+},
+{
+    "model": "tourney.match",
+    "pk": 131,
+    "fields": {
+        "tour": 32,
+        "stage": null,
+        "round_id": 50,
+        "match_name": "Match-3",
+        "match_number": 0,
+        "map_name": "Erangel",
+        "match_status": null,
+        "start_time": null,
+        "start_date": null,
+        "solo": [],
+        "team": []
+    }
+},
+{
+    "model": "wallet.deposit",
+    "pk": 1,
+    "fields": {
+        "amount": 10,
+        "date": "2020-01-11",
+        "username": [],
+        "team": []
+    }
+},
+{
+    "model": "wallet.deposit",
+    "pk": 2,
+    "fields": {
+        "amount": 10,
+        "date": "2020-01-11",
+        "username": [
+            "shiva"
+        ],
+        "team": []
+    }
+},
+{
+    "model": "wallet.withdrawals",
+    "pk": 3,
+    "fields": {
+        "paytm_no": "8376028836",
+        "amount": 10,
+        "date": "2019-10-29",
+        "username": [
+            "ansh"
+        ],
+        "team": []
+    }
+},
+{
+    "model": "wallet.withdrawals",
+    "pk": 4,
+    "fields": {
+        "paytm_no": "8376028836",
+        "amount": 10,
+        "date": "2019-12-16",
+        "username": [
+            "ansh"
+        ],
+        "team": []
+    }
+},
+{
+    "model": "wallet.withdrawals",
+    "pk": 5,
+    "fields": {
+        "paytm_no": "8376028836",
+        "amount": 10,
+        "date": "2019-12-17",
+        "username": [
+            "ansh"
+        ],
+        "team": []
+    }
+},
+{
+    "model": "auth.user",
+    "pk": 1,
+    "fields": {
+        "password": "pbkdf2_sha256$150000$1SezSMgLddb9$je+UjKZ05XyO6NNCIYEffiesvXjPY9+u1kWjvAcJdGI=",
+        "last_login": "2020-01-18T15:26:42.030Z",
+        "is_superuser": true,
+        "username": "heisenberg",
+        "first_name": "",
+        "last_name": "",
+        "email": "awasthiarihant@gmail.com",
+        "is_staff": true,
+        "is_active": true,
+        "date_joined": "2019-10-25T21:38:11.876Z",
+        "groups": [],
+        "user_permissions": []
+    }
+}
+]

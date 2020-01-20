@@ -1,0 +1,188 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Play', 'sans-serif'; 
+}
+
+body {
+    background: linear-gradient(to left, rgb(12, 12, 12), #3b3939);
+    overflow-x: hidden;
+}
+
+.container {
+    margin: 0.8rem 1.5rem;
+}
+
+/* ----NOTIFICATION BLOCK STARTS------ */
+.notify-div {
+    display: block;
+    position: fixed;
+    top: 2rem;
+    right: -100%;
+    z-index: 99999;
+    align-items: right;
+    width: 20rem;
+    height: 5rem;
+    background: linear-gradient(to right, rgb(12, 12, 12), #1d1c1c);
+    border-radius: 4px;
+    transition: all 0.4s ease-in-out;
+    box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.5);
+}
+
+.notify-div-wrapper {
+    display: flex;
+    height: 100%;
+    width: 100%;
+}
+
+.notify-div-side-bar {
+    height: 100%;
+    width: 0.5rem;
+    border-bottom-left-radius: 4px;
+    border-top-left-radius: 4px;
+    background-color: #fe0000;
+}
+
+.heading-message-container {
+    margin-left: 1rem;
+    margin-top: 0.3rem;
+    display: flex;
+    flex-direction: column;
+    padding-right: 0.5rem;
+    width: 100%;
+}
+
+.notify-heading {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-bottom: 0.7rem;
+}
+
+.notify-close {
+    color: white;
+    cursor: pointer;
+}
+
+.notify-heading-content {
+    font-size: 20px;
+    color: white;  
+    font-weight: bold;
+    width: 100%;
+    padding-right: 0.3rem;
+}
+
+.notify-message {
+    font-size: 14px;
+    color: rgba(211, 209, 209, 0.8);
+}
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover, 
+input:-webkit-autofill:focus, 
+input:-webkit-autofill:active  {
+    -webkit-box-shadow: 0 0 0 30px #3e4554 inset !important;
+    -webkit-text-fill-color: white;
+}
+
+input:focus {
+    outline-width: 0;
+    border: 1px solid rgb(19, 196, 19);
+}
+
+.gamathon {
+    margin: auto;
+    margin-top: 2rem;
+    text-align: center;
+    margin-bottom: 3rem;
+}
+
+.gamathon-img {
+    background-image: url('./Site_Material/logo.png');
+    height: 4rem;
+    width: 4rem;
+    margin-bottom: 0.5rem;
+    background-repeat: no-repeat;
+    background-size: contain;
+    margin: auto;
+}
+
+.gamathon-name {
+    font-size: 22px;
+    color: white;
+    font-weight: bold;
+}
+
+.recover-modal-content {
+    background: linear-gradient(to bottom, rgb(40, 40, 49), rgb(10, 10, 10));
+    border-radius: 4px;
+    margin: auto 1rem;
+    box-shadow: 0 2px 10px 0px rgba(0, 0, 0, 0.5);
+    transition: all 0.3s ease-in-out;
+    color: white;
+}
+
+.recover-heading {
+    text-align: center;
+    color: whitesmoke;
+    margin: 1rem 0 1rem 0;
+    font-weight: bold;
+    text-transform: uppercase;
+    font-size: 17px;
+}
+
+.recover-pass-btn {
+    width: 5rem;
+    margin: 2rem 1rem 1.5rem 1rem;
+    padding: 8px;
+    border-radius: 2px;
+    border: 0;
+    color: whitesmoke;
+    background-color: #ec3333;
+    font-size: 15px;
+    cursor: pointer;
+    font-family: 'Play', sans-serif;
+}
+
+.recover-desc {
+    font-size: 14px;
+    margin: 1.5rem 0 1rem 1rem;
+}
+
+.password-field {
+    margin: 0 1rem;
+    border-radius: 6px;
+    border: 0;
+    height: 40px;
+    padding-left: 2.2rem;
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+    padding-right: 0.5rem;
+    background-color: #3e4554;
+    color: white;
+    width: 90%;
+    margin-bottom: 1rem;
+}
+
+.top-shadow {
+    height: 5px;
+    border-top-left-radius: 6px;
+    border-top-right-radius: 6px;
+    background-color: #ec3333;
+    margin-top: 0.5rem;
+    box-shadow: 0 0 3px 0 #fa7171;
+    transition: all 0.1s ease-in-out;
+}
+
+@media only screen and (min-width: 1035px) {
+    .recover-modal-content {
+        margin: auto;
+        width: 30%;
+        margin-top: 2rem;
+    }
+
+    .recover-pass-btn {
+        margin-bottom: 3rem;
+    }
+}

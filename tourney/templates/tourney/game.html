@@ -1,0 +1,210 @@
+<!-- 
+    * This is homepage for the Gamathon.
+    
+    * Author: Arihant Awasthi  awasthiarihant@gmail.com
+    * version: 0.9
+ -->
+{% extends 'slingshot/base.html' %}
+ <!DOCTYPE html>
+ <html lang="en">
+ <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    {% load static %}
+
+    {% block metatags %}
+        <meta name="description" content="Gamathon has many tournaments for {{ game.fullname }} Play for glory, cash and prizes. You can also Organize {{ game.fullname }} Touranaments easily.">
+        <meta property="og:title" content="{{ game.fullname }} Hub | Gamathon"/>
+        <meta property="og:url" content="https://www.gamathon.gg/home"/>
+        <meta property="og:description" content="Compete and Organize {{ game.fullname }} on Gamathon.">
+    {% endblock %}
+     
+    {% block css %}
+        <link rel="stylesheet" href="{% static 'tourney/game.css' %}">
+    {% endblock %}
+    <title>{% block title %}{{ game.fullname }} Hub| Gamathon{% endblock %}</title>
+ </head>
+{% block body %}
+    <!-- Game validation Modal -->
+    <div class="bg-validate-modal">
+        <div class="validate-modal-content">
+            <div class="top-shadow"></div>
+            <div class="validate-modal-close"><i class="fa fa-times"></i></div>
+            <div class="modal-heading" style="margin-left: 1rem; margin-right: 1rem;">Add your {{ game.fullname }} account</div>
+            <form action="#" class="validate-modal-form">
+                {% csrf_token %}
+                <div class="name-head">Account Name</div>
+                <div class="icon-name-container" style="position: relative; width: 90%;">
+                    <i class="fa fa-user" style="position: absolute; top: 0.7rem; left: 1.6rem; font-size: 18px;"></i>
+                    <input type="input" name="gameid" class="acc-name-field" placeholder="Account Name" autofocus="on">
+                </div>
+                <div class="info">NOTE: This name must match your {{ game.fullname }} name.</div>
+                <button class="validate-modal-button">Submit</button>
+            </form>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="bg-image" style="background-image: url('/media/{{ game.bg_image }}');"></div>
+        <div class="path">Arena > GamesHub > Game</div>
+        <div class="game-heading">
+            <div class="game-info">
+                <div class="game-img" style="background-image: url('/media/{{ game.card_image }}');"></div>
+                <div class="game-name">{{ game.fullname }}</div>
+            </div>
+            {% if request.session.logged_in %}
+                {% if not gameidExists %}
+                    <div class="validate-game">
+                        <div class="validate-game-text-content">
+                            <div class="validate-game-label">
+                                Validate Game
+                            </div>
+                            <div class="validate-game-sub-label">
+                                Connect this to your account to start playing!
+                            </div>
+                        </div>
+                    </div>
+                {% else %}
+                    <div class="validate-game" style="background: linear-gradient(90deg,#6ccd00,#309100); pointer-events: none; cursor: default;">
+                        <div class="validate-game-text-content">
+                            <div class="validate-game-label">
+                                Game Validated
+                            </div>
+                            <div class="validate-game-sub-label">
+                                Connected account <br><span style="font-weight: bold; font-size: 13px">{{ gameid }}</span>
+                            </div>
+                        </div>
+                    </div>
+                {% endif %}
+            {% endif %}
+        </div>
+        <div class="trending-now-leaderboard-wrap">  
+            <div class="trending-now-wrap">
+                <div class="tourney-trending">
+                    Trending now
+                </div>
+                <div class="bar-line"></div>  
+            {% if tournaments|length > 0 %}    
+                <div class="trending-tourney" style="background-image: url('/media/{{ trending_tour.banner }}');">
+                    <div class="date-platform">
+                        <div class="date-time">27th Aug, 3:30 PM</div>
+                        <div class="platform">PC</div>
+                    </div>
+                    <div class="open-entry-info">
+                        <div class="open">Open to public</div>
+                        <div class="entry">&#8377 {{ trending_tour.entry_fee }} Entry</div>
+                    </div>        
+
+                    <div class="trending-main-section">
+                        <div class="main-section-name">
+                           {{ trending_tour.name }}
+                        </div>
+                        <div class="main-section-type">
+                            {{ trending_tour.tour_type }}
+                        </div>
+                    </div>
+
+                    <div class="bottom-info">
+                        <div class="registered">{{ trending_tour.participants }} Players Registered</div>
+                        <div class="status">Registration-open</div>
+                    </div>
+                </div>
+            {% else %}
+                <div class="no-shit" style="color: white; margin-top: 0.5rem;">Tournaments coming soon.</div>
+            {% endif %}
+            </div>
+
+            <div class="leaderboard-wrap">
+                <div class="leaderboard-heading">
+                    Top Players
+                </div>
+                <div class="bar-line"></div>
+                <div class="leadboard-main">
+                {% for player in players %}
+                    <a href="{% url 'profile' player.username %}" class="leaderboard-stack">
+                        <div class="stack-img" style="background-image: url('/media/{{ player.profile_pic }}');"></div>
+                        <div class="stack-info">
+                            <div class="stack-name">{{ player.username }}</div>
+                            <div class="stack-score">{{ player.wins }}</div>
+                        </div>
+                    </a>
+                {% empty %}
+                    <div class="no-shit" style="color: white;">No players for this game of yet.</div>
+                {% endfor %}
+                </div>
+            </div>
+        </div>
+
+        <div class="browse-tourney">
+            {{ game.fullname }} Tournaments
+        </div>
+
+        <div class="bar-line"></div>
+        <!-- Tourney cards -->
+        <div class="tourney-card-container">
+        {% for tournament in tournaments %}
+            <a href="{% url 'tourney' tournament.id %}" class="tourney-card">
+                <div class="tourney-card-image" style="background-image: url('/media/{{ tournament.banner }}');">
+                    <div class="tourney-card-time">11:00 AM, 19 Aug</div>
+                    <div class="tourney-card-platform">PC</div>
+                </div>
+                <div class="tourney-card-title">
+                    {{ tournament.name }}
+                </div>
+                <div class="tourney-card-type">
+                    {{ tournament.tour_type }}
+                </div>
+                <div class="tourney-card-info">
+                    <div class="tourney-card-open">
+                        Open to Public
+                    </div>
+                    <div class="tourney-card-entry">
+                        &#8377 {{ tournament.entry_fee }} entry
+                    </div>
+                </div>
+                <div class="tourney-card-organizer-sponsor-info">
+                    <div class="tourney-card-organizer">
+                        <div class="organizer-img"></div>
+                        <div class="organizer-info">
+                            <div class="organizer">Organizer</div>
+                            <div class="organizer-name">{{ tournament.organizer }}</div>
+                        </div>
+                    </div>
+                    {% if tournament.sponsor == '' %}
+                    <div class="tourney-card-sponsor" style="display: none;">
+                        <div class="sponsor-img"></div>
+                        <div class="sponsor-info">
+                            <div class="sponsor">Sponsor</div>
+                            <div class="sponsor-name">Gamathon</div>
+                        </div>
+                    </div>
+                    {% else %}
+                    <div class="tourney-card-sponsor">
+                        <div class="sponsor-img"></div>
+                        <div class="sponsor-info">
+                            <div class="sponsor">Sponsor</div>
+                            <div class="sponsor-name">Gamathon</div>
+                        </div>
+                    </div>
+                    {% endif %}
+                </div>
+                <div class="tourney-card-prizepool">
+                    <span class="prize">Prize Pool</span> &#8377 {{ tournament.prize_pool }}
+                </div>
+                <div class="tourney-card-registration">
+                    <div class="registered">{{ tournament.participants }} Players registered</div>
+                    <div class="registration-statua">Registration Open</div>
+                </div>
+            </a>
+            {% empty %}
+            <div class="no-shit" style="color: white; margin: auto;">Tournaments coming soon.</div>
+        {% endfor %}
+        </div>
+    </div>
+{% endblock %}
+
+{% block javascript %}
+    <script src="{% static 'tourney/game.js' %}"></script>
+{% endblock %}
+</html>

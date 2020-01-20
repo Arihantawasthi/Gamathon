@@ -1,0 +1,166 @@
+{% extends 'slingshot/base.html' %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    {% load static %}
+
+    {% block css %}
+        <link rel="stylesheet" href="{% static 'organize/create_tourney.css' %}">
+    {% endblock %}
+    <title>{% block title %}Create Tournament | Gamathon{% endblock %}</title>
+</head>
+{% block body %}
+    <div class="container">
+        <div class="head">
+            Create Tournament
+        </div>
+
+        <ul class="tabs">
+            <li class="setup">Setup</li>
+            <li class="info">Info</li>
+            <li class="settings">Settings</li>
+            <li class="manage">Manage</li>
+        </ul>
+        <div class="line4"></div>
+
+        <div class="form-container">  
+            <form action="{% url 'createTourney' organization.org_name %}" class="form-field" method="post">
+                {% csrf_token %}
+                <div class="setup-section">
+                    <div class="form-heading">Setup</div>
+                    <select class="select-game" name='game-name'>
+                        <option value="Select a Game">Select a Game</option>
+                        <option value="PUBGM">PUBG Mobile</option>
+                        <option value="CoD">CoD Mobile</option>
+                    </select>
+                    <div class="name-warning">You must fill this field</div>
+
+                    <div class="tourney-name">Tourament Name</div>
+                    <input type="text" name='tour-name' class="tourney-name-input" placeholder="Tournament Name">
+                    <div class="name-warning">You must fill this field</div>
+
+                    <div class="start-date">Start Date</div>
+                    <input type="date" class="start-date-input" name="start-date">
+                    <div class="name-warning">You must fill this field</div>
+
+                    <div class="start-time">Start Time</div>
+                    <input type="time" class="tourney-start-input" name='start-time'>
+                    <div class="name-warning">You must fill this field</div>
+
+                    <!-- <div class="tourney-pic">Tournament Banner</div>
+                    <label for="img-input" class="img-label"><i class="fa fa-camera"></i>
+                        <br>
+                        <div class="caption">Upload a photo.</div>
+                    </label>
+                    <input type="file" name="tour-banner" id="img-input" class="file-input" onchange="readURL(this);" accept="image/*"> -->
+
+                    <div class="next">Next</div>
+                </div>
+
+                <div class="info-section">
+                    <div class="form-heading">Info</div>
+
+                    <div class="select-name">How will your players contact you?</div>
+                    <select class="select-contact">
+                        <option value="custom">Custom</option>
+                        <option value="discord">Discord</option>
+                        <option value="instagram">Instagram</option>
+                    </select><br>
+                    <input type="text" class="social-link" placeholder="Please provide your social media link">
+                    
+                    <input type="number" name="prize-pool" class="social-link" placeholder="Tournamet Prize">
+                    
+                    <input type="number" name="entry-fee" class="social-link" placeholder="Entry Fee">
+                    
+                    <div class="contact-details">Contact Details</div>
+                    <textarea class="contact-area" name="tour-contact" cols="30" rows="10" placeholder="Enter details here.."></textarea>
+
+                    <div class="rules">Rules</div>
+                    <textarea cols="30" rows="10" name='tour-rules' class="rules-area" placeholder="Enter details here.."></textarea>
+                    
+                    <div class="prize">Prizes</div>
+                    <textarea cols="30" rows="10" name="tour-prizes" class="prize-area" placeholder="Enter details here.."></textarea>
+                    
+                    <div class="schedule">Schedule</div>
+                    <textarea cols="30" rows="10" name='schedule' class="schedule-area" placeholder="Enter details here.."></textarea>
+                    
+                    <div class="back-next">
+                        <div class="back">Back</div>
+                        <div class="next-btn">Next</div>
+                    </div>
+                </div>
+
+                <div class="settings-section">
+                    <div class="form-heading">Settings</div>
+                    <div class="tourney-format">Tournament Format</div>
+                    <select class="select-tourney-format" name="tour-type">
+                        <option value="Squad">Squad</option>
+                        <option value="Solo">Solo</option>
+                    </select>
+
+                    <div class="bracket-sec">Brackets</div>
+                    <i class="fa fa-info-circle bracket-info-icon"></i>
+                    <div class="bracket-info">
+                        <div class="close-info"><i class="fa fa-times"></i></div>
+                        Brackets will be seeded automatically.
+                    </div>
+                    <div class="bracket-name">Bracket Name</div>
+                    <input type="text" hame='bracket-name' class="bracket-name-input" placeholder="Your Bracket Name" required>
+                    <div class="name-warning">You must fill this field</div>
+
+                    <div class="tourney-type">Tournament Type</div>
+                    <select class="select-tourney-type" name="tour-nature">
+                        <!-- <option value="single-elimination">Single Elimination</option>
+                        <option value="double-elimination">Double Elimination</option> -->
+                        <option value="classic">Classic (For Battle Royale)</option>
+                    </select>
+
+                    <div class="reg-players" style="position: relative;">Total Participants <i class="fa fa-info-circle" style="position: absolute; left: 8.3rem; top: -0.3rem"></i></div>
+                    <input type="number" name="participants" class="reg-players-input" value="100" step="20">
+
+                    <div class="total-groups-note">NOTE: Total participants must be a multiple of 20</div>
+                    
+                    <div class="rounds-display-container">
+                        <div class="round-wrapper">
+                            <div class="round-number-head" style="position: relative;">
+                                <div class="arrow-right" style="position: absolute;"></div>
+                                Round <span class="round-number">1</span>
+                            </div>
+                            <div class="current-status-container">
+                                <div class="current-status-groups">Note: This round will have <span class="no-of-groups">5</span> groups with 20 participants each.</div>
+                                <div class="no-of-winners-container"> 
+                                    <div class="no-of-winners-head">Number of winners to qualify from each group</div>
+                                    <input type="number" name='round1-winners-number' class="no-of-winners-input" placeholder="No. of winners from each group.">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    
+                    <br><button class="next-btn" id="submit-btn">Create Tournament</button>  
+
+                </div>
+            </form>
+
+            <div class="manage-section">
+                <div class="form-heading">Manage</div>
+
+                <div class="email-participants">Email Participants</div>
+                <input type="text" class="email-subject-input" placeholder="Email Subject">
+                <div class="name-warning">You must fill this field</div>
+
+                <textarea name="" class="email-body" cols="30" rows="10" placeholder="Enter Your Message Here."></textarea>      
+            
+                <button class="email-btn">Send Mail</button>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block javascript %}
+    <script src="{% static 'organize/create_tourney.js' %}"></script>
+{% endblock %}
+</html>

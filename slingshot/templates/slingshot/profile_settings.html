@@ -1,0 +1,85 @@
+{% extends 'slingshot/base.html' %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="robot" content="noindex,nofollow">
+    <meta name="googlebot" content="noindex,nofollow">
+    {% load static %}
+    {% block css %}
+        <link rel="stylesheet" href="{% static 'slingshot/profile_settings.css' %}">
+    {% endblock %}
+    <title>Account Settings</title>
+</head>
+{% block body %}
+    <!-- Eamil Change validation Modal -->
+    <div class="bg-validate-modal" id='email-modal'>
+        <div class="validate-modal-content">
+            <div class="validate-modal-close">X</div>
+            <div class="modal-heading">Change Email</div>
+            <form action="#" class="validate-modal-form" id='validate-email-form'>
+                {% csrf_token %}
+                <div class="name-head">New Email</div>
+                <input type="email" name="email" class="acc-name-field" placeholder="Email" autofocus="on">
+                
+                <div class="info"></div>
+                <button class="validate-modal-button">Submit</button>
+            </form>
+        </div>
+    </div>
+    
+    <div class="bg-validate-modal" id='password-modal'>
+        <div class="validate-modal-content">
+            <div class="validate-modal-close">X</div>
+            <div class="modal-heading">Change Password</div>
+            <form action="#" class="validate-modal-form" id='validate-password-form'>
+                {% csrf_token %}
+                <div class="name-head">New Password</div>
+                <input type="text" name="pass" class="acc-name-field" placeholder="Password" autofocus="on">
+                
+                <div class="info"></div>
+                <button class="validate-modal-button">Submit</button>
+            </form>
+        </div>
+    </div>
+
+    <div class="bg-validate-modal" id='username-modal'>
+        <div class="validate-modal-content">
+            <div class="validate-modal-close">X</div>
+            <div class="modal-heading">Change Username</div>
+            <form action="#" class="validate-modal-form" id='validate-username-form'>
+                {% csrf_token %}
+                <div class="name-head">New Username</div>
+                <input type="text" name="username" class="acc-name-field" placeholder="Username" autofocus="on">
+                
+                <div class="info"></div>
+                <button class="validate-modal-button">Submit</button>
+            </form>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="heading">Account Settings</div>
+        
+        <div class="settings-section">
+            <div class="change-email">Email</div>
+            <div class="current-email">{{ email }}</div>
+            <button class="change-email-btn">Change Email</button>
+
+            <div class="change-pass">Password</div>
+            <div class="current-pass">.......</div>
+            <button class="change-pass-btn">Change Password</button>
+
+            <div class="change-username">Username</div>
+            <div class="current-username">{{ username }}</div>
+            <button class="change-username-btn">Change Username</button>
+        </div>
+    </div>
+{% endblock %}
+
+{% block javascript %}
+    <script src="{% static 'slingshot/profile_settings.js' %}"></script>
+{% endblock %}
+</html>

@@ -1,0 +1,440 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Play', sans-serif;
+}
+
+body {
+    background: linear-gradient(to left, rgb(12, 12, 12), #3b3939);
+}
+
+.container {
+    margin: 2rem 1.5rem;
+}
+
+.wallet-head {
+    margin-top: 2rem;
+    font-size: 18px;
+    color: white;
+    font-weight: bold;
+}
+
+.wallet-page-container {
+    display: flex;
+    flex-direction: column;
+}
+
+.line {
+    height: 2px;
+    width: 100%;
+    background: linear-gradient(#ad0d0d, #262626);
+    margin: 0.2rem 0 1rem 0;
+}
+
+.current-balance {
+    background-color: rgb(52, 52, 61);
+    padding: 1.2rem 0 1.2rem 0.8rem;
+    color: white;
+    font-size: 14px;
+    border-radius: 4px;
+    margin-bottom: 1rem;
+    box-shadow: 0px 2px 5px 0px rgba(0, 0, 0, 0.5);
+}
+
+.deposit-money {
+    background-color: rgb(52, 52, 61);
+    color: white;
+    border-radius: 4px;
+    font-size: 14px;
+    padding: 1.2rem 0 1.2rem 0.8rem;
+    box-shadow: 0px 2px 5px 0px rgba(0, 0, 0, 0.5);
+}
+
+.deposit-money-content {
+    width: 100%;
+}
+
+.deposit-money-head {
+    font-size: 20px;
+    margin-bottom: 0.5rem;
+}
+
+.continue-btn {
+    background-color: #ec3333;
+    text-align: center;
+    width: 93%;
+    margin: 1rem 0.5rem 0.5rem 0.5rem;
+    padding: 0.5rem;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.continue-btn:hover {
+    background-color: #c91515;
+}
+
+.withdraw-money {
+    background-color: rgb(52, 52, 61);
+    color: white;
+    border-radius: 4px;
+    font-size: px;
+    padding: 1.2rem 0.8rem 1.2rem 0.8rem;
+    margin-top: 1.5rem;
+    margin-bottom: 2rem;
+    box-shadow: 0px 2px 5px 0px rgba(0, 0, 0, 0.5);
+}
+
+.withdraw-money-head {
+    font-size: 20px;
+    margin-bottom: 0.5rem;
+}
+
+.withdraw-platform {
+    font-size: 14px;
+    font-weight: bold;
+    margin-bottom: 0.5rem;
+}
+
+.withdraw-money-info {
+    font-size: 14px;
+}
+
+.withdraw-money-info p {
+    margin-bottom: 0.5rem;
+}
+
+.paytm-info {
+    margin-top: 1rem;
+}
+
+.paytm-num {
+    font-size: 14px;
+    margin-bottom: 0.3rem;
+    font-weight: bold;
+}
+
+.paytm-num-input {
+    background-color: rgb(38, 38, 43);
+    color: white;
+    padding-left: 1.2rem;
+    padding-right: 1.2rem;
+    border-radius: 4px;
+    border: 0;
+    width: 100%;
+    height: 3rem;
+    margin-bottom: 1rem;
+}
+
+.paytm-num-input:focus {
+    outline-width: 0;
+}
+
+.withdraw-amount {
+    margin-bottom: 0.3rem;  
+    font-weight: bold;
+}
+
+.input-wrapper {
+    display: flex;
+    background-color: rgb(38, 38, 43);
+    border-radius: 4px;
+    padding: 0.5rem 0.8rem;
+}
+
+.rupee {
+    font-size: 30px;
+    margin-top: 0.3rem;
+}
+
+.withdraw-amt-input {
+    padding: 10px;
+    border: 0;
+    font-size: 20px;
+    width: 80%;
+    color: white;
+    background-color: rgb(38, 38, 43);
+}
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover, 
+input:-webkit-autofill:focus, 
+input:-webkit-autofill:active  {
+    -webkit-box-shadow: 0 0 0 30px rgb(38, 38, 43) inset !important;
+    -webkit-text-fill-color: white;
+}
+
+.withdraw-amt-input:focus {
+    outline-width: 0;
+    border: 0;
+}
+
+.INR {
+    letter-spacing: 1px;
+    font-size: 20px;
+    margin-top: 0.6rem;
+}
+
+.warning {
+    background-color: #ec3333;
+    color: white;
+    font-size: 11px;
+    padding: 2px;
+    width: 100%;
+    border-bottom-left-radius: 4px;
+    border-bottom-right-radius: 4px;
+    display: block;
+}
+
+.deduction-fee {
+    font-size: 12px;
+    margin-bottom: 1rem;
+}
+
+.confirm {
+    padding: 0.5rem;
+    border-radius: 4px;
+    color: white;
+    background-color: #ec3333;
+    border: 0;
+    cursor: pointer;
+}
+
+.confirm:hover {
+    background-color: #c91515;
+}
+
+.trans-history-head {
+    font-size: 18px;
+    color: white;
+    font-weight: bold;
+}
+
+.trans-history-content {
+    color: white;
+    font-size: 14px;
+    background-color: rgb(52, 52, 61);
+    padding: 1.2rem 0.8rem 1.2rem 0.8rem;
+    border-radius: 4px;
+    box-shadow: 0px 2px 5px 0px rgba(0, 0, 0, 0.5);
+}
+
+/* ---WALLET DEPOSIT MODAL STARTS HERE---- */
+.bg-wallet-modal {
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    position: absolute;
+    top: 0;
+    display: none;
+    z-index: 5;
+    position: fixed;
+}
+
+.wallet-modal-content {
+    background: linear-gradient(to bottom, rgb(40, 40, 49), rgb(10, 10, 10));
+    border-radius: 4px;
+    margin: 10rem 1rem;
+    transition: all 0.3s ease-in-out;
+    box-shadow: 0px 2px 10px 0px rgba(0, 0, 0, 0.5);
+    transform: translateY(-5rem);
+}
+
+.wallet-modal-form {
+    display: flex;
+    flex-direction: column;
+    color: white;
+}
+
+.modal-heading {
+    text-align: center;
+    margin: 0.5rem 0 2rem 0;
+    color: whitesmoke;
+    font-weight: bold;
+}
+
+.wallet-modal-close {
+    color: whitesmoke;
+    text-align: right;
+    margin: 1rem 0.5rem 0 0;
+    padding: 0.5rem 0.3rem 0 0.4rem;
+    cursor: pointer;
+}
+
+.withdraw-section {
+    width: 40%;
+}
+
+.transaction-history {
+    margin-top: 2rem;
+}
+
+.name-head {
+    font-size: 13px;
+    margin: 1.5rem 0 0.5rem 1rem;
+}
+
+.modal-input-wrapper {
+    display: flex;
+    margin-left: 1rem;
+    padding: 0.5rem 0.8rem;
+    margin-top: 1rem;
+    border-radius: 4px;
+    background-color: rgb(38, 38, 43);
+    width: 90%;
+}
+
+.rupee-icon {
+    font-size: 30px;
+    margin-top: -0.2rem;
+}
+
+.amount-field {
+    background-color: rgb(38, 38, 43);
+    border-radius: 2px;
+    border: 0;
+    height: 1.8rem;
+    padding-left: 1rem;
+    width: 80%;
+    color: white;
+}
+
+.amount-field:focus {
+    outline-width: 0;
+}
+
+.INR-modal {
+    margin-left: 0.3rem;
+    letter-spacing: 1px;
+    font-size: 20px;
+    margin-top: 0.2rem;
+}
+
+.modal-warning {
+    background-color: #ec3333;
+    color: white;
+    font-size: 11px;
+    padding: 2px;
+    width: 90%;
+    border-bottom-left-radius: 4px;
+    border-bottom-right-radius: 4px;
+    display: block;
+    margin-left: 1rem;
+}
+
+.wallet-modal-button {
+    width: 5rem;
+    margin: 0 1rem 1.5rem 1rem;
+    padding: 8px;
+    border-radius: 2px;
+    border: 0;
+    color: whitesmoke;
+    background-color: #ec3333;
+    font-size: 15px;
+    cursor: pointer;
+    font-family: 'Play', sans-serif;
+    margin-top: 1rem;
+}
+
+.create-team-modal-button:hover {
+    background-color: #b62626;
+}
+
+.team-wallet-container {
+    display: flex;
+    padding-top: 2rem;
+    overflow-x: scroll;
+    width: 100%;
+    color: white;
+    padding-bottom: 0.5rem;
+    -webkit-mask-image: -webkit-gradient(linear,left top,right top,from(#000),color-stop(75%,#000),color-stop(100%,transparent));
+    -webkit-mask-image: linear-gradient(90deg,#000,#000 75%,transparent 100%);
+}
+
+::-webkit-scrollbar-track {
+    background: rgb(231, 215, 215); 
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar {
+    margin-top: 0.5rem;
+    width: 5px;
+    height: 0.5rem;
+}
+
+::-webkit-scrollbar-thumb {
+    background: rgb(85, 84, 84); 
+    border-radius: 20px;
+}
+  
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+    background: #555; 
+}
+
+.team-wallet-card {
+    margin-right: 2rem;
+    margin-left: 0.5rem;
+    padding: 1rem;
+    background-color: rgb(52, 52, 61);
+    background: linear-gradient(to right, rgb(38, 38, 43), rgb(52, 52, 61));
+    display: flex;
+    border-radius: 4px;
+    color: white;
+    text-decoration: none;
+    box-shadow: 0px 5px 10px 0px rgba(0, 0, 0, 0.5);
+    transition: all 0.3s ease-in-out;
+}
+
+.team-wallet-card:hover {
+    box-shadow: 0px 8px 15px 0px rgba(0, 0, 0, 0.5);
+    transform: translateY(-5px);
+}
+
+.team-profile-pic {
+    margin-right: 1.5rem;
+    height: 4rem;
+    width: 4rem;
+    background-color: black;
+    background-size: cover;
+    border-radius: 50%;
+    background-repeat: no-repeat;
+}
+
+.wallet-money {
+    margin-top: 0.5rem;
+    font-size: 26px;
+    font-weight: bold;
+}
+
+.team-username {
+    opacity: 0.8;
+}
+
+@media only screen and (min-width: 1048px) {
+    .wallet-modal-content {
+       margin-left: 35%;
+       width: 40%;
+    }
+
+    .wallet-modal-button {
+        margin-bottom: 3rem;
+    }
+
+    .container {
+        margin-left: 260px;
+    }
+
+    .wallet-page-container {
+        flex-direction: row;
+    }
+
+    .wallet-section {
+        width:55%;
+        margin-right: 1.5rem;
+    }
+
+    .team-wallet-container {
+        overflow-x: unset;
+    }
+}

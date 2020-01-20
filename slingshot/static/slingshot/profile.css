@@ -1,0 +1,877 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Play', sans-serif;
+}
+
+body {
+    background: linear-gradient(to left, rgb(12, 12, 12), #3b3939);
+}
+
+.container {
+    margin: 2rem 1.5rem;
+}
+
+.profile-back {
+    width: 100%;
+    height: 35rem;
+    background-image: url('./Site_Material/profile-back.jpg');
+    position: absolute;
+    opacity: 0.65;
+    -webkit-mask-image: linear-gradient(0deg,transparent 25%,#000 50%);
+    top: 0;
+    left: 0;
+    background-position: top;
+    background-size: cover;
+    pointer-events: none;
+    z-index: -1;
+    margin-top: 3rem;
+}
+
+@media only screen and (min-width: 1048px) {
+    .container {
+        margin-left: 260px;
+    }
+
+    .profile-back {
+        margin-top: 0px;
+    }
+}
+
+.profile-info {
+    display: flex;
+    margin-top: 12rem;
+    justify-content: space-between;
+}
+
+.img-name {
+    margin-bottom: 0.5rem;
+    font-size: 17px;
+}
+
+.profile-img {
+    height: 5rem;
+    width: 5rem;
+    border-radius: 50%;
+    background-image: url('./Site_Material/logo.png');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-color: #262626;
+    margin-top: 7rem;
+    border: solid 2px #fe0000;
+}
+
+.flex-divider1 {
+    display: flex;
+}
+
+.profile-name-friend {
+    margin-left: 1rem;
+    margin-top: 7.5rem;
+}
+
+.profile-name {
+    font-size: 28px;
+    font-weight: bold;
+    color: white;
+}
+
+.profile-name::first-letter {
+    font-size: 35px;
+    text-transform: capitalize;
+}
+
+.profile-friend {
+    margin-top: 0.5rem;
+}
+
+.follow-form-wrapper {
+    display: flex;
+}
+
+.friend-request-btn {
+    padding: 0.3rem;
+    background-color: #ec3333;
+    font-weight: bold;
+    color: white;
+    border-radius: 4px;
+    font-size: 14px;
+    cursor: pointer;
+    text-align: center;
+    box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.5);
+    border: 0;
+    padding: 0.3rem 2rem;
+}
+
+.friend-request-sent {
+    padding: 0.3rem;
+    background-color: #ec3333;
+    font-weight: bold;
+    color: white;
+    border-radius: 4px;
+    font-size: 14px;
+    text-align: center;
+    box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.5);
+    border: 0;
+    padding: 0.3rem 2rem;
+}
+
+.friend {
+    padding: 0.3rem;
+    margin-right: 1rem;
+    background-color: #ec3333;
+    font-weight: bold;
+    color: white;
+    border-radius: 4px;
+    font-size: 14px;
+    cursor: pointer;
+    text-align: center;
+    box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.5);
+    padding: 0.3rem 2rem;
+}
+
+.friend-follow {
+    padding: 0.3rem;
+    margin-right: 1rem;
+    background-color: #ec3333;
+    font-weight: bold;
+    color: white;
+    border-radius: 4px;
+    font-size: 14px;
+    cursor: pointer;
+    text-align: center;
+    box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.5);
+    padding: 0.3rem 1rem;
+}
+
+.profile-sec {
+    margin-top: 1.5rem;
+    color:white;
+}
+
+.profile-tabs {
+    display: flex;
+    list-style: none;
+}
+
+.profile-tabs li {
+    cursor: pointer;
+    margin-right: 1.5rem;
+    font-weight: bold;
+}
+
+.profile-tabs li:hover {
+    cursor: pointer;
+    color: #ec3333;
+}
+
+.overview::first-letter, .teams::first-letter, .stats::first-letter, .games::first-letter {
+    font-size: 22px;
+}
+
+.teams, .stats, .games {
+    opacity: 0.6;
+}
+
+.line {
+    height: 2px;
+    width: 4.5rem;
+    background-color: #ec3333;
+    margin-top: 0.5rem;
+    border-radius: 2px;
+    margin-left: 0.2rem;
+    box-shadow: 0 0 10px #fa7171;
+    transition: all 0.1s ease-in-out;
+}
+
+
+/* ------TEAM SECTION STARTS-------- */
+.teams-section {
+    margin-top: 1.5rem;
+    color: white;
+    display: none;
+}
+
+.team-heading {
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.team-heading::first-letter {
+    font-size: 30px;
+}
+
+.line4 {
+    height: 2px;
+    width: 100%;
+    background: linear-gradient(#ad0d0d, #262626);
+    margin-bottom: 1.5rem;
+    margin-top: 0.2rem;
+}
+
+.team-card-container {
+    text-decoration: none;
+    margin-bottom: 1rem;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+}
+
+.team-card {
+    text-align: center;
+    border-radius: 4px;
+    text-decoration: none;
+    color: white;
+    box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.5);
+    width: 100%;
+    margin-bottom: 1rem;
+    margin-right: 1rem;
+    background-color: rgb(26, 25, 25);
+    border-top: solid 2px #fe0000;
+}
+
+.team-members {
+    color: rgba(255, 255, 255, 0.555);
+    font-size: 13px;
+}
+
+.team-card:hover {
+    transform: translateY(-5px);
+    transition: transform ease 0.2s;
+    box-shadow: 0 2px 10px 0 rgba(0, 0, 0, 0.5);
+    transition: ease 0.2s;
+}
+
+.team-background {
+    background-image: url('./Site_Material/logo.png');
+    background-size: cover;
+    background-repeat: no-repeat;
+    height: 10rem;
+    width: 100%;
+    border-radius: 4px;
+    position: relative;
+}
+
+.team-img {
+    border-radius: 50%;
+    z-index: 3;
+    position: absolute;
+    bottom: 0rem;
+    left: 50%;
+    transform: translateX(-50%);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-color: white;
+    height: 5rem;
+    width: 5rem;
+    border: solid 1px #fe0000;
+}
+
+.team-name {
+    font-size: 18px;
+    font-weight: bold;
+    margin: 0.5rem;
+}
+
+.win-loss-table {
+    display: flex;
+    flex-direction: column;
+    background: linear-gradient(to top, rgb(44, 43, 43), #181717);
+    margin-top: 0.5rem;
+    border-radius: 4px;
+    border-top: solid 2px #fe0000;
+}
+
+.table-head {
+    display: flex;
+    justify-content: space-between;
+    margin: 1rem 3rem 0.1rem 3rem;
+}
+
+.table-body {
+    display: flex;
+    justify-content: space-between;
+    margin: 0 3.7rem 1rem 3.7rem;
+}
+
+.create-team-card {
+    cursor: pointer;
+    background-color: #2c2b2b;
+    box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.5);
+    border-radius: 4px;
+}
+
+.create-team-card > i {
+    font-size: 50px;
+    margin-top: 4rem;
+}
+.create-team-para {
+   padding-bottom: 4rem;
+}
+
+.create-team-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 2px 10px 0 rgba(0, 0, 0, 0.5);
+    transition: ease 0.2s;
+    font-size: 20px;
+}
+
+.emptyTeam {
+    font-size: 18px;
+    color: white;
+    text-align: center;
+    opacity: 0.8;
+    margin: 0 auto 9rem auto;
+}
+
+/* -----OVERVIEW SECTION STARTS------ */
+.overview-section {
+    margin-top: 1.5rem;
+    color: white;
+    display: block;
+}
+
+.overview-heading {
+    font-size: 20px;
+    font-weight: bold;
+    margin-top: 2rem;
+}
+
+.overview-heading::first-letter {
+    font-size: 30px;
+}
+
+.most-played-game {
+    margin-top: 1rem;
+}
+
+.friends-card-wrapper {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+}
+
+.friends-card {
+    margin-right: 1rem;
+    /* background-color: rgb(49, 49, 49); */
+    background: linear-gradient(0deg,rgb(56, 55, 55) 25%,#222222 70%);
+    border-radius: 4px;
+    box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.5);
+    padding: 4rem 0;
+    text-decoration: none;
+    color: white;
+    margin-bottom: 1rem;
+    width: 44%;
+    border-top: solid 3px #fe0000;
+    height: 14rem;
+}
+
+.friends-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 3px 12px 0 rgba(0, 0, 0, 0.5);
+    transition: ease 0.2s;
+}
+
+.friend-pic {
+    height: 4rem;
+    width: 4rem;
+    border-radius: 50%;
+    margin: auto;
+    background-image: url('./Site_Material/logo.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    border: solid 1px #fe0000;
+}
+
+.friend-name {
+    text-align: center;
+    margin-top: 1rem;
+    font-size: 17px;
+}
+
+.friend-name::first-letter {
+    text-transform: capitalize;
+    font-size: 20px;
+}
+
+.no-shit {
+    margin-top: -1rem;
+    margin-bottom: 2rem;
+}
+
+.played-game-container {
+    display: flex;
+    flex-direction: column;
+}
+
+.played-game-card {
+    width: 100%;
+    box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.5);
+    margin-bottom: 2rem;
+    text-decoration: none;
+    color: white;
+    box-shadow: 0px 5px 10px 0px rgba(0, 0, 0, 0.5);
+}
+
+.played-game-card-up-sec {
+    background-color: rgb(58, 58, 68);
+    border-top-left-radius: 4px;
+    border-top-right-radius: 4px;
+    padding: 1.2rem 0.8rem;
+    display: flex;
+}
+
+.played-game-img {
+    border-radius: 50%;
+    height: 3rem;
+    width: 3rem;
+    background-color: black;
+    margin-right: 1rem;
+    background-image: url('./Site_Material/logo.png');
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+.played-game-name {
+    font-weight: bold;
+    margin-top: 0.2rem;
+}
+
+.played-game-history {
+    opacity: 0.6;
+    font-size: 14px;
+    margin-top: 0.1rem;
+}
+
+.played-game-card-bot-sec {
+    text-align: center;
+    background-color: rgb(34, 28, 28);
+    padding: 1rem;
+    display: flex;
+    justify-content: space-between;
+}
+
+.played-game-result {
+    font-weight: bold;
+    font-size: 20px;
+    background-color: green;
+    width: 30%;
+    border-radius: 4px;
+    padding: 0.5rem 0;
+}
+
+.played-game-prize {
+    font-size: 20px;
+    margin-top: 0.5rem;
+}
+
+.played-game-score {
+    background-color: rgb(34, 28, 28);
+    padding-bottom: 1rem;;
+    border-bottom-left-radius: 4px;
+    border-bottom-right-radius: 4px;
+    text-align: center;
+    font-size: 18px;
+    font-weight: bold;
+}
+/* ----OVERVIEW SECTION ENDS----- */
+
+/* ----STATISTICS SECTION BEGINS---- */
+.stats-section {
+    margin-top: 1.5rem;
+    color: white;
+    display: none;
+}
+
+.stats-heading {
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.stats-heading::first-letter {
+    font-size: 30px;
+}
+
+.stats-card {
+    width: 100%;
+    border-radius: 4px;
+    box-shadow: 0 3px 7px 0 rgba(0, 0, 0, 0.5);
+    padding: 1rem;
+    padding-bottom: 2rem;
+    position: relative;
+    margin-bottom: 1rem;
+}
+
+.stats-card-back {
+    width: 100%;
+    height: 100%;
+    background-image: url('https://s3-cdn.mogul.gg/gameasset/83b0cb38-a3a5-49f7-b68e-2db1b70f526f.jpg');
+    position: absolute;
+    opacity: 0.65;
+    top: 0;
+    left: 0;
+    background-size: cover;
+    pointer-events: none;
+    z-index: -1;
+    border-radius: 4px;
+}
+
+.stats-card-head {
+    display: flex;
+    margin-right: 0.5rem;
+}
+
+.stats-card-img {
+    height: 3rem;
+    width: 3rem;
+    border-radius: 50%;
+    margin-right: 0.5rem;
+    background-color: blue;
+    background-size: contain;
+}
+
+.stats-card-name {
+    font-weight: bold;
+    margin-bottom: 0.1rem;
+}
+
+.stats-card-stats {
+    opacity: 0.7;
+}
+
+.stats-game-played {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 2rem;
+    font-weight: bold;
+}
+
+.stats-num {
+    font-size: 25px;
+    margin-left: 48%;
+}
+
+
+.stats-game {
+    opacity: 0.7;
+    font-size: 14px;
+}
+
+.stats-percentage {
+    font-size: 25px;
+}
+
+.stats-perc-name {
+    opacity: 0.7;
+    font-size: 14px;
+}
+
+.stats-game-played-info {
+    display: flex;
+    margin-top: -2rem;
+}
+
+.stats-played-names {
+    margin-right: 1rem;
+}
+
+.stats-played-nums {
+    margin-top: 1px;
+}
+
+.stats-played-names div{
+    margin-bottom: 0.5rem
+}
+
+.stats-played-nums div{
+    margin-bottom: 0.5rem;
+}
+/* -----STATISTICS SECTION ENDED----- */
+
+/* -----GAMES SECTION STARTS----- */
+.games-section {
+    margin-top: 1.5rem;
+    color: white;
+    display: none;
+}
+
+.games-card-container {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.games-card {
+    width: 44%;
+    text-decoration: none;
+    color: white;
+    border-radius: 4px;
+    background-color: #fe0000;
+    box-shadow: 0 3px 7px 0 rgba(0, 0, 0, 0.5);
+    margin-right: 1rem;
+    margin-bottom: 1rem;
+}
+
+.games-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 3px 12px 0 rgba(0, 0, 0, 0.5);
+    transition: ease 0.2s;
+}
+
+.games-card-img {
+    background-image: url('https://s3-cdn.mogul.gg/gameasset/83b0cb38-a3a5-49f7-b68e-2db1b70f526f.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    width: 5rem;
+    height: 12rem;
+    width: 100%;
+    border-top-left-radius: 4px;
+    border-top-right-radius: 4px;
+}
+
+.games-card-game {
+    margin: 0.5rem;
+}
+
+/*   -----CREATE TEAM MODAL-----   */
+.bg-create-team-modal {
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    position: absolute;
+    top: 0;
+    display: none;
+    z-index: 5;
+    position: fixed;
+}
+
+.create-team-modal-content {
+    background: linear-gradient(to bottom, rgb(40, 40, 49), rgb(10, 10, 10));
+    border-radius: 4px;
+    margin: 3rem 1rem;
+}
+
+.create-team-modal-form {
+    display: flex;
+    flex-direction: column;
+    color: white;
+}
+
+.modal-heading {
+    text-align: center;
+    text-transform: uppercase;
+    margin: 0.5rem 0 2rem 0;
+    color: whitesmoke;
+    font-weight: bold;
+}
+
+.create-team-modal-close {
+    color: whitesmoke;
+    text-align: right;
+    margin: 1rem 0.5rem 0 0;
+    padding: 0.5rem 0.3rem 0 0.4rem;
+    cursor: pointer;
+}
+
+.name-head {
+    font-size: 13px;
+    margin: 1.5rem 0 0.5rem 1rem;
+    text-transform: uppercase;
+}
+
+.acc-name-field {
+    margin: 0 1rem;
+    border-radius: 2px;
+    border: 0;
+    height: 1.8rem;
+    padding-left: 1rem;
+    color: white;
+}
+
+.acc-name-field:focus {
+    border: 1px solid rgb(19, 196, 19);
+}
+
+.info {
+    margin: 0.5rem 0 1rem 1rem;
+    font-size: 14px;
+    color: white;
+}
+
+.create-team-modal-button {
+    width: 5rem;
+    margin: 0 1rem 1.5rem 1rem;
+    padding: 8px;
+    border-radius: 2px;
+    border: 0;
+    color: whitesmoke;
+    background-color: #ec3333;
+    font-size: 15px;
+    cursor: pointer;
+    font-family: 'Play', sans-serif;
+    margin-top: 1rem;
+}
+
+.footer {
+    margin-top: 11rem;
+}
+
+.create-team-modal-button:hover {
+    background-color: #b62626;
+}
+
+@media only screen and (min-width: 1048px) {
+    .create-team-modal-content {
+       margin-left: 35%;
+       width: 40%;
+    }
+
+    .create-team-modal-button {
+        margin-bottom: 3rem;
+    }
+}
+
+@media only screen and (min-width: 1048px) {
+    .friends-card {
+        width: 20%;
+    }
+
+    .games-card {
+        width: 12rem;
+    }
+    
+    .team-card-wrapper { 
+        flex-direction: row;
+        flex-wrap: wrap;
+    }
+
+    .team-card-container {
+        flex-direction: row;
+        flex-wrap: wrap;
+    }
+
+    .played-game-container {
+        width: 100%;
+        flex-wrap: wrap;
+        flex-direction: row;
+    }
+
+    .played-game-card {
+        width: 30%;
+        margin-right: 1rem;
+    }
+}
+
+@media only screen and (min-width: 768px) {
+    .team-card-wrapper {
+        flex-direction: row;
+        flex-wrap: wrap;
+    }
+
+    .team-card-container {
+        flex-direction: row;
+        flex-wrap: wrap;
+    }
+
+    .team-card {
+        width: 44%;
+    }
+
+    .create-team-card {
+        width: 44%;
+    }
+}
+
+#img-profile {
+    display: none;
+}
+
+.profile-back-save-btn, .profile-pic-save-btn {
+    padding: 0.5rem 2rem;
+    border: 0;
+    border-radius: 4px;
+    background-color: #ec3333;
+    color: white;
+    box-shadow: 0 2px 5px 0px rgba(0, 0, 0, 0.5);
+    margin-top: 10rem;
+    cursor: pointer;
+    display: none;
+}
+
+#img-input {
+    display: none;
+}
+
+.img-label {
+    position: absolute;
+    font-size: 14px;
+    color: white;
+    top: 4rem;
+    right: 1rem;
+}
+
+#profile-pic-label {
+    position: absolute;
+    font-size: 14px;
+    color: white;
+    top: 25.5rem;
+    left: 5rem;
+}
+
+#profile-pic {
+    font-size: 30px;
+    color: white;
+    cursor: pointer;
+}
+
+.img-label > i {
+    cursor: pointer;
+    font-size: 30px;
+    margin-left: 2.2rem;
+}
+
+.profile-pic-save-btn {
+    position: absolute;
+    top: 16rem;
+    left: 8rem;
+    z-index: 3;
+}
+
+.tourney-played {
+    margin-top: -0.3rem;
+}
+
+@media only screen and (min-width: 1048px) { 
+    .img-label {
+        font-size: 16px;
+        top: 2rem;
+    }
+
+    .img-label > i {
+        font-size: 50px;
+        margin-right: 1.8rem;
+    }
+
+    #profile-pic-label {
+        left: 20rem;
+        top: 22rem;
+    }
+
+    .profile-pic-save-btn {
+        top: 12rem;
+        left: 23rem;
+    }
+
+    .friends-card {
+        width: 11rem;
+    }
+
+    .team-card {
+        width: 16rem;
+    }
+
+    .create-team-card {
+        width: 16rem;
+    }
+}

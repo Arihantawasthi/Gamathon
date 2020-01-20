@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% load static %}
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="robot" content="index,follow">
+    <meta name="googlebot" content="index,follow">
+    <meta name="keywords" content="online tournaments, pubg online tournaments, online gaming tournaments, gaming tournaments">
+    <meta property="og:image" content="{% static 'slingshot/Site_Material/logo-card-icon.png' %}">
+    <meta property="og:type" content="website"/>
+    <meta property="og:locale" content="en_US"/>
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:site" content="@Gamathon" />
+    <meta name="twitter:creator" content="@Arihantawasthi" />
+    <meta name="description" content="Login to Gamathon and start competing in tournaments or create and organization to organize online gaming tournaments.">
+    <meta property="og:title" content="Play Online Gaming Tournaments."/>
+    <meta property="og:url" content="https://www.gamathon.gg/signin"/>
+    <meta property="og:description" content="Login to Gamathon to Compete and Organize Online Gaming Tournaments.">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.4.1.js" integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="anonymous"></script>
+    <link href="http://code.jquery.com/ui/1.10.2/themes/smoothness/jquery-ui.css" rel="Stylesheet">
+    <script src="http://code.jquery.com/ui/1.10.2/jquery-ui.js" ></script>
+    <link href="https://fonts.googleapis.com/css?family=Play:400,700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="{% static 'slingshot/login.css' %}">
+    <link rel="stylesheet" href="{% static 'slingshot/nav.css' %}">
+    <link rel='shortcut icon' type='image/png' href="{% static 'slingshot/Site_Material/logo.png' %}">
+    <title>Login Page | Gamathon</title>
+</head>
+<body>
+    <div class="bg-image"></div>
+    <div class="container">
+        <!-- Login Model Starts -->
+        <div class="login-modal-content">
+            <div class="top-shadow"></div>
+            <div class="modal-heading">Welcome Back Homie!</div>
+            <div class="modal-img"></div>
+            <form action="#" class="login-modal-form" id='login-form' method="POST">
+                {% csrf_token %}
+                <div class="name-head">Username</div>
+                <i class="fa fa-user" style="position: absolute; top: 14.1rem; left: 1.6rem; font-size: 18px;"></i>
+                <input type="input" name='loginUsername' class="username-field" placeholder="Username" autofocus="on" required>
+                
+                <div class="pass-head">Password</div>
+                <input type="password" name="loginPass" class="pass-field" placeholder="Password" required>
+                <i class="fa fa-lock" style="position: absolute; top: 20rem; left: 1.6rem; font-size: 20px;"></i>
+                <div class="warning" style='color: red; display: none; font-size: 14px; margin-left: 1rem; margin-top: 0.5rem;'>You must fill this field</div>
+
+                <button class="login-modal-button">Login</button>
+            </form>
+            <div class="reg-reminder">Don't have an account? <a href="{% url 'register' %}" style="color: white;">Register Now</a></div>
+        </div>
+    </div>
+
+    <h1 id="session" style="display: none;">{{ request.session.logged_in }}</h1>
+    <h1 id="sessionUser" style="display: none;">{{ request.session.username }}</h1>
+
+    <script src="{% static 'slingshot/login.js' %}"></script>
+</body>
+</html>

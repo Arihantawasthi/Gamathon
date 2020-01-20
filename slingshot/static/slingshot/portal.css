@@ -1,0 +1,334 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Play', 'sans-serif'; 
+}
+
+body {
+    background: linear-gradient(to left, rgb(12, 12, 12), #3b3939);
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizelegibility;
+}
+
+.loading-wrapper {
+    background: linear-gradient(to left, rgb(12, 12, 12), #3b3939);
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    left: 0;
+    top: 0;
+    z-index: 99999;
+}
+
+.main {
+    height: 92vh;
+    width: 100%;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.main-bg {
+    background-image: url('./Site_Material/carousel-img1-desktop.png');
+    position: absolute;
+    width: 100%;
+    height: 92vh;
+    background-position: top;
+    background-size: cover;
+    z-index: -1;
+    opacity: 0.3;
+    margin-left: 0px;
+    -webkit-mask-image: linear-gradient(0deg,transparent 1%,#000 99%);
+}
+
+.heading-slogan-box {
+    text-align: center;
+}
+
+.heading {
+    font-weight: bolder;
+    font-size: 40px;
+    text-shadow: 5px 8px 15px rgba(0, 0, 0, 0.5);
+}
+
+.heading::first-letter {
+    font-size: 60px;
+}
+
+.desc {
+    font-size: 17px;
+    margin-top: 1rem;
+    margin-left: auto;
+    margin-right: auto;
+    text-shadow: 5px 10px 20px rgba(0, 0, 0, 0.5);
+    width: 60%;
+    letter-spacing: 0.05rem;
+}
+
+.login-play-container {
+    flex-direction: column;
+    justify-content: space-around;
+    margin-top: 3rem;
+}
+
+.enter-background, .create-acc {
+    padding: 0.8rem 3rem;
+}
+
+.login-play-container > div {
+    margin-bottom: 2rem;
+}
+
+.create-acc > a {
+    border: 1px solid #fe0000;
+    background-color: #fe0000;
+    color: white;
+    padding: 0.8rem 3rem;
+    border-radius: 30px;
+    font-size: 14px;
+    font-weight: bold;
+    text-decoration: none;
+    text-transform: uppercase;
+    box-shadow: 0px 5px 10px 0px rgba(0, 0, 0, 0.5);
+}
+
+.enter-playground > a {
+    border: 3px solid #fe0000;
+    background: transparent;
+    color: white;
+    padding: 0.8rem 3rem;
+    border-radius: 30px;
+    font-size: 14px;
+    text-decoration: none;
+    text-transform: uppercase;
+    box-shadow: 0px 5px 10px 0px rgba(0, 0, 0, 0.5);
+}
+
+.create-acc > a:hover {
+    transition: all 0.3s ease-in-out;
+    box-shadow: 0px 5px 10px 5px rgba(254, 0, 0, 0.5);
+    background-color: #cc0000;
+}
+
+.enter-playground > a:hover {
+    transition: all 0.3s ease-in-out;
+    box-shadow: 0px 5px 10px 5px rgba(254, 0, 0, 0.5);
+    background-color: #cc0000;
+}
+
+.heading1 {
+    font-size: 35px;
+    font-weight: bold;
+    color: white;
+    margin-top: 0rem;
+    text-align: center;
+}
+
+.features {
+    color: white;
+    display: flex;
+    flex-direction: column;
+    margin-top: 2rem;
+    margin-left: auto;
+    margin-right: auto;
+    width: 75%;
+    margin-bottom: 3rem;
+}
+
+.features div {
+    margin-bottom: 1rem;
+}
+
+.compete, .find, .organize, .leaderboard {
+    background-color: rgb(38, 38, 43);
+    border-radius: 8px;
+    box-shadow: 0px 2px 5px 0px rgba(0, 0, 0, 0.5);
+    padding: 0.5rem 1rem;
+}
+
+.header {
+    font-size: 22px;
+    font-weight: bold;
+    margin-bottom: 0.5rem;
+}
+
+.description {
+    font-size: 16px;
+}
+
+.features-desc {
+    display: flex;
+    color: white;
+    flex-direction: column;
+    width: 100%;
+    margin-top: 2rem;
+    margin-bottom: 4rem;
+}
+
+.organize-desc, .compete-desc, .find-desc, .leaderboard-desc {
+    display: flex;
+    flex-direction: column;
+    margin: 0 1rem;
+    box-shadow: 0px 5px 10px 0px rgba(0, 0, 0, 0.5);
+}
+
+.compete-desc-img, .find-desc-img, .organize-desc-img, .leaderboard-desc-img {
+    width: 100%;
+    height: 14rem;
+    background-size: contain;
+    background-position: top;
+    background-repeat: no-repeat;
+    background-color:#1f1f1f;
+}
+
+.compete-desc-img {
+    background-image: url('./Site_Material/tournament_icon4\ .png');
+}
+.find-desc-img {
+    background-image: url('./Site_Material/socialize.png');
+}
+.organize-desc-img {
+    background-image: url('./Site_Material/Group\ 2.png');
+}
+.leaderboard-desc-img {
+    background-image: url('./Site_Material/leaderboards.png');
+}
+
+.organize-desc-head-description-container, .compete-desc-head-description-container, .find-desc-head-description-container, .leaderboard-desc-head-description-container {
+    color: white;
+    background-color: rgb(18, 18, 18);
+    padding: 4rem 1rem;
+}
+
+.desc-head {
+    font-size: 30px;
+    font-weight: bold;
+    margin-bottom: 1rem;
+}
+
+.desc-description {
+    line-height: 1.2rem;
+}
+
+.register-btn {
+    padding-top: 0.8rem;
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+    text-align: center;
+}
+
+.register-btn > a {
+    border: 1px solid #fe0000;
+    background-color: #fe0000;
+    color: white;
+    padding: 0.8rem 3rem;
+    border-radius: 30px;
+    font-size: 14px;
+    font-weight: bold;
+    text-decoration: none;
+    text-transform: uppercase;
+    box-shadow: 0px 5px 10px 0px rgba(0, 0, 0, 0.5);
+}
+
+.register-btn > a:hover {
+    transition: all 0.3s ease-in-out;
+    box-shadow: 0px 5px 10px 5px rgba(254, 0, 0, 0.5);
+    background-color: #cc0000;   
+}
+
+.anim {
+    opacity: 0;
+}
+
+.lets-connect {
+    margin-bottom: 4rem;
+}
+
+@keyframes anim1 {
+    0% {
+        transform: translateY(100px);
+        opacity: 0;
+    }
+    100% {
+        transform: translateY(0px);
+        opacity: 1;
+    }
+}
+
+@media only screen and (min-width: 1048px) {
+    .main {
+        height: 100vh;
+    }
+
+    .heading {
+        font-size: 50px;
+    }
+
+    .main-bg {
+        height: 100vh;
+    }
+
+    .login-play-container {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        margin-top: 3rem;
+        max-width: 60%;
+        margin-right: auto;
+        margin-left: auto;
+    }
+
+    .login-play-container > div {
+        margin-bottom: 0rem;
+    }
+
+    .enter-background, .create-acc {
+        padding: 0rem 0rem;
+    }
+
+    .features {
+        flex-direction: row;
+        justify-content: space-around;
+        width: 80%;
+        margin-bottom: 5rem;
+        margin-right: auto;
+        margin-left: auto;
+    }
+
+    .features > div {
+        margin-bottom: 0rem;
+        margin-right: 1rem;
+        max-width: 17rem;
+        box-shadow: 0px 5px 10px 0px rgba(0, 0, 0, 0.5);
+    }
+
+    .features-desc {
+        margin-left: -1rem;
+        margin-right: 1rem;
+    }
+
+    .compete-desc, .organize-desc {
+        flex-direction: row;
+        width: 100%;
+    }
+
+    .find-desc, .leaderboard-desc {
+        flex-direction: row-reverse;
+        width: 100%;
+    }
+
+    .compete-desc-img, .organize-desc-img, .find-desc-img, .leaderboard-desc-img {
+        height: 20rem;
+        width: 50%;
+    }
+
+    .organize-desc-head-description-container, .compete-desc-head-description-container, .find-desc-head-description-container, .leaderboard-desc-head-description-container {
+        height: 20rem;
+        width: 50%;
+        padding-left: 5rem;
+        padding-right: 5rem; 
+    }
+
+}

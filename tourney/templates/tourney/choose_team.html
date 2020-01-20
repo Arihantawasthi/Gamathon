@@ -1,0 +1,82 @@
+{% extends 'slingshot/base.html' %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    {% load static %}
+    
+    {% block css %}
+        <link rel="stylesheet" href="{% static 'tourney/choose_team.css' %}">
+    {% endblock %}
+    <meta name="robot" content="noindex,nofollow">
+    <meta name="googlebot" content="noindex,nofollow">
+    <title>{% block title %} Choose Team | Gamathon{% endblock %}</title>
+</head>
+{% block body %}
+    <!-- Create Team validation Modal -->
+    <div class="bg-create-team-modal">
+        <div class="create-team-modal-content">
+            <div class="create-team-modal-close"><i class="fa fa-times"></i></div>
+            <div class="modal-heading">Make Your Own Team</div>
+            <div class="info"><p>Teams are the best way to experience Gamathon. Your team will have a dedicated team profile page showcasing your team statistics, leaderboard status and more.</p>
+
+                    <br><p>Once you have created your team you can directly invite your friends or send this Join Code so that they can join your team and start competing in larger team tournaments.</p>
+            </div>
+
+            <form action="#" id="create-team-form" class="create-team-modal-form" method="POST">
+                {% csrf_token %}
+                <div class="name-head">Team Name</div>
+                <input type="input" name="team-name" class="acc-name-field" placeholder="Team Name" autofocus="on" required>
+                <div class="name-head">Password / Join Code</div>
+                <input type="text" name="join-code" class='acc-name-field' placeholder="Team Join Code" required>
+                <button class="create-team-modal-button">Create</button>
+            </form>
+        </div>
+    </div>
+    
+    <div class='container'>
+        <div class="bg-validate-modal-teamRegister">
+            <div class="validate-modal-content-teamRegister">
+                <div class="modal-heading">Choose a Team</div>
+                {% if teams|length == 0 %}
+                    <div class="modal-heading-createTeam">Create New Team</div>
+                {% endif %}
+                <form action="#" id='team-select' class="form1" method='POST'>
+                    {% csrf_token %}
+                    <input type="hidden" name="request-type" value="get-players">
+                    <div class="name-head-teamRegister">NOTE: You must be a captain of a team to register.</div>
+                        <div class="select-container-wrapper">
+                        {% for team in teams %}
+                            <label class="radio-container">{{ team.name }}
+                                <div class="members">{{ team.members.count }} members</div>
+                                <input type="radio" class="team-names" name="radio" value="{{ team.name }}">
+                                <span class="checkmark"></span>
+                            </label>
+                        {% endfor %}
+                        </div>
+                    {% if teams|length != 0 %}
+                        <button class="createTeam-modal-nxt-btn">Next</button>
+                    {% endif %}
+                </form>
+                
+                {% if tournament.entry_fee == 0 %}
+                    <form action="#" id="player-select" class="form2" method="post">
+                {% else %}
+                    <form action="{% url 'chooseTeam' tournament.id %}" class="form2" method="post">
+                {% endif %}
+                    {% csrf_token %}
+                    <input type="hidden" name="request-type" value="register">
+                    <div class="player-container-wrapper">
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block javascript %}
+    <script src="{% static 'tourney/choose_team.js' %}"></script>
+{% endblock %}
+</html>

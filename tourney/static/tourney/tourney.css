@@ -1,0 +1,1492 @@
+/* 
+    * This is the CSS for tournament page for the Gamathon, this is where magic happens ;)
+
+    * Author: Arihant Awasthi  awasthiarihant@gmail.com
+    * version: 0.9
+*/
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Play', 'sans-serif'; 
+}
+
+body {
+    background: linear-gradient(to left, rgb(12, 12, 12), #3b3939);
+    overflow-x: hidden;
+}
+
+/* SPONSOR AND ORGANIZER BANNERS */
+.sponsor-banner, .organizer-banner {
+    position: absolute;
+    left: 0.5rem;
+    top: 5rem;
+    width: 7rem;
+    max-width: 8rem;
+    background: linear-gradient(to right, rgb(12, 12, 12), #1d1c1c);
+    color: white;
+    display: flex;
+    font-size: 12px;
+    -webkit-transform: skew(-10deg);
+    transform: skew(-10deg); 
+    height: 3rem;
+    max-height: 5rem;
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.5);
+    border-top-left-radius: 4px;
+    border-bottom-left-radius: 4px;
+    animation-name: sponsor-anim;
+    animation-duration: 1.5s;
+    animation-direction: forwards;
+}
+
+.organizer-banner {
+    top: 10rem;
+}
+
+.organizer-banner-side-bar, .sponsor-banner-side-bar {
+    height: 100%;
+    width: 0.3rem;
+    background-color: #fe0000;
+    margin-right: 0.5rem;
+    border-top-left-radius: 4px;
+    border-bottom-left-radius: 4px;
+}
+
+.sponsor-banner-head-info-wrapper, .organizer-banner-head-info-wrapper {
+    margin-top: 0.1rem;
+    -webkit-transform: skew(10deg);
+    transform: skew(10deg); 
+}
+
+.sponsor-banner-head, .organizer-banner-head {
+    margin-bottom: 0.2rem;
+}
+
+.sponsor-banner-info, .organizer-banner-info {
+    font-size: 14px;
+    text-decoration: none;
+    color: white;
+    font-weight: bold;
+    margin-bottom: 0.2rem;
+}
+
+@keyframes sponsor-anim {
+    from {
+        width: 0rem;
+    }
+    to {
+        width: 7rem;
+    }
+}
+
+/*       Validate Game Modal     */
+.bg-validate-modal {
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    position: absolute;
+    top: 0;
+    display: none;
+    z-index: 5;
+    position: fixed;
+}
+
+.validate-modal-content {
+    background: linear-gradient(to bottom, rgb(40, 40, 49), rgb(10, 10, 10));
+    border-radius: 4px;
+    margin: 10rem 1rem;
+    box-shadow: 0px 2px 10px 0px rgba(0, 0, 0, 0.5);
+    transition: all 0.3s ease-in-out;
+    transform: translateY(-5rem);
+}
+
+.validate-modal-form {
+    display: flex;
+    flex-direction: column;
+    color: white;
+}
+
+.modal-heading {
+    text-align: center;
+    text-transform: uppercase;
+    margin: 0.5rem 0 2rem 0;
+    color: whitesmoke;
+    font-weight: bold;
+}
+
+.validate-modal-close {
+    color: whitesmoke;
+    text-align: right;
+    margin: 1rem 0.5rem 0 0;
+    padding: 0.5rem 0.3rem 0 0.4rem;
+    cursor: pointer;
+}
+
+.name-head {
+    font-size: 13px;
+    margin: 1.5rem 0 0.5rem 1rem;
+    text-transform: uppercase;
+}
+
+.acc-name-field {
+    margin: 0 1rem;
+    border-radius: 2px;
+    border: 0;
+    height: 1.8rem;
+    padding-left: 1rem;
+    color: white;
+}
+
+.info {
+    margin: 0.5rem 0 1.5rem 1rem;
+    font-size: 14px;
+}
+
+.validate-modal-button {
+    width: 5rem;
+    margin: 0 1rem 1.5rem 1rem;
+    padding: 8px;
+    border-radius: 2px;
+    border: 0;
+    color: whitesmoke;
+    background-color: #ec3333;
+    font-size: 15px;
+    cursor: pointer;
+    font-family: 'Play', sans-serif;
+}
+
+.validate-modal-button:hover {
+    background-color: #b62626;
+}
+
+@media only screen and (min-width: 1048px) {
+    .validate-modal-content {
+       margin-left: 40%;
+       width: 35%;
+    }
+
+    .validate-modal-content-teamRegister {
+        margin-left: 30%;
+        width: 50%;
+    }
+
+    .validate-modal-button {
+        margin-bottom: 3rem;
+    }
+
+    .sponsor-banner, .organizer-banner {
+        margin-left: 250px;
+        width: 12rem;
+        max-width: 12rem;
+        height: 4rem;
+        border-top-left-radius: 4px;
+        border-bottom-left-radius: 4px;
+        animation-name: desktop-anim;
+    }
+
+    .sponsor-banner-side-bar, .organizer-banner-side-bar {
+        width: 3%;
+        border-top-left-radius: 4px;
+        border-bottom-left-radius: 4px;
+    }
+
+    @keyframes desktop-anim {
+        from {
+            width: 0rem;
+        }
+        to {
+            width: 12rem;
+        }
+    }
+}
+/* Game Validate Model Ends */
+
+.container {
+    margin: 2rem 1.5rem;
+    margin-top: 8rem;
+}
+
+.bg-image {
+    background-image: url('https://s3-cdn.mogul.gg/gameasset/fb05d908-f7af-43c0-b612-db447c043b07.png');
+    position: absolute;
+    opacity: 0.15;
+    -webkit-mask-image: linear-gradient(0deg,transparent 5%,#000 95%);
+    width: 100%;
+    top: 3.5rem;
+    left: 0;
+    height: 700px;
+    background-position: top;
+    background-size: cover;
+    pointer-events: none;
+    z-index: -1;
+}
+
+.reg-tourney-section {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    color: white;
+    text-align: center;
+}
+
+.tourney-logo {
+    background-image: url('./Site_Material/logo.png');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-color: black;
+    height: 6rem;
+    width: 5rem;
+    margin: auto;
+}
+
+.tourney-name {
+    margin: 2rem auto;
+    font-size: 20px;
+    font-weight: bold;
+    text-align: center;
+}
+
+.tourney-reward {
+    background: linear-gradient(90deg,hsla(0,0%,100%,.1),transparent);
+    border-radius: 4px;
+    padding: 0.5rem;
+    display: flex;
+    justify-content: space-between;
+}
+
+.money-img {
+    background-image: url('./Site_Material/logo.png');
+    background-size: cover;
+    background-repeat: no-repeat;
+    margin: 0.2rem 0.8rem 0 0;
+    width: 2rem;
+    height: 2rem;
+    background-color: black;
+}
+
+.reward {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 1rem;
+}
+
+.reward .heading {
+    font-size: 10px;
+    text-align: center;
+    text-transform: uppercase;
+}
+
+.reward .prize {
+    font-weight: bold;
+    font-size: 17px;
+    margin-top: 0.1rem;
+}
+
+
+@media only screen and (min-width: 1048px) {
+    .tourney-reward {
+        flex-direction: column;
+        text-align: center;
+        width: 26rem;
+        margin: auto;
+    } 
+
+    .money-img {
+        margin: auto;
+    }
+
+    .reward {
+        margin-top: 1rem;
+    }
+
+    .reward .heading {
+        font-size: 11px;
+    }
+}
+
+.platform {
+    font-size: 14px;
+    margin-top: 0.5rem;
+}
+
+.tourney-register {
+    background: linear-gradient(90deg,#1571df,#05b6e8);
+    border-radius: 4px;
+    box-shadow: 0 0 12px #1570da;
+    margin: 1.5rem auto;
+    height: 4.5rem;
+    width: 17rem;
+    padding: 0.8rem 1.3rem;
+    cursor: pointer;
+    border: 0;
+    color: white;
+}
+
+.tourney-registration-done {
+    background: linear-gradient(90deg,#1571df,#05b6e8);
+    border-radius: 4px;
+    box-shadow: 0 0 12px #1570da;
+    margin: 1.5rem auto;
+    height: 4.5rem;
+    width: 17rem;
+    padding: 0.8rem 1.3rem;
+    cursor: default;
+    border: 0;
+    color: white;
+}
+
+.tourney-register-entry {
+    background: linear-gradient(90deg,#1571df,#05b6e8);
+    border-radius: 4px;
+    box-shadow: 0 0 12px #1570da;
+    margin: 1.5rem auto;
+    height: 4.5rem;
+    width: 17rem;
+    padding: 0.8rem 1.3rem;
+    cursor: pointer;
+    border: 0;
+    color: white;
+}
+
+.tourney-register-team {
+    background: linear-gradient(90deg,#1571df,#05b6e8);
+    border-radius: 4px;
+    box-shadow: 0 0 12px #1570da;
+    margin: 1.5rem auto;
+    height: 4.5rem;
+    width: 17rem;
+    padding: 0.8rem 1.3rem;
+    cursor: pointer;
+    border: 0;
+    color: white;
+}
+
+.tourney-register-validate {
+    background: linear-gradient(90deg,#1571df,#05b6e8);
+    border-radius: 4px;
+    box-shadow: 0 0 12px #1570da;
+    margin: 1.5rem auto;
+    height: 4.5rem;
+    width: 17rem;
+    padding: 0.8rem 1.3rem;
+    cursor: pointer;
+    border: 0;
+    color: white;
+}
+
+.tourney-registered {
+    background: linear-gradient(90deg,#6ccd00,#309100);
+    border-radius: 4px;
+    box-shadow: 0 0 12px #6ccd00;
+    margin: 1.5rem auto;
+    height: 4.5rem;
+    width: 17rem;
+    padding: 0.8rem 1.3rem;
+}
+
+.tourney-register:hover {
+    cursor: pointer;
+    background: linear-gradient(90deg,#055ac2,#0487ac);
+}
+
+.register-now {
+    font-size: 19px;
+    font-weight: bold;
+    margin-bottom: 0.2rem;
+}
+
+.registered-now {
+    font-size: 19px;
+    font-weight: bold;
+    margin-bottom: 0.2rem;
+}
+
+.tour-comp {
+    font-size: 19px;
+    font-weight: bold;
+    margin-top: 0.7rem;
+}
+
+.entry {
+    font-size: 14px;
+    opacity: 0.8;
+}
+
+.share {
+    display: flex;
+    flex-direction: column;
+    margin-top: 1.5rem;
+    color: white;
+    font-size: 12px;
+    font-weight: bold;
+    text-align: center;
+}
+
+.share-heading {
+    text-transform: uppercase;
+}
+
+.share-link {
+    margin-top: 0.5rem;
+}
+
+.share-link input {
+    border-radius: 2px;
+    border: 0;
+    height: 1.2rem;
+    padding-left: 0.5rem;
+    margin-top: 0.3rem;
+    margin-right: 0.3rem;
+    background-color: #111010;
+    color: white;
+}
+
+.share-link button {
+    border-radius: 2px;
+    background: linear-gradient(90deg,#055ac2,#0487ac);
+    border: 0;
+    color: white;
+    height: 1.2rem;
+    padding-left: 0.4rem;
+    padding-right: 0.4rem;
+    padding-bottom: 0.1rem;
+    cursor: pointer;
+}
+
+.date-time {
+    text-align: center;
+    text-transform: uppercase;
+    opacity: 0.7;
+    margin-top: -1.2rem;
+    font-size: 12px;
+}
+
+.tabs {
+    margin-top: 1.5rem;
+    overflow-x: scroll;
+    -webkit-mask-image: -webkit-gradient(linear,left top,right top,from(#000),color-stop(75%,#000),color-stop(100%,transparent));
+    -webkit-mask-image: linear-gradient(90deg,#000,#000 75%,transparent 100%);
+}
+
+::-webkit-scrollbar {
+    display: none;
+}
+
+.tabs .tabs-options {
+    display: flex;
+    color: white;
+    font-size: 18px;
+    justify-content: flex-start;
+    list-style: none;
+    margin-top: 2rem;
+    padding-bottom: 0.5rem;
+}
+
+.tabs {
+    margin-top: 0.5rem;
+}
+
+.tabs-options > li {
+    margin-right: 1.3rem;
+    cursor: pointer;
+    opacity: 0.6;
+}
+
+.tabs-options > li::first-letter {
+    font-size: 25px;
+}
+
+.tabs-options .overview {
+    opacity: 1;
+}
+
+.tabs-options > li:hover {
+    color: rgba(236, 51, 51, 1);
+}
+
+.line4 {
+    height: 2px;
+    width: 4.8rem;
+    background-color: #fe0000;
+    border-radius: 2px;
+    margin-bottom: 2rem;
+    margin-left: 2px;
+    box-shadow: 0 0 10px #fa7171;
+    transition: all 0.1s ease-in-out;
+}
+
+.announcement-head {
+    font-size: 21px;
+    border-bottom: 2px solid #fe0000;
+    font-weight: bold;
+    letter-spacing: 0.03rem;
+}
+
+.announcement-head::first-letter {
+    font-size: 32px;
+}
+
+.tourney-desc-head {
+    font-size: 21px;
+    border-bottom: 2px solid #fe0000;
+    font-weight: bold;
+    letter-spacing: 0.03rem;
+}
+
+.announce-content {
+    background-color: #2e2e3a;
+    color:rgba(255, 255, 255, 0.877);
+    padding: 1.2rem 0.5rem 1.2rem 0.5rem;
+    font-size: 14px;
+    letter-spacing: 0.02rem;
+    line-height: 1.2rem;
+    box-shadow: 0px 5px 10px 0px rgba(0, 0, 0, 0.5);
+    border-radius: 6px;
+    margin-bottom: 1rem;
+}
+
+.tourney-desc-head::first-letter {
+    font-size: 32px;
+}
+
+.tourney-description {
+    background-color: #2e2e3a;
+    color:rgba(255, 255, 255, 0.877);
+    padding: 1.2rem 0.5rem 1.2rem 0.5rem;
+    font-size: 14px;
+    letter-spacing: 0.02rem;
+    line-height: 1.2rem;
+    box-shadow: 0px 5px 10px 0px rgba(0, 0, 0, 0.5);
+    border-radius: 6px;
+    margin-bottom: 2rem;
+}
+
+.overview-details {
+    background-color: #2e2e3a;
+    box-shadow: 0px 5px 10px 0px rgba(0, 0, 0, 0.5);
+    border-radius: 6px;
+    color: rgba(255, 255, 255, 0.887);
+}
+
+.overview-details-head {
+    font-size: 21px;
+    border-bottom: 2px solid #fe0000;
+    font-weight: bold;
+    letter-spacing: 0.03rem;
+}
+
+.overview-details-head::first-letter {
+    font-size: 32px;
+}
+
+.overview-table-head {
+    width: 100%;
+}
+
+.overview-table-row:nth-child(odd) {
+    background-color: #2e323b;
+}
+
+.overview-container {
+    color: white;
+    font-weight: normal;
+    font-size: 14px;
+    width: 100%;
+    margin-top: 0rem;
+}
+
+.overview-table-row {
+    display: flex;
+    justify-content: space-evenly;
+    padding: 0.8rem 0rem 0.8rem 0.5rem;
+}
+
+.overview-table-column {
+    width: 50%;
+}
+
+.card-up-section {
+    height: 35%;
+    background-color: rgb(19, 17, 17);
+    border-radius: 4px;
+}
+
+.prize-image {
+    background-image: url(./Site_Material/);
+    position: absolute;
+    top: -2.4rem;
+    left: 0rem;
+    height: 6rem;
+    width: 5rem;
+    background-size: contain;
+    background-repeat: no-repeat;
+}
+
+.position {
+    margin: 0 0 0 1rem;
+    padding-top: 0.2rem;
+    font-size: 20px;
+    font-weight: bold;
+}
+.place {
+    font-weight: normal;
+}
+
+.card-down-section {
+    margin-top: 1rem;
+    margin-left: 1rem;
+}
+
+.prize-heading {
+    font-weight: bold;
+    margin-bottom: 0.3rem;
+}
+
+.ladder-content {
+    color: white;
+    display: none;
+    margin-top: -1rem;
+}
+
+.ladder-heading {
+    font-size: 21px;
+    font-weight: bold;
+}
+
+.ladder-heading::first-letter {
+    font-size: 30px;
+}
+
+.rules-content {
+    background-color: #313030;
+    color: white;
+    border-radius: 4px;
+    width: 100%;
+    padding: 1rem;
+    display: none;
+    margin-top: -1rem;
+    box-shadow: 0px 5px 10px 0px rgba(0, 0, 0, 0.5);
+}
+
+.content {
+    width: 100%;
+}
+
+.rules-heading {
+    font-size: 21px;
+    font-weight: bold;
+    margin-bottom: 0.5rem;
+}
+
+.rules-heading::first-letter {
+    font-size: 30px;
+}
+
+.line {
+    height: 1px;
+    width: 100%;
+    background: linear-gradient(#ad0d0d, #262626);
+    margin-bottom: 1rem;
+}
+
+.players-content {
+    display: none;
+    width: 100%;
+    margin-top: -1rem;
+}
+
+.players-card-wrapper {
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+}
+
+.players-card {
+    background: linear-gradient(to top, rgb(12, 12, 12), #222121);
+    color: white;
+    height: 14rem;
+    width: 100%;
+    text-align: center;
+    border-radius: 8px;
+    margin: 1.5rem 0rem 0 0;
+    text-decoration: none;
+    box-shadow: 0 5px 10px 0px rgba(0, 0, 0, 0.5);
+    transition: all 0.3s ease-in-out;
+    border-top: 1px solid #fe0000;
+}
+
+.players-card:hover {
+    box-shadow: 0 8px 15px 0px rgba(0, 0, 0, 0.5);
+    transform: translateY(-5px);
+}
+
+.up-section {
+    display: flex;
+    flex-direction: column;
+    height: 70%;
+    background: linear-gradient(to bottom, rgb(56, 54, 54), #181717);
+    border-radius: 4px;
+}
+
+.player-img {
+    background-image: url('./Site_Material/logo.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    height: 4rem;
+    width: 4rem;
+    margin: auto;
+    border-radius: 50%;
+    border: 1px solid #fe0000;
+    box-shadow: 0px 2px 5px 0px rgba(0, 0, 0, 0.5);
+}
+
+.player-name {
+    font-weight: bold;
+    font-size: 17px;
+}
+
+.player-name::first-letter {
+    text-transform: capitalize;
+}
+
+.player-user {
+    font-size: 14px;
+    opacity: 0.8;
+    margin: 0.1rem 0 1rem 0;
+}
+
+.bottom-section {
+    display: flex;
+    justify-content: space-around;
+    text-align: center;
+    margin-top: 1rem;
+}
+
+.lost-score {
+    font-weight: bold;
+}
+
+.won-score {
+    font-weight: 0;
+}
+
+.desk-right-section {
+    margin-top: 2rem;
+}
+
+.tournement-description-info {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+}
+
+.start-head {
+    font-size: 20px;
+    color: white;
+    font-weight: bold;
+}
+
+.starts {
+    background-color: #313030;
+    padding: 1rem;
+    border-radius: 4px;
+    box-shadow: 0px 2px 5px 0px rgba(0, 0, 0, 0.5);
+}
+
+.start-date {
+    color: white;
+    margin: auto;
+    text-align: center;
+    margin-bottom: 0.3rem;
+}
+
+.start-des {
+    text-align: center;
+    color: white;
+    font-size: 12px;
+    opacity: 0.8;
+}
+
+.tour-description {
+    margin-top: 1rem;
+    background-color: #313030;
+    padding: 1rem;
+    border-radius: 4px;
+    color: white;
+    box-shadow: 0px 2px 5px 0px rgba(0, 0, 0, 0.5);
+}
+
+.des-head {
+    font-size: 20px;
+    color: white;
+    font-weight: bold;
+}
+
+.moderators {
+    margin-top: 1rem;
+    background-color: #313030;
+    padding: 1rem;
+    border-radius: 4px;
+    color: white;
+    box-shadow: 0px 2px 5px 0px rgba(0, 0, 0, 0.5);
+}
+
+.mod-heading {
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.mod-des {
+    display: flex;
+    justify-content: space-around;
+}
+
+.mod-img1 {
+    background-image: url('./Site_Material/logo.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    height: 3rem;
+    width: 2rem;
+    border-radius: 2px;
+}
+
+.mod-img2 {
+    background-image: url('./Site_Material/logo.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    height: 3rem;
+    width: 2rem;
+    border-radius: 2px;
+}
+
+@media only screen and (min-width: 1048px) {
+    .container {
+        margin-left: 260px;
+    }
+
+    .mobNav {
+        display: none;
+    }
+
+    .footer {
+        margin-left: 240px;
+    }
+
+    .desk-wrap {
+        display: flex;
+        justify-content: space-around;
+    }
+
+    .desk-left-section {
+        width: 70%;
+    }
+
+    .desk-right-section {
+        width: 30%;
+        margin-left: 2rem;
+        margin-top: 0.8rem;
+    }
+}
+
+/* Login Modal */
+
+#tourney-login-modal {
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    position: absolute;
+    top: 0;
+    display: none;
+    z-index: 5;
+    position: fixed;
+    align-items: center;
+}
+
+.top-shadow {
+    height: 5px;
+    border-top-left-radius: 6px;
+    border-top-right-radius: 6px;
+    background-color: #ec3333;
+    margin-top: 0.5rem;
+    box-shadow: 0 0 3px 0 #fa7171;
+    transition: all 0.1s ease-in-out;
+}
+
+.login-modal-content {
+    background: linear-gradient(to bottom, rgb(40, 40, 49), rgb(10, 10, 10));
+    border-radius: 4px;
+    margin: 10rem 1rem;
+    box-shadow: 0px 2px 10px 0px rgba(0, 0, 0, 0.5);
+}
+
+.login-modal-form {
+    display: flex;
+    flex-direction: column;
+    color: white;
+}
+
+.modal-heading {
+    text-align: center;
+    text-transform: uppercase;
+    margin: 0.5rem 0 2rem 0;
+    color: whitesmoke;
+    font-weight: bold;
+}
+
+#tourney-login-modal-close {
+    color: whitesmoke;
+    text-align: right;
+    margin: 1rem 0.5rem 0 0;
+    padding: 0.5rem 0.3rem 0 0.4rem;
+    cursor: pointer;
+}
+
+#tourney-login-modal-content {
+    transition: all 0.3s ease-in-out;
+    transform: translateY(-5rem)
+}
+
+.modal-img {
+    background-image: url('./Site_Material/logo.png');
+    height: 3.5rem;
+    width: 3.5rem;
+    margin: auto;
+    background-size: contain;
+    background-repeat: no-repeat;
+}
+
+.name-head {
+    font-size: 13px;
+    margin: 1.5rem 0 0.5rem 1rem;
+    text-transform: uppercase;
+}
+
+.username-field {
+    margin: 0 1rem;
+    border-radius: 2px;
+    border: 0;
+    height: 1.8rem;
+    padding-left: 1rem;
+}
+
+.pass-head {
+    font-size: 13px;
+    margin: 2rem 0 0.5rem 1rem;
+    text-transform: uppercase;
+}
+
+.pass-field {
+    margin: 0 1rem 0rem 1rem;
+    border-radius: 2px;
+    border: 0;
+    height: 1.8rem;
+    padding-left: 1rem;
+}
+
+.login-modal-button {
+    width: 5rem;
+    margin: 2rem 1rem 1.5rem 1rem;
+    padding: 8px;
+    border-radius: 2px;
+    border: 0;
+    color: whitesmoke;
+    background-color: #ec3333;
+    font-size: 15px;
+    cursor: pointer;
+    font-family: 'Play', sans-serif;
+}
+
+.reg-reminder {
+    text-align: right;
+    padding: 0 1rem 1.2rem 0;
+    color: whitesmoke;
+    font-size: 13px;
+}
+
+.login-modal-button:hover {
+    background-color: #b62626;
+}
+
+.publish {
+    background-color: #262626;
+    color: white;
+    width: 100%;
+    padding: 0.5rem 1rem;
+    border: whitesmoke;
+    border-style: dashed;
+    margin-top: 1rem;
+    border-radius: 4px;
+    margin-bottom: 1rem;
+}
+
+.publish-head {
+    font-size: 20px;
+    font-weight: bold;
+    margin-bottom: 1rem;
+}
+
+.publish-desc {
+    margin-bottom: 0.8rem;
+}
+
+.publish-btn {
+    border-radius: 4px;
+    background-color: #ec3333;
+    color: white;
+    padding: 0.3rem 1rem;
+    cursor: pointer;
+    border: 0;
+}
+
+#img-input {
+    display: none;
+}
+
+.img-label {
+    color: white;
+    font-size: 14px;
+    margin-left: 1rem;
+}
+
+.caption {
+    margin-left: 1rem;
+}
+
+.img-label > i {
+    color: white;
+    font-size: 25px;
+    margin: 1rem 2rem;
+    cursor: pointer;
+    margin-bottom: -1rem;
+}
+
+/* Prize Table Starts */
+.prizes-content {
+    margin-top: -1rem;
+    color: white;
+    display: none;
+}
+
+.prize-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.prize-table-heading {
+    color: #fe0000;
+    font-size: 18px;
+}
+
+.prize-table-heading > tr > th {
+    text-align: center;
+    padding: 0.8rem 0 0.8rem 0.5rem;
+    border-bottom: 1px solid #3f3b3b;
+}
+
+.standings-row {
+    width: 50%;
+}
+
+.points-row {
+    width: 50%;
+}
+
+.prize-table-body > tr, td {
+    padding: 1.5rem 0 1.5rem 0.5rem;
+    border-bottom: 1px solid #3f3b3b;
+    text-align: center;
+}
+
+.prize-table-body > td {
+    display: flex;
+    text-align: center;
+}
+
+.table-user-pic {
+    height: 4rem;
+    width: 4rem;
+    margin-right: auto;
+    margin-left: auto;
+    margin-bottom: 0.4rem;
+    border-radius: 50%;
+    background-color: black;
+    border: 1px solid #fe0000;
+}
+
+.prizes-heading {
+    font-size: 21px;
+    font-weight: bold;
+    margin-bottom: 0.5rem;
+}
+
+.prizes-heading::first-letter {
+    font-size: 30px;
+}
+
+/* Schedule Content Starts */
+.schedule-content {
+    margin-top: -1rem;
+    color: white;
+    display: none;
+}
+
+.schedule-heading {
+    font-size: 21px;
+    font-weight: bold;
+    margin-bottom: 0.5rem;
+}
+
+.schedule-heading::first-letter {
+    font-size: 30px;
+}
+
+.schedule-round {
+    background-color: #313030;
+    margin-bottom: 1rem;
+    border-radius: 6px;
+    box-shadow: 0px 5px 10px 0px rgba(0, 0, 0, 0.5);
+    font-size: 14px;
+}
+
+.schedule-round-head {
+    background-color: #3e4554;
+    padding: 0.5rem 0 0.5rem 0.3rem;
+    border-top-right-radius: 6px;
+    border-top-left-radius: 6px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.schedule-round-status {
+    padding: 0.1rem 0.2rem 0.1rem 0.2rem;
+    background: linear-gradient(to right, rgb(4, 121, 4), rgb(16, 179, 16));
+    color: white;
+    font-weight: normal;
+    font-size: 12px;
+    border-radius: 4px;
+    margin-right: 0.3rem;
+}
+
+.schedule-round-body {
+    margin-top: 0.3rem;
+    padding-left: 0.3rem;
+    padding-bottom: 0.3rem;
+}
+
+.schedule-round-date {
+    font-size: 14px;
+    color: hsla(0,0%,100%,.6);
+    margin-bottom: 0.7rem;
+}
+
+.schedule-round-map {
+    font-size: 14px;
+    color: hsla(0,0%,100%,.6);
+    margin-bottom: 0.1rem;
+}
+
+.map-name {
+    font-size: 14px;
+    color: white;
+}
+
+.matches-heading {
+    font-size: 21px;
+    color: white;
+    font-weight: bold;
+    margin-top: 2rem;
+}
+
+.schedule-matches {
+    background-color: #313030;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+    margin-bottom: 1.5rem;
+    box-shadow: 0px 5px 10px 0px rgba(0, 0, 0, 0.5);
+}
+
+.schedule-matches-head {
+    background-color: #3e4554;
+    font-size: 16px;
+    display: flex;
+    justify-content: space-between;
+    padding: 1.5rem 0.8rem 1.5rem 0.8rem;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+}
+
+.schedule-matches-list {
+    font-size: 14px;
+    transition: 0.3s all ease-in-out; 
+} 
+
+.schedule-matches-list-element {
+    border-bottom: 1px solid #3f4a61; 
+}
+
+.schedule-list-element-head {
+    display: flex;
+    justify-content: space-between;
+    padding: 0.3rem 0.3rem 0.3rem 0.8rem;
+    background-color: #30343b;
+}
+
+.schedule-list-element-status {
+    padding: 0.1rem 0.2rem 0.1rem 0.2rem;
+    background: linear-gradient(to right, rgb(4, 121, 4), rgb(16, 179, 16));
+    border-radius: 4px;
+    font-size: 12px;
+}
+
+.schedule-list-element-name {
+    font-size: 16px;
+}
+
+.schedule-list-element-date {
+    padding-left: 0.8rem;
+    margin-bottom: 0.3rem;
+    color: hsla(0,0%,100%,.6);
+}
+
+.best-teams {
+    margin-top: 0.2rem;
+    padding-bottom: 0.3rem;
+    color: white;
+}
+
+/* LADDER */
+.top-team-heading {
+    display: flex;
+    justify-content: space-between;
+    font-weight: bold;
+    color: #fe0000;
+    padding: 0rem 0.5rem;
+    margin-top: 1.5rem;
+    margin-bottom: 0.5rem;
+}
+
+.img-name-head {
+    margin-left: 1rem;
+}
+
+.top-team-element {
+    width: 100%;
+    background-color: black;
+    border-radius: 6px;
+    color: white;
+    display: flex;
+    justify-content: space-between;
+    padding: 1rem 0.5rem;
+    padding-right: 1rem;
+    box-shadow: 0px 5px 10px 0px rgba(0, 0, 0, 0.5); 
+    background: linear-gradient(to left, rgb(22, 21, 21), #2b2828);
+    margin-bottom: 0.2rem;
+}
+
+.top-team-element:first-child {
+    border-left: 5px solid gold;
+}
+
+.top-team-element:nth-child(2) {
+    border-left: 5px solid silver;
+}
+
+.top-team-element:nth-child(3) {
+    border-left: 5px solid brown;
+}
+
+.left-section {
+    display: flex;
+    width: 8.8rem;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    padding-right: 0.2rem;
+}
+
+.left-section > .s-no {
+    margin-right: 1rem;
+}
+
+.left-section > div {
+    margin-right: 0.5rem;
+}
+
+.s-no, .img-name, .win-perc, .points {
+    margin-top: 0.3rem;
+}
+
+.team-img {
+    height: 2rem;
+    width: 2rem;
+    margin-top: -0.3rem;
+    margin-right: 0.3rem;
+    margin-left: 0.2rem;
+    border-radius: 4px;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-color: white;
+}
+
+.img-name a{
+    display: flex;
+    text-decoration: none;
+    color: white;
+}
+
+.right-section {
+    display: flex;
+    justify-content: space-between;
+    width: 50%;
+}
+
+.win-perc, .points {
+    margin-left: 0.5rem;
+}
+
+.participants-search {
+    width: 100%;
+    background-color: rgb(52, 52, 61);
+    border-radius: 6px;
+    padding: 1rem 0.5rem;
+    box-shadow: 0px 2px 5px 0px rgba(0, 0, 0, 0.5);
+}
+
+#participants-search-bar {
+    background: rgb(38, 38, 43);
+    padding: 0.8rem 0.5rem;
+    width: 70%;
+    border: 0;
+    border-radius: 8px;
+    box-shadow: 0px 5px 10px 0px rgba(0, 0, 0, 0.5);
+}
+
+#participants-search-bar::placeholder {
+    color: white;
+    opacity: 0.4;
+}
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover, 
+input:-webkit-autofill:focus, 
+input:-webkit-autofill:active  {
+    -webkit-box-shadow: 0 0 0 30px #3e4554 inset !important;
+    -webkit-text-fill-color: white;
+}
+
+#participants-search-bar:focus {
+    outline-width: 0;
+    border: 1px solid rgb(19, 196, 19);
+    color: white;
+}
+
+#phases-select {
+    margin-top: 1rem;
+    padding: 0.8rem 0.5rem;
+    border: 0;
+    background: rgb(38, 38, 43);
+    border-radius: 6px;
+    color: white;
+    width: 40%;
+    box-shadow: 0px 2px 5px 0px rgba(0, 0, 0, 0.5);
+    margin-right: 10%;
+}
+
+#groups-select {
+    margin-top: 1rem;
+    padding: 0.8rem 0.5rem;
+    border: 0;
+    background: rgb(38, 38, 43);
+    border-radius: 6px;
+    color: white;
+    width: 40%;
+    box-shadow: 0px 2px 5px 0px rgba(0, 0, 0, 0.5);
+    margin-right: 10%;
+}
+
+#matches-select {
+    margin-top: 1rem;
+    padding: 0.8rem 0.5rem;
+    border: 0;
+    background: rgb(38, 38, 43);
+    border-radius: 6px;
+    color: white;
+    width: 40%;
+    box-shadow: 0px 2px 5px 0px rgba(0, 0, 0, 0.5);
+}
+
+@media only screen and (min-width: 1035px) {
+    .login-modal-content {
+       margin-left: 40%;
+       margin-top: 10rem;
+       width: 30%;
+    }
+
+    .login-modal-button {
+        margin-bottom: 3rem;
+    }
+
+    .img-label > i {
+        font-size: 35px;
+    }
+
+    .bg-image {
+        margin-left: 240px;
+        margin-top: -3.5rem;
+    }
+
+    .players-card {
+        width: 18rem;
+        margin: 1.5rem 0rem 0 0;
+    }
+
+    .players-content {
+        width: 90%;
+    }
+
+    .standings-row {
+        width: 50%;
+    }
+
+    .name-row {
+        width: 70%;
+    }
+
+    .points-row {
+        width: 50%;
+    }
+
+    .players-card {
+        margin-right: 1rem;
+        width: 11rem;
+    }
+
+    .left-section {
+        width: 60%;
+        /* overflow: unset;
+        text-overflow: unset;
+        white-space: unset; */
+    }
+
+    .right-section {
+        width: 30%;
+    }
+}
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover, 
+input:-webkit-autofill:focus, 
+input:-webkit-autofill:active  {
+    -webkit-box-shadow: 0 0 0 30px #3e4554 inset !important;
+    -webkit-text-fill-color: white;
+}
+
+input {
+    background-color: #33373f;
+}
+
+input:focus {
+    background-color: #3c4250;
+    border: 1px solid rgb(19, 196, 19);
+}

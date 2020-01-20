@@ -1,0 +1,45 @@
+{% extends 'slingshot/base.html' %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    {% load static %}
+
+    {% block metatag %}
+        <meta name="description" content="Create and organize online gaming tournaments on Gamathon for free! Create tournaments for various games and publish it.">
+        <meta property="og:title" content="Play Online Gaming Tournaments."/>
+        <meta property="og:url" content="https://www.gamathon.gg/organize"/>
+        <meta property="og:description" content="Organize Online Gaming Tournaments on Gamathon. Organizing Tournaments made easy.">
+    {% endblock %}
+
+    {% block css %}
+        <link rel="stylesheet" href="{% static 'organize/organize.css' %}">
+    {% endblock %}
+    <title>{% block title %}Organize Onlnine Gaming Tournaments | Gamathon{% endblock %}</title>
+</head>
+{% block body %}
+    <div class="opening">
+        <h1 class="des-head">Organize Tournaments</h1>
+        <div class="des">
+            <p>
+                Create Organization for free to create your own awesome tournaments and earn money!
+            </p> 
+
+            <p>We provide everything you need to organize or manage tournaments.</p>
+            <br>
+            <p>Anyone can do it!</p>
+            <div class="coming-soon">Coming Soon!</div>
+        </div>
+    </div>
+
+    <div class="container">
+        
+    </div>
+{% endblock %}
+
+{% block javascript %}
+    <script src="{% static 'organize/organize.js' %}"></script>
+{% endblock %}
+</html>

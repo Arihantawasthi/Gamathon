@@ -1,0 +1,596 @@
+/* ----NOTIFICATION BLOCK STARTS------ */
+.notify-div {
+    display: none;
+    position: fixed;
+    top: 2rem;
+    right: -100%;
+    z-index: 99999;
+    align-items: right;
+    width: 20rem;
+    height: 5rem;
+    background: linear-gradient(to right, rgb(12, 12, 12), #1d1c1c);
+    border-radius: 4px;
+    transition: all 0.4s ease-in-out;
+    box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.5);
+}
+
+.notify-div-wrapper {
+    display: flex;
+    height: 100%;
+    width: 100%;
+}
+
+.notify-div-side-bar {
+    height: 100%;
+    width: 0.5rem;
+    border-bottom-left-radius: 4px;
+    border-top-left-radius: 4px;
+    background-color: #fe0000;
+}
+
+.heading-message-container {
+    margin-left: 1rem;
+    margin-top: 0.3rem;
+    display: flex;
+    flex-direction: column;
+    padding-right: 0.5rem;
+    width: 100%;
+}
+
+.notify-heading {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-bottom: 0.7rem;
+}
+
+.notify-close {
+    color: white;
+    cursor: pointer;
+}
+
+.notify-heading-content {
+    font-size: 20px;
+    color: white;  
+    font-weight: bold;
+    width: 100%;
+    padding-right: 0.3rem;
+}
+
+.notify-message {
+    font-size: 14px;
+    color: rgba(211, 209, 209, 0.8);
+}
+
+/* NOTIFICATION BAR ENDS HERE */
+
+/* Navbar for both mobile and desktop starts */
+.sideBar {
+    height: 93vh;
+    width: 240px;
+    position: fixed;
+    z-index: 5;
+    top: 0px;
+    left: 0px;
+    /* background-color: #111111; */
+    background: linear-gradient(to top, rgb(12, 12, 12), #272727);
+    padding-top: 10px;
+    display: none;
+    transform: translateX(-100%);
+    transition: transform 0.3s ease-in-out;
+    box-shadow: 0px 0px 15px 0px rgba(0, 0, 0, 0.5);
+}
+
+.nav-close {
+    transition: all 0.4s ease-in-out;
+    font-size: 18px;
+}
+
+.comp-name {
+    margin-left: 10px;
+    display: flex;
+    color: #dadada;
+}
+
+.comp-name h2::first-letter {
+    font-size: 40px;
+}
+
+.logo-img {
+    background-image: url('./Site_Material/logo.png');
+    height: 40px;
+    width: 3rem;
+    background-size: cover;
+}
+
+.side-bar-sections {
+    height: 90%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    margin-top: -1.5rem;
+}
+
+.upper-section li {
+    list-style: none;
+    margin: 0 0 5px 0;
+}
+
+.upper-section li a {
+    text-decoration: none;
+    color: #dadada;
+    opacity: 0.6;
+}
+
+.upper-section > li >  i {
+    margin-right: 0.4rem;
+    font-size: 18px;
+}
+
+.upper-section li a:hover {
+    color: whitesmoke;
+    opacity: 1;
+}
+
+.upper-section {
+    margin: 35px 0 5px 20px;
+}
+
+.upper-section > li > i{
+    color: white;
+}
+
+.search-bar form {
+    position: relative;
+    margin-bottom: 15px;
+}
+
+.search-icon i {
+    position: absolute;
+    top: 0.4rem;
+    left: 0.4rem;
+}
+
+.search-bar input {
+    font-size: 14px;
+    height: 30px;
+    width: 200px;
+    border-radius: 2px;
+    padding-left: 30px;
+    margin: 0px;
+    border: 0;
+    background-color: #3e4554;
+    padding-top: 0.3rem;
+    padding-bottom: 0.3rem;
+    padding-right: 0.3rem;
+    color: white;
+}
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover, 
+input:-webkit-autofill:focus, 
+input:-webkit-autofill:active  {
+    -webkit-box-shadow: 0 0 0 30px #3e4554 inset !important;
+    -webkit-text-fill-color: white;
+}
+
+.search-bar input::placeholder {
+    color: white;
+    opacity: 0.7;
+}
+
+.lower-section {
+    margin-left: 20px;
+    margin-top: auto;
+}
+
+.lower-section li {
+    color: whitesmoke;
+    font-weight: bold;
+    text-transform: uppercase;
+    font-size: 14px;
+    cursor: pointer;
+    padding: 5px;
+}
+
+.lower-sec-login {
+    display: block;
+    list-style: none;
+}
+
+.lower-sec-profile {
+    display: none;
+    list-style: none;
+    transition: all 0.5s ease-in-out;
+}
+
+.lower-sec-profile > li{
+    font-size: 14px;
+    opacity: 0.6;
+    text-transform: capitalize;
+    font-weight: 200;
+}
+
+.lower-sec-profile > li > i {
+    margin-right: 0.4rem;
+    color: white;
+    font-size: 16px;
+}
+
+.lower-sec-profile > li > a {
+    color: white;
+    text-decoration: none;
+}
+
+.lower-section li:hover {
+    opacity: 1;
+    cursor: pointer;
+}
+
+.notifications {
+    position: relative;
+    display: none;
+}
+
+.indicator {
+    height: 0.5rem;
+    width: 0.5rem;
+    color: white;
+    background-color: #ec3333;
+    border-radius: 50%;
+    font-size: 10px;
+    position: absolute;
+    top: 0.8rem;
+    left: 94%;
+}
+
+.notification-close {
+    margin-left: 95%;
+    color: white;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 18px;
+}
+
+.notification-box {
+    position: absolute;
+    font-weight: normal;
+    margin-left: 20px;
+    font-size: 18px;
+    width: 0; /* 90% when expanded */
+    height: 0; /* 90% when expanded */
+    overflow-y: scroll;
+    overflow-x: hidden;
+    top: 3.5rem;
+    transform: translateX(-40rem);
+    background: linear-gradient(to bottom, rgb(12, 12, 12), #1d1c1c);
+    border-radius: 4px;
+    padding: 0.5rem 1rem;
+    z-index: 4;
+    transition: all 0.5s ease-in-out;
+    color: white;
+}
+
+.notification-list {
+    list-style: none;
+    opacity: 1;
+}
+
+.notification-list > li {
+    background: linear-gradient(to left, rgb(22, 21, 21), #2b2828);
+    margin: 0.3rem 0rem;
+    border-radius: 4px;
+    border-left: solid 2px #fe0000;
+    padding: 0.8rem 0rem;
+    letter-spacing: 0.8px;
+}
+
+.accept {
+    background-color: rgb(98, 98, 211);
+    margin-left: 1rem;
+}
+
+.reject {
+    background-color: rgb(224, 46, 46);
+}
+
+.accept, .reject {
+    margin-top: 0.5rem;
+    padding: 0.4rem 0.6rem;
+    color: white;
+    border-radius: 4px;
+    border: 0;
+    cursor: pointer;
+}
+
+.text {
+    font-weight: normal;
+    font-size: 14px;
+    text-transform: capitalize;
+    margin-left: 0.8rem;
+}
+
+.notify-time {
+    font-size: 12px;
+    text-transform: capitalize;
+    font-weight: normal;
+    opacity: 0.8;
+    margin-top: 0.1rem;
+    margin-left: 0.8rem;
+}
+
+.login-btn {
+    background-color: #fe0000;
+    margin-bottom: 10px;
+    text-align: center;
+    width: 200px;
+    border-radius: 4px;
+}
+
+.login-btn:hover {
+    background-color: #ec3333;
+}
+
+.signup-btn {
+    background-color: #fe0000;
+    text-align: center;
+    width: 200px;
+    border-radius: 4px;
+}
+
+.signup-btn:hover {
+    background-color: #ec3333;
+}
+
+.loading-hud {
+    position: absolute;
+    z-index: 5000;
+    top: 50%;
+    left: 40%;
+    margin-left: 0rem;
+}
+
+@media only screen and (min-width: 1048px) {
+    .sideBar {
+        display: block;
+        transform: translateX(0%);
+        height: 100vh;
+    }
+
+    .nav-close {
+        display: none;
+    }
+
+    .footer {
+        padding-right: 13rem;
+    }
+
+    .loading-hud {
+        margin-left: 15rem;
+    }
+}
+
+.mobNav {
+    height: 3.5rem;
+    width: 100%;
+    background-color: #111111;
+    display: flex; 
+    padding: 9px 0 0 0;  
+    /* position: fixed; */
+    z-index: 4;
+    box-shadow: 0px 5px 10px 0px rgba(0, 0, 0, 0.5);
+}
+
+.mobNav img {
+    margin: -4px 0 0 5px;
+}
+
+.hamburger {
+    height: 23px;
+    width: 32px;
+    margin: 6px 2px 0 5px;
+    cursor: pointer;
+}
+
+.hamburger div {
+    background-color: whitesmoke;
+    height: 3px;
+    width: 30px;
+    margin: 5px;
+    border-radius: 4px;
+}
+
+.logo {
+    margin: -3px 0 0 -8px;
+    color: white;
+    opacity: 1;
+}
+
+.logo::first-letter {
+    font-size: 40px;
+    font-weight: bolder;
+}
+
+.logo a {
+    text-decoration: none;
+    color: white;
+    opacity: 1;
+}
+
+.mobile-notification {
+    font-size: 20px;
+    color: grey;
+    margin: 0.6rem auto 0rem auto;
+    align-items: right;
+}
+
+.notification-logo-wrapper {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    margin-right: 1rem;
+}
+
+.logo-wrapper {
+    display: flex;
+}
+
+
+#search-results {
+    background-color: #0d0d0d;
+    color: white;
+    width: 100%;
+    font-size: 16px;
+    padding: 1rem 1rem;
+    font-weight: bold;
+    position: absolute;
+    z-index: 3;
+    display: none;
+    border-radius: 4px;
+    max-height: 35rem;
+    overflow-y: scroll;
+}
+
+::-webkit-scrollbar-track {
+    background: rgb(231, 215, 215); 
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar {
+    margin-top: 0.5rem;
+    width: 5px;
+    height: 0.5rem;
+}
+
+::-webkit-scrollbar-thumb {
+    background: rgb(85, 84, 84); 
+    border-radius: 20px;
+}
+
+#search-results > ul {
+    margin-bottom: 1rem;
+}
+
+#search-results > div {
+    margin-bottom: 0.3rem;
+}
+
+.user-list, .tourney-list, .game-list, .org-list {
+    font-size: 14px;
+    display: flex;
+    background: linear-gradient(to right, rgb(22, 21, 21), #2b2828);
+    color: white;
+    font-weight: normal;
+    padding: 1rem 0.5rem;
+    border-radius: 4px;
+    border-left: solid 3px #fe0000;
+}
+
+.user-list, .tourney-list, .game-list, .org-list > div {
+    margin-right: 1rem;
+}
+
+.loading-wrapper {
+    background: linear-gradient(to left, rgb(12, 12, 12), #3b3939);
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    left: 0;
+    top: 0;
+    z-index: 99999;
+}
+
+@media only screen and (min-width: 1048px) {
+    .mobNav {
+        display: none;
+    }
+
+    .notifications {
+        display: block;
+    }
+
+    .notification-close {
+        margin-left: 95%;
+        color: white;
+        cursor: pointer;
+        font-weight: bold;
+        font-size: 16px;
+    }
+    
+    .notifications > .indicator {
+        position: absolute;
+        top: 0.3rem;
+        left: 7.2rem;
+        background-color: red;
+        color: white;
+        width: 0.5rem;
+        height: 0.5rem;
+        font-size: 14px;
+        border-radius: 50%;
+        font-weight: bold;
+    }
+    
+    .notification-box {
+        position: absolute;
+        font-weight: normal;
+        font-size: 18px;
+        width: 0rem; /* 40rem  when expanded */
+        height: 0rem; /* 20rem when expanded */
+        overflow-y: scroll;
+        overflow-x: hidden;
+        top: 60vh;
+        transform: translateX(-40rem);
+        background-color: black;
+        border-radius: 5%;
+        padding: 0.5rem 1rem;
+        z-index: 4;
+        transition: all 0.5s ease-in-out;
+        color: white;
+    }
+    
+    .notification-list {
+        list-style: none;
+    }
+    
+    .notification-list > li {
+        background-color: rgb(53, 49, 49);
+        margin: 0.2rem 0rem;
+        border-radius: 4px;
+    }
+    
+    .accept {
+        margin-left: 78%;
+        background-color: rgb(98, 98, 211);
+    }
+    
+    .reject {
+        background-color: rgb(224, 46, 46);
+    }
+    
+    .accept, .reject {
+        margin-top: 0.5rem;
+        padding: 0.4rem 0.6rem;
+        color: white;
+        border-radius: 4px;
+        border: 0;
+        cursor: pointer;
+    }
+    
+    .text {
+        font-weight: normal;
+        font-size: 14px;
+        text-transform: capitalize;
+        margin-left: 0.8rem;
+    }
+    
+    .notify-time {
+        font-size: 12px;
+        text-transform: capitalize;
+        font-weight: normal;
+        opacity: 0.8;
+        margin-top: 0.1rem;
+        margin-left: 0.8rem;
+    }
+}
+
+/* Navbar/SideBar ends here */

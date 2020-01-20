@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    {% load static %}
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.4.1.js" integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="anonymous"></script>
+    <link href="http://code.jquery.com/ui/1.10.2/themes/smoothness/jquery-ui.css" rel="Stylesheet">
+    <script src="http://code.jquery.com/ui/1.10.2/jquery-ui.js" ></script>
+    <link href="https://fonts.googleapis.com/css?family=Play:400,700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel='shortcut icon' type='image/png' href="{% static 'slingshot/Site_Material/logo.png' %}">
+    <link rel="stylesheet" href="{% static 'slingshot/resetpass.css' %}">
+
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-156424721-1"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'UA-156424721-1');
+    </script>
+    
+    <title>Reset Password | Gamathon</title>
+</head>
+<body>
+    <div class="container">
+        <div class="gamathon">
+            <div class="gamathon-img"></div>
+            <div class="gamathon-name">Gamathon</div>
+        </div>
+        <div class="recover-modal-content">
+            <div class="top-shadow"></div>
+            <div class="recover-heading">Reset your Password</div>
+            <div class="reg-modal-img"></div>
+            <form action="#" method="post" class='recover-modal-form' id="reset-form">
+                {% csrf_token %}
+                <div class="recover-desc">You have requested to reset your Mogul password. To proceed please enter your registered email address below and choose a new password for your account. The new password needs to be at least 5 characters long.</div>
+                <input type="password" name='pass' class="password-field" id='pass' placeholder="New Password" required autofocus='on' minlength="5">
+
+                <input type="password" name='conf-pass' class="password-field" id='conf-pass' placeholder="Confirm Password" required minlength="5">
+                <div class="pass-warning" style="font-size: 14px; margin-left: 1rem; margin-top: -1rem;"></div>
+                <button class="recover-pass-btn">Submit</button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        $('#pass, #conf-pass').on('keyup', function () {
+            if ($('#pass').val() == $('#conf-pass').val()) {
+                $('.pass-warning').html('Matching').css('color', 'green');
+        } else 
+            $('.pass-warning').html("Passwords doesn't match!").css('color', 'red');
+        });
+    </script>
+    <script src="{% static 'slingshot/resetpass.js' %}"></script>
+</body>
+</html>

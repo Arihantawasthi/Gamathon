@@ -1,0 +1,136 @@
+{% extends 'slingshot/base.html' %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    {% load static %}
+
+    {% block css %}
+        <link rel="stylesheet" href="{% static 'organize/org_profile.css' %}">
+    {% endblock %}
+    <title>{% block title %}{{ organization.org_name }} Profile | Gamathon{% endblock %}</title>
+</head>
+{% block body %}
+    <div class="background" style="background-image: url('/media/{{ organization.org_logo }}')"></div>
+    <div id="profile-back-form">
+        <form action="{% url 'uploadOrgBackground' organization.org_name request.session.username %}" enctype="multipart/form-data" method="post" id='picture-form'>
+            {% csrf_token %}
+            <label for="img-input" class="img-label">
+                <i class="fa fa-camera"></i>
+                <br>
+                <div class="caption">Upload a photo.</div>
+            </label>
+            <input type="file" name="org-back" id="img-input" class="file-input" onchange="readURL(this);" accept="image/*">
+            
+            <button class="profile-back-save-btn">Save Background</button>
+        </form>
+    </div>
+    <div class="container">
+        <div class="header">
+            <div class="name-follow-container">
+                <div class="organization-name" style="color: white; font-size: 20px; font-weight: bold; margin-bottom: 0.5rem;">{{ organization.org_name }}</div>
+                <div class="following-num">{{ followers }} Followers</div>
+            </div>
+            <!-- { if is_user }
+            <a href="{ url 'manageOrg' organization.org_name organization.org_owner.username }" class="manage">
+                <i class="fa fa-gear"></i>
+                Manage     
+            </a>      
+            { endif } -->
+        </div>
+
+        <div class="divider-line"></div>
+
+        <div class="message">
+            <div class="message-login">Welcome to your organization profile page! Your previously organized tournaments will be displayed here. You can create your new tournament from by clicking on "<u>Create New Tournament</u>" Card. Use "<u>Manage</u>" Button to brand your organization.</div>
+            <div class="message-not-login">Welcome to our tournament listings! Look below for full list of our events.</div>
+        </div>
+
+        <div class="total-stats">
+            <div class="stats-head">Stats</div>
+            <div class="divider-line"></div>
+            <div class="total-prize">Total Prize Distributed: <span class="prize-money">&#8377</span><span class="prize-money"> {{ total_prize }}</span></div>
+            <div class="total-players">Total Tournaments Organized: <span class="participants">{{ tournaments|length }}</span></div>
+        </div>
+
+        {% if is_user %}
+            <a href="{% url 'createTourney' organization.org_name %}" style="text-decoration: none;">
+                <div class="create-tourney-card-container">
+                    <div class="create-tourney-heading">Create New Tournament</div>
+                    <div class="divider-line"></div>
+                    <div class="create-tourney">
+                        <i class="fa fa-plus"></i>
+                        <div class="content">Create Tournament</div>
+                    </div>
+                </div>
+            </a>
+        {% endif %}
+        <div class="previous-tourney-heading">
+            Previous Tournaments
+        </div>
+        <div class="divider-line"></div>
+
+        <div class="previous-tourney-container">
+        {% for tournament in tournaments %}
+            <a href="#" class="tourney-card">
+                <div class="tourney-card-image">
+                    <div class="tourney-card-time">{{ tournament.start_time }}, {{ tournament.start_date }}</div>
+                    <div class="tourney-card-platform">PC</div>
+                </div>
+                <div class="tourney-card-title">
+                    {{ tournament.name  }}
+                </div>
+                <div class="tourney-card-type">
+                    {{ tournament.nature }}
+                </div>
+                <div class="tourney-card-info">
+                    <div class="tourney-card-open">
+                        open to public
+                    </div>
+                    <div class="tourney-card-entry">
+                        &#8377 {{ tournament.entry_fee }} entry
+                    </div>
+                </div>
+                <div class="tourney-card-organizer-sponsor-info">
+                    <div class="tourney-card-organizer">
+                        <div class="organizer-img"></div>
+                        <div class="organizer-info">
+                            <div class="organizer">Organizer</div>
+                            <div class="organizer-name">{{ tournament.organizer.org_name }}</div>
+                        </div>
+                    </div>
+                    {% if tournament.sponsor != '' %}
+                    <div class="tourney-card-sponsor">
+                        <div class="sponsor-img"></div>
+                        <div class="sponsor-info">
+                            <div class="sponsor">Sponsor</div>
+                            <div class="sponsor-name">Gamathon</div>
+                        </div>
+                    </div>
+                    {% endif %}
+                </div>
+                <div class="tourney-card-prizepool">
+                    <span class="prize">Prize Pool</span> &#8377 {{ tournament.prize_pool }}
+                </div>
+                <div class="tourney-card-registration">
+                    <div class="registered">{{ tournament.participants }} Players registered</div>
+                    {% if tournament.status == 0 %}
+                        <div class="registration-statua">Registration Open</div>
+                    {% else %}
+                        <div class="registration-statua">Registration Open</div>
+                    {% endif %}
+                </div>
+            </a>
+        {% empty %}
+            <div style="color: white; font-weight: bold; font-size: 18px; margin-left: 3rem">No Previous Tournaments<span>&#x1F610</span></div>
+        {% endfor %}
+        </div>
+    </div>    
+{% endblock %}
+
+{% block javascript %}
+    <script src="{% static 'organize/org_profile.js' %}"></script>
+{% endblock %}
+</html>

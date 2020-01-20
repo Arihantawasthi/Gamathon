@@ -1,0 +1,584 @@
+{% extends 'slingshot/base.html' %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% load static %}
+
+    {% block metatags %}
+        <meta name="description" content="{{ tournament.name }} Hosted in Gamathon is an online {{ game }} tournament. Hurry! Register for glory, cash and prizes.">
+        <meta property="og:title" content="{{ tournament.name}} is an online {{ game }} tournament hosted in Gamathon."/>
+        <meta property="og:url" content="https://www.gamathon.gg/home"/>
+        <meta property="og:description" content="{{ tournament.name }} Hosted in Gamathon is an online {{ game }} tournament.">
+    {% endblock %}
+
+    {% block css %}
+        <link rel="stylesheet" href="{% static 'tourney/tourney.css' %}">
+    {% endblock %}
+    <title>{% block title %}{{ tournament.name }} | Gamathon{% endblock %}</title>
+</head>
+{% block body %}
+<div id="game" style="display: none;">{{ game }}</div>
+    <!-- Login Model Starts -->
+    <div id='tourney-login-modal'>
+        <div class="login-modal-content" id='tourney-login-modal-content'>
+            <div class="top-shadow"></div>
+            <div id="tourney-login-modal-close"><i class="fa fa-times"></i></div>
+            <div class="modal-heading">Log In</div>
+            <div class="modal-img"></div>
+            <form action="#" class="login-modal-form" id='login-form-tourney' method="POST">
+                {% csrf_token %}
+                <div class="name-head">Username</div>
+                <i class="fa fa-user" style="position: absolute; top: 15.4rem; left: 1.6rem; font-size: 18px;"></i>
+                <input type="input" name='loginUsernamet' class="username-field" placeholder="Username" autofocus="on">
+                
+                <div class="pass-head">Password</div>
+                <i class="fa fa-lock" style="position: absolute; top: 21.3rem; left: 1.6rem; font-size: 20px;"></i>
+                <input type="password" name="loginPasst" class="pass-field" placeholder="Password">
+                <div class="loginWarning" style='color: red; display: none; font-size: 14px; margin-left: 1rem; margin-top: 0.5rem;'>You must fill this field</div>
+
+                <button class="login-modal-button">Login</button>
+            </form>
+            <div class="reg-reminder">Don't have an account? <a href="{% url 'register' %}" style="font-weight: bold">Register Now</a></div>
+        </div>
+    </div>
+    
+    <!-- Game validation Modal -->
+    <div class="bg-validate-modal">
+        <div class="validate-modal-content">
+            <div class="validate-modal-close"><i class="fa fa-times"></i></div>
+            <div class="modal-heading">Add your game account</div>
+            <form action="#" class="validate-modal-form" id='account-validate-form'>
+                <div class="name-head">Account Name</div>
+                <input type="input" name="game_id" class="acc-name-field" placeholder="Account Name" autofocus="on">
+                
+                <div class="info">NOTE: This name must match your in-game name.</div>
+                <button class="validate-modal-button">Submit</button>
+            </form>
+        </div>
+    </div>
+    
+    <div class="sponsor-banner">
+        <div class="sponsor-banner-side-bar"></div>
+        <div class="sponsor-banner-head-info-wrapper">
+            <div class="sponsor-banner-head">Sponsored By:</div>
+            <a href="" class="sponsor-banner-info">Gamathon</a>
+        </div>
+    </div>
+    <div class="organizer-banner">
+        <div class="organizer-banner-side-bar"></div>
+        <div class="organizer-banner-head-info-wrapper">
+            <div class="organizer-banner-head">Organized By:</div>
+            <a href="" class="organizer-banner-info">Gamathon</a>
+        </div>
+    </div>
+    
+    <div class="bg-image" style="background-image: url('/media/{{ tournament.banner }}')"></div>
+    <div class="container">
+        {% if tournament.status == 0 %}
+            <form action="{% url 'publishTourney' tournament.organizer.org_name %}" enctype="multipart/form-data" method="post">   
+                {% csrf_token %} 
+                <label for="img-input" class="img-label"><i class="fa fa-camera"></i>
+                    <br>
+                    <div class="caption">Upload a photo.</div>
+                </label>
+                <input type="file" name="tour-banner" id="img-input" class="file-input" onchange="readURL(this);" accept="image/*">
+                <input type="hidden" name="publish" id="publish" value="{{ tournament.id }}">
+                <div class="publish">
+                    <div class="publish-head">{{ tournament.name }} [Draft]</div>
+                    <div class="publish-desc"><i class="fa fa-exclamation-triangle"></i> This tournament is still saved as a draft. You can still make changes to the settings of this tournament. Press publish button for making it visible to the rest of the world.</div>
+                    <button class="publish-btn">Publish</button>
+                </div>
+            </form>
+        {% endif %}
+        <div class="reg-tourney-section">
+            <div class="tourney-logo" style="background-image: url('/media/{{ tournament.banner }}')"></div>
+            <div class="tourney-name">
+                {{ tournament.name }}
+            </div>
+            <div class="tourney-reward">
+                <div class="money-img" style="background-image: url('/media/{{ tournament.banner }}')"></div>
+                <div class="reward">
+                    <div class="heading">Tournament Rewards</div>
+                    <div class="prize">&#8377 {{ tournament.prize_pool }} Prize Pool</div>
+                </div>
+                <div class="platform">Mobile</div>
+            </div>
+            {% if tournament.status == 1 %}
+                {% if not request.session.logged_in %}
+                    <div class="tourney-register">
+                        <div class="register-now">Register Now</div>
+                        <div class="entry">Login to play!</div>
+                    </div>
+                {% elif not game_validated %}
+                    {% if tournament.entry_fee == 0 %}
+                    <div class="tourney-register">
+                        <div class="register-now">Register Now</div>
+                        <div class="entry">Entry is Free!</div>
+                    </div>
+                    {% else %}
+                    <div class="tourney-register">
+                        <div class="register-now">Register Now</div>
+                        <div class="entry">Entry is &#8377 {{ tournament.entry_fee }}</div>
+                    </div>
+                    {% endif %}
+                {% else %}
+                    {% if tournament.tour_type == 'Squad' %}         
+                        {% if team_registered %}
+                            <div class="tourney-registration-done">
+                                <div class="register-now" style="margin-top: 0.8rem; cursor: default;">You are Registered!</div>
+                            </div>
+                        {% elif tournament.entry_fee == 0 %}
+                            <form action="{% url 'chooseTeam' tournament.id %}">
+                                <button class="tourney-register-team">
+                                    <div class="register-now">Register Now</div>
+                                    <div class="entry">Entry is Free!</div>
+                                </button>
+                            </form>
+                        {% elif tournament.entry_fee != 0 %}
+                            <form action="{% url 'chooseTeam' tournament.id %}">
+                                <button class="tourney-register-team">
+                                    <div class="register-now">Register Now</div>
+                                    <div class="entry">Entry is <span> &#8377</span>{{ tournament.entry_fee }}</div>
+                                </button>
+                            </form>
+                        {% endif %}
+                    {% elif tournament.tour_type == 'Solo' %}
+                        {% if registered %}
+                            <div class="tourney-registration-done">
+                                <div class="register-now" style="margin-top: 0.8rem; cursor: default;">You are Registered!</div>
+                            </div>
+                        {% elif tournament.entry_fee == 0 %}
+                        <form action="{% url 'tourney' tournament.id %}" id="tour-registration-entry" method="POST">
+                            {% csrf_token %}
+                            <input type="hidden" value="{{ tournament.entry_fee }}" name='entry-fee'>
+                            <button class="tourney-register-entry">
+                                <div class="register-now">Register Now</div>
+                                <div class="entry">Entry is Free!</div>
+                            </button>
+                        </form>
+                        {% else %}
+                        <form action="{% url 'tourney' tournament.id %}" method="POST">
+                            {% csrf_token %}
+                            <input type="hidden" value="{{ tournament.entry_fee }}" name='entry-fee'>
+                            <button class="tourney-register-entry">
+                                <div class="register-now">Register Now</div>
+                                <div class="entry">Entry is &#8377 {{ tournament.entry_fee }}</div>
+                            </button>
+                        </form>
+                        {% endif %}
+                    {% endif %}
+                {% endif %}
+            {% elif tournament.status == 0 %}
+                <div class="tourney-registration-done">
+                    <div class="register-now" style="margin-top: 0.8rem; cursor: default;">This is Draft</div>
+                </div>
+            {% elif tournament.status == 2 %}
+                <div class="tourney-registration-done">
+                    <div class="register-now" style="margin-top: 0.8rem; cursor: default;">Tournament Completed!</div>
+                </div>
+            {% endif %}
+            <div class="date-time">Registration Ends {{ tournament.start_date }},  {{ tournament.start_time }}</div>
+        </div>
+
+        <div class="share">
+            <div class="share-heading">Share tournament and invite your friends</div>
+            <div class="share-link">
+                <input type="text" value="http://127.0.0.1:8000/tournament/{{ tournament.id }}" id="shareLink">
+                <button class="copyLink">Copy Link</button>
+            </div>
+        </div>
+
+        <div class="tabs">
+            <ul class="tabs-options">
+                <li class="overview">Overview</li>
+                <li class="ladder">Ladder</li>
+                <li class="players">Players</li>
+                <li class="prizes">Prizes</li>
+                <li class="schedule">Schedule</li>
+                <li class="rules">Rules</li>
+            </ul>
+            <div class="line4"></div>
+        </div>
+
+        <div class="desk-wrap">
+            <div class="desk-left-section">
+                <div class="overview-container">
+                    <div class="announcement-head">Announcements</div>
+                    <div class="announce-content"><i class="fa fa-warning"></i>
+                        All the announcements related to tournament will be listed here.
+                        {{ tourney.announcement|safe }}
+                    </div>
+
+                    <div class="tourney-desc-head">Description</div>
+                    <div class="tourney-description">
+                        Description of the tournament will be shown here.
+                        {{ tourney.description|safe }}
+                    </div>
+                    
+                    <div class="overview-details-head">Details</div>
+                    <div class="overview-details">
+                        <div class="overview-table-head">
+                            <div class="overview-table-row">
+                                <div class="overview-table-column">Region</div>
+                                <div class="overview-table-column">Asia</div>
+                            </div>
+                            <div class="overview-table-row">
+                                <div class="overview-table-column">Game</div>
+                                <div class="overview-table-column">PUBG Mobile</div>
+                            </div>
+                            <div class="overview-table-row">
+                                <div class="overview-table-column">Registration Close</div>
+                                <div class="overview-table-column">January 10, 2020 4:40 PM</div>
+                            </div>
+                            <div class="overview-table-row">
+                                <div class="overview-table-column">Tournament Type</div>
+                                <div class="overview-table-column">Battle Royale</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="ladder-content">
+                    <div class="ladder-heading">Ladder</div>
+                    <div class="line"></div>
+                    <div class="participants-search">
+                        <input type="text" id="participants-search-bar" placeholder="Search..." onkeyup="searchFun()"><br>
+                        <select name="phases" id="phases-select">
+                            <option value="phase-1">Phase 1</option>
+                            <option value="phase-2">Phase 2</option>
+                            <option value="phase-3">Phase 3</option>
+                        </select>
+                        <select name="groups" id="groups-select">
+                            <option value="group-1">Group 1</option>
+                            <option value="group-2">Group 2</option>
+                            <option value="group-3">Group 3</option>
+                        </select>
+                        <select name="matches" id="matches-select">
+                            <option value="match-1">Match 1</option>
+                            <option value="match-2">Match 2</option>
+                            <option value="match-3">Match 3</option>
+                        </select>
+                    </div>
+                    {% if participants|length == 0 or all_reg_teams|length == 0 %}
+                        <div class="top-team-heading">
+                            <div class="left-section">
+                                <div class="s-no-head">S.No.</div>
+                                <div class="img-name-head">Name</div>
+                            </div>
+                            <div class="right-section">
+                                <div class="win-perc-head">Rank</div>
+                                <div class="win-perc-head">Kills</div>
+                                <div class="points-head">Points</div>
+                            </div>
+                        </div>
+                    {% else %}
+                        The Ladder will be unavailable until the tournament officially begins and enters the bracket playoff stage.
+                    {% endif %}
+
+                    <div class="top-team-table">
+                    {% if tournament.tour_type == 'Solo' %}
+                        {% for participant in participants %}
+                        <div class="top-team-element">
+                            <div class="left-section">
+                                <div class="s-no">{{ forloop.counter }}</div>
+                                <div class="img-name">
+                                    <a href="{% url 'profile' participant.name %}" class="participant-name">
+                                        <div class="team-img" style="background-image: url('/media/{{ team.logo }}');"></div> {{ participant.name }}
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="right-section">
+                                <div class="win-perc">{{ participant.wins }}</div>
+                                <div class="win-perc">50</div>
+                                <div class="points">1,000</div>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    {% else %}
+                        {% for team in all_reg_teams %}
+                        <div class="top-team-element">
+                            <div class="left-section">
+                                <div class="s-no">{{ forloop.counter }}</div>
+                                <div class="img-name">
+                                    <a href="{% url 'team' team.name %}" class="participant-name">
+                                        <div class="team-img" style="background-image: url('/media/{{ team.logo }}');"></div> {{ team.name }}
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="right-section">
+                                <div class="win-perc">{{ team.wins }}</div>
+                                <div class="win-perc">50</div>
+                                <div class="points">1,000</div>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    {% endif %}
+                    </div>
+                </div>
+
+                <div class="rules-content">
+                    <div class="rules-heading">
+                        Rules
+                    </div>
+                    <div class="line"></div>
+                    <div class="content">
+                        {{ tournament.rules|safe }}
+                    </div>
+                </div>
+
+                <div class="prizes-content">
+                    <div class="prizes-heading">Prize Distribution</div>
+                    <div class="line"></div>
+                    <table class="prize-table">
+                        <thead class="prize-table-heading">
+                            <tr>
+                                <th class="standings-row">Standings</th>
+                                <!-- <th class="name-row">Name</th> -->
+                                <th class="points-row">Prize</th>
+                            </tr>
+                        </thead>
+                        <tbody class="prize-table-body">
+                            <tr>
+                                <td>1</td>
+                                <!-- <td><div class="table-user-pic" style="background-image: url('../../static/slingshot/Site_Material/logo.png');"></div><div>Heisenberg</div></td> -->
+                                <td>&#8377 3,00,000</td>
+                            </tr>
+                            <tr>
+                                <td>2</td>
+                                <!-- <td><div class="table-user-pic" style="background-image: url('../../static/slingshot/Site_Material/logo.png');"></div><div>Heisenberg</div></td> -->
+                                <td>&#8377 3,00,000</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="schedule-content">
+                    <div class="schedule-heading">Schedule</div>
+                    <div class="line"></div>
+
+                    <div class="schedule-round-container">
+                        <div class="schedule-round">
+                            <div class="schedule-round-head">
+                                <div class="schedule-round-name">
+                                    Round 1
+                                </div>
+                                <div class="schedule-round-status">
+                                    Completed
+                                </div>
+                            </div>
+                            <div class="schedule-round-body">
+                                <div class="schedule-round-date">
+                                    January 10, 2020 4:30 PM IST
+                                </div>
+                                <div class="schedule-round-map">
+                                    Maps <br>
+                                    <span class="map-name"> -Erangel</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="schedule-round">
+                            <div class="schedule-round-head">
+                                <div class="schedule-round-name">
+                                    Round 2
+                                </div>
+                                <div class="schedule-round-status">
+                                    Completed
+                                </div>
+                            </div>
+                            <div class="schedule-round-body">
+                                <div class="schedule-round-date">
+                                    January 10, 2020 5:30 PM IST
+                                </div>
+                                <div class="schedule-round-map">
+                                    Maps <br>
+                                    <span class="map-name"> -Erangel</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="matches-heading">Matches</div>
+                    <div class="line"></div>
+                    
+                    <div class="schedule-matches-container">
+                        <div class="schedule-matches">
+                            <div class="schedule-matches-head">
+                                <div class="schedule-matches-name">
+                                    Round 1
+                                </div>
+                                <div class="schedule-matches-icon">
+                                    <i class="fa fa-angle-down"></i>
+                                </div>
+                            </div>    
+                            <div class="schedule-matches-list">
+                                <div class="schedule-matches-list-element">
+                                    <div class="schedule-list-element-head">
+                                        <div class="schedule-list-element-name">
+                                            Match 1
+                                        </div>
+                                        <div class="schedule-list-element-status">
+                                            Completed
+                                        </div>
+                                    </div>
+                                    <div class="schedule-list-element-body">
+                                        <div class="schedule-list-element-date">
+                                            January 10, 2020 4:30 PM IST <br>
+                                            <div class="best-teams">Best 5 teams of 20 teams.</div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="schedule-matches-list-element">
+                                    <div class="schedule-list-element-head">
+                                        <div class="schedule-list-element-name">
+                                            Match 2
+                                        </div>
+                                        <div class="schedule-list-element-status">
+                                            Completed
+                                        </div>
+                                    </div>
+                                    <div class="schedule-list-element-body">
+                                        <div class="schedule-list-element-date">
+                                            January 10, 2020 4:30 PM IST <br>
+                                            <div class="best-teams">Best 5 teams of 20 teams.</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="schedule-matches">
+                            <div class="schedule-matches-head">
+                                <div class="schedule-matches-name">
+                                    Round 2
+                                </div>
+                                <div class="schedule-matches-icon">
+                                    <i class="fa fa-angle-down"></i>
+                                </div>
+                            </div>    
+                            <div class="schedule-matches-list">
+                                <div class="schedule-matches-list-element">
+                                    <div class="schedule-list-element-head">
+                                        <div class="schedule-list-element-name">
+                                            Match 1
+                                        </div>
+                                        <div class="schedule-list-element-status">
+                                            Completed
+                                        </div>
+                                    </div>
+                                    <div class="schedule-list-element-body">
+                                        <div class="schedule-list-element-date">
+                                            January 10, 2020 4:30 PM IST <br>
+                                            <div class="best-teams">Best 5 teams of 20 teams.</div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="schedule-matches-list-element">
+                                    <div class="schedule-list-element-head">
+                                        <div class="schedule-list-element-name">
+                                            Match 2
+                                        </div>
+                                        <div class="schedule-list-element-status">
+                                            Completed
+                                        </div>
+                                    </div>
+                                    <div class="schedule-list-element-body">
+                                        <div class="schedule-list-element-date">
+                                            January 10, 2020 4:30 PM IST <br>
+                                            <div class="best-teams">Best 5 teams of 20 teams.</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="players-content">
+                    <div class="players-card-wrapper">
+                    {% if tournament.tour_type == 'Solo' %}
+                        {% for participant in participants %}
+                            <a href="{% url 'profile' participant.name %}" class="players-card">
+                                <div class="up-section" style="background: url('/media/{{ participant.profile_back }}')">
+                                    <div class="player-img" style="background-image: url('/media/{{ participant.profile_pic }}"')></div>
+                                    <div class="player-name">{{ participant.name }}</div>
+                                    <div class="player-user">{{  participant.usrname }}</div>
+                                </div>
+                                <div class="bottom-section">
+                                    <div class="won">
+                                        <div class="won-text">Won</div>
+                                        <div class="won-score">{{ participant.wins }}</div>
+                                    </div>
+                                    <div class="lost">
+                                        <div class="lost-text">Lost</div>
+                                        <div class="lost-score">{{ participant.loss }}</div>
+                                    </div>
+                                </div>
+                            </a>
+                        {% empty %}
+                            <div class="no-shit" style="width: 100%; padding: 1rem 2rem; margin-top: 0.8rem; color: white; background-color: #313030;">No Participants yet.</div>
+                        {% endfor %}
+                    {% else %}
+                        {% for team in all_reg_teams %}
+                        <a href="{% url 'team' team.name %}" class="players-card">
+                            <div class="up-section" style="background: url('/media/{{ team.team_banner }}')">
+                                <div class="player-img" style="background-image: url('/media/{{ team.logo }}"')></div>
+                                <div class="player-name">{{ team.name }}</div>
+                            </div>
+                            <div class="bottom-section">
+                                <div class="won">
+                                    <div class="won-text">Won</div>
+                                    <div class="won-score">{{ team.wins }}</div>
+                                </div>
+                                <div class="lost">
+                                    <div class="lost-text">Lost</div>
+                                    <div class="lost-score">{{ team.loss }}</div>
+                                </div>
+                            </div>
+                        </a>
+                        {% empty %}
+                            <div class="no-shit" style=" width: 100%; padding: 1rem 2rem; margin-top: 0.8rem; color: white; background-color: #313030;">No Participants yet.</div>
+                        {% endfor %}
+                    {% endif %}
+                    </div>
+                </div>
+            </div>
+            <div class="desk-right-section">
+                <div class="tournament-description-info">
+                    <div class="starts">
+                        <div class="start-head">Starts</div>
+                        <div class="line"></div>
+                        <div class="start-date">
+                            {{ tournament.start_date }},  {{ tournament.start_time }}
+                        </div>
+                        <div class="start-des">
+                            All times are according to Indian Standard Time (IST).
+                        </div>
+                    </div>
+
+                    <div class="tour-description">
+                        <div class="des-head">Contact</div>
+                        <div class="line"></div>
+                        {{ tournament.contact|safe  }}
+                    </div>
+
+                    <div class="moderators">
+                        <div class="mod-heading">Sponsors</div>
+                        <div class="line"></div>
+                        <div class="mod-des">
+                            <div class="mod-img1"></div>
+                            <div class="mod-img2"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block javascript %}
+    <script src="{% static 'tourney/tourney.js' %}"></script>
+{% endblock %}
+</html>

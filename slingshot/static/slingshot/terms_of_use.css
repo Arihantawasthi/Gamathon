@@ -1,0 +1,29 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Play', 'sans-serif'; 
+}
+
+body {
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizelegibility;
+}
+
+.container {
+    margin: 0.8em 1.8em;
+}
+
+h2 {
+    margin-bottom: 2rem;
+}
+
+h2::first-letter {
+    font-size: 200%;
+    color: #fe0000;
+}
+
+p::first-letter {
+    font-size: 25px;
+    color: #fe0000;
+}

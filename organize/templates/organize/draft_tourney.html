@@ -1,0 +1,449 @@
+{% extends 'slingshot/base.html' %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% load static %}
+
+    {% block css %}
+        <link rel="stylesheet" href="{% static 'tourney/tourney.css' %}">
+    {% endblock %}
+    <title>{% block title %}{{ tournament.name }} | Gamathon{% endblock %}</title>
+</head>
+{% block body %}
+<div id="game" style="display: none;">{{ game }}</div>
+    <!-- Login Model Starts -->
+    <div id='tourney-login-modal'>
+        <div class="login-modal-content" id='tourney-login-modal-content'>
+            <div class="top-shadow"></div>
+            <div id="tourney-login-modal-close"><i class="fa fa-times"></i></div>
+            <div class="modal-heading">Log In</div>
+            <div class="modal-img"></div>
+            <form action="#" class="login-modal-form" id='login-form-tourney' method="POST">
+                {% csrf_token %}
+                <div class="name-head">Username</div>
+                <input type="input" name='loginUsernamet' class="username-field" placeholder="Username" autofocus="on">
+                
+                <div class="pass-head">Password</div>
+                <input type="password" name="loginPasst" class="pass-field" placeholder="Password">
+                <div class="loginWarning" style='color: red; display: none; font-size: 14px; margin-left: 1rem; margin-top: 0.5rem;'>You must fill this field</div>
+
+                <button class="login-modal-button">Login</button>
+            </form>
+            <div class="reg-reminder">Don't have an account? <a href="{% url 'register' %}" style="font-weight: bold">Register Now</a></div>
+        </div>
+    </div>
+    
+    <!-- Game validation Modal -->
+    <div class="bg-validate-modal">
+        <div class="validate-modal-content">
+            <div class="validate-modal-close">X</div>
+            <div class="modal-heading">Add your game account</div>
+            <form action="#" class="validate-modal-form" id='account-validate-form'>
+                <div class="name-head">Account Name</div>
+                <input type="input" name="game_id" class="acc-name-field" placeholder="Account Name" autofocus="on">
+                
+                <div class="info">NOTE: This name must match your in-game name.</div>
+                <button class="validate-modal-button">Submit</button>
+            </form>
+        </div>
+    </div>
+    
+    <div class="bg-image" style="background-image: url('/media/{{ tournament.banner }}')"></div>
+    <div class="container">
+        {% if tournament.status == 0 %}
+            <form action="{% url 'publishTourney' tournament.organizer.org_name %}" enctype="multipart/form-data" method="post">   
+                {% csrf_token %} 
+                <label for="img-input" class="img-label"><i class="fa fa-camera"></i>
+                    <br>
+                    <div class="caption">Upload a photo.</div>
+                </label>
+                <input type="file" name="tour-banner" id="img-input" class="file-input" onchange="readURL(this);" accept="image/*">
+                <input type="hidden" name="publish" id="publish" value="{{ tournament.id }}">
+                <div class="publish">
+                    <div class="publish-head">{{ tournament.name }} [Draft]</div>
+                    <div class="publish-desc"><i class="fa fa-exclamation-triangle"></i> This tournament is still saved as a draft. You can still make changes to the settings of this tournament. Press publish button for making it visible to the rest of the world.</div>
+                    <button class="publish-btn">Publish</button>
+                </div>
+            </form>
+        {% endif %}
+        <div class="reg-tourney-section">
+            <div class="tourney-logo" style="background-image: url('/media/{{ tournament.banner }}')"></div>
+            <div class="tourney-name">
+                {{ tournament.name }}
+            </div>
+            <div class="tourney-reward">
+                <div class="money-img" style="background-image: url('/media/{{ tournament.banner }}')"></div>
+                <div class="reward">
+                    <div class="heading">Tournament Rewards</div>
+                    <div class="prize">&#8377 {{ tournament.prize_pool }} Prize Pool</div>
+                </div>
+                <div class="platform">PC</div>
+            </div>
+            {% if tournament.status == 1 %}
+                {% if not request.session.logged_in %}
+                    <div class="tourney-register">
+                        <div class="register-now">Register Now</div>
+                        <div class="entry">Login to play!</div>
+                    </div>
+                {% elif not game_validated %}
+                    {% if tournament.entry_fee == 0 %}
+                    <div class="tourney-register">
+                        <div class="register-now">Register Now</div>
+                        <div class="entry">Entry is Free!</div>
+                    </div>
+                    {% else %}
+                    <div class="tourney-register">
+                        <div class="register-now">Register Now</div>
+                        <div class="entry">Entry is &#8377 {{ tournament.entry_fee }}</div>
+                    </div>
+                    {% endif %}
+                {% else %}
+                    {% if tournament.tour_type == 'Squad' %}         
+                        {% if team_registered %}
+                            <div class="tourney-register">
+                                <div class="register-now" style="margin-top: 0.8rem;">You are Registered!</div>
+                            </div>
+                        {% elif tournament.entry_fee == 0 %}
+                            <form action="{% url 'chooseTeam' tournament.id %}">
+                                <button class="tourney-register-team">
+                                    <div class="register-now">Register Now</div>
+                                    <div class="entry">Entry is Free!</div>
+                                </button>
+                            </form>
+                        {% elif tournament.entry_fee != 0 %}
+                            <form action="{% url 'chooseTeam' tournament.id %}">
+                                <button class="tourney-register-team">
+                                    <div class="register-now">Register Now</div>
+                                    <div class="entry">Entry is &#8377 {{ tournament.entry_fee }}</div>
+                                </button>
+                            </form>
+                        {% endif %}
+                    {% elif tournament.tour_type == 'Solo' %}
+                        {% if registered %}
+                            <div class="tourney-registration-done">
+                                <div class="register-now" style="margin-top: 0.8rem; cursor: default;">You are Registered!</div>
+                            </div>
+                        {% elif tournament.entry_fee == 0 %}
+                        <form action="{% url 'tourney' tournament.id %}" id="tour-registration-entry" method="POST">
+                            {% csrf_token %}
+                            <input type="hidden" value="{{ tournament.entry_fee }}" name='entry-fee'>
+                            <button class="tourney-register-entry">
+                                <div class="register-now">Register Now</div>
+                                <div class="entry">Entry is Free!</div>
+                            </button>
+                        </form>
+                        {% else %}
+                        <form action="{% url 'tourney' tournament.id %}" id="tour-registration-entry" method="POST">
+                            {% csrf_token %}
+                            <input type="hidden" value="{{ tournament.entry_fee }}" name='entry-fee'>
+                            <button class="tourney-register-entry">
+                                <div class="register-now">Register Now</div>
+                                <div class="entry">Entry is &#8377 {{ tournament.entry_fee }}</div>
+                            </button>
+                        </form>
+                        {% endif %}
+                    {% endif %}
+                {% endif %}
+            {% elif tournament.status == 0 %}
+                <div class="tourney-registration-done">
+                    <div class="register-now" style="margin-top: 0.8rem; cursor: default;">This is Draft</div>
+                </div>
+            {% else %}
+                <div class="tourney-registration-done">
+                    <div class="register-now" style="margin-top: 0.8rem; cursor: default;">Tournament Completed!</div>
+                </div>
+            {% endif %}
+            <div class="date-time">Registration Ends {{ tournament.start_date }},  {{ tournament.start_time }}</div>
+        </div>
+
+        <div class="share">
+            <div class="share-heading">Share tournament and invite your friends</div>
+            <div class="share-link">
+                <input type="text" value="http://127.0.0.1:8000/tournament/{{ tournament.id }}" id="shareLink">
+                <button class="copyLink">Copy Link</button>
+            </div>
+        </div>
+
+        <div class="tabs">
+            <ul class="tabs-options">
+                <li class="overview">Overview</li>
+                <li class="ladder">Ladder</li>
+                <li class="rules">Rules</li>
+                <li class="players">Players</li>
+            </ul>
+            <div class="line4"></div>
+        </div>
+
+        <div class="desk-wrap">
+            <div class="desk-left-section">
+                <div class="overview-container">
+                    <div class="prize-card-wrapper">
+                        <div class="prize-card">
+                            <div class="prize-image"></div>
+                            <div class="card-up-section">
+                                <div class="position">
+                                    <div class="number">1st</div>
+                                    <div class="place">Place</div>
+                                </div>
+                            </div>
+                            <div class="card-down-section">
+                                <div class="prize-heading">
+                                    &#8377 {{ tournament.place_1 }} INR
+                                </div>
+                                <div class="description">
+                                    Earn {{ tournament.place_1 }} INR by finishing at first place.
+                                </div>
+                            </div>
+                        </div>
+                        <div class="prize-card">
+                            <div class="card-up-section">
+                                <div class="position">
+                                    <div class="number">2nd</div>
+                                    <div class="place">Place</div>
+                                </div>
+                            </div>
+                            <div class="card-down-section">
+                                <div class="prize-heading">
+                                    &#8377 {{ tournament.place_2 }} INR
+                                </div>
+                                <div class="description">
+                                    Earn &#8377 {{ tournament.place_2 }} INR by finishing at first place.
+                                </div>
+                            </div>
+                        </div>
+                        <div class="prize-card">
+                            <div class="card-up-section">
+                                <div class="position">
+                                    <div class="number">3rd</div>
+                                    <div class="place">Place</div>
+                                </div>
+                            </div>
+                            <div class="card-down-section">
+                                <div class="prize-heading">
+                                    &#8377 {{ tournament.place_3 }} INR
+                                </div>
+                                <div class="description">
+                                    Earn &#8377 {{ tournament.place_3 }} INR by finishing at first place.
+                                </div>
+                            </div>
+                        </div>
+                        <div class="prize-card">
+                            <div class="card-up-section">
+                                <div class="position">
+                                    <div class="number">4th</div>
+                                    <div class="place">Place</div>
+                                </div>
+                            </div>
+                            <div class="card-down-section">
+                                <div class="prize-heading">
+                                    &#8377 {{ tournament.place_4 }} INR
+                                </div>
+                                <div class="description">
+                                    Earn &#8377 {{ tournament.place_4 }} INR by finishing at first place.
+                                </div>
+                            </div>
+                        </div>
+                        <div class="prize-card">
+                            <div class="card-up-section">
+                                <div class="position">
+                                    <div class="number">5th</div>
+                                    <div class="place">Place</div>
+                                </div>
+                            </div>
+                            <div class="card-down-section">
+                                <div class="prize-heading">
+                                    &#8377 {{ tournament.place_5 }} INR
+                                </div>
+                                <div class="description">
+                                    Earn &#8377 {{ tournament.place_5 }} INR by finishing at first place.
+                                </div>
+                            </div>
+                        </div>
+                        <div class="prize-card">
+                            <div class="card-up-section">
+                                <div class="position">
+                                    <div class="number">6th</div>
+                                    <div class="place">Place</div>
+                                </div>
+                            </div>
+                            <div class="card-down-section">
+                                <div class="prize-heading">
+                                    &#8377 {{ tournament.place_6 }} INR
+                                </div>
+                                <div class="description">
+                                    Earn &#8377 {{ tournament.place_6 }} INR by finishing at first place.
+                                </div>
+                            </div>
+                        </div>
+                        <div class="prize-card">
+                            <div class="card-up-section">
+                                <div class="position">
+                                    <div class="number">7th</div>
+                                    <div class="place">Place</div>
+                                </div>
+                            </div>
+                            <div class="card-down-section">
+                                <div class="prize-heading">
+                                    &#8377 {{ tournament.place_7 }} INR
+                                </div>
+                                <div class="description">
+                                    Earn &#8377 {{ tournament.place_7 }} INR by finishing at first place.
+                                </div>
+                            </div>
+                        </div>
+                        <div class="prize-card">
+                            <div class="card-up-section">
+                                <div class="position">
+                                    <div class="number">8th</div>
+                                    <div class="place">Place</div>
+                                </div>
+                            </div>
+                            <div class="card-down-section">
+                                <div class="prize-heading">
+                                    &#8377 {{ tournament.place_8 }} INR
+                                </div>
+                                <div class="description">
+                                    Earn &#8377 {{ tournament.place_8 }} INR by finishing at first place.
+                                </div>
+                            </div>
+                        </div>
+                        <div class="prize-card">
+                            <div class="card-up-section">
+                                <div class="position">
+                                    <div class="number">9th</div>
+                                    <div class="place">Place</div>
+                                </div>
+                            </div>
+                            <div class="card-down-section">
+                                <div class="prize-heading">
+                                    &#8377 {{ tournament.place_9 }} INR
+                                </div>
+                                <div class="description">
+                                    Earn &#8377 {{ tournament.place_9 }} INR by finishing at first place.
+                                </div>
+                            </div>
+                        </div>
+                        <div class="prize-card">
+                            <div class="card-up-section">
+                                <div class="position">
+                                    <div class="number">10th</div>
+                                    <div class="place">Place</div>
+                                </div>
+                            </div>
+                            <div class="card-down-section">
+                                <div class="prize-heading">
+                                    &#8377 {{ tournament.place_10 }} INR
+                                </div>
+                                <div class="description">
+                                    Earn &#8377 {{ tournament.place_10 }} INR by finishing at first place.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="ladder-content">
+                <div class="ladder-heading">Ladder</div>
+                <div class="line"></div>
+                The Ladder will be unavailable until the tournament officially begins and enters the bracket playoff stage. 
+            </div>
+
+            <div class="rules-content">
+                <div class="rules-heading">
+                    Rules
+                </div>
+                <div class="line"></div>
+                <div class="content">
+                    {{ tournament.rules }}
+                </div>
+            </div>
+            
+            <div class="players-content">
+                <div class="players-card-wrapper">
+                {% if tournament.tour_type == 'Solo' %}
+                    {% for participant in participants %}
+                        <a href="{% url 'profile' participant.name %}" class="players-card">
+                            <div class="up-section">
+                                <div class="player-img" style="background-image: url('/media/{{ participant.profile_pic }}"')></div>
+                                <div class="player-name">{{ participant.name }}</div>
+                                <div class="player-user">{{  participant.usrname }}</div>
+                            </div>
+                            <div class="bottom-section">
+                                <div class="won">
+                                    <div class="won-text">Won</div>
+                                    <div class="won-score">{{ participant.wins }}</div>
+                                </div>
+                                <div class="lost">
+                                    <div class="lost-text">Lost</div>
+                                    <div class="lost-score">{{ participant.loss }}</div>
+                                </div>
+                            </div>
+                        </a>
+                    {% empty %}
+                        <div class="no-shit" style="width: 100%; padding: 1rem 2rem; margin-top: 0.8rem; color: white; background-color: #313030;">No Participants yet.</div>
+                    {% endfor %}
+                {% else %}
+                    {% for team in all_reg_teams %}
+                    <a href="{% url 'team' team.name %}" class="players-card">
+                        <div class="up-section">
+                            <div class="player-img" style="background-image: url('/media/{{ team.logo }}"')></div>
+                            <div class="player-name">{{ team.name }}</div>
+                        </div>
+                        <div class="bottom-section">
+                            <div class="won">
+                                <div class="won-text">Won</div>
+                                <div class="won-score">{{ team.wins }}</div>
+                            </div>
+                            <div class="lost">
+                                <div class="lost-text">Lost</div>
+                                <div class="lost-score">{{ team.loss }}</div>
+                            </div>
+                        </div>
+                    </a>
+                    {% empty %}
+                        <div class="no-shit" style=" width: 100%; padding: 1rem 2rem; margin-top: 0.8rem; color: white; background-color: #313030;">No Participants yet.</div>
+                    {% endfor %}
+                {% endif %}
+                </div>
+            </div>
+
+            <div class="desk-right-section">
+                <div class="tournament-description-info">
+                    <div class="starts">
+                        <div class="start-head">Starts</div>
+                        <div class="line"></div>
+                        <div class="start-date">
+                            {{ tournament.start_date }},  {{ tournament.start_time }}
+                        </div>
+                        <div class="start-des">
+                            All times are according to Indian Standard Time(IST).
+                        </div>
+                    </div>
+
+                    <div class="tour-description">
+                        <div class="des-head">Contact</div>
+                        <div class="line"></div>
+                        {{ tournament.contact  }}
+                    </div>
+
+                    <div class="moderators">
+                        <div class="mod-heading">Moderators</div>
+                        <div class="line"></div>
+                        <div class="mod-des">
+                            <div class="mod-img1"></div>
+                            <div class="mod-img2"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block javascript %}
+    <script src="{% static 'tourney/tourney.js' %}"></script>
+{% endblock %}
+</html>

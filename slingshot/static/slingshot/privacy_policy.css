@@ -1,0 +1,31 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Play', 'sans-serif'; 
+}
+
+body {
+    /* background: linear-gradient(to left, rgb(12, 12, 12), #3b3939); */
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizelegibility;
+}
+
+h2::first-letter {
+    color: #fe0000;
+    font-size: 200%;
+}
+
+h2 {
+    margin-bottom: 2rem;
+}
+
+.container {
+    color: black;
+    margin: 0.8em 1.8em;
+}
+
+.container p::first-letter {
+    font-size: 28px;
+    color: #fe0000;
+}

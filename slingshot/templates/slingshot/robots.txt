@@ -1,0 +1,11 @@
+User-agent: *
+Disallow: /wallet/*
+Disallow: /team-wallet/* 
+Disallow: /handlerequest/* 
+Disallow: /teamUserTXN/* 
+Disallow: /withdraw/*
+Disallow: /forgot-password
+Disallow: /upload-team-profile/*
+Disallow: /accounts/password/*
+Disallow: /activate/*
+Disallow: /following/*

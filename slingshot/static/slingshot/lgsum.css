@@ -1,0 +1,431 @@
+/* Login Modal */
+
+.bg-login-modal {
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    position: absolute;
+    top: 0;
+    display: none;
+    z-index: 5;
+    position: fixed;
+    align-items: center;
+}
+
+.top-shadow {
+    height: 5px;
+    border-top-left-radius: 6px;
+    border-top-right-radius: 6px;
+    background-color: #ec3333;
+    margin-top: 0rem;
+    box-shadow: 0 0px 3px rgba(250, 113, 113, 0.5);
+    transition: all 0.1s ease-in-out;
+}
+
+.login-modal-content {
+    background: linear-gradient(to bottom, rgb(40, 40, 49), rgb(10, 10, 10));
+    border-radius: 4px;
+    margin: 2.5rem 1rem;
+    box-shadow: 0 2px 10px 0px rgba(0, 0, 0, 0.5);
+    transition: all 0.3s ease-in-out;
+    transform: translateY(-5rem);
+    max-height: 100%;
+    z-index: 5;
+    overflow-y: scroll;
+}
+
+.login-modal-form {
+    display: flex;
+    flex-direction: column;
+    color: white;
+}
+
+.modal-heading {
+    text-align: center;
+    text-transform: uppercase;
+    margin: 0.5rem 0 1rem 0;
+    color: whitesmoke;
+    font-weight: bold;
+}
+
+.modal-close {
+    color: whitesmoke;
+    text-align: right;
+    margin: 1rem 0.5rem 0 0;
+    padding: 0.5rem 0.3rem 0 0.4rem;
+    cursor: pointer;
+    font-size: 18px;
+}
+
+.modal-img {
+    background-image: url('./Site_Material/logo.png');
+    height: 6rem;
+    width: 6rem;
+    margin: auto;
+    background-size: contain;
+    background-repeat: no-repeat;
+}
+
+.name-head {
+    font-size: 13px;
+    margin: 1.5rem 0 0.5rem 1rem;
+    text-transform: uppercase;
+}
+
+.username-field {
+    margin: 0 1rem;
+    border-radius: 6px;
+    border: 0;
+    height: 40px;
+    padding-left: 2.2rem;
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+    padding-right: 0.5rem;
+    /* background-color: #3e4554; */
+    background-color: #363b46;
+    color: white;
+}
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover, 
+input:-webkit-autofill:focus, 
+input:-webkit-autofill:active  {
+    -webkit-box-shadow: 0 0 0 30px #3e4554 inset !important;
+    -webkit-text-fill-color: white;
+}
+
+input {
+    background-color: #33373f;
+}
+
+input:focus {
+    background-color: #3c4250;
+    border: 1px solid rgb(19, 196, 19);
+}
+
+.username-field::placeholder {
+    color: white;
+    opacity: 0.5;
+    font-size: 13px;
+}
+
+.username-field:focus {
+    outline-width: 0;
+}
+
+.pass-head {
+    font-size: 13px;
+    margin: 2rem 0 0.5rem 1rem;
+    text-transform: uppercase;
+}
+
+.pass-field {
+    margin: 0 1rem 0rem 1rem;
+    border-radius: 6px;
+    border: 0;
+    height: 40px;
+    padding-left: 2.2rem;
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+    padding-right: 0.5rem;
+    background-color: #33373f;
+    color: white;
+}
+
+.pass-field::placeholder {
+    color: white;
+    opacity: 0.5;
+    font-size: 13px;
+}
+
+.pass-field:focus {
+    outline-width: 0;
+}
+
+.login-modal-button {
+    width: 5rem;
+    margin: 2rem 1rem 1.5rem 1rem;
+    padding: 8px;
+    border-radius: 2px;
+    border: 0;
+    color: whitesmoke;
+    background: linear-gradient(to left, #e00f0f, #db5353);
+    font-size: 15px;
+    cursor: pointer;
+    font-family: 'Play', sans-serif;
+}
+
+.reg-reminder {
+    text-align: right;
+    padding: 0 1rem 1.2rem 0;
+    color: whitesmoke;
+    font-size: 13px;
+}
+
+.login-modal-button:hover {
+    background-color: #b62626;
+}
+
+.forget-pass-register-wrapper {
+    display: flex;
+    justify-content: space-between;
+    color: white;
+    margin: -4.5rem 1rem;
+    padding: 1rem 1rem;
+    border-bottom-left-radius: 6px;
+    border-bottom-right-radius: 6px;
+    background-color: rgb(40, 40, 49);
+}
+
+.forget-pass-container {
+    text-align: center;
+    font-size: 14px;
+    text-decoration: none;
+    color: white;
+    cursor: pointer;
+}
+
+.login-instead-container {
+    text-align: center;
+    font-size: 14px;
+    text-decoration: none;
+    color: white;
+    cursor: pointer;
+}
+
+.create-account-container {
+    text-align: center;
+    font-size: 14px;
+    text-decoration: none;
+    color: white;
+}
+
+@media only screen and (min-width: 1035px) {
+    .login-modal-content {
+       margin-left: 40%;
+       margin-top: 10rem;
+       width: 30%;
+       overflow-y: auto;
+    }
+
+    .forget-pass-register-wrapper {
+        margin-left: 40%;
+        margin-right: 30%;
+        padding: 1rem 2rem;
+    }
+
+    .login-modal-button {
+        margin-bottom: 3rem;
+    }
+}
+
+/* Register modal */
+.bg-register-modal {
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    position: absolute;
+    top: 0;
+    z-index: 5;
+    position: fixed;
+    display: none;
+}
+
+#top-shadow-register {
+    margin-top: 0rem;
+}
+
+.register-modal-content {
+    background: linear-gradient(to bottom, rgb(40, 40, 49), rgb(10, 10, 10));
+    border-radius: 4px;
+    margin: 0.5rem 1rem 0rem 1rem;    
+    box-shadow: 0 2px 10px 0px rgba(0, 0, 0, 0.5);
+    transition: all 0.3s ease-in-out;
+    transform: translateY(-5rem);
+    max-height: 100%;
+    overflow-y: scroll;
+}
+
+.reg-modal-form {
+    display: flex;
+    flex-direction: column;
+    color: whitesmoke;
+}
+
+.reg-modal-close {
+    text-align: right;
+    color: whitesmoke;
+    margin: 1rem 0.5rem 0 0;
+    padding: 0.5rem 0.5rem 0 0;
+    cursor: pointer;
+}
+
+.reg-heading {
+    text-align: center;
+    color: whitesmoke;
+    margin: 0.5rem 0 1rem 0;
+    font-weight: bold;
+    text-transform: uppercase;
+    font-size: 17px;
+}
+
+.reg-modal-img {
+    margin: auto;
+    background-image: url('./Site_Material/logo.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    height: 6rem;
+    width: 6rem;
+    margin-bottom: 0.2rem;
+}
+
+.conf-pass-head {
+    font-size: 13px;
+    margin: -0.5rem 0 0.5rem 1rem;
+    text-transform: uppercase;
+}
+
+.reg-pass-head {
+    font-size: 13px;
+    margin: 1rem 0 0.5rem 1rem;
+    text-transform: uppercase;
+}
+
+.conf-pass-head {
+    font-size: 13px;
+    margin: 1rem 0 0.5rem 1rem;
+    text-transform: uppercase;
+}
+
+.reg-modal-button {
+    width: 5rem;
+    margin: 2rem 1rem 1.5rem 1rem;
+    padding: 8px;
+    border-radius: 2px;
+    border: 0;
+    color: whitesmoke;
+    background-color: #ec3333;
+    font-size: 15px;
+    cursor: pointer;
+    font-family: 'Play', sans-serif;
+}
+
+.reg-modal-button:hover {
+    background-color: #b62626;
+}
+
+.pass-warning {
+    font-size: 12px;
+    text-align: right;
+    margin: -1.5rem 1rem 0 0;
+    color: red;
+}
+
+.reg-reminder > a {
+    color: white;
+}
+
+@media only screen and (min-width: 1035px) {
+    .register-modal-content {
+       margin-left: 35%;
+       width: 30%;
+       margin-top: 4rem;
+       overflow: unset;
+    }
+
+    .reg-modal-button {
+        margin-bottom: 3rem;
+    }
+}
+
+.bg-recover-modal {
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    position: absolute;
+    top: 0;
+    display: none;
+    z-index: 5;
+    position: fixed;
+    align-items: center;
+    padding-top: auto;
+}
+
+.recover-modal-content {
+    background: linear-gradient(to bottom, rgb(40, 40, 49), rgb(10, 10, 10));
+    border-radius: 4px;
+    margin: 2.5rem 1rem;
+    box-shadow: 0 2px 10px 0px rgba(0, 0, 0, 0.5);
+    transition: all 0.3s ease-in-out;
+    transform: translateY(-5rem);
+    color: white;
+}
+
+.recover-heading {
+    text-align: center;
+    color: whitesmoke;
+    margin: 1rem 0 1rem 0;
+    font-weight: bold;
+    text-transform: uppercase;
+    font-size: 17px;
+}
+
+.recover-pass-btn {
+    width: 5rem;
+    margin: 2rem 1rem 1.5rem 1rem;
+    padding: 8px;
+    border-radius: 2px;
+    border: 0;
+    color: whitesmoke;
+    background-color: #ec3333;
+    font-size: 15px;
+    cursor: pointer;
+    font-family: 'Play', sans-serif;
+}
+
+.recover-desc {
+    font-size: 14px;
+    margin: 1.5rem 0 0.5rem 1rem;
+}
+
+#recover-email {
+    margin: 0 1rem;
+    border-radius: 2px;
+    border: 0;
+    height: 40px;
+    padding-left: 2.2rem;
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+    padding-right: 0.5rem;
+    background-color: #3e4554;
+    color: white;
+    width: 100%;
+}
+
+#recover-email:focus {
+    outline-width: 0;
+}
+
+#recover-email::placeholder {
+    font-size: 13px;
+}
+
+.recover-modal-close {
+    text-align: right;
+    color: whitesmoke;
+    margin: 0.5rem 0.5rem 0 0;
+    padding: 0.5rem 0.5rem 0 0;
+    cursor: pointer;
+}
+
+@media only screen and (min-width: 1035px) {
+    .recover-modal-content {
+        margin-left: 40%;
+        width: 30%;
+        margin-top: 2rem;
+    }
+
+    .recover-pass-btn {
+        margin-bottom: 3rem;
+    }
+}

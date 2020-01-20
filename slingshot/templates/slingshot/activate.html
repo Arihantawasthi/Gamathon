@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% load static %}
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.4.1.js" integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="anonymous"></script>
+    <link href="https://fonts.googleapis.com/css?family=Play:400,700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="{% static 'slingshot/nav.css' %}">
+    <link rel="stylesheet" href="{% static 'slingshot/lgsum.css' %}">
+    <link rel="stylesheet" href="{% static 'slingshot/activate.css' %}">
+    <link rel="stylesheet" href="{% static 'slingshot/footer.css' %}">
+    <title>Activate Account | Gamathon</title>
+</head>
+<body>
+    <div class="mobNav">
+        <div class="hamburger">
+            <div class="line1"></div>
+            <div class="line3"></div>
+            <div class="line2"></div>
+        </div>
+        <img src="{% static 'slingshot/Site_Material/logo.png' %}" alt="" height="30" width="28">
+        <h2 class="logo"><a href="{% url 'index' %}">Gamathon</a></h2>
+    </div>
+    <div class="sideBar">
+        <div class="comp-name">
+            <div class="logo-img"></div>
+            <h2>Gamathon</h2>
+        </div>
+        <div class="side-bar-sections">
+            <ul class="upper-section">
+                <li class="search-bar">
+                    <form action="#">
+                        <div class="search-icon">
+                                <i class="fa fa-search"></i>
+                            <input type="text" placeholder="Search"></input>
+                        </div>
+                    </form>
+                </li>
+                <li>
+                    <i class="fa fa-home"></i>
+                    <a href="{% url 'index' %}">Home</a>
+                </li>
+                <li>
+                    <i class="fa fa-trophy"></i>
+                    <a href="{% url 'index' %}">Tournaments</a>
+                </li>
+                <li>
+                    <i class="fa fa-bar-chart"></i>
+                    <a href="{% url 'leaderboard' %}">Leaderboard</a>
+                </li>
+                <li>
+                    <i class="fa fa-wrench"></i>
+                    <a href="{% url 'organize' %}">Organize Tournaments</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- Login Model Starts -->
+    <div class="login-modal-content">
+        <div class="modal-heading">Log In</div>
+        <div class="modal-img"></div>
+        <form action="#" class="login-modal-form" id='login-form' method="POST">
+            {% csrf_token %}
+            <div class="name-head">Username</div>
+            <input type="input" name='loginUsername' class="username-field" placeholder="Username" autofocus="on" required>
+            
+            <div class="pass-head">Password</div>
+            <input type="password" name="loginPass" class="pass-field" placeholder="Password" required>
+            <div class="warning" style='color: red; display: none; font-size: 14px; margin-left: 1rem; margin-top: 0.5rem;'>You must fill this field</div>
+    
+            <button class="login-modal-button">Login</button>
+        </form>
+        <div class="reg-reminder">Don't have an account? <a href="{% url 'register' %}">Register Now</a></div>
+    </div>
+
+    <h1 id="session" style="display: none;">{{ request.session.logged_in }}</h1>
+    <h1 id="sessionUser" style="display: none;">{{ request.session.username }}</h1>
+
+    <div class="notify-div">
+        <div class="notify-heading">
+            <div class="notify-heading-content">Notify heading content</div>
+            <div class="notify-close">X</div>
+        </div>
+        <div class="notify-message">Notify Message</div>
+    </div>
+
+    <div class="footer">
+        <div class="footer-img-container">
+            <div class="footer-img"></div>
+        </div>
+        <ul class="components">
+            <li><a href="#">About</a></li>
+            <li><a href="#">Terms & Conditions</a></li>
+            <li><a href="#">Privacy Policy</a></li>
+        </ul>
+        <div class="company-name">Gamathon pvt. LTD.</div>
+    </div>
+
+    <script src="{% static 'slingshot/activate.js' %}"></script>
+</body>
+</html>

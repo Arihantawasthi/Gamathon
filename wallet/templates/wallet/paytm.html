@@ -1,0 +1,21 @@
+<!DOCTYPE html5>
+<html>
+<head>
+	<title>PayTm Payment Merchant Page</title>
+</head>
+<body style="background: linear-gradient(to left, rgb(12, 12, 12), #3b3939); color: white;">
+
+	<div style="width: 100%; height: 100%; display: flex; align-items: center; justify-content: center;">
+		<h1 style="margin: auto;">Loading...</h1>
+	</div>
+	<form action="https://securegw.paytm.in/order/process"  method="POST" name="paytm">
+		{% for key, value in data_dict.items %}
+			<input type="hidden" name="{{ key }}" value="{{ value }}">
+		{% endfor %}
+	</form>
+
+</body>
+<script type="text/javascript">
+	document.paytm.submit()
+</script>
+</html>

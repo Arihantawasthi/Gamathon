@@ -1,0 +1,108 @@
+{% extends 'slingshot/base.html' %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    {% load static %}
+    {% block css %}
+        <link rel="stylesheet" href="{% static 'organize/create_org.css' %}">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fork-awesome@1.1.7/css/fork-awesome.min.css" integrity="sha256-gsmEoJAws/Kd3CjuOQzLie5Q3yshhvmo7YNtBG7aaEY=" crossorigin="anonymous">
+    {% endblock %}
+    <title>{% block title %}Create Organization | Gamathon{% endblock %}</title>
+</head>
+{% block body %}
+    <div class="container">
+        <div class="heading">
+            Create Organization
+        </div>
+
+        <ul class="tabs">
+           <li class="basic">Basic</li>
+           <li class="info">Contact Info</li>
+        </ul>
+        <div class="indicator-line"></div>
+
+        <div class="form-container">
+            <form action="{% url 'createOrg' %}" class="form" id="org-reg-form" enctype="multipart/form-data" method="POST">
+                {% csrf_token %}
+                <div class="form1">
+                    <div class="name-field">
+                        <div class="name">Name
+                            <span class="name-warning-available" style="margin-left: 2rem; font-size: 14px; text-transform: capitalize; display: none;"></span>
+                            <span class="name-warning-unavailable" style="margin-left: 2rem; font-size: 14px; text-transform: capitalize; display: none;"></span>
+                        </div>
+                        <input type="text" name="org_name" class="name-input" placeholder="Name Your Organization" min-length="5" required>
+                        <div class="name-warning">You must fill this field</div>
+                    </div>
+
+                    <div class="des-field">
+                        <div class="des">Description</div>
+                        <textarea name="org_desc" class="des-input" cols="30" rows="10" placeholder="Enter your text here"></textarea>
+                    </div>
+                    <div class="img-field">
+                        <div class="img-name">Upload Your Logo</div>
+                        <label for="img-input" class="img-label"><i class="fa fa-camera"></i>
+                        </label>
+                        <input type="file" name="org_logo" id="img-input" class="img" onchange="readURL(this);" accept="image/*">
+                    </div>
+                    <div class="next-btn">
+                        Next
+                    </div>  
+                </div>
+
+                <div class="form2">
+                    <div class="email-field">
+                        <div class="email">Email</div>
+                        <i class="fa fa-envelope"></i>
+                        <input type="email" name="org_email" class="email-input" required placeholder="contact@you-domain.com">
+                        <div class="name-warning">You must fill this field</div>
+                    </div>
+
+                    <div class="site-field">
+                        <div class="site">Website Link</div>
+                        <i class="fa fa-globe"></i>
+                        <input type="text" name="org_website" class="site-input" placeholder="https://www.your-website.com">
+                    </div>
+
+                    <div class="insta-field">
+                        <div class="insta">Intagram Link</div>
+                        <i class="fa fa-instagram"></i>
+                        <input type="text" name="org_insta" class="insta-input" placeholder="Your Instagram Username">
+                    </div>
+
+                    <div class="twitter-field">
+                        <div class="twitter">Twitter Link</div>
+                        <i class="fa fa-twitter"></i>
+                        <input type="text" name="org_twitter" class="twitter-input" placeholder="Your Twitter Username">
+                    </div>
+
+                    <div class="twitch-field">
+                        <div class="twitch">Twitch Link</div>
+                        <i class="fa fa-twitch"></i>
+                        <input type="text" name="org_twitch" class="twitch-input" placeholder="Your Twitch Username">
+                    </div>
+
+                    <div class="discord-field">
+                        <div class="discord">Discord Link</div>
+                        <i class="fa fa-discord"></i>
+                        <input type="text" name="org_discord" class="discord-input" placeholder="Your Discord Server">
+                    </div>
+
+                    <div class="youtube-field">
+                        <div class="youtube">Youtube Link</div>
+                        <i class="fa fa-youtube"></i>
+                        <input type="text" name="org_youtube" class="youtube-input" placeholder="Your Youtube Channel Link">
+                    </div>
+                    <button class="create-btn">Create Organization</button>
+                </div>
+            </form>
+        </div>
+    </div>
+{% endblock %}
+
+{% block javascript %}
+    <script src="{% static 'organize/create_org.js' %}"></script>
+{% endblock %}
+</html>

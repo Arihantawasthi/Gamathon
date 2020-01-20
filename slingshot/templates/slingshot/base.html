@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    {% load static %}
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="robot" content="index,follow">
+    <meta name="googlebot" content="index,follow">
+    <meta name="keywords" content="online tournaments, pubg online tournaments, online gaming tournaments, gaming tournaments">
+    <meta property="og:image" content="{% static 'slingshot/Site_Material/logo-card-icon.png' %}">
+    <meta property="og:type" content="website"/>
+    <meta property="og:locale" content="en_US"/>
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:site" content="@Gamathon" />
+    <meta name="twitter:creator" content="@Arihantawasthi" />
+    {% block metatags %}{% endblock %}
+    <script src="https://code.jquery.com/jquery-3.4.1.js" integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="anonymous"></script>
+    <link href="https://fonts.googleapis.com/css?family=Play:400,700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fork-awesome@1.1.7/css/fork-awesome.min.css" integrity="sha256-gsmEoJAws/Kd3CjuOQzLie5Q3yshhvmo7YNtBG7aaEY=" crossorigin="anonymous">
+    <link rel="shortcut icon" href="{% static 'slingshot/Site_Material/logo.png' %}" type="image/png">
+    <link rel="apple-touch-icon" sizes="32x32" href="{% static 'slingshot/Site_Material/logo.png' %}">
+    {% block css %}{% endblock %}
+    <link rel="stylesheet" href="{% static 'slingshot/footer.css' %}">
+    <link rel="stylesheet" href="{% static 'slingshot/nav.css' %}">
+    <link rel="stylesheet" href="{% static 'slingshot/lgsum.css' %}">
+
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-156424721-1"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'UA-156424721-1');
+    </script>
+
+    <title>{% block title %}{% endblock %}</title>
+</head>
+<body>
+    <div class="loading-wrapper" style="display: none;">
+            <div class="loading-logo" style="position: absolute; top: -2rem; bottom: 0; margin: auto; left: 0; right: 0.3rem; height: 14rem; width: 14rem; background-size: contain; background-image: url('../../static/slingshot/Site_Material/logo.png');"></div>
+        <div id="loading-hud" style="position: absolute; top: 0; bottom: 0; margin: auto; transform: translateY(7rem); left: 0; right: 0; height: 4rem; width: 4rem;">
+            <img src='../../static/slingshot/Site_Material/hud.svg'>
+        </div>
+    </div>
+
+    <div class="notify-div">
+        <div class="notify-div-wrapper">
+            <div class="notify-div-side-bar"></div>
+            <div class="heading-message-container">
+                <div class="notify-heading">
+                    <div class="notify-heading-content">Notify heading content</div>
+                    <div class="notify-close"><i class="fa fa-times"></i></div>
+                </div>
+                <div class="notify-message">Notify Message</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="mobNav">
+        <div class="hamburger">
+            <div class="line1"></div>
+            <div class="line3"></div>
+            <div class="line2"></div>
+        </div>
+        <div class="notification-logo-wrapper">
+            <div class="logo-wrapper">
+                <img src="{% static 'slingshot/Site_Material/logo.png' %}" alt="" height="50" width="50">
+                <h2 class="logo"><a href="{% url 'index' %}">Gamathon</a></h2>
+            </div>
+            <div class="notification-wrapper">
+                <i class="fa fa-bell mobile-notification"></i>
+                <span class="indicator"></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="notification-box">
+        <div class="notification-close"><i class="fa fa-times"></i></div>
+        <ul class="notification-list">
+        {% for notification in invite_notifications %}
+            {% if request.session.username == notification.user_1.username %}
+                <li style="border-left-color: #fe0000; border-left-width: 0.2rem;">
+                    <div class="text"><a href="{% url 'profile' notification.user_2.username %}" style="font-weight: bold; text-decoration: none; color: white;">{{ notification.user_2.username }}</a> invited you to join <a href="{% url 'team' notification.team.name %}" style="font-weight: bold; text-decoration: none; color: white;">{{ notification.team.name }}</a></div>
+                    <div class="notify-time">{{ notification.created }}</div>
+                    <form action="#" method="post" id='invite-form'>
+                        {% csrf_token %}
+                        <input type='hidden' id='team-name' value="{{ notification.team.name }}">
+                        <input type="hidden" id="status">
+                        <button class="accept" value="1" onclick="document.getElementById('status').value = '1';">Accept</button>
+                        <button class="reject" value="2" onclick="document.getElementById('status').value = '2';">Reject</button>
+                    </form>
+                </li>
+            {% endif %}
+        {% endfor %}
+
+        {% for notification in org_notifications %}
+            {% if request.session.username == notification.org.org_owner %}
+                <li style="border-left-color: #fe0000; border-left-width: 0.2rem;">
+                    <div class="text"><a href="{% url 'profile' notification.user_2.username %}" style="font-weight: bold; text-decoration: none; color: white;;">{{ notification.user_2.username }}</a> started following <a href="{% url 'org-profile' notification.org.org_name%}" style="font-weight: bold; text-decoration: none; color: white;">{{ notification.org.org_name }}</a></div>
+                    <div class="notify-time">{{ notification.created }}</div>
+                </li>
+            {% endif %}
+        {% endfor %}
+
+        {% for notification in follow_notifications %}
+            {% if request.session.username == notification.user_1.username %}
+                <li style="border-left-color: #fe0000; border-left-width: 0.2rem;">
+                    <div class="text"><a href="{% url 'profile' notification.user_2.username %}" style="font-weight: bold; text-decoration: none; color: white">{{ notification.user_2.username }}</a> started following you.</div>
+                    <div class="notify-time">{{ notification.created }}</div>
+                </li>
+            {% endif %}
+        {% endfor %}
+
+        {% if total_notifications == 0 %}
+            <div style="color:white; font-size: 14px; text-align: center;">Now new notifications.</div>
+        {% endif %}
+        </ul>
+    </div>
+
+    <div class="sideBar">
+        <div class="comp-name">
+            <div class="logo-img"></div>
+            <h2 style="font-size: 25px; color: white; padding-top: 0rem; margin-left: -0.5rem;"><a href="{% url 'index' %}" style="text-decoration: none; color: white;">Gamathon</a></h2>
+            <div><i class="fa fa-times nav-close" style="margin-left: 2rem; margin-top: 0.3rem; color: white;"></i></div>
+        </div>
+        <div class="side-bar-sections">
+            <ul class="upper-section">
+                <li class="search-bar">
+                    <form action="#">
+                        {% csrf_token %}
+                        <div class="search-icon">
+                            <label>
+                                <i class="fa fa-search" style="color: white;"></i>
+                                <input id="search-input" type="text" placeholder="Search"></input>
+                            </label>
+                        </div>
+                        <div id='search-results'>
+                            <div class="search-result-heading">User</div>
+                            <ul class="search-result-user">
+                            </ul>
+                            <div class="search-result-heading">Tournaments</div>
+                            <ul class="search-result-tourney">
+                                <a href=""><li class="tourney-list">
+                                    Ansh
+                                </li></a>
+                            </ul>
+                            <div class="search-result-heading">Game</div>
+                            <ul class="search-result-game">
+                                <a href=""><li class="game-list">
+                                    Ansh
+                                </li></a>
+                            </ul>
+                            <div class="search-result-heading">Organizations</div>
+                            <ul class="search-result-org">
+                                <a href=""><li class="org-list">
+                                    Ansh
+                                </li></a>
+                            </ul>
+                        </div>
+                    </form>
+                </li>
+                <li>
+                    <i class="fa fa-home"></i>
+                    <a href="{% url 'index' %}">Home</a>
+                </li>
+                <li>
+                    <i class="fa fa-trophy"></i>
+                    <a href="{% url 'index' %}#tournament-hyperlink">Tournaments</a>
+                </li>
+                <li>
+                    <i class="fa fa-bar-chart"></i>
+                    <a href="{% url 'leaderboard' %}">Leaderboard</a>
+                </li>
+                <li>
+                    <i class="fa fa-wrench"></i>
+                    <a href="{% url 'organize' %}">Organize Tournaments</a>
+                </li>
+            </ul>
+
+            <div class="lower-section">
+                <span id="session" style="display: none;">{{ request.session.logged_in }}</span>
+                <span id="sessionUser" style="display: none;">{{ request.session.username }}</span>
+                <ul class="lower-sec-login">
+                    <li class="login-btn">Login</li>
+                    <li class="signup-btn">Register</li>
+                </ul>
+                <ul class="lower-sec-profile">
+                    <li class="notifications">
+                        <i class="fa fa-bell"></i>
+                        <span class="my-notifications">Notifications</span><span class="indicator"></span>
+                    </li>
+                    <li>
+                        <i class="fa fa-user"></i>
+                        <a href="#" class="my-profile">My Profile</a>
+                    <li>
+                        <i class="fa fa-gear"></i>
+                        <a href="#" class="acc-settings">Account Settings</a>
+                    </li>
+                    <li>
+                        <i class="fa fa-credit-card"></i>
+                        <a href="#" class="wallet">My Wallet</a>
+                    </li>
+                    <li>
+                        <i class="fa fa-sign-out"></i>
+                        <a href="{% url 'logout' %}" class="logout">Logout</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- Login Model Starts -->
+    <div class="bg-login-modal">
+        <div class="login-modal-content">
+            <div class="top-shadow"></div>
+            <div class="modal-close"><i class="fa fa-times"></i></div>
+            <div class="modal-heading">Welcome Back Homie!</div>
+            <div class="modal-img"></div>
+            <form action="#" class="login-modal-form" id='login-form' method="POST">
+                {% csrf_token %}
+                <div class="name-head">Username</div>
+                <i class="fa fa-user" style="position: absolute; top: 15.4rem; left: 1.6rem; font-size: 18px;"></i>
+                <input type="input" name='loginUsername' class="username-field" placeholder="Username" autofocus="on">
+                
+                <div class="pass-head">Password</div>
+                <i class="fa fa-lock" style="position: absolute; top: 21.3rem; left: 1.6rem; font-size: 20px;"></i>
+                <input type="password" name="loginPass" class="pass-field" placeholder="Password" minlength="5">
+                <div class="warning" style='color: red; display: none; font-size: 14px; margin-left: 1rem; margin-top: 0.5rem; margin-bottom: -1rem;'>You must fill this field</div>
+        
+                <button class="login-modal-button">Login</button>
+            </form>
+        </div>
+        <div class="forget-pass-register-wrapper">
+            <div class="forget-pass-container">
+                <div class="warning-icon"><i class='fa fa-warning'></i></div>
+                <div class="forget-pass">Forgot Password?</div>
+            </div>
+
+            <a href='{% url "register" %}' class="create-account-container">
+                <div class="user-plus-icon"><i class='fa fa-user-plus'></i></div>
+                <div class="create-account">Create an Account</div>
+            </a>
+        </div>
+    </div>
+
+    <div class="bg-recover-modal">
+        <div class="recover-modal-content">
+            <div class="top-shadow"></div>
+            <div class="recover-modal-close"><i class="fa fa-times"></i></div>
+            <div class="recover-heading">Recover Password</div>
+            <div class="reg-modal-img"></div>
+            <form action="#" method="post" class='recover-modal-form' id="recover-form">
+                {% csrf_token %}
+                <div class="recover-desc">Forgot your Password? No problem, simply enter your registered email address below and we will send you an email with further instructions to recover your password.</div>
+                <div class="icon-recover-container" style="position: relative; width: 95%;">
+                    <i class="fa fa-envelope" style="position: absolute; top: 0.7rem; left: 1.6rem; font-size: 18px;"></i>
+                    <input type="email" name='email' id='recover-email' class="username-field" placeholder="Email" required autofocus='on'>
+                </div>
+                <div class="recover-warning" style="color: red; margin-left: 1rem; font-size: 14px; margin-top: 0.2rem; display: none"></div>
+                <button class="recover-pass-btn">Submit</button>
+            </form>
+        </div>
+        <div class="forget-pass-register-wrapper" style="margin-top: -12rem;">
+            <div class="login-instead-container">
+                <div class="warning-icon"><i class='fa fa-sign-out'></i></div>
+                <div class="forget-pass">Login Instead</div>
+            </div>
+
+            <a href='{% url "register" %}' class="create-account-container">
+                <div class="user-plus-icon"><i class='fa fa-user-plus'></i></div>
+                <div class="create-account">Create an Account</div>
+            </a>
+        </div>
+    </div>
+
+    <!-- Register Model starts -->
+    <div class="bg-register-modal">
+        <div class="register-modal-content">
+            <div class="top-shadow" id='top-shadow-register'></div>
+            <div class="reg-modal-close"><i class="fa fa-times"></i></div>
+            <div class="reg-heading">Time to Join the Hood!</div>
+            <div class="reg-modal-img"></div>
+            <form action="#" class="reg-modal-form" id="reg-form" method="POST">
+                {% csrf_token %}
+                <div class="name-head">Name</div>
+                <i class="fa fa-user" style="position: absolute; top: 15.5rem; left: 1.6rem; font-size: 18px;"></i>
+                <input type="text" name='name' class="username-field" placeholder="Name" autofocus="on" required>
+
+                <div class="name-head" style="display: flex;">Username 
+                    <span class="username-warning-available" style="margin-left: 2rem; font-size: 14px; text-transform: capitalize; display: none;"></span>
+                    <span class="username-warning-unavailable" style="margin-left: 2rem; font-size: 14px; text-transform: capitalize; display: none;"></span>
+                </div>
+                <i class="fa fa-user" style="position: absolute; top: 21.0rem; left: 1.6rem; font-size: 18px;"></i>
+                <input type="text" name='username' class="username-field" id='reg-username' placeholder="Username" required minlength="5">
+
+                <div class="name-head name-email">Email</div>
+                <i class="fa fa-envelope" style="position: absolute; top: 26.4rem; left: 1.6rem; font-size: 18px;"></i>
+                <input type="email" name='emails' id='reg-email' class="username-field" placeholder="Email" required>
+
+                <div class="reg-pass-head">Password</div>
+                <i class="fa fa-lock" style="position: absolute; top: 31.4rem; left: 1.6rem; font-size: 18px;"></i>
+                <input type="password" name='pass' id="pass" class="pass-field" placeholder="Password" required minlength="5">
+
+                <div class="conf-pass-head">Confirm Password</div>
+                <i class="fa fa-lock" style="position: absolute; top: 36.3rem; left: 1.6rem; font-size: 18px;"></i>
+                <input type="password" name='conf-pass' id="conf-pass" class="pass-field" placeholder="Confirm Password" required minlength="5">
+                <div class="pass-warning" style="margin-top: 0.5rem;"></div>
+
+                <button class="reg-modal-button">Register</button>
+                <div class="reg-reminder">Have an account? <a href="{% url 'signIn' %}" style="font-weight: bold;">Login</a></div>
+            </form>
+        </div>
+    </div>
+    {% block body %}
+    {% endblock %}
+
+    <footer class="footer">
+        <div class="footer-img-container">
+            <div class="footer-img"></div>
+        </div>
+        <div class="connect">
+            <div class="fb"><a href="https://www.instagram.com/gamathon.gg" target="_blank" rel="noreferrer"><i class="fa fa-instagram"></i></a></div>
+            <div class="inta"><a href="https://www.facebook.com/Gamathon.gg" target="_blank" rel="noreferrer"><i class="fa fa-facebook-official"></i></a></div>
+            <div class="twit"><a href="https://www.twitter.com/theGamathon" target="_blank" rel="noreferrer"><i class="fa fa-twitter"></i></a></div>
+            <div class="disc"><a href="https://www.discord.gg/9Bpme4g" target="_blank" rel="noreferrer"><i class="fa fa-discord"></i></a></div>
+        </div>
+        <ul class="components">
+            <li><a href="{% url 'about' %}">About</a></li>
+            <li><a href="{% url 'termsOfUse' %}">Terms Of Use</a></li>
+            <li><a href="{% url 'privacyPolicy' %}">Privacy Policy</a></li>
+        </ul>
+        <div class="company-name">
+            <div class="copyright">Copyright &copy Gamathon pvt. LTD. All Rights Reserved.</div>
+            <div class="version">v <span style="color: white;">0.9</span></div>
+        </div>
+    </footer>
+
+    {% block javascript %}
+    {% endblock %}
+
+    <script src="{% static 'slingshot/app.js' %}"></script>
+    <script>
+        $('#pass, #conf-pass').on('keyup', function () {
+            if ($('#pass').val() == $('#conf-pass').val()) {
+                $('.pass-warning').html('Matching').css('color', 'green');
+        } else 
+            $('.pass-warning').html("Passwords doesn't match!").css('color', 'red');
+        });
+    </script>
+</body>
+</html>

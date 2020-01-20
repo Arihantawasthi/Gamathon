@@ -1,0 +1,591 @@
+/* 
+    * This is the CSS for homepage for the Gamathon, this is where magic happens ;)
+
+    * Author: Arihant Awasthi  awasthiarihant@gmail.com
+    * version: 0.9
+*/
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Play', 'sans-serif'; 
+}
+
+body {
+    background: linear-gradient(to left, rgb(12, 12, 12), #3b3939);
+    overflow-x: hidden;
+}
+
+.container {
+    margin: 0.8em 1.8em;
+}
+
+.head {
+    font-size: 22px;
+    color: white;
+    font-weight: bold;
+    margin-bottom: 1rem;
+}
+
+.tabs {
+    display: flex;
+    list-style: none;
+}
+
+.tabs li {
+    margin-right: 1.5rem;
+    color: white;
+    cursor: pointer;
+}
+
+.setup {
+    opacity: 1;
+}
+
+.info, .settings, .manage {
+    opacity: 0.6;
+}
+
+.line4 {
+    height: 2px;
+    width: 2.8rem;
+    background-color: #ec3333;
+    border-radius: 2px;
+    margin-bottom: 1rem;
+    margin-top: 0.5rem; 
+    box-shadow: 0 0 10px #fa7171;
+    transition: all 0.1s ease-in-out;
+}
+
+.setup-section, .info-section, .settings-section, .manage-section {
+    background-color: rgb(52, 52, 61);
+    padding: 1.2rem 0.8rem;
+    border-radius: 4px;
+    width: 100%;
+    transition: all 0.3s ease-in-out;
+}
+
+.info-section, .settings-section {
+    display: none;
+}
+
+.form-field > div {
+    margin-bottom: 2rem;
+}
+
+.form-heading {
+    font-size: 20px;
+    color: white;
+    font-weight: bold;
+    margin-bottom: 1rem;
+}
+
+.select-game {
+    width: 90%;
+    background-color: rgb(38, 38, 43);
+    border-radius: 4px;
+    color: white;
+    padding: 0.8rem 0.4rem;
+}
+
+.tourney-name {
+    color: white;
+    margin-top: 0.8rem;
+    font-size: 18px;
+}
+
+.tourney-name-input {
+    padding: 0.8rem;
+    border-radius: 4px;
+    color: white;
+    background-color: rgb(38, 38, 43);
+    border: 0;
+    width: 90%;
+    margin-top: 0.2rem;
+}
+
+.name-warning {
+    background-color: red;
+    width: 90%;
+    color: white;
+    font-size: 11px;
+    border-bottom-left-radius: 4px;
+    border-bottom-right-radius: 4px;
+    padding: 1px;
+    margin-bottom: 0.8rem;
+    /* display: none; */
+}
+
+.start-date {
+    font-size: 18px;
+    color: white;
+    margin-top: 1.2rem;
+}
+
+.start-date-input {
+    padding: 0.8rem;
+    border-radius: 4px;
+    color: white;
+    background-color: rgb(38, 38, 43);
+    border: 0;
+    width: 90%;
+    margin-top: 0.2rem;
+}
+
+.start-time {
+    font-size: 18px;
+    color: white;
+    margin-top: 1.2rem;
+}
+
+.tourney-start-input {
+    padding: 0.8rem;
+    border-radius: 4px;
+    color: white;
+    background-color: rgb(38, 38, 43);
+    border: 0;
+    width: 90%;
+    margin-top: 0.2rem;
+}
+
+.tourney-pic {
+    font-size: 18px;
+    color: white;
+    margin-top: 1.2rem;
+}
+
+#img-input {
+    display: none;
+}
+
+.img-label {
+    color: white;
+    font-size: 14px;
+    margin-left: 1.2rem;
+}
+
+.caption {
+    margin-left: 1.6rem;
+}
+
+.img-label > i {
+    color: white;
+    font-size: 50px;
+    margin: 1rem 2rem;
+    cursor: pointer;
+    margin-bottom: -1rem;
+}
+
+.next {
+    border: 0;
+    padding: 0.5rem 1.8rem;
+    color: white;
+    background-color: #ec3333;
+    margin-top: 1rem;
+    border-radius: 4px;
+    cursor: pointer;
+    width: 6rem;
+    box-shadow: 0 2px 5px 0 rgb(0, 0, 0, 0.5);
+    margin-left: 60%;
+    margin-bottom: 1rem;
+}
+
+.next:hover {
+    background-color: #c51515;
+}
+
+.info-form-field {
+    background-color: rgb(52, 52, 61);
+    border-radius: 4px;
+    padding: 1.2rem 0.8rem;
+}
+
+.select-name {
+    color: white;
+    opacity: 1;
+    margin-bottom: 0.3rem;
+}
+
+.select-contact {
+    background-color: rgb(38, 38, 43);
+    border: 0;
+    color: white;
+    padding: 0.8rem 1rem;
+    width: 60%;
+    border-radius: 4px;
+    margin-bottom: 1rem;
+}
+
+.social-link {
+    background-color: rgb(38, 38, 43);
+    border: 0;
+    color: white;
+    padding: 0.8rem 1rem;
+    width: 90%;
+    border-radius: 4px;
+    margin-bottom: 1.5rem;
+}
+
+.contact-details {
+    font-size: 18px;
+    color: white;
+    margin-bottom: 0.5rem;
+}
+
+.contact-area {
+    border-radius: 4px;
+    border: 0;
+    background-color: rgb(38, 38, 43);
+    color: white;
+    padding: 0.8rem;
+    font-size: 14px;
+    margin-bottom: 1.5rem;
+    width: 100%;
+}
+
+.rules {
+    color: white;
+    font-size: 18px;
+    margin-bottom: 0.5rem;
+}
+
+.rules-area {
+    border-radius: 4px;
+    border: 0;
+    background-color: rgb(38, 38, 43);
+    color: white;
+    padding: 0.8rem;
+    font-size: 14px;
+    margin-bottom: 1.5rem;
+    width: 100%;
+}
+
+.prize {
+    color: white;
+    font-size: 18px;
+    margin-bottom: 0.5rem;
+}
+
+.prize-area {
+    border-radius: 4px;
+    border: 0;
+    background-color: rgb(38, 38, 43);
+    color: white;
+    padding: 0.8rem;
+    font-size: 14px;
+    margin-bottom: 1.5rem;
+    width: 100%;
+}
+
+.schedule {
+    color: white;
+    font-size: 18px;
+    margin-bottom: 0.5rem;
+}
+
+.schedule-area {
+    border-radius: 4px;
+    border: 0;
+    background-color: rgb(38, 38, 43);
+    color: white;
+    padding: 0.8rem;
+    font-size: 14px;
+    margin-bottom: 1.5rem;
+    width: 100%;
+}
+
+.back-next {
+    display: flex;
+}
+
+.back {
+    padding: 0.4rem 2rem;
+    font-size: 15px;
+    background-color: rgb(38, 38, 43);
+    margin-right: 0.5rem;
+    border-radius: 4px;
+    color: white;
+    cursor: pointer; 
+    box-shadow: 0 2px 5px 0 rgb(0, 0, 0, 0.5);
+}
+
+.next-btn {
+    padding: 0.4rem 2rem;
+    font-size: 15px;
+    background-color: #ec3333;
+    border-radius: 4px;
+    color: white;
+    cursor: pointer;
+    border: 0;
+    box-shadow: 0 2px 5px 0 rgb(0, 0, 0, 0.5);
+}
+
+#submit-btn {
+    padding: 0.4rem 2rem;
+    font-size: 15px;
+    background-color: #ec3333;
+    border-radius: 4px;
+    color: white;
+    cursor: pointer;
+    border: 0;
+    box-shadow: 0 2px 5px 0 rgb(0, 0, 0, 0.5);
+    margin-top: 2rem;
+}
+
+.next-btn:hover {
+    background-color: #c51515;
+}
+
+.tourney-format {
+    color: white;
+    margin-bottom: 0.5rem;
+}
+
+.select-tourney-format {
+    background-color: rgb(38, 38, 43);
+    border: 0;
+    color: white;
+    padding: 0.8rem 1rem;
+    width: 60%;
+    border-radius: 4px;
+    margin-bottom: 1rem;
+}
+
+.max-players, .min-players, .reg-players, .bracket-name, .tourney-type, .email-participants {
+    color: white;
+    margin-bottom: 0.5rem;
+}
+
+.bracket-name, .tourney-type, .reg-players {
+    margin-top: 1.2rem;
+}
+
+.bracket-sec {
+    font-size: 20px;
+    color: white;
+    font-weight: bold;
+    margin-bottom: 1.5rem;
+}
+
+.bracket-name-input {
+    background-color: rgb(38, 38, 43);
+    border: 0;
+    color: white;
+    padding: 0.8rem 1rem;
+    width: 90%;
+    border-radius: 4px;
+}
+
+.select-tourney-type {
+    background-color: rgb(38, 38, 43);
+    border: 0;
+    color: white;
+    padding: 0.8rem 1rem;
+    width: 90%;
+    border-radius: 4px;
+}
+
+.max-players-input, .min-players-input, .reg-players-input {
+    background-color: rgb(38, 38, 43);
+    border: 0;
+    color: white;
+    padding: 0.8rem 1rem;
+    width: 40%;
+    margin-bottom: 1rem;
+    border-radius: 4px;
+}
+
+.reg-players-input {
+    margin-bottom: 0rem;
+    width: 90%;
+}
+
+.email-subject-input {
+    background-color: rgb(38, 38, 43);
+    border: 0;
+    color: white;
+    padding: 0.8rem 1rem;
+    width: 90%;
+    border-radius: 4px;
+}
+
+.email-body {
+    border-radius: 4px;
+    border: 0;
+    background-color: rgb(38, 38, 43);
+    color: white;
+    padding: 0.8rem;
+    font-size: 14px;
+    margin-top: 1.5rem;
+    width: 100%;
+}
+
+.email-btn {
+    padding: 0.4rem 2rem;
+    font-size: 15px;
+    background-color: #ec3333;
+    border-radius: 4px;
+    color: white;
+    cursor: pointer;
+    border: 0;
+    box-shadow: 0 2px 5px 0 rgb(0, 0, 0, 0.5);
+    margin-top: 1.5rem;
+}
+
+.email-btn:hover {
+    background-color: #c51515;
+}
+
+.bracket-info-icon {
+    color: white;
+    position: absolute;
+    top: 11.6rem;
+    left: 7.4rem;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+.bracket-info {
+    position: absolute;
+    top: 12.8rem;
+    left: 7.4rem;
+    background-color: rgb(38, 38, 43);
+    font-size: 12px;
+    color: white;
+    padding: 0.5rem;
+    text-align: right;
+}
+
+.close-info {
+    margin-bottom: 0.3rem;
+    cursor: pointer;
+}
+
+.form-container {
+    position: relative;
+}
+
+.info-section {
+    position: absolute;
+    top: 0;
+    transform: translate(110%);
+}
+
+.settings-section {
+    position: absolute;
+    top: 0;
+    transform: translateX(110%);
+}
+
+.manage-section {
+    position: absolute;
+    top: 0;
+    transform: translateX(110%);
+    display: none;
+}
+
+.total-groups-note {
+    color: white;
+    background-color: red;
+    font-size: 12px;
+    width: 90%;
+    padding-left: 0.1rem;
+    border-bottom-left-radius: 4px;
+    border-bottom-right-radius: 4px;
+    margin-bottom: 1rem;
+    display: none;
+}
+
+.rounds-display-container {
+    width: 100%;
+    background-color: rgb(38, 38, 44);
+    border-radius: 4px;
+    color: white;
+    padding-left: 1rem;
+    padding-top: 0.3rem;
+    box-shadow: 0px 2px 5px 0px rgba(0, 0, 0, 0.5);
+    display: none;
+}
+
+.round-number-head {
+    font-size: 20px;
+    padding: 0.3rem;
+    padding-left: 0.5rem;
+    background-color: #ec3333;
+    width: 6rem;
+}
+
+.round-wrapper {
+    margin-top: 0.5rem;
+    position: relative;
+    margin-bottom: 1rem;
+    display: none;
+}
+
+.round-number-head {
+    box-shadow: 0px 2px 15px 0px rgba(0, 0, 0, 0.5);
+    margin-bottom: 0.5rem;
+}
+
+.arrow-right {
+    width: 0; 
+    height: 0; 
+    border-top: 16px solid transparent;
+    border-bottom: 16px solid transparent; 
+    border-left: 16px solid #ec3333;
+    top: 0rem;
+    left: 6rem;
+    z-index: 4;
+}
+
+.current-status-groups {
+    font-size: 14px;
+    margin-bottom : 1rem;
+}
+
+.no-of-winners-container {
+    width: 100%;
+}
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover, 
+input:-webkit-autofill:focus, 
+input:-webkit-autofill:active  {
+    -webkit-box-shadow: 0 0 0 30px #3e4554 inset !important;
+    -webkit-text-fill-color: white;
+    outline-width: 0;
+}
+
+.no-of-winners-head {
+    margin-bottom: 0.5rem;
+}
+
+.no-of-winners-input {
+    background-color: rgb(52, 52, 61);
+    border: 0;
+    color: white;
+    padding: 0.8rem 1rem;
+    width: 90%;
+    margin-bottom: 1rem;
+    border-radius: 4px;
+    box-shadow: 0px 2px 5px 0px rgba(0, 0, 0, 0.5);
+}
+
+.no-of-winners-input:focus {
+    outline-width: 0;
+}
+
+.footer {
+    transition: all 0.3s ease-in-out;
+}
+
+@media only screen and (min-width: 1048px) {
+    .container {
+        margin-left: 260px;
+    }
+
+    .next {
+        margin-left: 80%;
+    }
+}

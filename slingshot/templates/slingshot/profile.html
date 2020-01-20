@@ -1,0 +1,349 @@
+{% extends 'slingshot/base.html' %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    {% load static %}
+
+    {% block metatags %}
+        <meta name="description" content="{{ user.username }} Profile page for gamathon. {{ user.username }} is a gamathon member.">
+        <meta property="og:title" content="Play Online Gaming Tournaments."/>
+        <meta property="og:url" content="https://www.gamathon.gg/home"/>
+        <meta property="og:description" content="Compete and Organize Online Gaming Tournaments on Gamathon.">
+    {% endblock %}
+    
+    {% block css %}
+        <link rel="stylesheet" href="{% static 'slingshot/profile.css' %}">
+    {% endblock %}
+    <title>{% block title %}Profile {{ user.username }} | Gamathon{% endblock %}</title>
+</head>
+    {% block body %}
+        <!-- Create Team validation Modal -->
+        <div class="bg-create-team-modal">
+            <div class="create-team-modal-content">
+                <div class="create-team-modal-close"><i class="fa fa-times"></i></div>
+                <div class="modal-heading">Make Your Own Team</div>
+                <div class="info"><p>Teams are the best way to experience Gamathon. Your team will have a dedicated team profile page showcasing your team statistics, leaderboard status and more.</p>
+
+                        <br><p>Once you have created your team you can directly invite your friends or send this Join Code so that they can join your team and start competing in larger team tournaments.</p>
+                </div>
+
+                <form action="#" id="create-team-form" class="create-team-modal-form" method="POST">
+                    {% csrf_token %}
+                    <div class="name-head">Team Name</div>
+                    <input type="input" name="team-name" class="acc-name-field" placeholder="Team Name" autofocus="on" required>
+                    <div class="name-head">Password / Join Code</div>
+                    <input type="text" name="join-code" class='acc-name-field' placeholder="Team Join Code" required>
+                    <button class="create-team-modal-button">Create</button>
+                </form>
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="profile-back" style="background-image: url('/media/{{ user.profile_back }}')"></div>
+            <div class="profile-info">
+                <div class="flex-divider1">
+                    <div class="profile-img" style="background-image: url('/media/{{ user.profile_pic }}')">    
+                    </div>
+                    <div class="profile-name-friend">
+                        <div class="profile-name">{{ user.username }}</div>
+                        {% if request.session.logged_in %}
+                        <div class="profile-friend">
+                            {% if request.session.username != user.username %}
+                                {% if request.session.username in followers %}
+                                    <div class="friend" style="cursor: default;">
+                                        Following
+                                    </div>
+                                {% elif user.username in logged_in_user_followers %}
+                                    <div class="follow-form-wrapper">
+                                        <form action="#" id="follow-form" method="POST">
+                                            <button class="friend-request-btn">
+                                                <i class="fa fa-plus"></i> Follow Back
+                                            </button>
+                                        </form>
+                                    </div>
+                                {% else %}
+                                    <form action="#" id="follow-form" method="POST">
+                                        <button class="friend-request-btn">
+                                            <i class="fa fa-plus"></i> Follow
+                                        </button>
+                                    </form>
+                                {% endif %}
+                            {% endif %}
+                        </div>
+                        {% endif %}
+                    </div>
+                </div>
+                {% if request.session.logged_in and user.username == request.session.username %}
+                <div class="flex-divider2">
+                    <div id="profile-back-form">
+                        <form action="{% url 'uploadProfile' request.session.username %}" enctype="multipart/form-data" method="post" id='picture-form'>
+                            {% csrf_token %}
+                            <label for="img-input" class="img-label">
+                                <i class="fa fa-camera"></i>
+                                <br>
+                                <div class="caption">Upload a photo.</div>
+                            </label>
+                            <input type="file" name="profile-back" id="img-input" class="file-input" onchange="readURL(this);" accept="image/*">
+                            
+                            <button class="profile-back-save-btn">Save Pic</button>
+                        </form>
+                    </div>
+
+                    <div id="profile-pic-form">
+                        <form action="{% url 'uploadProfile' request.session.username %}" enctype="multipart/form-data" method="post">
+                            {% csrf_token %}
+                            <label for="img-profile" id="profile-pic-label">
+                                <i class="fa fa-camera" id="profile-pic"></i>
+                            </label>
+                            <input type="file" name="profile-pic" id="img-profile" class="file-input" onchange="profileReadURL(this);" accept="image/*">
+                            <button class="profile-pic-save-btn">Save Pic</button>
+                        </form>
+                    </div>
+                </div>
+                {% endif %}
+            </div>
+
+            <div class="profile-sec">
+                <ul class='profile-tabs'>
+                    <li class="overview">Overview</li>
+                    <li class="teams">Teams</li>
+                    <li class="stats">Statistics</li>
+                    <li class="games">Games</li>
+                </ul>
+                <div class="line"></div>
+            </div>
+
+            <div class="overview-section">
+                <div class="overview-heading">
+                    Most Played Game
+                </div>
+                <div class="line4"></div>
+                <div class="played-game-content">
+                    {% if most_played_game != '' %}
+                        <div class="stats-wrapper">
+                            <div class="stats-card">
+                                <div class="stats-card-back" style="background-image: url('/media/{{ most_played_game.bg_image }}')""></div>
+                                <div class="stats-card-head">
+                                    <div class="stats-card-img" style="background-image: url('/media/{{ most_played_game.card_image }}')"></div>
+                                    <div class="stats-card-head-info">
+                                        <div class="stats-card-name">{{ most_played_game.fullname }}</div>
+                                        <div class="stats-card-stats">Statistics</div>
+                                    </div>
+                                </div>
+            
+                                <div class="stats-game-played">
+                                    <div class="stats-game-played-num">
+                                        <div class="stats-num">{{ stats.games_played }}</div>
+                                        <div class="stats-game">Games Played</div>
+                                    </div>
+                                    <div class="stats-game-played-percentage">
+                                        <div class="stats-percentage">{{ wins_perc }}%</div>
+                                        <div class="stats-perc-name">Wins</div>
+                                    </div>
+                                    <div class="stats-game-played-info">
+                                        <div class="stats-played-names">
+                                            <div class="stats-win">Wins: </div>
+                                            <div class="stats-loss">Losses:</div>
+                                            <div class="stats-tied">Tied:</div>    
+                                            <div class="stats-kills">Kills:</div>    
+                                        </div>
+            
+                                        <div class="stats-played-nums">
+                                            <div class="stats-win">{{ stats.wins }}</div>
+                                            <div class="stats-loss">{{ stats.loss }}</div>
+                                            <div class="stats-tied">{{ stats.tie }}</div>                                            
+                                            <div class="stats-kills">{{ stats.kills }}</div>                                            
+                                        </div>
+                                    </div>
+                                </div>
+            
+                            </div>
+                        </div>
+                    {% else %}
+                        <div style="color: rgba(233, 221, 221, 0.7); text-align: center; font-size: 14px;">Ah. This looks dry. Let's play some games homie!</div>
+                    {% endif %}
+                </div>
+                <div class="overview-heading">
+                    Followers ({{ followers|length }})
+                </div>
+                <div class="line4"></div>
+                <div class="friends-content">
+                    <div class="friends-card-wrapper">
+                    
+                    {% for follow in followers %}
+                        <a href="{% url 'profile' follow %}" class="friends-card">
+                            <div class="friend-pic">
+                                
+                            </div>
+                            <div class="friend-name">
+                                {{ follow }}
+                            </div>
+                        </a>
+                    {% empty %}
+                        <div class="no-shit" style="color: rgba(233, 221, 221, 0.7); text-align: center; font-size: 14px;">No Followers. Looks like we got ourselves a lone wolf here</div>
+                    {% endfor %}
+                    </div>
+                </div>
+                <div class="overview-heading tourney-played">
+                    Tournaments Played
+                </div>
+                <div class="line4"></div>
+                <div class="played-game-content">
+                    <div class="played-game-container">
+                    {% for tournament in tournaments %}
+                        <a href="{% url 'tourney' tournament.id %}" class="played-game-card">
+                            <div class="played-game-card-up-sec">
+                                <div class="played-game-img" style="background-image: url('/media/{{ tournament.banner }}');"></div>
+                                <div class="played-game-name-history">
+                                    <div class="played-game-name">
+                                        {{ tournament.name }}
+                                    </div>
+                                    <div class="played-game-history">
+                                        Match History
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="played-game-card-bot-sec">
+                            {% if tournament.winner.username == user.username %}
+                                <div class="played-game-result">Won</div>
+                            {% elif tournament.winner.username == None %}
+                                {% if tournament.status == 1 %}
+                                    <div class="played-game-result" style="width: 8rem;">In Progress</div>
+                                {% else %}
+                                    <div class="played-game-result" style="width: 8rem;">Completed</div>
+                                {% endif %}
+                            {% else %}
+                                <div class="played-game-result" style="background-color: #ec3333;">Lost</div>
+                            {% endif %}
+                                <div class="played-game-prize">Prize: <span style="font-weight: bold;">&#8377 {{ tournament.prize_pool }}</span></div>
+                            </div>
+                            <div class="played-game-score"></div>
+                        </a>
+                    {% empty %}
+                        <div style="margin: auto; color: rgba(233, 221, 221, 0.7); text-align: center; font-size: 14px;">Every thing is clean. Looks like {{ user.username }} hasn't played any tournaments yet<span>&#x1F610</span></div>
+                    {% endfor %}
+                    </div>
+                </div>
+            </div>
+
+            <div class="teams-section">
+                <div class="team-heading">
+                    Teams
+                </div>
+                <div class="line4"></div>
+                <div class="team-card-container">
+                    {% for team in totalTeams %}
+                    <a href="{% url 'team' team.name%}" class="team-card">    
+                        <div class="team-background" style="background-image: url('/media/{{ team.team_banner }}');">
+                            <div class="team-img" style="background-image: url('/media/{{ team.logo }}');"></div>
+                        </div>
+                        <div class="team-name">{{ team.name }}</div>
+                        <div class="team-members">{{ team.members.count }} Members</div>
+                        <div class="win-loss-table">
+                            <div class="table-head">
+                                <div>Win</div>
+                                <div>Loss</div>
+                                <div>Tie</div>
+                            </div>
+                            <div class="table-body">
+                                <div>{{ team.wins }}</div>
+                                <div>{{ team.loss }}</div>
+                                <div>{{ team.tie }}</div>
+                            </div>
+                        </div>
+                    </a>
+                    {% empty %}
+                    {% if request.session.username != user.username %}
+                        <div class="emptyTeam" style="color: rgba(233, 221, 221, 0.7); text-align: center; font-size: 14px;">{{ user.username }} is not in any team yet.</div>
+                    {% endif %}
+                    {% endfor %}
+                    {% if request.session.username == user.username %}
+                    <div class="create-team-card">
+                        <i class="fa fa-plus"></i>
+                        <div class="create-team-para">CREATE NEW TEAM</div>
+                    </div>
+                    {% endif %}
+                </div>
+            </div>
+
+            <div class="stats-section">
+                <div class="stats-heading">
+                    Statistics
+                </div>
+                <div class="line4"></div>
+
+                <div class="stats-wrapper">
+                {% for stat in all_stats %}
+                    <div class="stats-card">
+                        <div class="stats-card-back" style="background-image: url('/media/{{ stat.game.bg_image }}');"></div>
+                        <div class="stats-card-head">
+                            <div class="stats-card-img" style="background-image: url('/media/{{ stat.game.card_image }}')"></div>
+                            <div class="stats-card-head-info">
+                                <div class="stats-card-name">{{ stat.game.fullname }}</div>
+                                <div class="stats-card-stats">Statistics</div>
+                            </div>
+                        </div>
+
+                        <div class="stats-game-played">
+                            <div class="stats-game-played-num">
+                                <div class="stats-num">{{ stat.games_played }}</div>
+                                <div class="stats-game">Games Played</div>
+                            </div>
+                            <div class="stats-game-played-percentage">
+                                {% if stat.games_played == 0 %}
+                                    <div class="stats-percentage">0</div>
+                                {% else %}
+                                    <div class="stats-percentage">{% widthratio stat.wins stat.games_played 1 %}%</div>
+                                {% endif %}
+                                <div class="stats-perc-name">Win Ratio</div>
+                            </div>
+                            <div class="stats-game-played-info">
+                                <div class="stats-played-names">
+                                    <div class="stats-win">Wins:</div>
+                                    <div class="stats-loss">Losses:</div>
+                                    <div class="stats-tied">Tied:</div>    
+                                    <div class="stats-kills">Kills:</div>    
+                                </div>
+
+                                <div class="stats-played-nums">
+                                    <div class="stats-win">{{ stat.wins }}</div>
+                                    <div class="stats-loss">{{ stat.loss }}</div>
+                                    <div class="stats-tied">{{ stat.tie }}</div>                                            
+                                    <div class="stats-kills">{{ stat.kills }}</div>                                            
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                {% empty %}
+                    <div style="color: rgba(233, 221, 221, 0.7); text-align: center; font-size: 14px;">Ah. This looks dry. Let's play some games homie!</div>
+                {% endfor %}
+                </div>
+            </div>
+            <div class="games-section">
+                <div class="stats-heading">
+                    Validated Games
+                </div>
+                <div class="line4"></div>
+                
+                <div class="games-card-container">
+                    {% for game, game_validate in zipped %}
+                        <a href="{% url 'game' game_validate.gameName %}" class="games-card">
+                            <div class="games-card-img" style="background-image: url('/media/{{ game.card_image }}')"></div>
+                            <div class="games-card-game">{{ game.fullname }}</div>
+                        </a>
+                    {% empty %}
+                        <div class="shit" style="color: rgba(233, 221, 221, 0.7); text-align: center; font-size: 14px;">Hasn't Played Any shit yet</div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    {% endblock %}
+
+    {% block javascript %}
+        <script src="{% static 'slingshot/profile.js' %}"></script>
+        <script src="https://cdn.jsdelivr.net/npm/exif-js"></script>
+    {% endblock %}
+</html>

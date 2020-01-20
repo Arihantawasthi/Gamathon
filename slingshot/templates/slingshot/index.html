@@ -1,0 +1,119 @@
+<!-- 
+    * This is homepage for the Gamathon.
+    
+    * Author: Arihant Awasthi  awasthiarihant@gmail.com
+    * version: 0.9
+ -->
+{% extends 'slingshot/base.html' %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    {% load static %}
+    {% block metatags %}
+        <meta name="description" content="Gamathon is an E-sports site focused to build a gaming community and environment, it allows users to play and even organize online gaming tournaments.">
+        <meta property="og:title" content="Play Online Gaming Tournaments."/>
+        <meta property="og:url" content="https://www.gamathon.gg/home"/>
+        <meta property="og:description" content="Compete and Organize Online Gaming Tournaments on Gamathon.">
+    {% endblock %}
+    {% block css %}
+        <link rel="stylesheet" href="{% static 'slingshot/home.css' %}">
+    {% endblock %}
+    <title>{% block title %}Play & Organize Gaming Online Gaming Tournaments| Gamathon{% endblock %}</title>
+</head>
+    {% block body %}
+    <div class="page-wrapper">
+        <div class="carousel">
+            <div class="img-container">
+                <img class="desktop-img" src="../../static/slingshot/Site_Material/carousel-img1-desktop.png" alt="carousel image">
+                <img class="mobile-img" src="../../static/slingshot/Site_Material/carousel-img1-mobile.png" alt="carousel image">
+            </div>
+        </div>
+        <div class="container">
+            <div class="tournament">
+                <h2>Tournaments</h2>
+            </div>
+            <div class="gamehubs">
+                <div class="game-hub">Game Hubs</div>
+            </div>
+
+            <!-- Game cards  -->
+            <div class="game-card-container">
+                {% for game in games %}
+                    <a href="{% url 'game' game.name %}" class="game-card">
+                        <div>
+                            <div class="game-img" style="background-image: url('/media/{{ game.card_image }}');"></div>
+                            <div class="game-name">{{ game.fullname }}</div>
+                        </div>
+                    </a>
+                {% endfor %}
+            </div>
+
+            <div class="trending">
+                <a name='tournament-hyperlink'></a>
+                <h2>Trending</h2>
+            </div>
+
+            <div class="tourney-card-container">
+            {% for tournament in tournaments %}
+                <a href="{% url 'tourney' tournament.id %}" class="tourney-card" id="tourney-tabs">
+                    <div class="tourney-card-image" style="background-image: url('/media/{{ tournament.banner }}');">
+                        <div class="tourney-card-time">{{ tournament.start_time }} |  <span style="margin-left: 0.2rem;">{{ tournament.start_date }}</span></div>
+                        <div class="tourney-card-platform">PC</div>
+                    </div>
+                    <div class="tourney-card-title">
+                        {{ tournament.name }}
+                    </div>
+                    <div class="tourney-card-type">
+                        {{ tournament.tour_type }}
+                    </div>
+                    <div class="tourney-card-info">
+                        <div class="tourney-card-open">
+                            {{ tournament.tour_game.fullname }}
+                        </div>
+                        <div class="tourney-card-entry">
+                            &#8377 {{ tournament.entry_fee }} entry
+                        </div>
+                    </div>
+                    <div class="tourney-card-organizer-sponsor-info">
+                        <div class="tourney-card-organizer">
+                            <div class="organizer-img"></div>
+                            <div class="organizer-info">
+                                <div class="organizer">Organizer</div>
+                                <div class="organizer-name">{{ tournament.organizer }}</div>
+                            </div>
+                        </div>
+                        <div class="tourney-card-sponsor">
+                            {% if tournament.sponsor == '' %}
+                            <div class="sponsor-img" style="display: none;"></div>
+                            <div class="sponsor-info" style="display: none;">
+                                <div class="sponsor">Sponsor</div>
+                                <div class="sponsor-name">{{ tournament.sponsor }}</div>
+                            </div>
+                            {% else %}
+                            <div class="sponsor-img"></div>
+                            <div class="sponsor-info">
+                                <div class="sponsor">Sponsor</div>
+                                <div class="sponsor-name">{{ tournament.sponsor }}</div>
+                            </div>
+                            {% endif %}
+                        </div>
+                    </div>
+                    <div class="tourney-card-prizepool">
+                        <span class="prize">Prize Pool</span>&#8377 {{ tournament.prize_pool }} 
+                    </div>
+                    <div class="tourney-card-registration">
+                        <div class="registered">{{ tournament.participants }} Players registered</div>
+                        <div class="registration-status"><i class="fa fa-check" style="margin-right: 0.3rem"></i>Registration Open</div>    
+                    </div>
+                </a>
+            {% empty %}
+                <div style="color: white; margin-bottom: 2rem; margin-top: 1rem; text-align: center; margin-left: 2rem;">Coming Soon</div>
+            {% endfor %}
+            </div>
+        </div>
+    </div>
+    {% endblock %}
+</html>

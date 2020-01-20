@@ -1,0 +1,160 @@
+{% extends 'slingshot/base.html' %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    {% load static %}
+    
+    {% block css %}
+        <link rel="stylesheet" href="{% static 'wallet/team_wallet.css' %}">
+    {% endblock %}
+    <meta name="robot" content="noindex,nofollow">
+    <meta name="googlebot" content="noindex,nofollow">
+    <title>{% block title %}{{ team.name }} Wallet | Gamathon{% endblock %}</title>
+</head>
+<body>
+{% block body %}
+    <div class="container">
+        <div class="history-wallet-wrapper">
+            <div class="team-player-wallet-transfer-wrapper">
+                <div class="team-wallet-transfer">
+                    <div class="team-wallet-head">{{ team.name }} Shared Team Wallet</div>
+                    <div class="line"></div>
+                    <div class="team-wallet-current-wallet">Current Balance: <span style="font-weight: bold;">&#8377 {{ team.wallet }} INR</span></div>
+                    <div class="team-wallet-transfer-content">
+                        <div class="team-wallet-transfer-head">
+                            Transfer To Team
+                        </div>
+                        <div class="team-wallet-transfer-info">
+                            <p>You can transfer money from your own personal wallet to the shared team wallet. Only team captains can distribute money from the team wallet to members. </p>
+                            <p>You currently have <span style="font-weight: bold;">&#8377 {{ team.wallet }} INR</span> available to transfer in your personal wallet. </p>
+                            
+                            <form action="#" method="post" class="team-wallet-transfer-form">
+                                {% csrf_token %}
+                                <div class="amount-input-field">
+                                    <div class="rupee-icon">&#8377</div> 
+                                    <input type="number" name="team-transfer-amt" value="0" class="transfer-input">
+                                    <div class="INR">INR</div>
+                                </div>
+                                <div class="warning">You must specify a valid amount to transfer.</div>
+                                <button class="team-transfer-btn">Transfer Money</button>
+                                
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            
+            {% if request.session.username == team.captain.username %}
+                <div class="player-transfer">
+                    <div class="player-transfer-head">Transfer to Player</div>
+                    <div class="player-transfer-info">
+                        <p>As a team captain, you can distribute money from the shared team wallet to other members. </p>
+                        <p>There is currently <span>&#8377 {{ team.wallet }} INR</span> available in the team wallet. </p>
+                        <form action="" method="post" class="player-transfer-form">
+                            {% csrf_token %}
+                            <select class="player-transfer-options" required>
+                                <option value="">Choose a Member</option>
+                            {% for member in members %}
+                                <option value="{{ member.username }}">{{ member.username }}</option>
+                            {% endfor %}
+                            </select> 
+            
+                            <div class="amount-input-field">
+                                <div class="rupee-icon">&#8377</div>
+                                <input type="number" name='member-transfer-amt' value="0" class="transfer-input">
+                                <div class="INR">INR</div>
+                            </div>
+                            <div class="warning">You must specify a valid amount to transfer.</div>
+                            <button class="player-transfer-btn">Transfer Money</button>
+                        </form>
+                    </div>
+                </div>
+            {% endif %}
+            </div>
+            <div class="transaction-history">
+                <div class="transaction-history-head">Transaction History</div>
+                <div class="line"></div>
+                <div class="transaction-history-content">
+                    Nothing to see here. Looks like you have not made any transactions yet. 
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        /* ---FORM FOR TRANSFER AMOUNT FROM USER TO TEAM USING AJAX */
+        $(document).on('submit','.team-wallet-transfer-form', function(e) {
+            e.preventDefault();
+
+            var formData = {
+                'amount': $('input[name=team-transfer-amt]').val(),
+                'csrfmiddlewaretoken': $('input[name=csrfmiddlewaretoken]').val()
+            }
+            if (parseInt(formData.amount) > 0) {
+                console.log(formData)
+                $.ajax({
+                    type:'POST',
+                    url: '/team-wallet/{{ team.name }}',
+                    data: formData,
+                }).done(function(response_data) {
+                    setTimeout(function(){ 
+                        notifyHead.innerHTML = response_data.status
+                        notifyMessage.innerHTML = response_data.message
+                        notifyDiv.style.right = '1rem' 
+                    }, 200);
+                })
+            }
+            else {
+                notifyDiv.style.display = 'block'
+                setTimeout(function(){ 
+                    notifyHead.innerHTML = 'Failed'
+                    notifyMessage.innerHTML = 'Please Provide a valid amount Homie!'
+                    notifyDiv.style.right = '1rem' 
+                }, 200);
+            }
+        })
+
+
+        /* ---FORM TO TRANSFER AMOUNT FROM TEAM TO USER USING AJAX */
+        $(document).on('submit','.player-transfer-form', function(e) {
+            e.preventDefault();
+
+            var formData = {
+                'member': $(".player-transfer-options").val(),
+                'amount': $('input[name=member-transfer-amt]').val(),
+                'csrfmiddlewaretoken': $('input[name=csrfmiddlewaretoken]').val()
+            }
+
+            if (parseInt(formData.amount) > 0) {
+                console.log(formData)
+                $.ajax({
+                    type:'POST',
+                    url: '/teamUserTXN/{{ team.name }}',
+                    data: formData,
+                }).done(function(response_data) {
+                    notifyDiv.style.display = 'block'
+                    setTimeout(function(){ 
+                        notifyHead.innerHTML = response_data.status
+                        notifyMessage.innerHTML = response_data.message
+                        notifyDiv.style.right = '1rem' 
+                    }, 200);
+                })
+            }
+            else {
+                notifyDiv.style.display = 'block'
+                setTimeout(function(){ 
+                    notifyHead.innerHTML = 'Failed'
+                    notifyMessage.innerHTML = 'Please Enter a valid amount Homie!'
+                    notifyDiv.style.right = '1rem' 
+                }, 200);
+            }
+        })
+    </script>
+{% endblock %}
+
+{% block javascript %}
+    <script src="{% static 'wallet/team_wallet.js' %}"></script>
+{% endblock %}
+</html>

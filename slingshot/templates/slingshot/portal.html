@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    {% load static %}
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="robot" content="index,follow">
+    <meta name="googlebot" content="index,follow">
+    <meta name="keywords" content="online tournaments, pubg online tournaments, online gaming tournaments, gaming tournaments">
+    <meta name="description" content="Gamathon is an E-sports site focused to build a gaming community and environment, it allows users to play and even organize online gaming tournaments.">
+    <meta property="og:title" content="Play Online Gaming Tournaments."/>
+    <meta property="og:url" content="https://www.gamathon.gg"/>
+    <meta property="og:description" content="Compete and Organize Online Gaming Tournaments on Gamathon.">
+    <meta property="og:image" content="{% static 'slingshot/Site_Material/logo-card-icon.png' %}">
+    <meta property="og:type" content="website"/>
+    <meta property="og:locale" content="en_US"/>
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:site" content="@Gamathon" />
+    <meta name="twitter:creator" content="@Arihantawasthi" />
+    <script src="https://code.jquery.com/jquery-3.4.1.js" integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="anonymous"></script>
+    <link rel="Shortcut Icon" href="{% static 'slingshot/Site_Material/logo.png' %}" type="image/png">
+    <link rel="apple-touch-icon" sizes="32x32" href="{% static 'slingshot/Site_Material/logo.png' %}">
+    <link href="https://fonts.googleapis.com/css?family=Play:400,700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fork-awesome@1.1.7/css/fork-awesome.min.css" integrity="sha256-gsmEoJAws/Kd3CjuOQzLie5Q3yshhvmo7YNtBG7aaEY=" crossorigin="anonymous">
+    <link rel="stylesheet" href="{% static 'slingshot/portal.css' %}">
+    <link rel="stylesheet" href="{% static 'slingshot/footer.css' %}">
+    
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-156424721-1"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'UA-156424721-1');
+    </script>
+
+    <title>Play & Organize Online Gaming Tournaments | Gamathon</title>
+</head>
+<body>
+    <div class="loading-wrapper" style="display: none;">
+        <div class="loading-logo" style="position: absolute; top: -2rem; bottom: 0; margin: auto; left: 0; right: 0.3rem; height: 14rem; width: 14rem; background-size: contain; background-image: url('../../static/slingshot/Site_Material/logo.png');"></div>
+        <div id="loading-hud" style="position: absolute; top: 0; bottom: 0; margin: auto; transform: translateY(7rem); left: 0; right: 0; height: 4rem; width: 4rem;">
+            <img src='../../static/slingshot/Site_Material/hud.svg' alt="">
+        </div>
+    </div>
+    <div class="containers">
+        <div class="main">
+            <div class="main-bg"></div>
+            <div class="heading-slogan-box">
+                <h1 style="display: none">Online Gaming Tournaments</h1>
+                <div class="heading">The Playground for Competitive Gaming.</div>
+                <div class="desc">Your E-sports journey begins here.</div>
+
+                <div class="login-play-container">
+                    <div class="create-acc">
+                        <a href="{% url 'register' %}">Create Account</a>
+                    </div>
+                    <div class="enter-playground">
+                        <a href="{% url 'index' %}">Enter Playground</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="heading1">
+            Play Hard. Go Hard!
+        </div>
+
+        <div class="features">
+            <div class="compete anim" data-delay="0s">
+                <div class="header">Compete.</div>
+                <div class="description">Compete and Play in variety of online gaming tournaments and take your skill level to the top.</div>
+            </div>
+            <div class="find anim" data-delay="0.2s">
+                <div class="header">Find Teamates.</div>
+                <div class="description">Create Teams and Post Recruitment.</div>
+            </div>
+            <div class="organize anim" data-delay="0.3s">
+                <div class="header">Organize.</div>
+                <div class="description">Easily Create and Manage your own Tournaments for free.</div>
+            </div>
+            <div class="leaderboard anim" data-delay="0.4s">
+                <div class="header">Leaderboard.</div>
+                <div class="description">Show off your skills on Gamathon Leaderboard.</div>
+            </div>
+        </div>
+
+        <div class="heading1" data-delay="0s">
+            Let's Get Connected!
+        </div>
+
+        <div class="connect lets-connect">
+            <div class="fb"><a target="_blank" rel="noopener noreferrer" href="https://www.instagram.com/gamathon.gg"><i class="fa fa-instagram"></i></a></div>
+            <div class="inta"><a target="_blank" rel="noopener noreferrer" href="https://www.facebook.com/Gamathon.gg"><i class="fa fa-facebook-official"></i></a></div>
+            <div class="twit"><a target="_blank" rel="noopener noreferrer" href="https://www.twitter.com/theGamathon"><i class="fa fa-twitter"></i></a></div>
+            <div class="disc"><a target="_blank" rel="noopener noreferrer" href="https://www.discord.gg/9Bpme4g"><i class="fa fa-discord"></i></a></div>
+        </div>
+
+        <div class="heading1 anim" data-delay="0s">
+            Get Ready to Play!
+        </div>
+
+        <div class="features-desc">
+            <div class="compete-desc anim" data-delay="0s">
+                <div class="compete-desc-img"></div>
+                <div class="compete-desc-head-description-container">
+                    <div class="desc-head">Play Tournaments.</div>
+                    <div class="desc-description">Compete in various tournaments having massive amount of prizepool. We will be hosting our Official Tournaments and Inviting other Organizations to host tournaments as well. So a single platform for Esports aspirants to participate in tournaments.</div>
+                </div>
+            </div>        
+            <div class="find-desc anim" data-delay="0s">
+                <div class="find-desc-img"></div>
+                <div class="find-desc-head-description-container">
+                    <div class="desc-head">Find Teammates.</div>
+                    <div class="desc-description">Create Teams and Post Reqruitments or apply for other team's recruits. Send each other friend requests and make a Team to conquer every Tournament.</div>
+                </div>
+            </div>        
+            <div class="organize-desc anim" data-delay="0s">
+                <div class="organize-desc-img"></div>
+                <div class="organize-desc-head-description-container">
+                    <div class="desc-head">Organize Tournaments.</div>
+                    <div class="desc-description">We are taking an initiative to bring organizers on a single platform so they can host their Tournaments. We have made the process really easy for Organizers. You just need to create tournament and we provide you easy management through our platform.</div>
+                </div>
+            </div>        
+            <div class="leaderboard-desc anim" data-delay="0s">
+                <div class="leaderboard-desc-img"></div>
+                <div class="leaderboard-desc-head-description-container">
+                    <div class="desc-head">Leaderboards.</div>
+                    <div class="desc-description">Show off your stats on the Gamathon Leaderboard. Top Teams and Top Players will be listed in the leaderboard. It let's you track your progress.</div>
+                </div>
+            </div>        
+        </div>
+
+        <div class="heading1 anim" data-delay="0s">
+            Ready to Sign Up? It's Free!
+        </div>
+
+        <div class="register-btn anim" data-delay="0s">
+            <a href="{% url 'register' %}">Create Account</a>
+        </div>
+    </div>
+
+    <footer class="footer" style="margin-left: 0px; width: 100%;">
+        <div class="footer-img-container">
+            <div class="footer-img"></div>
+        </div>
+        <div class="connect">
+            <div class="fb"><a target="_blank" rel="noopener noreferrer" href="https://www.instagram.com/gamathon.gg"><i class="fa fa-instagram"></i></a></div>
+            <div class="inta"><a target="_blank" rel="noopener noreferrer" href="https://www.facebook.com/Gamathon.gg"><i class="fa fa-facebook-official"></i></a></div>
+            <div class="twit"><a target="_blank" rel="noopener noreferrer" href="https://www.twitter.com/theGamathon"><i class="fa fa-twitter"></i></a></div>
+            <div class="disc"><a target="_blank" rel="noopener noreferrer" href="https://www.discord.gg/9Bpme4g"><i class="fa fa-discord"></i></a></div>
+        </div>
+        <ul class="components">
+            <li><a href="{% url 'about' %}">About</a></li>
+            <li><a href="{% url 'termsOfUse' %}">Terms Of Use</a></li>
+            <li><a href="{% url 'privacyPolicy' %}">Privacy Policy</a></li>
+        </ul>
+        <div class="company-name">Copyright &copy Gamathon pvt. LTD. All Rights Reserved.</div>
+    </footer>
+
+    <script src="{% static 'slingshot/portal.js' %}"></script>
+</body>
+</html>

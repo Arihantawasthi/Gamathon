@@ -1,0 +1,40 @@
+{% extends 'slingshot/base.html' %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    {% load static %}
+
+    {% block metatag %}
+        <meta name="description" content="Gamathon is an E-sports platform developed for Organizers and Gamers to give their E-sports and competitive gaming career a boost.">
+        <meta property="og:title" content="Play Online Gaming Tournaments."/>
+        <meta property="og:url" content="https://www.gamathon.gg/organize"/>
+        <meta property="og:description" content="Organize Online Gaming Tournaments on Gamathon. Organizing Tournaments made easy.">
+    {% endblock %}
+
+    {% block css %}
+        <link rel="stylesheet" href="{% static 'slingshot/about.css' %}">
+    {% endblock %}
+    <title>{% block title %}About Us | Gamathon{% endblock %}</title>
+</head>
+{% block body %}
+    <div class="bg-image"></div>
+    <div class="container">
+        <div class="heading">
+            About Gamathon
+        </div>
+        <div class="content">
+            <p>Gamathon is an E-sports Platform developed for the gamers and e-sports aspirants. We are focused to take Indian Gaming Community to Next Level. Gamathon is for both Gamers and E-sports Organizations. Players can play and increase their skills in game and also can win huge amounts by winning tournaments. We host many tournaments on our platform with the help of other organizers as well. We are helping Organizers to host their tournaments on our platform.</p>
+        </div>
+        <div class="use">You can use Gamathon to: </div>
+        <ul class="use-list">
+          <li>Play and Compete in various type of tournaments and increase their gaming skills as well as earn cash and other prizes.</li>  
+          <li>Form a Team containing like minded individuals to head towards e-sports world and compete together in various e-sports tournaments</li>  
+          <li>Organize various type of tournaments of different games and boost your organizer career. You just have to create a tournament and we'll handle all the other mess. Cause let's face it, organizing through Google Forms is a lot of manual work and it sucks.</li>  
+          <li>Get connected to other players. We have added follow/following functionality, so that you can connect with different players and see what tournaments they are playing and create a team with them.</li>  
+        </ul>
+    </div>
+{% endblock %}
+</html>

@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="robot" content="index,follow">
+    <meta name="googlebot" content="index,follow">
+    <meta name="keywords" content="online tournaments, pubg online tournaments, online gaming tournaments, gaming tournaments">
+    <meta property="og:image" content="{% static 'slingshot/Site_Material/logo-card-icon.png' %}">
+    <meta property="og:type" content="website"/>
+    <meta property="og:locale" content="en_US"/>
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:site" content="@Gamathon" />
+    <meta name="twitter:creator" content="@Arihantawasthi" />
+    <meta name="description" content="Register for Gamathon to Play & Organize tournaments. After creating a account in Gamathon, you can take part in various tournaments and even organize various tournaments.">
+    <meta property="og:title" content="Create a Account in Gamathon."/>
+    <meta property="og:url" content="https://www.gamathon.gg/home"/>
+    <meta property="og:description" content="Compete and Organize Online Gaming Tournaments on Gamathon.">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.4.1.js" integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="anonymous"></script>
+    <link href="http://code.jquery.com/ui/1.10.2/themes/smoothness/jquery-ui.css" rel="Stylesheet">
+    <script src="http://code.jquery.com/ui/1.10.2/jquery-ui.js" ></script>
+    <link href="https://fonts.googleapis.com/css?family=Play:400,700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fork-awesome@1.1.7/css/fork-awesome.min.css" integrity="sha256-gsmEoJAws/Kd3CjuOQzLie5Q3yshhvmo7YNtBG7aaEY=" crossorigin="anonymous">
+    <link rel='shortcut icon' type='image/png' href="{% static 'slingshot/Site_Material/logo.png' %}">
+    <link rel="stylesheet" href="{% static 'slingshot/register.css' %}">
+
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-156424721-1"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'UA-156424721-1');
+    </script>
+    
+    <title>Sign Up | Gamathon</title>
+</head>
+<body>
+    <div class="notify-div">
+        <div class="notify-div-wrapper">
+            <div class="notify-div-side-bar"></div>
+            <div class="heading-message-container">
+                <div class="notify-heading">
+                    <div class="notify-heading-content">Notify heading content</div>
+                    <div class="notify-close"><i class="fa fa-times"></i></div>
+                </div>
+                <div class="notify-message">Notify Message</div>
+                <div class="btn-container">
+                    <a href="{% url 'index' %}" class="btn">Visit Home</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <h1 id="session" style="display: none;">{{ request.session.logged_in }}</h1>
+    <h1 id="sessionUser" style="display: none;">{{ request.session.username }}</h1>
+    <div class="bg-image"></div>
+    <div class="container">
+        <div class="register-modal-content">
+            <div class="top-shadow"></div>
+            <div class="reg-heading">Time to Join the Hood!</div>
+            <div class="reg-modal-img"></div>
+            <form action="#" class="reg-modal-form" id="reg-form" method="POST" style="position: relative;">
+                {% csrf_token %}
+                <div class="name-head">Name</div>
+                <i class="fa fa-user" style="position: absolute; top: 3.6rem; left: 1.6rem; font-size: 18px;"></i>
+                <input type="text" name='name' class="username-field" placeholder="Name" autofocus="on" required>
+
+                <div class="name-head" style="display: flex">Username
+                    <span class="username-warning-available" style="margin-left: 1rem; font-size: 14px; text-transform: capitalize; display: none;"></span>
+                    <span class="username-warning-unavailable" style="margin-left: 1rem; font-size: 14px; text-transform: capitalize; display: none;"></span>
+                </div>
+                <i class="fa fa-user" style="position: absolute; top: 9.1rem; left: 1.6rem; font-size: 18px;"></i>
+                <input type="text" name='username' id='reg-username' class="username-field" placeholder="Username" required minlength="5">
+
+                <div class="name-head">Email</div>
+                <i class="fa fa-envelope" style="position: absolute; top: 14.5rem; left: 1.6rem; font-size: 18px;"></i>
+                <input type="email" name='emails' class="username-field" placeholder="Email" required>
+
+                <div class="reg-pass-head">Password</div>
+                <i class="fa fa-lock" style="position: absolute; top: 19.4rem; left: 1.6rem; font-size: 20px;"></i>
+                <input type="password" name='pass' id="pass" class="pass-field" placeholder="Password" required minlength="5">
+
+                <div class="conf-pass-head">Confirm Password</div>
+                <i class="fa fa-lock" style="position: absolute; top: 24.4rem; left: 1.6rem; font-size: 20px;"></i>
+                <input type="password" name='conf-pass' id="conf-pass" class="pass-field" placeholder="Confirm Password" required minlength="5">
+                <div class="pass-warning" style="margin-top: 0.5rem; margin-bottom: -1rem;"></div>
+
+                <button class="reg-modal-button">Register</button>
+                <div class="reg-reminder">Have an account? <a href="{% url 'signIn' %}">Login</a></div>
+            </form>
+        </div>
+    </div>
+
+    <div class="notify-div">
+        <div class="notify-heading">
+            <div class="notify-heading-content">Notify heading content</div>
+            <div class="notify-close"><i class="fa fa-times"></i></div>
+        </div>
+        <div class="notify-message">Notify Message</div>
+    </div>
+
+    <script>
+        $('#pass, #conf-pass').on('keyup', function () {
+            if ($('#pass').val() == $('#conf-pass').val()) {
+                $('.pass-warning').html('Matching').css('color', 'green');
+        } else 
+            $('.pass-warning').html("Passwords doesn't match!").css('color', 'red');
+        });
+    </script>
+
+    <script src="{% static 'slingshot/register.js' %}"></script>
+</body>
+</html>

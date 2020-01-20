@@ -1,0 +1,149 @@
+{% extends 'slingshot/base.html' %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    {% load static %}
+    
+    {% block css %}
+        <link rel="stylesheet" href="{% static 'wallet/wallet.css' %}">
+    {% endblock %}
+    <meta name="robot" content="noindex,nofollow">
+    <meta name="googlebot" content="noindex,nofollow">
+    <title>{% block title %}{{ request.session.username }} Wallet | Gamathon{% endblock %}</title>
+</head>
+{% block body %}
+    <!-- Create Team validation Modal -->
+    <div class="bg-wallet-modal">
+        <div class="wallet-modal-content">
+            <div class="wallet-modal-close"><i class="fa fa-times"></i></div>
+            <div class="modal-heading">Wallet Deposit</div>
+            <form action="{% url 'wallet' request.session.username %}" class="wallet-modal-form" method='POST'>
+                {% csrf_token %}
+                <div class="name-head">Enter the amount of money you would like to deposit.</div>
+                <div class="modal-input-wrapper">
+                    <div class="rupee-icon">&#8377</div>
+                    <input type="number" name='amount' class="amount-field" autofocus="on">
+                    <div class="INR-modal">INR</div>
+                </div>
+                <div class="modal-warning">You must specify a valid amount to deposit.</div>
+                <button class="wallet-modal-button">Deposit</button>
+            </form>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="wallet-head">Your Team Wallets</div>
+        <div class="line"></div>
+        <div class="team-wallet-container">
+        {% for team in teams %}
+            <a href="{% url 'teamWallet' team.name %}" class="team-wallet-card">
+                <div class="team-profile-pic" style="background-image: url('/media/{{ team.logo }}')">
+                </div>
+                <div class="name-wallet">
+                    <div class="wallet-money">&#8377 {{ team.wallet }}</div>
+                    <div class="team-username">{{ team.name }}</div>
+                </div>
+            </a>
+            {% empty %}
+            You are not in any team.
+        {% endfor %}
+        </div>
+        <div class="wallet-page-container">
+            <div class="wallet-section">
+                <div class="wallet-head">Your Personal Gamathon Wallet</div>
+                <div class="line"></div>
+                <div class="current-balance">Current Balance: <span style="font-weight: bold;">&#8377 {{ user.wallet }} INR</span></div>
+
+                <div class="deposit-money">
+                    <div class="deposit-money-head">
+                        Deposit Money
+                    </div>
+                    <div class="deposit-money-content">
+                        <div class="deposit-info">
+                            <p>You can use the PayTm service to top up your Gamathon Wallet.</p>
+                            <div class="continue-btn">Continue</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="withdraw-money">
+                    <div class="withdraw-money-head">Withdraw Money</div>
+                    <div class="withdraw-platform">PayTm Withdraw</div>
+                    <div class="withdraw-money-info">
+                        <p>You are able to withdraw funds from your Gamathon account into any verified PayTm account. Enter your PayTm Number of the beneficiary PayTm account below. </p>
+                        <p>There is currently <span style="font-weight: bold;">&#8377 {{ user.wallet }} INR</span> available in your wallet. </p>
+                        
+                        <div class="paytm-info">
+                            <form action="#" method="post" class="widhraw-money-form">
+                                {% csrf_token %}
+                                <div class="paytm-num">PayTm Number</div>
+                                <input type="text" name="paytm-no" class="paytm-num-input" placeholder="Enter your PayTm number" required>
+
+                                <div class="withdraw-amount">Enter the Amount of money you want to Withdraw.</div>
+                                <div class="input-wrapper">
+                                    <div class="rupee">&#8377</div>
+                                    <input type="number" name='withdraw-amt' class="withdraw-amt-input" required>
+                                    <div class="INR">INR</div>
+                                </div>
+                                <div class="warning">You must specify a valid amount to Withdraw.</div>
+                                <div class="deduction-fee">We will deduct <span style="font-weight: bold;">3% transaction fee.</span></div>
+                                
+                                <button class="confirm">Confirm Transaction</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="withdraw-section">
+                <div class="transaction-history">
+                    <div class="trans-history-head">Transaction History</div>
+                    <div class="line"></div>
+                    {% for deposit in deposits %}
+                        <div class="trans-history-content">You {{ deposit }}</div> 
+                    {% endfor %}
+
+                    {% for withdraw in withdrawals %}
+                        <div class="trans-history-content">You {{ withdraw }}</div> 
+                    {% endfor %}
+
+                    {% if deposits|length == 0 and withdrawals|length == 0 %}
+                        <div class="trans-history-content">Nothing to see here. Looks like you have not made any transactions yet.</div> 
+                    {% endif %}    
+                </div>   
+            </div>
+        </div>
+    </div>
+    <script>
+        /* ---FORM FOR WITHDRAW USER USING AJAX */
+        $(document).on('submit','.widhraw-money-form', function(e) {
+            e.preventDefault();
+
+            var formData = {
+                'paytmNo': $('input[name=paytm-no]').val(),
+                'amount': $('input[name=withdraw-amt]').val(),
+                'csrfmiddlewaretoken': $('input[name=csrfmiddlewaretoken]').val()
+            }
+            console.log(formData)
+            $.ajax({
+                type:'POST',
+                url: '/withdraw/{{ request.session.username }}',
+                data: formData,
+            }).done(function(response_data) {
+                setTimeout(function(){ 
+                    notifyHead.innerHTML = response_data.status
+                    notifyMessage.innerHTML = response_data.message
+                    notifyDiv.style.right = '1rem' 
+                }, 200);
+            })
+        })
+    </script>
+{% endblock %}
+
+{% block javascript %}
+    <script src="{% static 'wallet/wallet.js' %}"></script>
+{% endblock %}
+</html>

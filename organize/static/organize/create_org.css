@@ -1,0 +1,345 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Play', 'sans-serif'; 
+}
+
+body {
+    background: linear-gradient(to left, rgb(12, 12, 12), #3b3939);
+    overflow-x: hidden;
+}
+
+.container {
+    margin: 0.8em 1.8em;
+}
+
+.heading {
+    color: white;
+    font-size: 22px;
+    margin-top: 1rem;
+    margin-bottom: 2rem;
+    font-weight: bold;
+}
+
+.tabs {
+    display: flex;
+    list-style: none;
+    color: white;
+}
+
+.tabs > li {
+    margin-right: 2rem;
+    font-size: 17px;
+    cursor: pointer;
+}
+
+.info {
+    opacity: 0.6;
+}
+
+.setting {
+    opacity: 0.6;
+}
+
+.indicator-line {
+    height: 2px;
+    width: 2.7rem;
+    background-color: #ec3333;
+    border-radius: 2px;
+    margin-bottom: 1rem;
+    margin-top: 0.5rem; 
+    box-shadow: 0 0 10px #fa7171;
+    transition: all 0.1s ease-in-out;
+}
+
+.form1 {
+    background: linear-gradient(to bottom, rgb(52, 52, 61), rgb(31, 30, 30));
+    border-radius: 4px;
+    padding: 1rem 2rem;
+    color: white;
+    transition: all 0.3s ease-in-out;
+    margin-bottom: 2rem;
+    width: 100%;
+    box-shadow: 0 2px 15px 0 rgba(0, 0, 0, 0.5);
+}
+
+.form1 > div {
+    margin-bottom: 2rem;
+}
+
+.name {
+    margin-bottom: 0.5rem;
+    font-size: 17px;
+    display: flex;
+}
+
+.name-warning {
+    background-color: red;
+    color: white;
+    font-size: 11px;
+    border-bottom-left-radius: 4px;
+    border-bottom-right-radius: 4px;
+    padding: 1px;
+    width: 90%;
+    margin-bottom: 0.8rem;
+}
+
+.name-input {
+    background-color: rgb(38, 38, 43);
+    padding: 0.8rem;
+    color: white;
+    font-size: 14px;
+    border: 0;
+    border-radius: 2px;
+    width: 90%;
+    box-shadow: 0 2px 5px 0 rgb(0, 0, 0, 0.5);
+}
+
+.des {
+    margin-bottom: 0.5rem;
+    font-size: 17px;
+}
+
+.des-input {
+    background-color: rgb(38, 38, 43);
+    padding: 1rem;
+    color: white;
+    font-size: 15px;
+    border: 0;
+    border-radius: 2px;
+    width: 90%;
+    height: 8rem;
+    box-shadow: 0 2px 5px 0 rgb(0, 0, 0, 0.5);
+}
+
+.img-name {
+    margin-bottom: 0.5rem;
+    font-size: 17px;
+}
+
+#img-input {
+    display: none;
+}
+
+.img-label {
+    cursor: pointer;
+    font-size: 50px;
+    margin-left: 2rem;
+}
+
+.next-btn {
+    color: white;
+    background-color: #ec3333;
+    padding: 0.5rem 1rem;
+    border: 0;
+    border-radius: 4px;
+    width: 35%;
+    cursor: pointer;
+    font-size: 14px;
+    box-shadow: 0 2px 5px 0 rgb(0, 0, 0, 0.5);
+    text-align: center;
+    margin-left: 60%;
+}
+
+.next-btn:hover {
+    cursor: pointer;
+    background-color: #e41717;
+}
+
+.form2 {
+    display: none;
+    background: linear-gradient(to bottom, rgb(52, 52, 61), rgb(31, 30, 30));
+    border-radius: 4px;
+    padding: 1rem 2rem;
+    color: white;
+    width: 100%;
+    position: absolute;
+    top: 0;
+    transition: all 0.3s ease-in-out;
+    transform: translateX(110%);
+    box-shadow: 0 2px 15px 0 rgba(0, 0, 0, 0.5);
+}
+
+.form {
+    position: relative;
+}
+
+.form2 > div {
+    margin-bottom: 2rem;
+}
+
+.email {
+    margin-bottom: 0.5rem;
+    font-size: 17px;
+}
+
+.email-input  { 
+    background-color: rgb(38, 38, 43);
+    padding: 0.8rem;
+    padding-left: 2rem;
+    color: white;
+    font-size: 14px;
+    border: 0;
+    border-radius: 2px;
+    width: 90%;
+    box-shadow: 0 2px 5px 0 rgb(0, 0, 0, 0.5);
+}
+
+.site {
+    margin-bottom: 0.5rem;
+    font-size: 17px;
+}
+
+.site-input  { 
+    background-color: rgb(38, 38, 43);
+    padding: 0.8rem;
+    padding-left: 2rem;
+    color: white;
+    font-size: 14px;
+    border: 0;
+    border-radius: 2px;
+    width: 90%;
+    box-shadow: 0 2px 5px 0 rgb(0, 0, 0, 0.5);
+}
+
+.insta {
+    margin-bottom: 0.5rem;
+    font-size: 17px;
+}
+
+.insta-input  { 
+    background-color: rgb(38, 38, 43);
+    padding: 0.8rem;
+    padding-left: 2rem;
+    color: white;
+    font-size: 14px;
+    border: 0;
+    border-radius: 2px;
+    width: 90%;
+    box-shadow: 0 2px 5px 0 rgb(0, 0, 0, 0.5);
+}
+
+.twitter {
+    margin-bottom: 0.5rem;
+    font-size: 17px;
+}
+
+.twitter-input  { 
+    background-color: rgb(38, 38, 43);
+    padding: 0.8rem;
+    padding-left: 2rem;
+    color: white;
+    font-size: 14px;
+    border: 0;
+    border-radius: 2px;
+    box-shadow: 0 2px 5px 0 rgb(0, 0, 0, 0.5);
+}
+
+.twitch {
+    margin-bottom: 0.5rem;
+    font-size: 17px;
+}
+
+.twitch-input  { 
+    background-color: rgb(38, 38, 43);
+    padding: 0.8rem;
+    padding-left: 2rem;
+    color: white;
+    font-size: 14px;
+    border: 0;
+    border-radius: 2px;
+    width: 90%;
+    box-shadow: 0 2px 5px 0 rgb(0, 0, 0, 0.5);
+}
+
+.discord {
+    margin-bottom: 0.5rem;
+    font-size: 17px;
+}
+
+.discord-input  { 
+    background-color: rgb(38, 38, 43);
+    padding: 0.8rem;
+    padding-left: 2rem;
+    color: white;
+    font-size: 14px;
+    border: 0;
+    border-radius: 2px;
+    width: 90%;
+    box-shadow: 0 2px 5px 0 rgb(0, 0, 0, 0.5);
+}
+
+.youtube {
+    margin-bottom: 0.5rem;
+    font-size: 17px;
+}
+
+.youtube-input  { 
+    background-color: rgb(38, 38, 43);
+    padding: 0.8rem;
+    padding-left: 2rem;
+    color: white;
+    font-size: 14px;
+    border: 0;
+    border-radius: 2px;
+    width: 90%;
+    box-shadow: 0 2px 5px 0 rgb(0, 0, 0, 0.5);
+}
+
+.email-field, .site-field, .insta-field, .twitter-field, .twitch-field, .discord-field, .youtube-field{
+    position: relative;
+}
+
+.create-btn {
+    color: white;
+    background-color: #ec3333;
+    padding: 0.5rem 1rem;
+    border: 0;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+    box-shadow: 0 2px 5px 0 rgb(0, 0, 0, 0.5);
+    text-align: center;
+    margin-left: 50%;
+    margin-bottom: 1rem;
+}
+
+.create-btn:hover {
+    cursor: pointer;
+    background-color: #e41717;
+}
+
+.fa-envelope, .fa-globe, .fa-instagram, .fa-twitter, .fa-twitch, .fa-discord, .fa-youtube {
+    position: absolute;
+    top: 2.4rem;
+    padding: 0.1rem 0.5rem;
+    font-size: 18px;
+}
+
+.footer {
+    transition: all 0.3s ease-in-out;
+}
+
+@media only screen and (min-width: 1048px) {
+    .container {
+        margin-left: 260px;
+    }
+
+    .next-btn {
+        margin-left: 80%;
+        width: 15%;
+    }
+
+    .create-btn {
+        margin-left: 80%;
+    }
+
+    .name-warning {
+        width: 50%;
+    }
+
+    .name-input, .des-input, .email-input, .site-input, .insta-input, .twitter-input, .twitch-input, .discord-input, .youtube-input {
+        width: 50%;
+    }
+}

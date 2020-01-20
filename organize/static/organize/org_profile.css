@@ -1,0 +1,456 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Play', 'sans-serif'; 
+}
+
+body {
+    background: linear-gradient(to left, rgb(12, 12, 12), #3b3939);
+    overflow-x: hidden;
+}
+
+.background {
+    width: 100%;
+    height: 30rem;;
+    background-image: url('./Site_Material/profile-back.jpg');
+    position: absolute;
+    opacity: 0.65;
+    -webkit-mask-image: linear-gradient(0deg,transparent 25%,#000 50%);
+    top: 0;
+    left: 0;
+    background-position: top;
+    background-size: cover;
+    pointer-events: none;
+    z-index: -1;
+    margin-top: 3rem;
+}
+
+.container {
+    margin: 0.8rem 1.8rem;
+}
+
+.header {
+    margin-top: 19rem;
+    color: white;
+}
+
+.org-name {
+    font-size: 22px;
+    margin-bottom: 0.5rem;
+    font-weight: bold;
+}
+
+.follow-disposal {
+    display: flex;
+}
+
+.follow-btn {
+    padding: 0.2rem 0.8rem;
+    border: 1px solid #eb2b44;
+    border-radius: 4px;
+    text-align: center;
+    width: 20%;
+    font-size: 11px;
+    margin-bottom: 1rem;
+    cursor: pointer;
+    margin-right: 1rem;
+}
+
+.following {
+    padding: 0.2rem 0.8rem;
+    border: 1px solid grey;
+    border-radius: 4px;
+    text-align: center;
+    width: 20%;
+    font-size: 11px;
+    margin-bottom: 1rem;
+    cursor: pointer;
+    display: none;
+}
+
+.following-num {
+    font-size: 15px;
+    margin-top: 0.2rem;
+    opacity: 1;
+}
+
+.manage {
+    border: 1px solid #eb2b44;
+    text-align: center;
+    border-radius: 4px;
+    padding: 0.4rem 0.8rem;
+    font-size: 14px;
+    cursor: pointer;
+    color: white;
+    text-decoration: none;
+}
+
+.manage > i{
+    margin-right: 0.2rem;
+}
+
+.divider-line {
+    width: 100%;
+    height: 1px;
+    background-color: grey;
+    margin-bottom: 1.5rem;
+}
+
+.message {
+    color: white;
+    font-size: 14px;
+}
+
+.header {
+    margin-bottom: 1rem;
+}
+
+.message-login {
+    text-align: left;
+    line-height: 1.1rem;
+    margin-bottom: 2rem;
+}
+
+.message-not-login {
+    line-height: 1.1rem;
+    margin-bottom: 2rem;
+    display: none;
+}
+
+.total-stats {
+    background-color: rgb(52, 52, 61);
+    padding: 1rem;
+    width: 80%;
+    border-radius: 4px;
+    margin-bottom: 1rem;
+}
+
+.stats-head {
+    font-size: 20px;
+    color: white;
+}
+
+.total-prize {
+    font-size: 16px;
+    color: white;
+    margin-bottom: 1rem;
+}
+
+.total-players {
+    font-size: 16px;
+    color: white;
+}
+
+.prize-money, .participants {
+    font-size: 20px;
+}
+
+.create-tourney-heading {
+    font-size: 20px;
+    color: white;
+}
+
+.create-tourney {
+    width: 10rem;
+    border-radius: 4px;
+    text-align: center;
+    padding: 5rem 0.2rem;
+    box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.5);
+    margin-right: 1rem;
+    margin-bottom: 1.5rem;
+    color: white;
+}
+
+.create-tourney:hover {
+    transform: translateY(-5px);
+    transition: transform ease 0.2s;
+    box-shadow: 0 2px 10px 0 rgba(0, 0, 0, 0.5);
+    transition: ease 0.2s;
+    cursor: pointer;
+    background-color: #222121;
+}
+
+.create-tourney > i {
+    font-size: 30px;
+    margin-bottom: 0.5rem;
+}
+
+.content {
+    font-weight: bold;
+}
+
+.previous-tourney-heading {
+    font-size: 20px;
+    color: white;
+}
+
+.previous-tourney-container {
+    display: flex;
+    flex-direction: column;
+    margin: 1.5rem 1.8rem 0 -1.8rem;
+}
+
+/* Tourney card */
+.tourney-card {
+    margin: 0 0 1.5rem 1.8rem;
+    width: 100%;
+    background-color: #262626;;
+    color: whitesmoke;
+    height: 32rem;
+    text-decoration: none;
+    border-radius: 4px;
+    box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.5);
+}
+
+.tourney-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 2px 10px 0 rgba(0, 0, 0, 0.5);
+    transition: transform ease 0.2s;
+}
+
+.tourney-card-image {
+    display: flex;
+    justify-content: space-between;
+    background-image: url(./Site_Material/logo.png
+    );
+    background-size: contain;
+    background-repeat: no-repeat;
+    width: 100%;
+    height: 40%;
+}
+
+.tourney-card-time {
+    margin-top: 11.6rem;
+    background-color: black;
+    font-size: 12px;
+    padding: 3px 6px 0 5px;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+.tourney-card-platform {
+    margin-top: 11.6rem;
+    background-color: #262626;
+    padding: 2px 6px 0 5px;
+    font-size: 11px;
+    font-weight: bold;
+    text-transform: uppercase;
+    opacity: 0.9;
+}
+
+.tourney-card-title {
+    margin: 1.5rem;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.tourney-card-type {
+    width: 100%;
+    text-align: center;
+    font-size: 12px;
+}
+
+.tourney-card-info {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    text-align: center;
+    padding: 0 1.5rem 0 1.5rem;
+    margin-top: 0.8rem;
+}
+
+.tourney-card-open {
+    padding: 5px;
+    margin-bottom: 5px;
+    background-color: #ec3333;
+    border-radius: 8px;
+    font-size: 11px;
+    text-transform: uppercase;
+}
+
+.tourney-card-entry {
+    padding: 5px;
+    margin-bottom: 5px;
+    background-color: #ec3333;
+    border-radius: 8px;
+    font-weight: bold;
+    text-transform: uppercase;
+    font-size: 11px;
+}
+
+.tourney-card-organizer-sponsor-info {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-top: 0.5rem;
+}
+
+.tourney-card-organizer {
+    width: 50%;
+    padding: 5px;
+    display: flex;
+}
+
+.organizer-img {
+    width: 4rem;
+    height: 40px;
+    border-radius: 50%;
+    background-image: url(./Site_Material/logo.png);
+    background-repeat: no-repeat;
+    background-size: contain;
+}
+
+.organizer-info {
+    font-size: 11px;
+    margin: 0.4rem 0 0 1.0rem;
+}
+
+.organizer {
+    text-transform: uppercase;
+    font-size: 14px;
+}
+
+.organizer-name {
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.tourney-card-sponsor {
+    width: 50%;
+    padding: 5px;
+    display: flex;
+}
+
+.sponsor-img {
+    width: 4rem;;
+    height: 40px;
+    border-radius: 50%;
+    background-image: url(./Site_Material/logo.png);
+    background-repeat: no-repeat;
+    background-size: contain;
+}
+
+.sponsor-info {
+    font-size: 11px;
+    margin: 0.4rem 0 0 1.0rem;
+}
+
+.sponsor {
+    text-transform: uppercase;
+    font-size: 14px;
+}
+
+.sponsor-name {
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.tourney-card-prizepool {
+    padding: 20px;
+    text-align: center;
+    font-weight: bold;
+    font-size: 20px;
+    border-radius: 4px;
+}
+
+.prize {
+    font-size: 14px;
+    font-weight: regular;
+    float: left;
+    margin-top: 0.3rem;
+}
+
+.tourney-card-registration {
+    font-size: 12px;
+    text-transform: capitalize;
+    padding: 7px;
+    display: flex;
+    justify-content: space-around;
+}
+
+/* TOURNAMENT CARD ENDS */
+
+#img-input {
+    display: none;
+}
+
+.img-label {
+    position: absolute;
+    font-size: 14px;
+    color: white;
+    top: 4rem;
+    right: 1rem;
+}
+
+.profile-back-save-btn {
+    padding: 0.5rem 1rem;
+    border: 0;
+    border-radius: 4px;
+    background-color: #ec3333;
+    color: white;
+    box-shadow: 0 2px 5px 0px rgba(0, 0, 0, 0.5);
+    cursor: pointer;
+    display: none;
+    position: absolute;
+    top: 24rem;
+    right: 1rem;
+}
+
+.img-label > i {
+    cursor: pointer;
+    font-size: 30px;
+    margin-left: 2.2rem;
+}
+
+@media only screen and (min-width: 1048px) {
+    .container {
+        margin-left: 260px;
+        margin-top: 10rem;
+    }
+
+    .background {
+        margin-left: 100px;
+        height: 40rem;
+        background-size: cover;
+        margin-top: 0px;
+    }
+
+    .previous-tourney-container {
+        flex-direction: row;
+        flex-wrap: wrap;
+    }
+
+    .follow-btn {
+        width: 10%;
+    }
+
+    .following {
+        width: 10%;
+    }
+
+    .manage {
+        width: 15%;
+    }
+
+    .tourney-card {
+        width: 45%;
+    }
+
+    .total-stats {
+        width: 30%;
+    }
+
+    .header {
+        margin-top: 26rem;
+    }
+
+    .img-label {
+        top: 2rem;
+    }
+
+    .profile-back-save-btn {
+        top: 26rem;
+    }
+}
