@@ -6,7 +6,7 @@ class User(models.Model):
     username = models.CharField(max_length=50, primary_key=True)
     email = models.EmailField(max_length=50)
     password = models.CharField(max_length=100)
-    profile_pic = models.ImageField(upload_to='user/profile', default='', blank=True)
+    profile_pic = models.ImageField(upload_to='user/profile', default='user/profile/default.jpg', blank=True)
     profile_back = models.ImageField(upload_to='user/profile', blank=True)
     bio = models.TextField(max_length=300, default="", blank=True)
     date_joined = models.DateTimeField(auto_now_add=True, blank=True, null=True)
@@ -23,7 +23,7 @@ class User(models.Model):
 
 class Team(models.Model):
     name = models.CharField(max_length=50, unique=True)
-    logo = models.ImageField(upload_to='team/profile', default='', blank=True)
+    logo = models.ImageField(upload_to='team/profile', default='team/profile/default.jpg', blank=True)
     team_banner = models.ImageField(upload_to='team/profile', default='', blank=True)
     password = models.CharField(max_length=30, blank=True, null=True)
     captain = models.CharField(max_length=50)
