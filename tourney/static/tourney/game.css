@@ -355,8 +355,9 @@ input:-webkit-autofill:active  {
     /* background-image: url('./Site_Material/logo.png'); */
     background-size: cover;
     background-repeat: no-repeat;
-    border-radius: 4px;
+    border-radius: 6px;
     box-shadow: 0px 5px 10px 0px rgba(0, 0, 0, 0.5);
+    border: solid 1px #fe0000;
 }
 
 .game-name {
@@ -486,14 +487,14 @@ input:-webkit-autofill:active  {
     margin-top: 0.8rem;
     background-image: url(./Site_Material/socialize.png);
     background-size: cover;
-    box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.5);
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.5);
     cursor: pointer;
+    transition: 0.3s all ease-in-out;
 }
 
 .trending-tourney:hover {
     transform: translateY(-5px);
-    box-shadow: 0 2px 10px 0 rgba(0, 0, 0, 0.5);
-    transition: transform ease 0.2s;
+    box-shadow: 0 7px 14px 0 rgba(0, 0, 0, 0.5);
 }
 
 .date-platform {
@@ -584,11 +585,11 @@ input:-webkit-autofill:active  {
     display: flex;
     flex-direction: row;
     margin: 0.2rem 0;
-    background-image: radial-gradient(farthest-corner at 80% 50%,rgba(0, 0, 0, 0.75) 0,rgba(36, 36, 36, 0.75) 100%);
-    background: linear-gradient(to left, black, #333131);
+    background-color: #202020;
     border-radius: 4px;
     padding: 0.5rem 0 0.5rem 0.5rem;
     border-left: solid 2px #fe0000;
+    box-shadow: 0px 5px 10px 0px rgba(0, 0, 0, 0.5);
 }
 
 .stack-img {
@@ -600,7 +601,7 @@ input:-webkit-autofill:active  {
     vertical-align: center;
     border-radius: 4px;
     margin-right: 0.8rem;
-    background-color: black;
+    border: solid 1px #fe0000;
 }
 
 .stack-info {

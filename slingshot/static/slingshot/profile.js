@@ -109,6 +109,28 @@ $(document).on('submit','#follow-form', function(e) {
     })
 })
 
+$(document).on('submit','#create-team-form', function(e) {
+    e.preventDefault();
+
+    var formData = {
+        'team_name': $('input[name=team-name]').val(),
+        'join_code': $('input[name=join-code]').val(),
+        'csrfmiddlewaretoken': $('input[name=csrfmiddlewaretoken]').val()
+    }
+    $.ajax({
+        type:'POST',
+        url: '/profile/'+sessionUser.innerHTML,
+        data: formData,
+    }).done(function(response_data) {
+        notifyDiv.style.display = 'block'
+        setTimeout(function(){ 
+            notifyHead.innerHTML = response_data.status
+            notifyMessage.innerHTML = response_data.message
+            notifyDiv.style.right = '1rem' 
+        }, 200);
+    })
+})
+
 function readURL(input) {
     if (input.files && input.files[0]) {
         var reader = new FileReader();

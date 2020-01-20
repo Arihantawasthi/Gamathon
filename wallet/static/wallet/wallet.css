@@ -262,7 +262,7 @@ input:-webkit-autofill:active  {
 }
 
 .withdraw-section {
-    width: 40%;
+    width: 100%;
 }
 
 .transaction-history {
@@ -377,7 +377,7 @@ input:-webkit-autofill:active  {
     margin-left: 0.5rem;
     padding: 1rem;
     background-color: rgb(52, 52, 61);
-    background: linear-gradient(to right, rgb(38, 38, 43), rgb(52, 52, 61));
+    background: linear-gradient(to right, #fe0000, #ec3333);
     display: flex;
     border-radius: 4px;
     color: white;
@@ -436,5 +436,9 @@ input:-webkit-autofill:active  {
 
     .team-wallet-container {
         overflow-x: unset;
+    }
+
+    .withdraw-section {
+        width: 44%;
     }
 }

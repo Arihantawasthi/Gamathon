@@ -193,6 +193,8 @@
                         </div>
                         <div class="played-game-score"></div>
                     </a>
+                {% empty %}
+                    <div class="shit" style="color: rgba(233, 221, 221, 0.7); text-align: center; font-size: 14px;">Ah. This looks dry. Hasn't played any Games Yet.</div>
                 {% endfor %}
                 </div>
             </div>
@@ -281,6 +283,8 @@
                         </div>
                     </div>
                 </div>
+            {% empty %}
+                <div class="shit" style="color: rgba(233, 221, 221, 0.7); text-align: center; font-size: 14px;">Ah. This looks dry. Let's Play some Games Homie.</div>
             {% endfor %}
             </div>
         </div>
@@ -296,6 +300,8 @@
                     <div class="games-card-img" style="background-image: url('/media/{{ stat.game.card_image }}');"></div>
                     <div class="games-card-game">{{ stat.game.fullname }}</div>
                 </a>
+            {% empty %}
+                <div class="shit" style="color: rgba(233, 221, 221, 0.7); text-align: center; font-size: 14px;">Ah. This looks dry. Go and validate some Games Homie!</div>
             {% endfor %}
             </div>
         </div>

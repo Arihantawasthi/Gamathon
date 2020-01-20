@@ -171,6 +171,7 @@ body {
     background-size: cover;
     background-repeat: no-repeat;
     background-color: white;
+    border: solid 1px #fe0000;
 }
 
 .points {

@@ -1018,3 +1018,7 @@ input:-webkit-autofill:active  {
         width: 12rem;
     }
 }
+
+.footer {
+    margin-top: 3rem;
+}

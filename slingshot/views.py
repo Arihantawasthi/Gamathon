@@ -297,8 +297,8 @@ def profile(request, username):
         return render(request, 'slingshot/profile.html', context)
 
     if request.method == 'POST':
-        team_name = request.POST.get('name')        
-        join_code = request.POST.get('password')
+        team_name = request.POST.get('team_name')        
+        join_code = request.POST.get('join_code')
         response_data = {}
 
         #Checking whether the user has logged in or not.
@@ -308,6 +308,7 @@ def profile(request, username):
             return JsonResponse(response_data)         
 
         #Checking if the team name already exists and promting user if it does
+        print('Yha')
         try:
             if team_name == Team.objects.get(name=team_name).name:
                 response_data['status'] = 'Failed :('
