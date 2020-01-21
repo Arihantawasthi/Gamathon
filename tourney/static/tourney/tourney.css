@@ -703,7 +703,7 @@ body {
 }
 
 .players-card {
-    background: linear-gradient(to top, rgb(12, 12, 12), #222121);
+    background-color: #2e2e3a;
     color: white;
     height: 14rem;
     width: 100%;
@@ -731,7 +731,7 @@ body {
 
 .player-img {
     background-image: url('./Site_Material/logo.png');
-    background-size: contain;
+    background-size: cover;
     background-repeat: no-repeat;
     height: 4rem;
     width: 4rem;
@@ -1071,6 +1071,8 @@ body {
 .prize-table {
     width: 100%;
     border-collapse: collapse;
+    box-shadow: 0px 5px 10px 0px rgba(0, 0, 0, 0.5);
+    background-color: #2e2e3a;
 }
 
 .prize-table-heading {
