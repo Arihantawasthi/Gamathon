@@ -1,0 +1,13 @@
+Django==2.2.6
+django-appconf==1.0.3
+django-compress==1.0.1
+django-compressor==2.4
+itsdangerous==1.1.0
+Pillow==6.2.1
+psycopg2==2.8.4
+pycryptodome==3.9.0
+pytz==2019.3
+rcssmin==1.0.6
+rjsmin==1.1.0
+six==1.14.0
+sqlparse==0.3.0
