@@ -23,7 +23,7 @@ $(document).on('submit','#login-form', function(e) {
             warning.innerHTML = response_data.message
         }
         else {
-            window.location.replace('http://127.0.0.1:8000')
+            window.location.replace('http://13.127.120.92:8000')
         }
     })
 })

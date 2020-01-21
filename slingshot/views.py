@@ -105,7 +105,7 @@ def signUp(request):
 
             #email_subject, from_email, to = 'Activate your Gamathon Account', 'kohlivirat45678@gmail.com', email
             htmly = get_template('slingshot/email.html')
-            link = f'http://127.0.0.1:8000/activate/{token}'
+            link = f'http://13.127.120.92:8000/activate/{token}'
             context =  {
                 'user': name.title(),
                 'link': link,
@@ -568,7 +568,7 @@ def forgotPass(request):
                 token = secret_key.dumps(email, salt='reset_pass')
 
                 htmly = get_template('slingshot/email.html')
-                link = f'http://127.0.0.1:8000/accounts/password/{token}'
+                link = f'http://13.127.120.92:8000/accounts/password/{token}'
                 context =  {
                     'user': name.title(), 
                     'link': link,

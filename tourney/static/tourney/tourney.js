@@ -221,9 +221,6 @@ $(document).on('submit','#login-form-tourney', function(e) {
                 if (response_data.sessionLogged_in === true) {
                     lowerLogin.style.display = 'none'
                     lowerProfile.style.display = 'block'
-                    /* setTimeout(function(){ 
-                        window.location.replace('http://127.0.0.1:8000/tournament/'+tourid)
-                    }, 1500); */
                     notifyHead.innerHTML = response_data['status']
                     notifyMessage.innerHTML = response_data['message']
                     notifyDiv.style.right = '1rem'
@@ -255,9 +252,6 @@ $(document).on('submit','#account-validate-form', function(e) {
     }).done(function(response_data) {
         validateModal.style.display = 'none';
         notifyDiv.style.display = 'block'
-        /* setTimeout(function(){ 
-            window.location.replace('http://127.0.0.1:8000/tournament/'+tourid)
-        }, 2000); */
         setTimeout(function(){ 
             notifyHead.innerHTML = response_data['status']
             notifyMessage.innerHTML = response_data['message']
@@ -282,7 +276,6 @@ $(document).on('submit','#tour-registration-entry', function(e) {
         notifyDiv.style.display = 'block'
         setTimeout(function(){ 
             if (response_data['status'] === 1) {
-               /*  window.location.replace('http://127.0.0.1:8000/tournament/'+tourid) */
                 notifyHead.innerHTML = 'Success'
                 notifyMessage.innerHTML = response_data.message
                 notifyDiv.style.height = '5.7rem'
