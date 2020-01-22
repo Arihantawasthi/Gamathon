@@ -36,7 +36,7 @@ $(document).on('submit','#login-form', function(e) {
             warning.innerHTML = response_data.message
         }
         else {
-            window.location.replace('http://13.126.147.71:8000')
+            window.location.replace('http://13.126.115.12:8000')
         }
     })
 })
