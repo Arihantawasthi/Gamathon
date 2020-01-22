@@ -63,6 +63,7 @@ $(document).on('submit','.validate-modal-form', function(e) {
             validate.style.background = 'linear-gradient(90deg,#6ccd00,#309100)'
             validateHead.innerHTML = response_data['status']
             validateMess.innerHTML = response_data['message']
+            document.querySelector('.validate-game').style.pointerEvents = 'none'
         }, 200);
     })
 })
