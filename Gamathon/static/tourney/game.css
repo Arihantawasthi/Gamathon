@@ -1,0 +1,982 @@
+/* 
+    * This is the CSS for homepage for the Gamathon, this is where magic happens ;)
+
+    * Author: Arihant Awasthi  awasthiarihant@gmail.com
+    * version: 0.9
+*/
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background: linear-gradient(to left, rgb(12, 12, 12), #3b3939);
+    font-family: 'Play', 'sans-serif'; 
+}
+
+.sideBar {
+    /* height: 100vh; */
+    min-height: -webkit-fill-available;
+    width: 240px;
+    position: sticky;
+    z-index: 5;
+    top: 0px;
+    left: 0px;
+    background-color: #111111;
+    padding-top: 10px;
+    display: none;
+    transition: transform 0.5s ease-in;
+}
+
+.comp-name {
+    margin-left: 20px;
+    display: flex;
+    color: #dadada;
+}
+
+.logo-img {
+    background-image: url(./Site_Material/logo.png);
+    background-size: contain;
+    background-repeat: no-repeat;
+    width: 25px;
+    height: 25px;
+    margin: 2px 3px 0 0;
+}
+
+.side-bar-sections {
+    height: 90%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.upper-section li {
+    list-style: none;
+    margin: 0 0 5px 0;
+}
+
+.upper-section li a {
+    text-decoration: none;
+    color: #dadada;
+    opacity: 0.7;
+}
+
+.upper-section li a:hover {
+    color: whitesmoke;
+    opacity: 1;
+}
+
+.upper-section {
+    margin: 35px 0 5px 20px;
+}
+
+.search-bar form {
+    position: relative;
+    margin-bottom: 15px;
+}
+
+.search-icon i {
+    position: absolute;
+    top: 5px;
+    left: 3px;
+}
+
+.search-bar input {
+    font-size: 14px;
+    height: 25px;
+    width: 200px;
+    border-radius: 2px;
+    padding-left: 20px;
+    margin: 0px;
+    border: 0;
+}
+
+.search-bar input::placeholder {
+    color: #0d0d0d;
+    opacity: 0.7;
+}
+
+.lower-section {
+    margin-left: 20px;
+    list-style: none;
+}
+
+.lower-section li {
+    color: whitesmoke;
+    font-weight: bold;
+    text-transform: uppercase;
+    font-size: 14px;
+    cursor: pointer;
+    padding: 5px;
+}
+
+.lower-section li:hover {
+    opacity: 1;
+    cursor: pointer;
+}
+
+.login-btn {
+    background-color: #ec3333;
+    margin-bottom: 10px;
+    text-align: center;
+    width: 200px;
+    border-radius: 4px;
+}
+
+.login-btn:hover {
+    background-color: #b62626;
+}
+
+.signup-btn {
+    background-color: #ec3333;
+    text-align: center;
+    width: 200px;
+    border-radius: 4px;
+}
+
+.signup-btn:hover {
+    background-color: #b62626;
+}
+
+@media only screen and (min-width: 1048px) {
+    .sideBar {
+        display: block;
+    }
+    .footer {
+        padding-right: 13rem;
+    }
+}
+
+.mobNav {
+    height: 3.5rem;
+    width: 100%;
+    background-color: #111111;
+    display: flex; 
+    padding: 9px 0 0 0;  
+   /*  position: fixed; */
+    z-index: 4;
+}
+
+.mobNav img {
+    margin: 6px 0 0 10px;
+}
+
+.hamburger {
+    height: 23px;
+    width: 32px;
+    margin: 6px 5px 0 5px;
+    cursor: pointer;
+}
+
+.hamburger div {
+    background-color: whitesmoke;
+    height: 3px;
+    width: 30px;
+    margin: 5px;
+    border-radius: 4px;
+}
+
+.logo {
+    margin: 5px 0 0 2px;
+}
+
+.logo a {
+    text-decoration: none;
+    color: whitesmoke;
+}
+
+/* Main content for game page starts here */
+/*       Validate Game Modal     */
+.bg-validate-modal {
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    position: absolute;
+    top: 0;
+    display: none;
+    z-index: 5;
+    position: fixed;
+}
+
+.validate-modal-content {
+    background: linear-gradient(to bottom, rgb(40, 40, 49), rgb(10, 10, 10));
+    border-radius: 4px;
+    margin: 2.5rem 1rem;
+    box-shadow: 0px 2px 10px 0px rgba(0, 0, 0, 0.5);
+    transition: all 0.3s ease-in-out;
+    transform: translateY(-5rem)
+}
+
+.validate-modal-form {
+    display: flex;
+    flex-direction: column;
+    color: white;
+}
+
+.modal-heading {
+    text-align: center;
+    text-transform: uppercase;
+    margin: 0.5rem 0 2rem 0;
+    color: whitesmoke;
+    font-weight: bold;
+}
+
+.validate-modal-close {
+    color: whitesmoke;
+    text-align: right;
+    margin: 0.5rem 0.5rem 0 0;
+    padding: 0.5rem 0.3rem 0 0.4rem;
+    cursor: pointer;
+}
+
+.name-head {
+    font-size: 13px;
+    margin: 1.5rem 0 0.5rem 1rem;
+    text-transform: uppercase;
+}
+
+.acc-name-field {
+    margin: 0 1rem;
+    border-radius: 2px;
+    border: 0;
+    height: 40px;
+    padding-left: 2.2rem;
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+    padding-right: 0.5rem;
+    background-color: #3e4554;
+    color: white;
+    width: 100%;
+}
+
+.acc-name-field:focus {
+    outline-width: 0;
+}
+
+.acc-name-field::placeholder {
+    font-size: 13px;
+    color: white;
+    opacity: 0.5;
+}
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover, 
+input:-webkit-autofill:focus, 
+input:-webkit-autofill:active  {
+    -webkit-box-shadow: 0 0 0 30px #3e4554 inset !important;
+    -webkit-text-fill-color: white;
+}
+
+.info {
+    margin: 0.5rem 0 1.5rem 1rem;
+    font-size: 14px;
+}
+
+.validate-modal-button {
+    width: 5rem;
+    margin: 0 1rem 1.5rem 1rem;
+    padding: 8px;
+    border-radius: 2px;
+    border: 0;
+    color: whitesmoke;
+    background-color: #ec3333;
+    font-size: 15px;
+    cursor: pointer;
+    font-family: 'Play', sans-serif;
+}
+
+.validate-modal-button:hover {
+    background-color: #b62626;
+}
+
+@media only screen and (min-width: 1048px) {
+    .validate-modal-content {
+       width: 30%;
+       margin-left: 40%;
+    }
+
+    .validate-modal-button {
+        margin-bottom: 3rem;
+    }
+}
+
+/* Container starts */
+.container {
+    margin: 2rem 1.5rem;
+}
+
+.notify-container {
+    position: relative;
+    overflow: hidden;
+}
+
+.path {
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 11px;
+    text-transform: uppercase;
+    margin-bottom: 2rem;
+}
+
+
+/* Game Heading and validate game section */
+.bg-image {
+   /*  background-image: url('https://s3-cdn.mogul.gg/gameasset/fb05d908-f7af-43c0-b612-db447c043b07.png'); */
+    position: absolute;
+    opacity: 0.15;
+    -webkit-mask-image: linear-gradient(0deg,transparent 10%,#000 90%);
+    width: 100%;
+    top: 0;
+    left: 0;
+    height: 700px;
+    background-position: top;
+    background-size: cover;
+    pointer-events: none;
+    z-index: -1;
+}
+
+.game-heading {
+    display: flex;
+    flex-direction: column;
+}
+
+.game-info {
+    display: flex;
+    color: white;
+    height: 6rem;
+    margin-bottom: 2.5rem;
+}
+
+.game-img {
+    height: 100%;
+    width: 6rem;
+    height: 7rem;
+    /* background-image: url('./Site_Material/logo.png'); */
+    background-size: cover;
+    background-repeat: no-repeat;
+    border-radius: 6px;
+    box-shadow: 0px 5px 10px 0px rgba(0, 0, 0, 0.5);
+    border: solid 1px #fe0000;
+}
+
+.game-name {
+    font-size: 30px;
+    font-weight: bold;
+    padding: 0.5rem 0 0 1rem;
+    margin-top: 0rem;
+    text-shadow: 5px 5px 10px rgba(0, 0, 0, 0.5);
+}
+
+.validate-game {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    background: linear-gradient(90deg,#1aa6ee,#045594);
+    border-radius: 4px;
+    cursor: pointer;
+    box-shadow: 0 5px 10px 0px rgba(11,156,230,.3);
+    width: 18rem;
+    transition: 0.3s ease;
+    position: relative;
+    margin: 2rem 0rem;
+}
+
+@media only screen and (min-width: 1048px) {
+    .game-heading {
+        flex-direction: row;
+        justify-content: space-between;
+    }
+
+    .game-img {
+        height: 9rem;
+    }
+
+    .validate-game {
+        height: 6rem;
+        width: 20rem;
+        margin: 1rem 1rem 0rem 5rem;
+    }
+}
+
+.top-shadow {
+    height: 5px;
+    border-top-left-radius: 6px;
+    border-top-right-radius: 6px;
+    background-color: #ec3333;
+    margin-top: 0.5rem;
+    box-shadow: 0 0 3px 0 #fa7171;
+    transition: all 0.1s ease-in-out;
+}
+
+/* .validated-game {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    background: linear-gradient(90deg,#6ccd00,#309100);
+    border-radius: 4px;
+    box-shadow: 0 0 25px rgba(11,156,230,.3);
+    width: 18rem;
+    transition: 0.3s ease;
+    position: relative;
+    pointer-events: none;
+} */
+
+.validate-game:hover {
+    box-shadow: 0 0 50px rgba(11,156,230,.3);
+    background: linear-gradient(90deg,#4da7d4,#0b4069);
+}
+
+.validate-game-text-content {
+    display: flex;
+    flex-direction: column;
+    margin: 1rem 0.8rem;
+    width: 60%;
+}
+
+.validate-game-label {
+    color: white;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.validate-game-sub-label {
+    color: white;
+    font-size: 12px;
+    margin-top: 0.3rem;
+}
+
+.validate-game-img {
+    position: absolute;
+    /* background-image: url('https://cdn.mogul.gg/static/images/game-characters/small/apex.png'); */
+    bottom: 0;
+    right: 0;
+    height: 7.8rem;
+    width: 5rem;
+    background-repeat: no-repeat;
+}
+
+/* Trending tournament section, showing only one tournament */
+
+.trending-now-leaderboard-wrap {
+    display: flex;
+    flex-direction: column;
+    margin-top: 4rem;
+    margin-bottom: 4rem;
+}
+
+.tourney-trending {
+    color: white;
+    font-size: 16px;
+    font-weight: bold;
+    text-transform: uppercase;
+    margin-bottom: 0.5rem;
+    margin-top: -3rem;
+}
+
+.bar-line {
+    height: 2px;
+    width: 100%;
+    background: linear-gradient(90deg,#ec3333,#520808);    
+    border-radius: 2px;
+}
+
+.trending-tourney {
+    display: flex;
+    flex-direction: column;
+    margin-top: 0.8rem;
+    background-image: url(./Site_Material/socialize.png);
+    background-size: cover;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.5);
+    cursor: pointer;
+    transition: 0.3s all ease-in-out;
+}
+
+.trending-tourney:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 7px 14px 0 rgba(0, 0, 0, 0.5);
+}
+
+.date-platform {
+    display: flex;
+    font-size: 11px;
+    font-weight: 600;
+    color: white;
+    margin-bottom: 3rem;
+}
+
+.date-time {
+    background-color: #0d0d0d;
+    padding: 6px;
+}
+
+.platform {
+    background-color: rgba(13, 13, 13, 0.6);
+    padding: 6px;
+}
+
+.open-entry-info {
+    display: flex;
+    justify-content: space-around;
+    color: white;
+    font-weight: 600;
+    font-size: 11px;
+    text-transform: uppercase;
+}
+
+.open {
+    background-color: rgba(13, 13, 13, 0.3);
+    padding: 10px;
+    border-radius: 4px;
+}
+
+.entry {
+    background-color: rgba(13, 13, 13, 0.3);
+    padding: 10px;
+    border-radius: 4px;
+}
+
+.trending-main-section {
+    color: white;
+    margin: 1rem 0 0.5rem 2.4rem;
+}
+
+.main-section-name {
+    font-size: 25px;
+    font-weight: 600;
+    margin-bottom: 0.2rem;
+}
+
+.bottom-info {
+    display:flex;
+    justify-content: space-between;
+    color: white;
+    margin-top: 3rem;
+    font-size: 13px;
+    background-color: rgba(13, 13, 13, 0.5);
+    padding: 0.8rem 0.5rem;
+}
+
+.status {
+    font-weight: bold;
+}
+
+/* Top Players/Leaderboards section */
+
+.leaderboard-heading {
+    margin-top: 2rem;
+    color: white;
+    font-size: 16px;
+    font-weight: bold;
+    text-transform: uppercase;
+    margin-bottom: 0.5rem;
+}
+
+.leadboard-main {
+    margin-top: 0.5rem;
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 2rem;
+}
+
+.leaderboard-stack {
+    text-decoration: none;
+    color: white;
+    display: flex;
+    flex-direction: row;
+    margin: 0.2rem 0;
+    background-color: #202020;
+    border-radius: 4px;
+    padding: 0.5rem 0 0.5rem 0.5rem;
+    border-left: solid 2px #fe0000;
+    box-shadow: 0px 5px 10px 0px rgba(0, 0, 0, 0.5);
+}
+
+.stack-img {
+    height: 2.5rem;
+    width: 2.5rem;
+    background-image: url('./Site_Material/logo.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    vertical-align: center;
+    border-radius: 4px;
+    margin-right: 0.8rem;
+    border: solid 1px #fe0000;
+}
+
+.stack-info {
+    width: 80%;
+    display: flex;
+    justify-content: space-between;
+    margin-top: 0.6rem;
+    font-weight: bold;
+}
+
+.stack-name {
+    font-size: 18px;
+}
+
+.stack-score {
+    font-size: 14px;
+    margin-top: 0.2rem;
+}
+
+@media only screen and (min-width: 1048px) {
+    .trending-now-leaderboard-wrap {
+        width: 100%;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+    }
+
+    .trending-now-wrap {
+        width: 48%;
+    }
+
+    .leaderboard-wrap {
+        width: 48%;
+        margin-top: -2.1rem;
+    }
+
+    .trending-tourney {
+        width: 100%;
+    }
+
+    .tourney-trending {
+        margin-top: 0rem;
+    }
+
+    .leaderboard-main {
+        width: 100%;
+    }
+
+    body {
+        overflow-x: hidden;
+    }
+}
+
+.browse-tourney {
+    color: white;
+    font-size: 16px;
+    font-weight: bold;
+    text-transform: uppercase;
+    margin-bottom: 0.5rem;
+}
+
+/* TOURNAMENT CARD STARTS */
+
+.tourney-card-container {
+    display: flex;
+    flex-direction: column;
+    margin: 1.5rem 1.8rem 0 -1.8rem;
+}
+
+
+/* Tourney card */
+.tourney-card {
+    margin: 0 0 1.5rem 1.8rem;
+    width: 100%;
+    background: linear-gradient(to right, rgb(17, 17, 17), #363434);
+    color: whitesmoke;
+    /* height: 32rem; */
+    text-decoration: none;
+    border-radius: 4px;
+    box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.5);
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: wrap;
+    position: relative;
+}
+
+.tourney-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 2px 10px 0 rgba(0, 0, 0, 0.5);
+    transition: transform ease 0.2s;
+}
+
+.tourney-card-image {
+    display: flex;
+    justify-content: space-between;
+    background-image: url(./Site_Material/logo.png);
+    -webkit-mask-image: linear-gradient(0deg,transparent 0%,#000 100%);
+    background-size: cover;
+    background-repeat: no-repeat;
+    width: 100%;
+    height: 40%;
+}
+
+.tourney-card-time {
+    top: 0;
+    left: 0;
+    background-color: #ec3333;
+    position: absolute;
+    font-size: 12px;
+    padding: 3px 6px 5px 5px;
+    border-radius: 4px;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+.tourney-card-platform {
+    margin-top: 11.6rem;
+    background-color: #262626;
+    padding: 2px 6px 0 5px;
+    font-size: 11px;
+    font-weight: bold;
+    text-transform: uppercase;
+    opacity: 0.9;
+}
+
+.tourney-card-title {
+    margin: 1.5rem;
+    font-size: 20px;
+    font-weight: bold;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: wrap;
+}
+
+.tourney-card-type {
+    width: 100%;
+    text-align: center;
+    font-size: 12px;
+}
+
+.tourney-card-info {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    text-align: center;
+    padding: 0 1.5rem 0 1.5rem;
+    margin-top: 0.8rem;
+}
+
+.tourney-card-open {
+    padding: 5px;
+    margin-bottom: 5px;
+    background-color: #ec3333;
+    border-radius: 8px;
+    font-size: 11px;
+    text-transform: uppercase;
+}
+
+.tourney-card-entry {
+    padding: 5px;
+    margin-bottom: 5px;
+    background-color: #ec3333;
+    border-radius: 8px;
+    font-weight: bold;
+    text-transform: uppercase;
+    font-size: 11px;
+}
+
+.tourney-card-organizer-sponsor-info {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-top: 0.5rem;
+}
+
+.tourney-card-organizer {
+    width: 50%;
+    padding: 5px;
+    display: flex;
+}
+
+.organizer-img {
+    width: 3.5rem;
+    height: 3.5rem;
+    border-radius: 50%;
+    background-image: url(./Site_Material/logo.png);
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.organizer-info {
+    font-size: 11px;
+    margin: 0.4rem 0 0 0.5rem;
+}
+
+.organizer {
+    text-transform: uppercase;
+    font-size: 14px;
+}
+
+.organizer-name {
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.tourney-card-sponsor {
+    width: 50%;
+    padding: 5px;
+    display: flex;
+}
+
+.sponsor-img {
+    width: 4rem;;
+    height: 40px;
+    border-radius: 50%;
+    background-image: url(./Site_Material/logo.png);
+    background-repeat: no-repeat;
+    background-size: contain;
+}
+
+.sponsor-info {
+    font-size: 11px;
+    margin: 0.4rem 0 0 1.0rem;
+}
+
+.sponsor {
+    text-transform: uppercase;
+    font-size: 14px;
+}
+
+.sponsor-name {
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.tourney-card-prizepool {
+    padding: 20px;
+    text-align: center;
+    font-weight: bold;
+    font-size: 20px;
+    border-radius: 4px;
+}
+
+.prize {
+    font-size: 14px;
+    font-weight: regular;
+    float: left;
+    margin-top: 0.3rem;
+}
+
+.tourney-card-registration {
+    font-size: 12px;
+    text-transform: capitalize;
+    padding: 0.7rem 0.5rem;
+    padding-bottom: 1rem;
+    display: flex;
+    justify-content: space-around;
+    background: linear-gradient(to left, rgb(41, 40, 40), #262626);
+    border-bottom-right-radius: 4px;
+    border-bottom-left-radius: 4px;
+}
+
+/* TOURNAMENT CARD ENDS */
+
+@media only screen and (min-width: 540px) {
+    .tourney-card-info {
+        display: flex;
+        flex-direction: row;
+    }
+
+    .tourney-card-open {
+        width: 49%;
+        margin-right: 1%;
+        border-radius: 5px;
+        font-size: 12px;
+    }
+
+    .tourney-card-entry {
+        width: 49%;
+        border-radius: 5px;
+        font-size: 12px;
+    }
+}
+
+/* Footer and media queries */
+.footer {
+    width: 100%;
+    height: 20rem;
+    display: flex;
+    flex-direction: column;
+    background-color: #302e2e;
+    text-align: center;
+    box-shadow: 5px 5px rgba(0, 0, 0, 0.5);   
+}
+
+.footer-img-container {
+    width: 100%;
+    height: 8.5rem;
+    text-align: center;
+    align-content: center;
+    align-items: center;
+    display: flex;
+}
+
+.footer-img {
+    margin: auto;
+    height: 6rem;
+    width: 6rem;
+    background-image: url(./Site_Material/logo.png);
+    background-size: contain;
+    background-repeat: no-repeat;
+}
+
+
+.components {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    margin-top: 2rem;
+}
+
+.components li {
+    margin: 0.5rem;
+    list-style: none;
+    font-size: 14px;
+}
+
+.components li a {
+    text-decoration: none;
+    color: whitesmoke;
+}
+
+.company-name {
+    margin: 2rem 0 0 0;
+    color: whitesmoke; 
+    background-color: #262626;
+    padding: 5px;
+    font-size: 14px;
+}
+
+.footer {
+    margin-top: 10rem;
+}
+
+@media only screen and (min-width: 1048px) {
+    .container {
+        margin-left: 260px;
+    }
+
+    .carousel {
+        margin-left: 240px;
+    }
+
+    .mobNav {
+        display: none;
+    }
+
+    .footer {
+        margin-left: 240px;
+    }
+
+    .tourney-card-container {
+        flex-direction: row;
+        flex-wrap: wrap;;
+    }
+
+    .tourney-card {
+        width: 50%;
+        white-space: wrap;
+    }
+}
+
+@media only screen and (min-width: 1200px) {
+    .tourney-card {
+        width: 26rem;
+    }
+}
