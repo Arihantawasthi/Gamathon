@@ -45,7 +45,7 @@ def wallet(request, username):
             'INDUSTRY_TYPE_ID':'Retail',
             'WEBSITE':'DEFAULT',
             'CHANNEL_ID':'WEB',
-            'CALLBACK_URL':f'http://13.126.115.12/handlerequest/{username}',
+            'CALLBACK_URL':f'http://13.235.100.9/handlerequest/{username}',
         }
         data_dict['CHECKSUMHASH'] = Checksum.generate_checksum(data_dict, MERCHANT_KEY)
         return render(request, 'wallet/paytm.html', {'data_dict': data_dict})
