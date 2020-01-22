@@ -46,11 +46,11 @@
     </div>
 
     <div class="container">
-        <div class="bg-image" style="background-image: url('/Gamathon/media/{{ game.bg_image }}');"></div>
+        <div class="bg-image" style="background-image: url('/media/{{ game.bg_image }}');"></div>
         <div class="path">Arena > GamesHub > Game</div>
         <div class="game-heading">
             <div class="game-info">
-                <div class="game-img" style="background-image: url('/Gamathon/media/{{ game.card_image }}');"></div>
+                <div class="game-img" style="background-image: url('/media/{{ game.card_image }}');"></div>
                 <div class="game-name">{{ game.fullname }}</div>
             </div>
             {% if request.session.logged_in %}
@@ -86,7 +86,7 @@
                 </div>
                 <div class="bar-line"></div>  
             {% if tournaments|length > 0 %}    
-                <div class="trending-tourney" style="background-image: url('/Gamathon/media/{{ trending_tour.banner }}');">
+                <div class="trending-tourney" style="background-image: url('/media/{{ trending_tour.banner }}');">
                     <div class="date-platform">
                         <div class="date-time">27th Aug, 3:30 PM</div>
                         <div class="platform">PC</div>
@@ -123,7 +123,7 @@
                 <div class="leadboard-main">
                 {% for player in players %}
                     <a href="{% url 'profile' player.username %}" class="leaderboard-stack">
-                        <div class="stack-img" style="background-image: url('/Gamathon/media/{{ player.profile_pic }}');"></div>
+                        <div class="stack-img" style="background-image: url('/media/{{ player.profile_pic }}');"></div>
                         <div class="stack-info">
                             <div class="stack-name">{{ player.username }}</div>
                             <div class="stack-score">{{ player.wins }}</div>
@@ -145,7 +145,7 @@
         <div class="tourney-card-container">
         {% for tournament in tournaments %}
             <a href="{% url 'tourney' tournament.id %}" class="tourney-card">
-                <div class="tourney-card-image" style="background-image: url('/Gamathon/media/{{ tournament.banner }}');">
+                <div class="tourney-card-image" style="background-image: url('/media/{{ tournament.banner }}');">
                     <div class="tourney-card-time">11:00 AM, 19 Aug</div>
                     <div class="tourney-card-platform">PC</div>
                 </div>

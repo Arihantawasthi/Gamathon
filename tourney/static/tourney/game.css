@@ -596,7 +596,7 @@ input:-webkit-autofill:active  {
     height: 2.5rem;
     width: 2.5rem;
     background-image: url('./Site_Material/logo.png');
-    background-size: contain;
+    background-size: cover;
     background-repeat: no-repeat;
     vertical-align: center;
     border-radius: 4px;
