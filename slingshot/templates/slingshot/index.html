@@ -44,7 +44,7 @@
                 {% for game in games %}
                     <a href="{% url 'game' game.name %}" class="game-card">
                         <div>
-                            <div class="game-img" style="background-image: url('/Gamathon/media/{{ game.card_image }}');"></div>
+				<div class="game-img" style="background-image: url('/media/{{ game.card_image }}');"></div>
                             <div class="game-name">{{ game.fullname }}</div>
                         </div>
                     </a>
