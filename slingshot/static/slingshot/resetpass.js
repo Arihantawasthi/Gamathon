@@ -12,7 +12,7 @@ $(document).on('submit','#reset-form', function(e) {
         data: formData,
     }).done(function(response_data) {
         if (response_data.status === 1) {
-            window.location.replace('http://13.126.115.12:8000/signin')
+            window.location.replace('http://13.126.115.12/signin')
         }
     })
 })

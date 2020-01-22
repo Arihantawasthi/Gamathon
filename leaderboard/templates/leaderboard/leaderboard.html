@@ -55,7 +55,7 @@
                         <div class="s-no">{{ forloop.counter }}</div>
                         <div class="img-name">
                             <a href="{% url 'team' team.name %}">
-                                <div class="team-img" style="background-image: url('/media/{{ team.logo }}');"></div> {{ team.name}}
+                                <div class="team-img" style="background-image: url('/Gamathon/media/{{ team.logo }}');"></div> {{ team.name}}
                             </a>
                         </div>
                     </div>
@@ -75,7 +75,7 @@
                         <div class="s-no">{{ forloop.counter }}</div>
                         <div class="img-name">
                             <a href="{% url 'profile' user.username %}">
-                                <div class="team-img" style="background-image: url('/media/{{ user.profile_pic }}');"></div> <div class="user-name">{{ user.username }}</div>
+                                <div class="team-img" style="background-image: url('/Gamathon/media/{{ user.profile_pic }}');"></div> <div class="user-name">{{ user.username }}</div>
                             </a>
                         </div>
                     </div>

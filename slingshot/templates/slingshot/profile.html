@@ -42,10 +42,10 @@
         </div>
 
         <div class="container">
-            <div class="profile-back" style="background-image: url('/media/{{ user.profile_back }}')"></div>
+            <div class="profile-back" style="background-image: url('/Gamathon/media/{{ user.profile_back }}')"></div>
             <div class="profile-info">
                 <div class="flex-divider1">
-                    <div class="profile-img" style="background-image: url('/media/{{ user.profile_pic }}')">    
+                    <div class="profile-img" style="background-image: url('/Gamathon/media/{{ user.profile_pic }}')">    
                     </div>
                     <div class="profile-name-friend">
                         <div class="profile-name">{{ user.username }}</div>
@@ -125,9 +125,9 @@
                     {% if most_played_game != '' %}
                         <div class="stats-wrapper">
                             <div class="stats-card">
-                                <div class="stats-card-back" style="background-image: url('/media/{{ most_played_game.bg_image }}')""></div>
+                                <div class="stats-card-back" style="background-image: url('/Gamathon/media/{{ most_played_game.bg_image }}')""></div>
                                 <div class="stats-card-head">
-                                    <div class="stats-card-img" style="background-image: url('/media/{{ most_played_game.card_image }}')"></div>
+                                    <div class="stats-card-img" style="background-image: url('/Gamathon/media/{{ most_played_game.card_image }}')"></div>
                                     <div class="stats-card-head-info">
                                         <div class="stats-card-name">{{ most_played_game.fullname }}</div>
                                         <div class="stats-card-stats">Statistics</div>
@@ -196,7 +196,7 @@
                     {% for tournament in tournaments %}
                         <a href="{% url 'tourney' tournament.id %}" class="played-game-card">
                             <div class="played-game-card-up-sec">
-                                <div class="played-game-img" style="background-image: url('/media/{{ tournament.banner }}');"></div>
+                                <div class="played-game-img" style="background-image: url('/Gamathon/media/{{ tournament.banner }}');"></div>
                                 <div class="played-game-name-history">
                                     <div class="played-game-name">
                                         {{ tournament.name }}
@@ -237,8 +237,8 @@
                 <div class="team-card-container">
                     {% for team in totalTeams %}
                     <a href="{% url 'team' team.name%}" class="team-card">    
-                        <div class="team-background" style="background-image: url('/media/{{ team.team_banner }}');">
-                            <div class="team-img" style="background-image: url('/media/{{ team.logo }}');"></div>
+                        <div class="team-background" style="background-image: url('/Gamathon/media/{{ team.team_banner }}');">
+                            <div class="team-img" style="background-image: url('/Gamathon/media/{{ team.logo }}');"></div>
                         </div>
                         <div class="team-name">{{ team.name }}</div>
                         <div class="team-members">{{ team.members.count }} Members</div>
@@ -278,9 +278,9 @@
                 <div class="stats-wrapper">
                 {% for stat in all_stats %}
                     <div class="stats-card">
-                        <div class="stats-card-back" style="background-image: url('/media/{{ stat.game.bg_image }}');"></div>
+                        <div class="stats-card-back" style="background-image: url('/Gamathon/media/{{ stat.game.bg_image }}');"></div>
                         <div class="stats-card-head">
-                            <div class="stats-card-img" style="background-image: url('/media/{{ stat.game.card_image }}')"></div>
+                            <div class="stats-card-img" style="background-image: url('/Gamathon/media/{{ stat.game.card_image }}')"></div>
                             <div class="stats-card-head-info">
                                 <div class="stats-card-name">{{ stat.game.fullname }}</div>
                                 <div class="stats-card-stats">Statistics</div>
@@ -331,7 +331,7 @@
                 <div class="games-card-container">
                     {% for game, game_validate in zipped %}
                         <a href="{% url 'game' game_validate.gameName %}" class="games-card">
-                            <div class="games-card-img" style="background-image: url('/media/{{ game.card_image }}')"></div>
+                            <div class="games-card-img" style="background-image: url('/Gamathon/media/{{ game.card_image }}')"></div>
                             <div class="games-card-game">{{ game.fullname }}</div>
                         </a>
                     {% empty %}

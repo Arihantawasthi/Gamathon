@@ -40,7 +40,7 @@
         <div class="team-wallet-container">
         {% for team in teams %}
             <a href="{% url 'teamWallet' team.name %}" class="team-wallet-card">
-                <div class="team-profile-pic" style="background-image: url('/media/{{ team.logo }}')">
+                <div class="team-profile-pic" style="background-image: url('/Gamathon/media/{{ team.logo }}')">
                 </div>
                 <div class="name-wallet">
                     <div class="wallet-money">&#8377 {{ team.wallet }}</div>
