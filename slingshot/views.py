@@ -372,23 +372,16 @@ def team(request, team_name):
             pass
     context['all_stats'] = all_stats
 
-    try:
-        stats = GameStat.objects.get(game=most_played_game, team=teamObject)
-        context['stats'] = stats
-    except GameStat.DoesNotExist:
-        return render(request, 'slingshot/team.html', context)
-
     if request.method == 'POST':
         response_data = {}
         query = request.POST.get('query')
         status = request.POST.get('status')
-        
         if query is not None:
             user_term = User.objects.filter(username__icontains=query)
             user_term = [i.username for i in user_term if i not in teamObject.members.all()]
-
             user_results = ''
             for i in user_term:
+                print('yha2')
                 user_results += f"""<label class='player-result-container'>
                                     {i}
                                     <input type='checkbox' name='players' value='{i}'>
@@ -405,7 +398,6 @@ def team(request, team_name):
             notification = Notification.objects.get(user_1=session_user, team=team_object)
             invite.status = status
             invite.save()
-            print('yha')
             if status == '1':
                 team_object.members.add(session_user)
                 team_object.save()
@@ -431,6 +423,12 @@ def team(request, team_name):
             response_data['message'] = "Invite Sent"    
             return JsonResponse(response_data)
 
+    try:
+        stats = GameStat.objects.get(game=most_played_game, team=teamObject)
+        context['stats'] = stats
+    except GameStat.DoesNotExist:
+        return render(request, 'slingshot/team.html', context)
+        
     return render(request, 'slingshot/team.html', context)
 
 def logout(request):

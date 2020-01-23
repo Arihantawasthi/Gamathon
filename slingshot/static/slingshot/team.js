@@ -134,7 +134,6 @@ $('#invite-search').keyup(function() {
         url: "/team/"+teamName,
         data: formData,
     }).done(function(response_data) {
-
         if (formData.query === '') {
             document.querySelector('.search-result-container').style.display = 'none'
         }
