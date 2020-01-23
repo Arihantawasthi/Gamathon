@@ -22,14 +22,14 @@
                 <div class="team-wallet-transfer">
                     <div class="team-wallet-head">{{ team.name }} Shared Team Wallet</div>
                     <div class="line"></div>
-                    <div class="team-wallet-current-wallet">Current Balance: <span style="font-weight: bold;">&#8377 {{ team.wallet }} INR</span></div>
+                    <div class="team-wallet-current-wallet">Current Balance: <span class="team-wallet-current" style="font-weight: bold;">&#8377 {{ team.wallet }} INR</span></div>
                     <div class="team-wallet-transfer-content">
                         <div class="team-wallet-transfer-head">
                             Transfer To Team
                         </div>
                         <div class="team-wallet-transfer-info">
                             <p>You can transfer money from your own personal wallet to the shared team wallet. Only team captains can distribute money from the team wallet to members. </p>
-                            <p>You currently have <span style="font-weight: bold;">&#8377 {{ team.wallet }} INR</span> available to transfer in your personal wallet. </p>
+                            <p>You currently have <span class="user-wallet-current" style="font-weight: bold;">&#8377 {{ user.wallet }} INR</span> available to transfer in your personal wallet. </p>
                             
                             <form action="#" method="post" class="team-wallet-transfer-form">
                                 {% csrf_token %}
@@ -46,12 +46,12 @@
                     </div>
                 </div>
             
-            {% if request.session.username == team.captain.username %}
+            {% if request.session.username == team.captain %}
                 <div class="player-transfer">
                     <div class="player-transfer-head">Transfer to Player</div>
                     <div class="player-transfer-info">
                         <p>As a team captain, you can distribute money from the shared team wallet to other members. </p>
-                        <p>There is currently <span>&#8377 {{ team.wallet }} INR</span> available in the team wallet. </p>
+                        <p>There is currently <span class="team-wallet-current2">&#8377 {{ team.wallet }} INR</span> available in the team wallet. </p>
                         <form action="" method="post" class="player-transfer-form">
                             {% csrf_token %}
                             <select class="player-transfer-options" required>
@@ -77,7 +77,17 @@
                 <div class="transaction-history-head">Transaction History</div>
                 <div class="line"></div>
                 <div class="transaction-history-content">
-                    Nothing to see here. Looks like you have not made any transactions yet. 
+                    {% for deposit in deposits %}
+                        <div class="trans-history-content">{{ user.username }} {{ deposit|safe }}</div> 
+                    {% endfor  %}
+
+                    {% for transfer in transfers %}
+                        <div class="trans-history-content">{{ user.username }} transferred &#8377 {{ transfer.amount }} on {{ transfer.date }}</div> 
+                    {% endfor %}
+
+                    {% if deposits|length == 0 and transfers|length == 0 %}
+                        Nothing to see here. Looks like you have not made any transactions yet. 
+                    {% endif %}
                 </div>
             </div>
         </div>
@@ -99,10 +109,15 @@
                     url: '/team-wallet/{{ team.name }}',
                     data: formData,
                 }).done(function(response_data) {
+                    document.querySelector('.notify-div').style.display = 'block'
                     setTimeout(function(){ 
-                        notifyHead.innerHTML = response_data.status
-                        notifyMessage.innerHTML = response_data.message
-                        notifyDiv.style.right = '1rem' 
+                        console.log(response_data)
+                        document.querySelector('.notify-heading-content').innerHTML = response_data.status
+                        document.querySelector('.notify-message').innerHTML = response_data.message
+                        document.querySelector('.notify-div').style.right = '1rem' 
+                        document.querySelector('.team-wallet-current').innerHTML = "&#8377 "+response_data.team_wallet+' INR'
+                        document.querySelector('.user-wallet-current').innerHTML = "&#8377 "+response_data.user_wallet+' INR'
+                        document.querySelector('.team-wallet-current2').innerHTML = "&#8377 "+response_data.team_wallet+' INR'
                     }, 200);
                 })
             }

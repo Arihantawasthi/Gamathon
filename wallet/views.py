@@ -61,8 +61,6 @@ def wallet(request, username):
     except (Deposit.DoesNotExist, User.DoesNotExist):
         return render(request, 'wallet/wallet.html', context)
 
-    
-
     return render(request, 'wallet/wallet.html', context)
 
 def teamWallet(request, team_name):
@@ -73,18 +71,25 @@ def teamWallet(request, team_name):
         return HttpResponse("Sorry kiddo not here")
 
     user = User.objects.get(username=request.session['username'])
+    context['user'] = user
     teams = Team.objects.filter(members=user)
     try:
         team = Team.objects.get(name=team_name)
     except Team.DoesNotExist:
-        return HttpResponse('Sorry Kiddo Not here')
+        return render(request, 'slingshot/404.html')
 
     if not team in teams:
-        return HttpResponse("Sorry Kiddo not here")
+        render(request, 'slingshot/404.html')
     
     members = team.members.all()
+
+    deposits = Deposit.objects.filter(team=team)
+    transfers = Withdrawals.objects.filter(team=team)
+
     context['members'] = members
     context['team'] = team
+    context['deposits'] = deposits
+    context['transfers'] = transfers
 
     if request.method == 'POST':
         response_data = {}
@@ -98,8 +103,15 @@ def teamWallet(request, team_name):
             team.wallet += int(amount)
             user.save()
             team.save()
+            deposit = Deposit(amount=int(amount))
+            deposit.save()
+            deposit.username.add(user)
+            deposit.team.add(team)
+            deposit.save()
             response_data['status'] = 'Success'
             response_data['message'] = 'Transaction was successful'
+            response_data['user_wallet'] = user.wallet
+            response_data['team_wallet'] = team.wallet
 
         return JsonResponse(response_data)
 
@@ -179,6 +191,11 @@ def teamUserTXN(request, team_name):
             user.wallet += int(amount)
             team.save()
             user.save()
+            transfer = Withdrawals(amount=int(amount))
+            transfer.save()
+            transfer.username.add(user)
+            transfer.team.add(team)
+            transfer.save()
             response_data['status'] = 'Success'
             response_data['message'] = 'Transaction was successful'
         

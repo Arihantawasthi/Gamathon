@@ -103,11 +103,11 @@
                     <div class="trans-history-head">Transaction History</div>
                     <div class="line"></div>
                     {% for deposit in deposits %}
-                        <div class="trans-history-content">You {{ deposit }}</div> 
+                        <div class="trans-history-content">You {{ deposit|safe }}</div> 
                     {% endfor %}
 
                     {% for withdraw in withdrawals %}
-                        <div class="trans-history-content">You {{ withdraw }}</div> 
+                        <div class="trans-history-content">You {{ withdraw|safe }}</div> 
                     {% endfor %}
 
                     {% if deposits|length == 0 and withdrawals|length == 0 %}
