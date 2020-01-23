@@ -356,16 +356,29 @@ body {
 .friends-card {
     margin-right: 1rem;
     /* background-color: rgb(49, 49, 49); */
-    background: linear-gradient(0deg,rgb(56, 55, 55) 25%,#222222 70%);
     border-radius: 4px;
     box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.5);
     padding: 4rem 0;
     text-decoration: none;
     color: white;
     margin-bottom: 1rem;
+    background-size: cover;
     width: 44%;
     border-top: solid 3px #fe0000;
     height: 14rem;
+    position: relative;
+}
+
+.friends-card-back-image {
+    -webkit-mask-image: linear-gradient(0deg,transparent 1%,#000 99%);
+    z-index: -1;
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-size: cover;
+    opacity: 0.9;
 }
 
 .friends-card:hover {
@@ -380,7 +393,7 @@ body {
     border-radius: 50%;
     margin: auto;
     background-image: url('./Site_Material/logo.png');
-    background-size: contain;
+    background-size: cover;
     background-repeat: no-repeat;
     border: solid 1px #fe0000;
 }
@@ -389,6 +402,9 @@ body {
     text-align: center;
     margin-top: 1rem;
     font-size: 17px;
+    font-weight: bold;
+    text-shadow: 5px 8px 15px rgba(0, 0, 0, 0.5);
+    z-index: 1;
 }
 
 .friend-name::first-letter {

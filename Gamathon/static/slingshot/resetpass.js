@@ -12,7 +12,7 @@ $(document).on('submit','#reset-form', function(e) {
         data: formData,
     }).done(function(response_data) {
         if (response_data.status === 1) {
-            window.location.replace('http://13.235.100.9/signin')
+            window.location.replace('https://gamathon.gg/signin')
         }
     })
 })

@@ -1,4 +1,3 @@
-const hamburger = document.querySelector('.hamburger');
 const sideBar = document.querySelector('.sideBar');
 const mobNav = document.querySelector('.mobNav');
 const container = document.querySelector('.container');
@@ -110,7 +109,7 @@ container.addEventListener('click', () => {
     notificationContainer.style.width = '0rem'
 })
 
-hamburger.addEventListener('click', function() {
+document.querySelector('.hamburger').addEventListener('click', function() {
     sideBar.style.display = 'block';
     setTimeout(() => {
         sideBar.style.transform = 'translate(0%, 0%)'   

@@ -151,6 +151,7 @@ body {
 
 .left-section {
     display: flex;
+    margin-right: 2rem;
 }
 
 .left-section > div {
@@ -174,8 +175,8 @@ body {
     border: solid 1px #fe0000;
 }
 
-.points {
-    margin-left: 2rem;
+.win-perc {
+    margin-left: 1.4rem;
 }
 
 .img-name a{
@@ -186,6 +187,8 @@ body {
 
 .right-section {
     display: flex;
+    width: 30%;
+    justify-content: space-between;
 }
 
 .footer {
@@ -199,11 +202,16 @@ body {
 
     .footer {
         margin-left: 240px;
+        margin-top: 10rem;
     }
 
     .lead-back {
         margin-top: 0px;
         background-size: cover;
         background-repeat: no-repeat;
+    }
+
+    .right-section {
+        width: 15%;
     }
 }

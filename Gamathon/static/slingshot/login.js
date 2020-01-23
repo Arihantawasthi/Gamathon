@@ -23,7 +23,7 @@ $(document).on('submit','#login-form', function(e) {
             warning.innerHTML = response_data.message
         }
         else {
-            window.location.replace('http://13.235.100.9')
+            window.location.replace('https://gamathon.gg')
         }
     })
 })
