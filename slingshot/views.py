@@ -182,26 +182,15 @@ def profileSettings(request, username):
         user = User.objects.get(username=request.session['username'])
         users = User.objects.all()
         
-        if queryFor == 'username':
-            #Checking whether username is already exists or not
-            if query in [i.username for i in users]:
-                response_data['status'] = 'Failed :('
-                response_data['message'] = 'Username Already Exists!'
-                return JsonResponse(response_data)
-            else:
-                user.username = query
-                user.save()
-                response_data['status'] = 'Success :)'
-                response_data['message'] = 'Username Has Been Updated!'
-                return JsonResponse(response_data)
-        
-        elif queryFor == 'email':
+        if queryFor == 'email':
             #Checking whether email is already taken or not
+            print(query)
             if query in [i.email for i in users]:
                 response_data['status'] = 'Failed :('
                 response_data['message'] = 'Email is Already Taken'
                 return JsonResponse(response_data)
             else:
+                print(user)
                 user.email = query
                 user.save()
                 response_data['status'] = 'Success :)'
@@ -209,7 +198,7 @@ def profileSettings(request, username):
                 return JsonResponse(response_data)
         
         else:
-            user.password = query
+            user.password = make_password(query)
             user.save()
             response_data['status'] = 'Success :)'
             response_data['message'] = 'Password Has Been Updated!'

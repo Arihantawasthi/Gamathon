@@ -142,10 +142,39 @@ body {
 
 .acc-name-field {
     margin: 0 1rem;
-    border-radius: 2px;
+    border-radius: 6px;
     border: 0;
-    height: 1.8rem;
-    padding-left: 1rem;
+    height: 40px;
+    padding-left: 2.2rem;
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+    padding-right: 0.5rem;
+    /* background-color: #3e4554; */
+    background-color: #363b46;
+    color: white;
+}
+
+.acc-name-field::placeholder {
+    color: white;
+    opacity: 0.5;
+    font-size: 13px;
+}
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover, 
+input:-webkit-autofill:focus, 
+input:-webkit-autofill:active  {
+    -webkit-box-shadow: 0 0 0 30px #3e4554 inset !important;
+    -webkit-text-fill-color: white;
+}
+
+input {
+    background-color: #33373f;
+}
+
+input:focus {
+    background-color: #3c4250;
+    border: 1px solid rgb(19, 196, 19);
 }
 
 .info {
@@ -170,7 +199,7 @@ body {
 }
 
 .footer {
-    margin-top: 14rem;
+    margin-top: 19rem;
 }
 
 @media only screen and (min-width: 1048px) {

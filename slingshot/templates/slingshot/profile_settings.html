@@ -22,7 +22,7 @@
             <form action="#" class="validate-modal-form" id='validate-email-form'>
                 {% csrf_token %}
                 <div class="name-head">New Email</div>
-                <input type="email" name="email" class="acc-name-field" placeholder="Email" autofocus="on">
+                <input type="email" id="email-field" name="email" class="acc-name-field" placeholder="Email" autofocus="on">
                 
                 <div class="info"></div>
                 <button class="validate-modal-button">Submit</button>
@@ -37,7 +37,7 @@
             <form action="#" class="validate-modal-form" id='validate-password-form'>
                 {% csrf_token %}
                 <div class="name-head">New Password</div>
-                <input type="text" name="pass" class="acc-name-field" placeholder="Password" autofocus="on">
+                <input type="text" id="pass-field" name="pass" class="acc-name-field" placeholder="Password" autofocus="on">
                 
                 <div class="info"></div>
                 <button class="validate-modal-button">Submit</button>
@@ -52,7 +52,7 @@
             <form action="#" class="validate-modal-form" id='validate-username-form'>
                 {% csrf_token %}
                 <div class="name-head">New Username</div>
-                <input type="text" name="username" class="acc-name-field" placeholder="Username" autofocus="on">
+                <input type="text" id="username-field" name="username" class="acc-name-field" placeholder="Username" autofocus="on" minlength="5">
                 
                 <div class="info"></div>
                 <button class="validate-modal-button">Submit</button>
@@ -71,10 +71,6 @@
             <div class="change-pass">Password</div>
             <div class="current-pass">.......</div>
             <button class="change-pass-btn">Change Password</button>
-
-            <div class="change-username">Username</div>
-            <div class="current-username">{{ username }}</div>
-            <button class="change-username-btn">Change Username</button>
         </div>
     </div>
 {% endblock %}
