@@ -45,7 +45,7 @@ def wallet(request, username):
             'INDUSTRY_TYPE_ID':'Retail',
             'WEBSITE':'DEFAULT',
             'CHANNEL_ID':'WEB',
-            'CALLBACK_URL':f'http://13.235.100.9/handlerequest/{username}',
+            'CALLBACK_URL':f'https://gamathon.gg/handlerequest/{username}',
         }
         data_dict['CHECKSUMHASH'] = Checksum.generate_checksum(data_dict, MERCHANT_KEY)
         return render(request, 'wallet/paytm.html', {'data_dict': data_dict})
@@ -129,7 +129,7 @@ def handleRequest(request, username):
             user.wallet = int(float(response_dict['TXNAMOUNT']))
             user.save()
         else:
-            return HttpResponse('<div style="text-align: center; font-size: 17px; color: black;">Order was not successful because ' + response_dict['RESPMSG']+'</div>'+'<div style="text-align: center; margin-top: 4rem;"><a href="http://13.126.115.12/home" style="color: white; text-decoration: none; background-color: #007bff; padding: 0.8rem 1.8rem; border-radius: 6px; box-shadow: 0px 5px 10px 0px rgba(0, 0, 0, 0.5);">Go Back</a></div>')
+            return HttpResponse('<div style="text-align: center; font-size: 17px; color: black;">Order was not successful because ' + response_dict['RESPMSG']+'</div>'+'<div style="text-align: center; margin-top: 4rem;"><a href="https://gamathon.gg/home" style="color: white; text-decoration: none; background-color: #007bff; padding: 0.8rem 1.8rem; border-radius: 6px; box-shadow: 0px 5px 10px 0px rgba(0, 0, 0, 0.5);">Go Back</a></div>')
     return redirect('index')
 
 def withdraw(request, username):
