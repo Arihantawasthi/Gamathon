@@ -34,6 +34,7 @@ class Team(models.Model):
     wins = models.PositiveSmallIntegerField(default=0, blank=True)
     loss = models.PositiveSmallIntegerField(default=0, blank=True)
     tie = models.PositiveSmallIntegerField(default=0, blank=True)
+    kills = models.PositiveIntegerField(default=0)
 
     def __str__(self):
         return self.name
