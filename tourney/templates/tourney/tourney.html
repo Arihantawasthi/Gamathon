@@ -206,10 +206,15 @@
             <div class="desk-left-section">
                 <div class="overview-container">
                     <div class="announcement-head">Announcements</div>
-                    <div class="announce-content"><i class="fa fa-warning"></i>
-                        {{ tourney.announcement|safe }}
-                    </div>
-
+                    {% for announcement in announcements %}
+                        <div class="announce-content"><i class="fa fa-warning"></i>
+                            {{ announcement.ann|safe }}
+                        </div>
+                    {% empty %}
+                        <div class="announce-content"><i class="fa fa-warning"></i>
+                            Announcements realted to tournament will be listed here.
+                        </div>
+                    {% endfor %}
                     <div class="tourney-desc-head">Description</div>
                     <div class="tourney-description">
                         {{ tourney.description|safe }}
@@ -328,7 +333,6 @@
 
                 <div class="prizes-content">
                     <div class="prizes-heading">Prize Distribution</div>
-                    <div class="line"></div>
                     <table class="prize-table">
                         <thead class="prize-table-heading">
                             <tr>
@@ -338,16 +342,13 @@
                             </tr>
                         </thead>
                         <tbody class="prize-table-body">
+                        {% for prize in prizes %}
                             <tr>
-                                <td>1</td>
+                                <td>{{ prize.place }}</td>
                                 <!-- <td><div class="table-user-pic" style="background-image: url('../../static/slingshot/Site_Material/logo.png');"></div><div>Heisenberg</div></td> -->
-                                <td>&#8377 3,00,000</td>
+                                <td>&#8377 {{ prize.prize }}</td>
                             </tr>
-                            <tr>
-                                <td>2</td>
-                                <!-- <td><div class="table-user-pic" style="background-image: url('../../static/slingshot/Site_Material/logo.png');"></div><div>Heisenberg</div></td> -->
-                                <td>&#8377 3,00,000</td>
-                            </tr>
+                        {% endfor %}
                         </tbody>
                     </table>
                 </div>

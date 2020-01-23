@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Game, Game_validate, Tournament, GameStat, Stage, Round, Match, ScoreCard, Announcements
+from .models import Game, Game_validate, Tournament, GameStat, Stage, Round, Match, ScoreCard, Announcements, Prize
 
 # Register your models here.
 admin.site.register(Game)
@@ -11,3 +11,4 @@ admin.site.register(Round)
 admin.site.register(Match)
 admin.site.register(ScoreCard)
 admin.site.register(Announcements)
+admin.site.register(Prize)

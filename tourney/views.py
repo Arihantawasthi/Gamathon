@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse, JsonResponse
 from django.db.models import Max
-from .models import Game, Game_validate, Tournament, GameStat
+from .models import Game, Game_validate, Tournament, GameStat, Announcements, Prize
 from slingshot.models import User, Team
 from wallet.models import OrderId
 from django.views.decorators.csrf import csrf_exempt
@@ -98,6 +98,11 @@ def tourney(request, tour_id):
     except KeyError:
         pass
 
+    prizes = tournament.tour_prize.all()
+    context['prizes'] = tournament.tour_prize.all().order_by('place')
+
+    announcements = tournament.tour_ann.all()
+    context['announcements'] = tournament.tour_ann.all()
     #Checking if user has validated game
     try:
         user = User.objects.get(username=request.session['username'])

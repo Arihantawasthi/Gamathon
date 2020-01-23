@@ -23,13 +23,9 @@ class Game_validate(models.Model):
     def __str__(self):
         return f"{self.userName} plays {self.gameName} with {self.gameId}"
 
-class Announcements(models.Model):
-    ann = models.CharField(max_length=500, blank=True)
-
 class Tournament(models.Model):
     name = models.CharField(max_length=60, blank=True)
     desc = models.CharField(max_length=500, blank=True, null=True)
-    announcement = models.ForeignKey(Announcements, on_delete=models.CASCADE, related_name='announcement', blank=True, null=True)
     player = models.ManyToManyField(User, related_name='participant', blank=True)
     participants = models.PositiveIntegerField(default=0, blank=True)
     sponsor = models.CharField(max_length=50, blank=True)
@@ -49,18 +45,24 @@ class Tournament(models.Model):
     tour_nature = models.CharField(max_length=60, blank=True)
     tour_type = models.CharField(max_length=60, blank=True)
     tour_game = models.ForeignKey(Game, on_delete=models.CASCADE, related_name='tour_game', blank=True)
-    place_1 = models.PositiveIntegerField(blank=True, default=0)
-    place_2 = models.PositiveIntegerField(blank=True, default=0)
-    place_3 = models.PositiveIntegerField(blank=True, default=0)
-    place_5 = models.PositiveIntegerField(blank=True, default=0)
-    place_6 = models.PositiveIntegerField(blank=True, default=0)
-    place_7 = models.PositiveIntegerField(blank=True, default=0)
-    place_8 = models.PositiveIntegerField(blank=True, default=0)
-    place_9 = models.PositiveIntegerField(blank=True, default=0)
-    place_10 = models.PositiveIntegerField(blank=True, default=0)
 
     def __str__(self):
         return self.name
+
+class Announcements(models.Model):
+    tour = models.ForeignKey(Tournament, on_delete=models.CASCADE, related_name='tour_ann', blank=True, null=True)
+    ann = models.CharField(max_length=500, blank=True)
+
+    def __str__(self):
+        return f'Announcement {self.ann} for {self.tour}'
+
+class Prize(models.Model):
+    tour = models.ForeignKey(Tournament, on_delete=models.CASCADE, related_name='tour_prize', blank=True, null=True)
+    place = models.PositiveSmallIntegerField(blank=True, default=1)
+    prize = models.CharField(max_length=10, blank=True)
+
+    def __str__(self):
+        return f'Prize {self.prize} for {self.tour}'
 
 class GameStat(models.Model):
     game = models.ForeignKey(Game, on_delete=models.CASCADE, related_name='game_stats', blank=True, null=True)
