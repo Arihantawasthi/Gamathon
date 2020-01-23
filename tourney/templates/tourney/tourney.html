@@ -217,7 +217,7 @@
                     {% endfor %}
                     <div class="tourney-desc-head">Description</div>
                     <div class="tourney-description">
-                        {{ tourney.desc|safe }}
+                        {{ tournament.desc|safe }}
                     </div>
                     
                     <div class="overview-details-head">Details</div>
@@ -233,7 +233,7 @@
                             </div>
                             <div class="overview-table-row">
                                 <div class="overview-table-column">Registration Close</div>
-                                <div class="overview-table-column">January 10, 2020 4:40 PM</div>
+				<div class="overview-table-column">{{ tournament.start_date }}  {{ tournament.start_time }}</div>
                             </div>
                             <div class="overview-table-row">
                                 <div class="overview-table-column">Tournament Type</div>

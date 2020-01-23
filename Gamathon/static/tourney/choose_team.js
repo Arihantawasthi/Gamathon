@@ -65,7 +65,7 @@ $(document).on('submit', '#team-select', function(e) {
     }
     $.ajax({
         type:'POST',
-        url: 'http://127.0.0.1:8000/choose-team/registration/'+tourid,
+        url: 'https://gamathon.gg/choose-team/registration/'+tourid,
         data: formData,
     }).done(function(response_data) {
         document.querySelector('.form1').style.transform = 'translate(-110%)'
@@ -135,12 +135,12 @@ $(document).on('submit','#player-select', function(e) {
         }
         $.ajax({
             type:'POST',
-            url: 'http://127.0.0.1:8000/tournament/'+tourid,
+            url: 'https://gamathon.gg/tournament/'+tourid,
             data: formData,
         }).done(function(response_data) {
             setTimeout(function(){ 
                 if (response_data['status'] === 1) {
-                    window.location.replace('http://127.0.0.1:8000/tournament/'+tourid)
+                    window.location.replace('https://gamathon.gg/tournament/'+tourid)
                 }
     
                 else {
