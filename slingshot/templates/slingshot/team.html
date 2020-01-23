@@ -124,6 +124,7 @@
             </div>
             <div class="line4"></div>
             <div class="played-game-content">
+                {% if most_played_game != '' %}
                 <div class="stats-wrapper">
                     <div class="stats-card">
                         <div class="stats-card-back"></div>
@@ -160,9 +161,11 @@
                                 </div>
                             </div>
                         </div>
-    
                     </div>
                 </div>
+                {% else %}
+                    <div style="color: rgba(233, 221, 221, 0.7); text-align: center; font-size: 14px;">Ah. This looks dry. Let's play some games homie!</div>
+                {% endif %}
             </div>
             <div class="overview-heading">
                 Tournaments Played
@@ -194,7 +197,7 @@
                         <div class="played-game-score"></div>
                     </a>
                 {% empty %}
-                    <div class="shit" style="color: rgba(233, 221, 221, 0.7); text-align: center; font-size: 14px;">Ah. This looks dry. Hasn't played any Games Yet.</div>
+                    <div class="shit" style="color: rgba(233, 221, 221, 0.7); text-align: center; font-size: 14px; margin-bottom: 2rem;">Ah. This looks dry. {{ teamObject.name }} hasn't played any Games Yet.</div>
                 {% endfor %}
                 </div>
             </div>
@@ -286,7 +289,7 @@
                     </div>
                 </div>
             {% empty %}
-                <div class="shit" style="color: rgba(233, 221, 221, 0.7); text-align: center; font-size: 14px; margin-bottom: 6rem;">Ah. This looks dry. Let's Play some Games Homie.</div>
+                <div class="shit" style="color: rgba(233, 221, 221, 0.7); text-align: center; font-size: 14px; margin-bottom: 8rem;">Ah. This looks dry. Let's Play some Games Homie.</div>
             {% endfor %}
             </div>
         </div>
@@ -303,20 +306,11 @@
                     <div class="games-card-game">{{ stat.game.fullname }}</div>
                 </a>
             {% empty %}
-                <div class="shit" style="color: rgba(233, 221, 221, 0.7); text-align: center; font-size: 14px; margin-bottom: 8rem;">Ah. This looks dry. Go and validate some Games Homie!</div>
+                <div class="shit" style="color: rgba(233, 221, 221, 0.7); text-align: center; font-size: 14px; margin-bottom: 5rem;">Ah. This looks dry. Go and validate some Games Homie!</div>
             {% endfor %}
             </div>
         </div>
     </div>
-    <script src="{% static 'slingshot/app.js' %}"></script>
-    <script>
-        $('#pass, #conf-pass').on('keyup', function () {
-            if ($('#pass').val() == $('#conf-pass').val()) {
-                $('.pass-warning').html('Matching').css('color', 'green');
-        } else 
-            $('.pass-warning').html("Passwords doesn't match!").css('color', 'red');
-        });
-    </script>
 {% endblock %}
 
 {% block javascript %}
