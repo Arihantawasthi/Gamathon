@@ -532,6 +532,7 @@ body {
     border-bottom: 2px solid #fe0000;
     font-weight: bold;
     letter-spacing: 0.03rem;
+    margin-top: 2rem;
 }
 
 .announce-content {
@@ -543,7 +544,7 @@ body {
     line-height: 1.2rem;
     box-shadow: 0px 5px 10px 0px rgba(0, 0, 0, 0.5);
     border-radius: 6px;
-    margin-bottom: 1rem;
+    margin-bottom: 0.3rem;
 }
 
 .tourney-desc-head::first-letter {
@@ -1073,6 +1074,8 @@ body {
     border-collapse: collapse;
     box-shadow: 0px 5px 10px 0px rgba(0, 0, 0, 0.5);
     background-color: #2e2e3a;
+    border-radius: 8px;
+    border-top: solid 2px #fe0000;
 }
 
 .prize-table-heading {
