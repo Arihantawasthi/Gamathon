@@ -449,7 +449,6 @@ body {
 
 .friends-card {
     margin-right: 1rem;
-    background: linear-gradient(0deg,rgb(56, 55, 55) 25%,#222222 70%);
     border-radius: 4px;
     box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.5);
     padding: 4rem 0;
@@ -457,7 +456,21 @@ body {
     color: white;
     margin-bottom: 1rem;
     width: 44%;
+    background-size: cover;
     border-top: solid 2px #fe0000;
+    position: relative;
+}
+
+.friends-card-back-image {
+    -webkit-mask-image: linear-gradient(0deg,transparent 1%,#000 99%);
+    z-index: -1;
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-size: cover;
+    opacity: 0.9;
 }
 
 .friends-card:hover {
@@ -505,7 +518,7 @@ body {
     border-radius: 50%;
     margin: auto;
     background-image: url('./Site_Material/logo.png');
-    background-size: contain;
+    background-size: cover;
     background-repeat: no-repeat;
     border: solid 1px #fe0000;
 }

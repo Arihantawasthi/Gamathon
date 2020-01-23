@@ -207,7 +207,8 @@
             <div class="line4"></div>
             <div class="friends-card-wrapper">
                 <a href="{% url 'profile' teamObject.captain %}" class="friends-card">
-                    <div class="friend-pic">
+                    <div class="friends-card-back-image" style="background-image: url('/media/{{ captainObject.profile_back }}')"></div>
+                    <div class="friend-pic" style="background-image: url('/media/{{ captainObject.profile_pic }}')">
                         
                     </div>
                     <div class="friend-name">
@@ -219,7 +220,8 @@
                 </a>
             {% for member in members %}
                 <a href="{% url 'profile' member.username %}" class="friends-card">
-                    <div class="friend-pic">
+                    <div class="friends-card-back-image" style="background-image: url('/media/{{ member.profile_back }}')"></div>
+                    <div class="friend-pic" style="background-image: url('/media/{{ member.profile_pic }}')">
                         
                     </div>
                     <div class="friend-name">

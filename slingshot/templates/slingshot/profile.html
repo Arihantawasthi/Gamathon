@@ -175,7 +175,8 @@
                     
                     {% for follow in followers %}
                         <a href="{% url 'profile' follow %}" class="friends-card">
-                            <div class="friend-pic">
+                            <div class="friends-card-back-image" style="background-image: url('/media/{{ follow.profile_back }}')"></div>
+                            <div class="friend-pic" style="background-image: url('/media/{{ follow.profile_pic }}')">
                                 
                             </div>
                             <div class="friend-name">

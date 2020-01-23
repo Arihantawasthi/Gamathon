@@ -282,7 +282,7 @@ def profile(request, username):
     section and then followed section.
     """
     followers = user.followers.all()
-    followers = [i.username for i in followers]
+    followers = [i for i in followers]
     print(followers)
     context['followers'] = followers
     
@@ -341,6 +341,8 @@ def team(request, team_name):
 
     teamObject = Team.objects.get(name=team_name)
     context['teamObject'] = teamObject
+    captainObject = User.objects.get(username=teamObject.captain)
+    context['captainObject'] = captainObject
     
     members = teamObject.members.exclude(username=teamObject.captain)
     context['members'] = members
