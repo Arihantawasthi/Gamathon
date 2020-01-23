@@ -155,27 +155,28 @@ def tourney(request, tour_id):
 
         if tournament.tour_type == 'Squad':    
             team_name = request.POST.get('team_name')
+            selected_members = request.POST.getlist('selected_members[]')
+            
             if team_name == '':
                 response_data['status'] = 0
                 response_data['message'] = 'Please select a team.'
                 return JsonResponse(response_data)
 
             selected_team = Team.objects.get(name=team_name)
-            members = selected_team.members.count()
 
-            if members > 5:
+            if len(selected_members) > 5:
                 response_data['status'] = 0
-                response_data['message'] = 'Team should have 5 members to play this tournament!'
+                response_data['message'] = 'Team should have at least 4 members and 5 members at max to play this tournament!'
                 return JsonResponse(response_data) 
 
-            for member in members:
+            for member in selected_members:
                 try:
                     game_stat = GameStat.objects.get(game=tournament.tour_game, user=member)
                     game_stat.games_played += 1
                     game_stat.save()
                 except GameStat.DoesNotExist:
                     response_data['status'] = 0
-                    response_data['message'] = f"One or more players haven't added their {tournament.tour_game.fullname} account yet."
+                    response_data['message'] = f"{member} haven't added {tournament.tour_game.fullname} account yet."
                     return JsonResponse(response_data)
 
             try:
@@ -283,6 +284,7 @@ def chooseTeam(request, tour_id):
         elif request_type == 'register':
             amount = str(tournament.entry_fee)
             team = Team.objects.get(name=team_name)
+
             if team.wallet >= int(amount):
                 team.wallet -= int(amount)
                 team.save()
@@ -290,9 +292,14 @@ def chooseTeam(request, tour_id):
                 tournament.team.add(team)
                 tournament.participants += 1
                 tournament.save()
-                game_stat = GameStat(team=team, game=tournament.tour_game)
-                game_stat.save()
-
+                try:
+                    game_stat = GameStat.objects.get(team=team, game=tournament.tour_game)
+                    game_stat.games_played += 1
+                    game_stat.save()
+                except GameStat.DoesNotExist:
+                    game_stat = GameStat(team=team, game=tournament.tour_game)
+                    game_stat.games_played += 1
+                    game_stat.save()
                 return redirect('tourney', tournament.id)
 
             order_no = OrderId.objects.all().last()

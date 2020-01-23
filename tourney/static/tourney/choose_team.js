@@ -101,14 +101,14 @@ document.querySelector('.form2').onsubmit = ()=> {
             selectedPlayers.push(players[i])
         }
     }
-    if(selectedPlayers.length < 5) {
+    if(selectedPlayers.length <= 4 && selectedPlayers.length <= 5) {
         return true
     }
     else {
         notifyDiv.style.display = 'block'
         setTimeout(()=> {
             document.querySelector('.notify-heading-content').innerHTML = 'Failed'
-            document.querySelector('.notify-message').innerHTML = 'Team should have 5 members to play this tournament!'
+            document.querySelector('.notify-message').innerHTML = 'Team should have at least 4 members to play this tournament!'
             document.querySelector('.notify-div').style.right = '1rem'
         }, 200)
         return false
@@ -124,15 +124,16 @@ $(document).on('submit','#player-select', function(e) {
     var selectedMembers = []
     for(let i = 0; i < members.length; i++){
         if (members[i].checked === true) {
-            selectedMembers.push(members[i])
+            selectedMembers.push(members[i].value)
         }
     }
-
-    if(selectedMembers.length > 5) {
+    if(selectedMembers.length >= 4 && selectedMembers.length <=5) {
         var formData = {
             'team_name': team_name,
+            'selected_members[]': selectedMembers,
             'csrfmiddlewaretoken': $('input[name=csrfmiddlewaretoken]').val()
         }
+        console.log(formData)
         $.ajax({
             type:'POST',
             url: 'https://gamathon.gg/tournament/'+tourid,
@@ -158,7 +159,7 @@ $(document).on('submit','#player-select', function(e) {
         notifyDiv.style.display = 'block'
         setTimeout(()=> {
             document.querySelector('.notify-heading-content').innerHTML = 'Failed'
-            document.querySelector('.notify-message').innerHTML = 'Team should have 5 members to play this tournament!'
+            document.querySelector('.notify-message').innerHTML = 'Team should have at least 4 members to play this tournament!'
             document.querySelector('.notify-div').style.right = '1rem'
         }, 200)
     }
