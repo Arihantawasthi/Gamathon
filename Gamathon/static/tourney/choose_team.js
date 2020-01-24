@@ -31,7 +31,7 @@ $(document).on('submit','#create-team-form', function(e) {
     e.preventDefault();
 
     var formData = {
-        'name': $('input[name=team-name]').val(),
+        'name': $('input[name=team-name]').val(), 
         'password': $('input[name=join-code]').val(),
         'csrfmiddlewaretoken': $('input[name=csrfmiddlewaretoken]').val()
     }
@@ -60,8 +60,8 @@ $(document).on('submit', '#team-select', function(e) {
     }
     var formData = {
         'team-name': team_name,
-        'request-type': $('input[name=request-type]').val(),
-        'csrfmiddlewaretoken': $('input[name=csrfmiddlewaretoken]').val()
+        'request-type': document.querySelector('input[name="request-type"]').value,
+        'csrfmiddlewaretoken': document.querySelector('input[name="csrfmiddlewaretoken"]').value,
     }
     $.ajax({
         type:'POST',
@@ -93,27 +93,43 @@ $(document).on('submit', '#team-select', function(e) {
 })
 
 /* TOURNEY REGISTRATION FORM FOR PAID TOURNAMENTS */
-document.querySelector('.form2').onsubmit = ()=> {
-    var players = document.querySelectorAll('.members-names')
+$(document).on('submit', "#team-register", function(e) {
+    e.preventDefault();
+    let players = document.querySelectorAll('.member-names')
     var selectedPlayers = []
-    for(let i=0; i < players.length; i++) {
+    for (let i=0; i < players.length; i++) {
         if(players[i].checked === true) {
-            selectedPlayers.push(players[i])
+            selectedPlayers.push(players[i].value)
         }
     }
-    if(selectedPlayers.length < 5) {
-        return true
+    if (selectedPlayers.length >= 4 && selectedPlayers.length <= 5) {
+        var formData = {
+            'request-type': 'register',
+            'team-name': document.querySelector('.team-name-input').value,
+            'selectedPlayers[]': selectedPlayers,
+            'csrfmiddlewaretoken': $('input[name=csrfmiddlewaretoken]').val()
+        }
+        console.log(formData)
+        $.ajax({
+            type: "POST",
+            url: 'https://gamathon.gg/choose-team/registration/'+tourid,
+            data: formData,
+        }).done(function(response_data) {
+            setTimeout(function() {
+                window.location.replace('https://gamathon.gg/teamPaidRegistration/'+formData['team-name']+'/'+tourid)
+            },100)
+        })
     }
     else {
         notifyDiv.style.display = 'block'
         setTimeout(()=> {
             document.querySelector('.notify-heading-content').innerHTML = 'Failed'
-            document.querySelector('.notify-message').innerHTML = 'Team should have 5 members to play this tournament!'
+            document.querySelector('.notify-message').innerHTML = 'Team should have at least 4 members to play this tournament!'
             document.querySelector('.notify-div').style.right = '1rem'
         }, 200)
         return false
     }
-}
+})
 
 
 /* ---FORM TO REGISTER TEAM NAME FOR FREE ENTRY USING USING AJAX */
@@ -124,15 +140,16 @@ $(document).on('submit','#player-select', function(e) {
     var selectedMembers = []
     for(let i = 0; i < members.length; i++){
         if (members[i].checked === true) {
-            selectedMembers.push(members[i])
+            selectedMembers.push(members[i].value)
         }
     }
-
-    if(selectedMembers.length > 5) {
+    if(selectedMembers.length >= 4 && selectedMembers.length <=5) {
         var formData = {
             'team_name': team_name,
+            'selected_members[]': selectedMembers,
             'csrfmiddlewaretoken': $('input[name=csrfmiddlewaretoken]').val()
         }
+        console.log(formData)
         $.ajax({
             type:'POST',
             url: 'https://gamathon.gg/tournament/'+tourid,
@@ -152,13 +169,13 @@ $(document).on('submit','#player-select', function(e) {
                     }, 200);
                 }
             }, 200);
-        })
+        }); 
     }
     else {
         notifyDiv.style.display = 'block'
         setTimeout(()=> {
             document.querySelector('.notify-heading-content').innerHTML = 'Failed'
-            document.querySelector('.notify-message').innerHTML = 'Team should have 5 members to play this tournament!'
+            document.querySelector('.notify-message').innerHTML = 'Team should have at least 4 members to play this tournament!'
             document.querySelector('.notify-div').style.right = '1rem'
         }, 200)
     }
