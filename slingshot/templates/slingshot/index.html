@@ -102,11 +102,20 @@
                         </div>
                     </div>
                     <div class="tourney-card-prizepool">
-                        <span class="prize">Prize Pool</span>&#8377 {{ tournament.prize_pool }} 
+                        <span class="prize">Prize Pool</span>&#8377 {{ tournament.prize_pool }}
                     </div>
                     <div class="tourney-card-registration">
-                        <div class="registered">{{ tournament.participants }} Players registered</div>
-                        <div class="registration-status"><i class="fa fa-check" style="margin-right: 0.3rem"></i>Registration Open</div>    
+                        {% if tournament.tour_type == 'Squad' %}
+                            <div class="registered">{{ tournament.participants }} Teams registered</div>
+                        {% else %}
+                            <div class="registered">{{ tournament.participants }} Payers registered</div>
+                        {% endif %}
+
+                        {% if tournament.status != 2 %}
+                            <div class="registration-status"><i class="fa fa-check" style="margin-right: 0.3rem"></i>Registration Open</div>
+                        {% else %}    
+                            <div class="registration-status"><i class="fa fa-cross" style="margin-right: 0.3rem"></i>Registration Closed</div>
+                        {% endif %}
                     </div>
                 </a>
             {% empty %}

@@ -134,9 +134,11 @@ def tourney(request, tour_id):
             tournament.save()
         else:
             tournament.status = 2
+            tournament.save()
     else:
         tournament.status = 2
-
+        tournament.save()
+        
     try:
         reg_team_members = [i.members.all() for i in all_reg_teams]
         if tournament.tour_type == 'Squad':

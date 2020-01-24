@@ -308,3 +308,22 @@ const searchFun = () => {
         }
     }
 }
+
+/* PARTICIPANTS SEARCH */
+const searchPlayersFun = () => {
+    let filter = document.querySelector('#players-search-bar').value.toUpperCase();
+    let table = document.querySelector('.players-card-wrapper')
+    let elements = document.querySelectorAll('.players-card')
+
+    for (let i=0; i < elements.length; i++) {
+        let name = elements[i].querySelector('.player-name')
+        if (name) {
+            let textValue = name.innerText
+            if (textValue.toUpperCase().indexOf(filter) > -1) {
+                elements[i].style.display = ""
+            } else {
+                elements[i].style.display = 'none';
+            } 
+        }
+    }
+}

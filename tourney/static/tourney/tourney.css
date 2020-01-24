@@ -1422,6 +1422,26 @@ input:-webkit-autofill:active  {
     box-shadow: 0px 2px 5px 0px rgba(0, 0, 0, 0.5);
 }
 
+#players-search-bar {
+    background: rgb(38, 38, 43);
+    padding: 0.8rem 0.5rem;
+    width: 100%;
+    border: 0;
+    border-radius: 8px;
+    box-shadow: 0px 5px 10px 0px rgba(0, 0, 0, 0.5);
+}
+
+#players-search-bar::placeholder {
+    color: white;
+    opacity: 0.4;
+}
+
+#players-search-bar:focus {
+    outline-width: 0;
+    border: 1px solid rgb(19, 196, 19);
+    color: white;
+}
+
 @media only screen and (min-width: 1035px) {
     .login-modal-content {
        margin-left: 40%;
@@ -1478,21 +1498,8 @@ input:-webkit-autofill:active  {
     .right-section {
         width: 30%;
     }
-}
 
-input:-webkit-autofill,
-input:-webkit-autofill:hover, 
-input:-webkit-autofill:focus, 
-input:-webkit-autofill:active  {
-    -webkit-box-shadow: 0 0 0 30px #3e4554 inset !important;
-    -webkit-text-fill-color: white;
-}
-
-input {
-    background-color: #33373f;
-}
-
-input:focus {
-    background-color: #3c4250;
-    border: 1px solid rgb(19, 196, 19);
+    #players-search-bar {
+        width: 60%;
+    }
 }
