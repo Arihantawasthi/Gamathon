@@ -176,7 +176,11 @@
                 </div>
             {% elif tournament.status == 2 %}
                 <div class="tourney-registration-done">
-                    <div class="register-now" style="margin-top: 0.8rem; cursor: default;">Tournament Completed!</div>
+                    <div class="register-now" style="margin-top: 0.8rem; cursor: default;">Registration Closed!</div> <!-- Comptleted Tournament -->
+                </div>
+            {% elif tournament.participants >= tournament.limit %}
+                <div class="tourney-registration-done">
+                    <div class="register-now" style="margin-top: 0.8rem; cursor: default;">Registration Closed!</div>
                 </div>
             {% endif %}
             <div class="date-time">Registration Ends {{ tournament.start_date }},  {{ tournament.start_time }}</div>
@@ -194,7 +198,11 @@
             <ul class="tabs-options">
                 <li class="overview">Overview</li>
                 <li class="ladder">Ladder</li>
-                <li class="players">Players</li>
+                {% if tournament.tour_type == 'Squad' %}
+                    <li class="players">Teams</li>
+                {% else %}
+                    <li class="players">Players</li>
+                {% endif %}
                 <li class="prizes">Prizes</li>
                 <li class="schedule">Schedule</li>
                 <li class="rules">Rules</li>
@@ -264,21 +272,18 @@
                             <option value="match-3">Match 3</option>
                         </select>
                     </div>
-                    {% if participants|length == 0 or all_reg_teams|length == 0 %}
-                        <div class="top-team-heading">
-                            <div class="left-section">
-                                <div class="s-no-head">S.No.</div>
-                                <div class="img-name-head">Name</div>
-                            </div>
-                            <div class="right-section">
-                                <div class="win-perc-head">Rank</div>
-                                <div class="win-perc-head">Kills</div>
-                                <div class="points-head">Points</div>
-                            </div>
+
+                    <div class="top-team-heading">
+                        <div class="left-section">
+                            <div class="s-no-head">S.No.</div>
+                            <div class="img-name-head">Name</div>
                         </div>
-                    {% else %}
-                        The Ladder will be unavailable until the tournament officially begins and enters the bracket playoff stage.
-                    {% endif %}
+                        <div class="right-section">
+                            <div class="win-perc-head">Rank</div>
+                            <div class="win-perc-head">Kills</div>
+                            <div class="points-head">Points</div>
+                        </div>
+                    </div>
 
                     <div class="top-team-table">
                     {% if tournament.tour_type == 'Solo' %}
@@ -298,6 +303,8 @@
                                 <div class="points">{{ participant.kills }}</div>
                             </div>
                         </div>
+                        {% empty %}
+                        <div style="color: white; text-align: center;">Ladder will be available when tournament begins.</div>
                         {% endfor %}
                     {% else %}
                         {% for team in all_reg_teams %}
@@ -316,6 +323,8 @@
                                 <div class="points">{{ team.kills }}</div>
                             </div>
                         </div>
+                        {% empty %}
+                        <div style="color: white; text-align: center;">Ladder will be available when tournament begins.</div>
                         {% endfor %}
                     {% endif %}
                     </div>
@@ -496,6 +505,7 @@
                 </div>
                 
                 <div class="players-content">
+                    <input type="text" id="players-search-bar" placeholder="Search..." onkeyup="searchPlayersFun()"><br>
                     <div class="players-card-wrapper">
                     {% if tournament.tour_type == 'Solo' %}
                         {% for participant in participants %}
@@ -503,7 +513,7 @@
                                 <div class="up-section" style="background: url('/media/{{ participant.profile_back }}')">
                                     <div class="player-img" style="background-image: url('/media/{{ participant.profile_pic }}"')></div>
                                     <div class="player-name">{{ participant.name }}</div>
-                                    <div class="player-user">{{  participant.usrname }}</div>
+                                    <div class="player-user">{{ participant.username }}</div>
                                 </div>
                                 <div class="bottom-section">
                                     <div class="won">
