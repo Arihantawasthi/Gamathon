@@ -143,7 +143,7 @@ $(document).on('submit','#player-select', function(e) {
             selectedMembers.push(members[i].value)
         }
     }
-    if(selectedMembers.length <= 4 && selectedMembers.length <=5) {
+    if(selectedMembers.length >= 4 && selectedMembers.length <=5) {
         var formData = {
             'team_name': team_name,
             'selected_members[]': selectedMembers,
@@ -169,7 +169,7 @@ $(document).on('submit','#player-select', function(e) {
                     }, 200);
                 }
             }, 200);
-        })
+        }); 
     }
     else {
         notifyDiv.style.display = 'block'
