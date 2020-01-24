@@ -31,7 +31,7 @@ $(document).on('submit','#create-team-form', function(e) {
     e.preventDefault();
 
     var formData = {
-        'name': $('input[name=team-name]').val(),
+        'name': $('input[name=team-name]').val(), 
         'password': $('input[name=join-code]').val(),
         'csrfmiddlewaretoken': $('input[name=csrfmiddlewaretoken]').val()
     }
@@ -60,8 +60,8 @@ $(document).on('submit', '#team-select', function(e) {
     }
     var formData = {
         'team-name': team_name,
-        'request-type': $('input[name=request-type]').val(),
-        'csrfmiddlewaretoken': $('input[name=csrfmiddlewaretoken]').val()
+        'request-type': document.querySelector('input[name="request-type"]').value,
+        'csrfmiddlewaretoken': document.querySelector('input[name="csrfmiddlewaretoken"]').value,
     }
     $.ajax({
         type:'POST',
