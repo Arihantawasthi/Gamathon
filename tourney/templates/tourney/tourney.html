@@ -294,8 +294,8 @@
                             </div>
                             <div class="right-section">
                                 <div class="win-perc">{{ participant.wins }}</div>
-                                <div class="win-perc">50</div>
-                                <div class="points">1,000</div>
+                                <div class="win-perc">{{ participant.kills }}</div>
+                                <div class="points">{{ participant.kills }}</div>
                             </div>
                         </div>
                         {% endfor %}
@@ -312,8 +312,8 @@
                             </div>
                             <div class="right-section">
                                 <div class="win-perc">{{ team.wins }}</div>
-                                <div class="win-perc">50</div>
-                                <div class="points">1,000</div>
+                                <div class="win-perc">{{ team.kills }}</div>
+                                <div class="points">{{ team.kills }}</div>
                             </div>
                         </div>
                         {% endfor %}
