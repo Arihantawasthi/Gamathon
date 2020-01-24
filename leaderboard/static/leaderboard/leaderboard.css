@@ -155,16 +155,19 @@ body {
     width: 55%;
 }
 
+.img-name {
+    width: 100%;
+}
+
 .user-name {
-    width: 75%;
+    width: 70%;
     overflow: hidden;
     white-space: nowrap;
     text-overflow: ellipsis;
 }
 
-
 .team-name {
-    width: 75%;
+    width: 70%;
     overflow: hidden;
     white-space: nowrap;
     text-overflow: ellipsis;
@@ -231,11 +234,15 @@ body {
         width: 15%;
     }
 
+    .img-name {
+        width: 70%;
+    }
+
     .user-name {
-        width: 100%;
+        width: 80%;
     }
 
     .team-name {
-        width: 100%
+        width: 80%;
     }
 }
