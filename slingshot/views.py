@@ -271,7 +271,7 @@ def profile(request, username):
     section and then followed section.
     """
     followers = user.followers.all()
-    followers = [i for i in followers]
+    followers = [i.username for i in followers]
     print(followers)
     context['followers'] = followers
     

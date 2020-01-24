@@ -64,9 +64,10 @@
                 {% if tournament.entry_fee == 0 %}
                     <form action="#" id="player-select" class="form2" method="post">
                 {% else %}
-                    <form action="{% url 'chooseTeam' tournament.id %}" class="form2" method="post">
+                    <form action="#" id="team-register" class="form2" method="post">
                 {% endif %}
                     {% csrf_token %}
+                    <div style="color: white; font-size: 13px; margin-top: 0.2rem; margin-bottom: 0.7rem; margin-left: 1rem;">If you don't see all the players of the team. It's beacuse they haven't added this Game's Account in Gamathon.</div>
                     <input type="hidden" name="request-type" value="register">
                     <div class="player-container-wrapper">
                     </div>

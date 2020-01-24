@@ -164,12 +164,13 @@ def tourney(request, tour_id):
 
             selected_team = Team.objects.get(name=team_name)
 
-            if len(selected_members) > 5:
+            if len(selected_members) > 5 and len(selected_members) <= 5:
                 response_data['status'] = 0
                 response_data['message'] = 'Team should have at least 4 members and 5 members at max to play this tournament!'
                 return JsonResponse(response_data) 
-
+            
             for member in selected_members:
+                tournament.player.add(member)
                 try:
                     game_stat = GameStat.objects.get(game=tournament.tour_game, user=member)
                     game_stat.games_played += 1
@@ -256,18 +257,28 @@ def chooseTeam(request, tour_id):
     if request.method == 'POST':
         response_data = {}
         team_name = request.POST.get('team-name')
+        print(team_name)
         request_type = request.POST.get('request-type')
 
         if request_type == 'get-players':
             if team_name == '':
+                print('yha pe nhi')
                 response_data['status'] = 0
                 response_data['message'] = 'Please select a team.'
                 return JsonResponse(response_data)
             
             selected_team = Team.objects.get(name=team_name)
             members = selected_team.members.all()
+            valid_members = []
+            for member in members:
+                try:
+                    game_valid = Game_validate.objects.get(userName=member, gameName=tournament.tour_game.name)
+                    valid_members.append(member)
+                except Game_validate.DoesNotExist:
+                    pass
+
             members_results = ''
-            for i in members:
+            for i in valid_members:
                 members_results += f"""<label class='player-result-container'>
                                         {i}
                                         <div class="members">{ i.name }</div>
@@ -284,12 +295,19 @@ def chooseTeam(request, tour_id):
         elif request_type == 'register':
             amount = str(tournament.entry_fee)
             team = Team.objects.get(name=team_name)
+            selected_members = request.POST.getlist('selectedPlayers[]')
+            members = [User.objects.get(username=i) for i in selected_members]
 
             if team.wallet >= int(amount):
                 team.wallet -= int(amount)
                 team.save()
                 tournament = Tournament.objects.get(id=tour_id)
                 tournament.team.add(team)
+                for member in members:
+                    tournament.players.add(member)
+                    player_stat = GameStat.objects.get(user=member, game=tournament.tour_game)
+                    player_stat.games_played += 1
+
                 tournament.participants += 1
                 tournament.save()
                 try:
@@ -301,25 +319,6 @@ def chooseTeam(request, tour_id):
                     game_stat.games_played += 1
                     game_stat.save()
                 return redirect('tourney', tournament.id)
-
-            order_no = OrderId.objects.all().last()
-            order_id = order_no.order
-            order_no.order = str(int(order_id)+1)
-            order_no.save()
-
-            # Sending request to paytm to transfer the amount to the account after user has made the payment
-            data_dict = {
-                'MID':config['PAYTM_MERCHANT_ID'],
-                'ORDER_ID':order_id,
-                'TXN_AMOUNT': amount,
-                'CUST_ID':request.session['username'],
-                'INDUSTRY_TYPE_ID':'Retail',
-                'WEBSITE':'DEFAULT',
-                'CHANNEL_ID':'WEB',
-                'CALLBACK_URL':f'https://gamathon.gg/handleRegisterRequestTeam/{team_name}/{tour_id}',
-            }
-            data_dict['CHECKSUMHASH'] = Checksum.generate_checksum(data_dict, MERCHANT_KEY)
-            return render(request, 'wallet/paytm.html', {'data_dict': data_dict})
 
     return render(request, 'tourney/choose_team.html', context)
 
@@ -378,3 +377,25 @@ def handleRegisterRequestTeam(request, team_name, tour_id):
         else:
             return HttpResponse('<div style="text-align: center; font-size: 17px; color: black;">Order was not successful because ' + response_dict['RESPMSG']+'</div>'+'<div style="text-align: center; margin-top: 4rem;"><a href="https://gamathon.gg/home" style="color: white; text-decoration: none; background-color: #007bff; padding: 0.8rem 1.8rem; border-radius: 6px; box-shadow: 0px 5px 10px 0px rgba(0, 0, 0, 0.5);">Go Back</a></div>')
         return redirect('tourney', tour_id)
+
+def teamPaidRegistration(request, team_name, tour_id):
+    order_no = OrderId.objects.all().last()
+    order_id = order_no.order
+    order_no.order = str(int(order_id)+1)
+    order_no.save()
+
+    tournament = Tournament.objects.get(id=tour_id)
+    
+    # Sending request to paytm to transfer the amount to the account after user has made the payment
+    data_dict = {
+        'MID':config['PAYTM_MERCHANT_ID'],
+        'ORDER_ID':order_id,
+        'TXN_AMOUNT': str(tournament.entry_fee),
+        'CUST_ID':request.session['username'],
+        'INDUSTRY_TYPE_ID':'Retail',
+        'WEBSITE':'DEFAULT',
+        'CHANNEL_ID':'WEB',
+        'CALLBACK_URL':f'https://gamathon.gg/handleRegisterRequestTeam/{team_name}/{tour_id}',
+    }
+    data_dict['CHECKSUMHASH'] = Checksum.generate_checksum(data_dict, MERCHANT_KEY)
+    return render(request, 'wallet/paytm.html', {'data_dict': data_dict})
