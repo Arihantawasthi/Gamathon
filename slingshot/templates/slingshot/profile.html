@@ -173,14 +173,14 @@
                 <div class="friends-content">
                     <div class="friends-card-wrapper">
                     
-                    {% for follow in followers %}
+                    {% for follow in followerObjects %}
                         <a href="{% url 'profile' follow %}" class="friends-card">
                             <div class="friends-card-back-image" style="background-image: url('/media/{{ follow.profile_back }}')"></div>
                             <div class="friend-pic" style="background-image: url('/media/{{ follow.profile_pic }}')">
                                 
                             </div>
                             <div class="friend-name">
-                                {{ follow }}
+                                {{ follow.username }}
                             </div>
                         </a>
                     {% empty %}

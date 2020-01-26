@@ -38,6 +38,7 @@ body {
     animation-name: sponsor-anim;
     animation-duration: 1.5s;
     animation-direction: forwards;
+    border-left: solid 4px #fe0000;
 }
 
 .organizer-banner {
