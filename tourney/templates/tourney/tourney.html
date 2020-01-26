@@ -292,7 +292,7 @@
                             <div class="left-section">
                                 <div class="s-no">{{ forloop.counter }}</div>
                                 <div class="img-name">
-                                    <a href="{% url 'profile' participant.name %}" class="participant-name">
+                                    <a href="{% url 'profile' participant.username %}" class="participant-name">
                                         <div class="team-img" style="background-image: url('/media/{{ team.logo }}');"></div> {{ participant.name }}
                                     </a>
                                 </div>
@@ -509,7 +509,7 @@
                     <div class="players-card-wrapper">
                     {% if tournament.tour_type == 'Solo' %}
                         {% for participant in participants %}
-                            <a href="{% url 'profile' participant.name %}" class="players-card">
+                            <a href="{% url 'profile' participant.username %}" class="players-card">
                                 <div class="up-section" style="background: url('/media/{{ participant.profile_back }}')">
                                     <div class="player-img" style="background-image: url('/media/{{ participant.profile_pic }}"')></div>
                                     <div class="player-name">{{ participant.name }}</div>
