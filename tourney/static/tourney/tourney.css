@@ -44,19 +44,16 @@ body {
     top: 10rem;
 }
 
-.organizer-banner-side-bar, .sponsor-banner-side-bar {
-    height: 100%;
-    width: 0.3rem;
-    background-color: #fe0000;
-    margin-right: 0.5rem;
-    border-top-left-radius: 4px;
-    border-bottom-left-radius: 4px;
+.sponsor-banner {
+    height: 4rem;
 }
 
 .sponsor-banner-head-info-wrapper, .organizer-banner-head-info-wrapper {
     margin-top: 0.1rem;
     -webkit-transform: skew(10deg);
     transform: skew(10deg); 
+    position: relative;
+    padding-left: 1rem;
 }
 
 .sponsor-banner-head, .organizer-banner-head {
@@ -176,22 +173,49 @@ body {
     }
 
     .sponsor-banner, .organizer-banner {
-        margin-left: 250px;
+        margin-left: 260px;
         width: 12rem;
-        max-width: 12rem;
+        max-width: 17rem;
         height: 4rem;
         border-top-left-radius: 4px;
         border-bottom-left-radius: 4px;
-        animation-name: desktop-anim;
+        padding-top: 0.5rem;
+        border-left: solid 4px #fe0000;
     }
 
-    .sponsor-banner-side-bar, .organizer-banner-side-bar {
-        width: 3%;
-        border-top-left-radius: 4px;
-        border-bottom-left-radius: 4px;
+    .sponsor-banner {
+        animation-name: desktop-anim-sponsor;
     }
 
-    @keyframes desktop-anim {
+    .organizer-banner {
+        animation-name: desktop-anim-organizer;
+    }
+
+    .sponsor-banner {
+        max-width: 20rem;
+        width: 20rem;
+    }
+
+    .sponsor-banner-info {
+        height: 2rem;
+        width: 5rem;
+    }
+
+    .sponsor-banner-info img {
+        height: 2rem;
+        width: 5rem;
+    }
+
+    @keyframes desktop-anim-sponsor {
+        from {
+            width: 0rem;
+        }
+        to {
+            width: 20rem;
+        }
+    }
+
+    @keyframes desktop-anim-organizer {
         from {
             width: 0rem;
         }
@@ -200,6 +224,35 @@ body {
         }
     }
 }
+
+@keyframes desktop-anim-sponsor {
+    from {
+        width: 0rem;
+    }
+    to {
+        width: 20rem;
+    }
+}
+
+.sponsor-banner {
+    animation-name: desktop-anim-sponsor;
+}
+
+.sponsor-banner {
+    max-width: 20rem;
+    width: 20rem;
+}
+
+.sponsor-banner-info {
+    height: 1rem;
+    width: 2rem;
+}
+
+.sponsor-banner-info img {
+    height: 2rem;
+    width: 4rem;
+}
+
 /* Game Validate Model Ends */
 
 .container {
