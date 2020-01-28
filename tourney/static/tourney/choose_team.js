@@ -152,7 +152,7 @@ $(document).on('submit','#player-select', function(e) {
         console.log(formData)
         $.ajax({
             type:'POST',
-            url: 'https://gamthon.gg/tournament/'+tourid,
+            url: 'https://gamathon.gg/tournament/'+tourid,
             data: formData,
         }).done(function(response_data) {
             setTimeout(function(){ 
