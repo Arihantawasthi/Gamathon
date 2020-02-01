@@ -203,7 +203,7 @@ body {
 .validate-modal-content {
     background: linear-gradient(to bottom, rgb(40, 40, 49), rgb(10, 10, 10));
     border-radius: 4px;
-    margin: 2.5rem 1rem;
+    margin: 4rem 1rem;
     box-shadow: 0px 2px 10px 0px rgba(0, 0, 0, 0.5);
     transition: all 0.3s ease-in-out;
     transform: translateY(-5rem)
@@ -239,7 +239,7 @@ body {
 
 .acc-name-field {
     margin: 0 1rem;
-    border-radius: 2px;
+    border-radius: 6px;
     border: 0;
     height: 40px;
     padding-left: 2.2rem;
@@ -253,6 +253,8 @@ body {
 
 .acc-name-field:focus {
     outline-width: 0;
+    border: 1px solid rgb(19, 196, 19);
+    color: white;
 }
 
 .acc-name-field::placeholder {
@@ -991,4 +993,9 @@ input:-webkit-autofill:active  {
     .tourney-card {
         width: 26rem;
     }
+}
+
+.registration-status {
+    color: #64d13e;
+    text-shadow: 0 0 6px rgba(52,200,0,.51);
 }

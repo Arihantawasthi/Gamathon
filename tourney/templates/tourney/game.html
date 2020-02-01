@@ -31,15 +31,15 @@
         <div class="validate-modal-content">
             <div class="top-shadow"></div>
             <div class="validate-modal-close"><i class="fa fa-times"></i></div>
-            <div class="modal-heading" style="margin-left: 1rem; margin-right: 1rem;">Add your {{ game.fullname }} account</div>
+            <div class="modal-heading" style="margin-left: 1rem; margin-right: 1rem;">Add your {{ game.fullname }} in-game name</div>
             <form action="#" class="validate-modal-form">
                 {% csrf_token %}
-                <div class="name-head">Account Name</div>
+                <div class="name-head">In-Game Name</div>
                 <div class="icon-name-container" style="position: relative; width: 90%;">
                     <i class="fa fa-user" style="position: absolute; top: 0.7rem; left: 1.6rem; font-size: 18px;"></i>
                     <input type="input" name="gameid" class="acc-name-field" placeholder="Account Name" autofocus="on">
                 </div>
-                <div class="info">NOTE: This name must match your {{ game.fullname }} name.</div>
+                <div class="info">NOTE: This name must match your in-game name. (eg:- awaxx534)</div>
                 <button class="validate-modal-button">Submit</button>
             </form>
         </div>
@@ -194,7 +194,11 @@
                 </div>
                 <div class="tourney-card-registration">
                     <div class="registered">{{ tournament.participants }} Players registered</div>
-                    <div class="registration-statua">Registration Open</div>
+                    {% if tournament.status != 2 %}
+                        <div class="registration-status"><i class="fa fa-check" style="margin-right: 0.3rem"></i>Registration Open</div>
+                    {% else %}    
+                        <div class="registration-status"><i class="fa fa-cross" style="margin-right: 0.3rem"></i>Registration Closed</div>
+                    {% endif %}
                 </div>
             </a>
             {% empty %}

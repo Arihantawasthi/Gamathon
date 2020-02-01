@@ -308,6 +308,10 @@
                 <input type="password" name='conf-pass' id="conf-pass" class="pass-field" placeholder="Confirm Password" required minlength="5">
                 <div class="pass-warning" style="margin-top: 0.5rem;"></div>
 
+                <div class="agreement">
+                    <input type="checkbox" name="agree" class="agree-radio" required> I agree to the <a href="https://gamathon.gg/terms-of-use">terms of use</a>
+                </div>
+
                 <button class="reg-modal-button">Register</button>
                 <div class="reg-reminder">Have an account? <a href="{% url 'signIn' %}" style="font-weight: bold;">Login</a></div>
             </form>
