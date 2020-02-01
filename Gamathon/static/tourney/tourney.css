@@ -38,25 +38,23 @@ body {
     animation-name: sponsor-anim;
     animation-duration: 1.5s;
     animation-direction: forwards;
+    border-left: solid 4px #fe0000;
 }
 
 .organizer-banner {
     top: 10rem;
 }
 
-.organizer-banner-side-bar, .sponsor-banner-side-bar {
-    height: 100%;
-    width: 0.3rem;
-    background-color: #fe0000;
-    margin-right: 0.5rem;
-    border-top-left-radius: 4px;
-    border-bottom-left-radius: 4px;
+.sponsor-banner {
+    height: 4rem;
 }
 
 .sponsor-banner-head-info-wrapper, .organizer-banner-head-info-wrapper {
     margin-top: 0.1rem;
     -webkit-transform: skew(10deg);
     transform: skew(10deg); 
+    position: relative;
+    padding-left: 1rem;
 }
 
 .sponsor-banner-head, .organizer-banner-head {
@@ -95,7 +93,7 @@ body {
 .validate-modal-content {
     background: linear-gradient(to bottom, rgb(40, 40, 49), rgb(10, 10, 10));
     border-radius: 4px;
-    margin: 10rem 1rem;
+    margin: 4rem 1rem;
     box-shadow: 0px 2px 10px 0px rgba(0, 0, 0, 0.5);
     transition: all 0.3s ease-in-out;
     transform: translateY(-5rem);
@@ -131,10 +129,21 @@ body {
 
 .acc-name-field {
     margin: 0 1rem;
-    border-radius: 2px;
+    border-radius: 6px;
     border: 0;
-    height: 1.8rem;
-    padding-left: 1rem;
+    height: 40px;
+    padding-left: 2.2rem;
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+    padding-right: 0.5rem;
+    background-color: #3e4554;
+    color: white;
+    width: 100%;
+}
+
+.acc-name-field:focus {
+    outline-width: 0;
+    border: 1px solid rgb(19, 196, 19);
     color: white;
 }
 
@@ -176,22 +185,49 @@ body {
     }
 
     .sponsor-banner, .organizer-banner {
-        margin-left: 250px;
+        margin-left: 260px;
         width: 12rem;
-        max-width: 12rem;
+        max-width: 17rem;
         height: 4rem;
         border-top-left-radius: 4px;
         border-bottom-left-radius: 4px;
-        animation-name: desktop-anim;
+        padding-top: 0.5rem;
+        border-left: solid 4px #fe0000;
     }
 
-    .sponsor-banner-side-bar, .organizer-banner-side-bar {
-        width: 3%;
-        border-top-left-radius: 4px;
-        border-bottom-left-radius: 4px;
+    .sponsor-banner {
+        animation-name: desktop-anim-sponsor;
     }
 
-    @keyframes desktop-anim {
+    .organizer-banner {
+        animation-name: desktop-anim-organizer;
+    }
+
+    .sponsor-banner {
+        max-width: 20rem;
+        width: 20rem;
+    }
+
+    .sponsor-banner-info {
+        height: 2rem;
+        width: 5rem;
+    }
+
+    .sponsor-banner-info img {
+        height: 2rem;
+        width: 5rem;
+    }
+
+    @keyframes desktop-anim-sponsor {
+        from {
+            width: 0rem;
+        }
+        to {
+            width: 20rem;
+        }
+    }
+
+    @keyframes desktop-anim-organizer {
         from {
             width: 0rem;
         }
@@ -200,6 +236,35 @@ body {
         }
     }
 }
+
+@keyframes desktop-anim-sponsor {
+    from {
+        width: 0rem;
+    }
+    to {
+        width: 20rem;
+    }
+}
+
+.sponsor-banner {
+    animation-name: desktop-anim-sponsor;
+}
+
+.sponsor-banner {
+    max-width: 20rem;
+    width: 20rem;
+}
+
+.sponsor-banner-info {
+    height: 1rem;
+    width: 2rem;
+}
+
+.sponsor-banner-info img {
+    height: 2rem;
+    width: 4rem;
+}
+
 /* Game Validate Model Ends */
 
 .container {
@@ -1422,6 +1487,26 @@ input:-webkit-autofill:active  {
     box-shadow: 0px 2px 5px 0px rgba(0, 0, 0, 0.5);
 }
 
+#players-search-bar {
+    background: rgb(38, 38, 43);
+    padding: 0.8rem 0.5rem;
+    width: 100%;
+    border: 0;
+    border-radius: 8px;
+    box-shadow: 0px 5px 10px 0px rgba(0, 0, 0, 0.5);
+}
+
+#players-search-bar::placeholder {
+    color: white;
+    opacity: 0.4;
+}
+
+#players-search-bar:focus {
+    outline-width: 0;
+    border: 1px solid rgb(19, 196, 19);
+    color: white;
+}
+
 @media only screen and (min-width: 1035px) {
     .login-modal-content {
        margin-left: 40%;
@@ -1478,21 +1563,8 @@ input:-webkit-autofill:active  {
     .right-section {
         width: 30%;
     }
-}
 
-input:-webkit-autofill,
-input:-webkit-autofill:hover, 
-input:-webkit-autofill:focus, 
-input:-webkit-autofill:active  {
-    -webkit-box-shadow: 0 0 0 30px #3e4554 inset !important;
-    -webkit-text-fill-color: white;
-}
-
-input {
-    background-color: #33373f;
-}
-
-input:focus {
-    background-color: #3c4250;
-    border: 1px solid rgb(19, 196, 19);
+    #players-search-bar {
+        width: 60%;
+    }
 }

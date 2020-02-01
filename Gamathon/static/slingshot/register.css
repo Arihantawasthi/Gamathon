@@ -174,7 +174,7 @@ body {
 
 .reg-modal-button {
     width: 5rem;
-    margin: 2rem 1rem 1.5rem 1rem;
+    margin: 1rem 1rem 1.5rem 1rem;
     padding: 8px;
     border-radius: 2px;
     border: 0;
@@ -282,4 +282,21 @@ input:focus {
     padding: 0 1rem 1.2rem 0;
     color: whitesmoke;
     font-size: 13px;
+}
+
+.agreement {
+    font-size: 14px;
+    margin-left: 2.5rem;
+    position: relative;
+    margin-top: 1rem;
+}
+
+.agree-radio {
+    position: absolute;
+    top: 0.1rem;
+    left: -1.2rem;
+}
+
+.agreement > a {
+    color: white;
 }

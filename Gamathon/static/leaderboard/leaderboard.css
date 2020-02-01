@@ -152,6 +152,25 @@ body {
 .left-section {
     display: flex;
     margin-right: 2rem;
+    width: 55%;
+}
+
+.img-name {
+    width: 100%;
+}
+
+.user-name {
+    width: 70%;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+.team-name {
+    width: 70%;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
 }
 
 .left-section > div {
@@ -213,5 +232,17 @@ body {
 
     .right-section {
         width: 15%;
+    }
+
+    .img-name {
+        width: 70%;
+    }
+
+    .user-name {
+        width: 80%;
+    }
+
+    .team-name {
+        width: 80%;
     }
 }

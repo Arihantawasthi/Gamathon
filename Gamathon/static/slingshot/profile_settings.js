@@ -1,7 +1,6 @@
 const modal = document.querySelector('.bg-validate-modal');
 const emailBtn = document.querySelector('.change-email-btn');
 const passBtn = document.querySelector('.change-pass-btn');
-const userBtn = document.querySelector('.change-username-btn');
 const emailModal = document.querySelector('#email-modal');
 const modalClose = document.querySelectorAll('.validate-modal-close');
 const passwordModal = document.querySelector('#password-modal');
@@ -18,12 +17,6 @@ passBtn.addEventListener('click', ()=> {
     emailModal.style.display = 'none';
     passwordModal.style.display = 'block';
     usernameModal.style.display = 'none';   
-});
-
-userBtn.addEventListener('click', ()=> {
-    emailModal.style.display = 'none';
-    passwordModal.style.display = 'none';
-    usernameModal.style.display = 'block';
 });
 
 for (let i = 0; i < modalClose.length; i++) {
@@ -60,7 +53,7 @@ $(document).on('submit','#validate-email-form', function(e) {
     e.preventDefault();
 
     var formData = {
-        'query': $('input[name=email]').val(),
+        'query': document.querySelector('#email-field').value,
         'queryFor': 'email',
         'csrfmiddlewaretoken': $('input[name=csrfmiddlewaretoken]').val()
     }
@@ -70,13 +63,13 @@ $(document).on('submit','#validate-email-form', function(e) {
         data: formData,
     }).done(function(response_data) {
         emailModal.style.display = 'none';
-        document.querySelector('.notify-message').style.dispay = 'block'
+        document.querySelector('.notify-div').style.display = 'block'
         setTimeout(function(){ 
             document.querySelector('.notify-heading-content').innerHTML = response_data.status
             document.querySelector('.notify-message').innerHTML = response_data.message
             document.querySelector('.notify-div').style.right = '1rem' 
             if (response_data.status == 'Success :)')
-                document.querySelector('.current-email').innerHTML = $('input[name=email]').val()
+                document.querySelector('.current-email').innerHTML = formData.query
         }, 200);
     })
 })
@@ -85,7 +78,7 @@ $(document).on('submit','#validate-password-form', function(e) {
     e.preventDefault();
 
     var formData = {
-        'query': $('input[name=pass]').val(),
+        'query': document.querySelector('#pass-field').value,
         'queryFor': 'pass',
         'csrfmiddlewaretoken': $('input[name=csrfmiddlewaretoken]').val()
     }
@@ -100,31 +93,6 @@ $(document).on('submit','#validate-password-form', function(e) {
             document.querySelector('.notify-heading-content').innerHTML = response_data.status
             document.querySelector('.notify-message').innerHTML = response_data.message
             document.querySelector('.notify-div').style.right = '1rem' 
-        }, 200);
-    })
-})
-
-$(document).on('submit','#validate-username-form', function(e) {
-    e.preventDefault();
-
-    var formData = {
-        'query': $('input[name=username]').val(),
-        'queryFor': 'username',
-        'csrfmiddlewaretoken': $('input[name=csrfmiddlewaretoken]').val()
-    }
-    $.ajax({
-        type:'POST',
-        url: `/profile-settings/${document.querySelector('#sessionUser').innerHTML}`,
-        data: formData,
-    }).done(function(response_data) {
-        usernameModal.style.display = 'none';
-        document.querySelector('.notify-div').style.display = 'block'
-        setTimeout(function(){ 
-            document.querySelector('.notify-heading-content').innerHTML = response_data.status
-            document.querySelector('.notify-message').innerHTML = response_data.message
-            document.querySelector('.notify-div').style.right = '1rem' 
-            if (response_data.status == 'Success :)')
-                document.querySelector('.current-username').innerHTML = $('input[name=username]').val()
         }, 200);
     })
 })
