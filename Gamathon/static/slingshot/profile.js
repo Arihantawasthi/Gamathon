@@ -12,9 +12,7 @@ const friend = document.querySelector('.friend');
 const modal = document.querySelector('.bg-create-team-modal');
 const createTeam = document.querySelector('.create-team-card');
 const modalClose = document.querySelector('.create-team-modal-close');
-const sessionName = document.querySelector('#sessionUser')
 const friendsCard = document.querySelectorAll('.friends-card')
-
 
 teams.addEventListener('click', ()=> {
     teams.style.opacity = '1';
@@ -75,7 +73,7 @@ modalClose.addEventListener('click', ()=> {
     }, 500)
 });
 
-if (sessionUser.innerHTML === document.querySelector('.profile-name').innerHTML){
+if (document.querySelector('#sessionUser').innerHTML === document.querySelector('.profile-name').innerHTML){
     createTeam.addEventListener('click', ()=> {
     modal.style.display = 'block';
     });

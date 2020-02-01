@@ -93,7 +93,7 @@ WSGI_APPLICATION = 'Gamathon.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': config['DATABASE_NAME'],
+        'NAME': 'gamathon_test',
         'USER': config['DATABASE_USER'],
         'PASSWORD': config['DATABASE_PASSWORD'],
         'HOST': config['DATABASE_HOST'],
@@ -140,6 +140,5 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
-
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')

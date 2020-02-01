@@ -5,12 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     {% load static %}
+    {% load compress %}
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <meta name="robot" content="index,follow">
     <meta name="googlebot" content="index,follow">
     <meta name="keywords" content="online tournaments, pubg online tournaments, online gaming tournaments, gaming tournaments">
-    <meta name="description" content="Gamathon is an E-sports site focused to build a gaming community and environment, it allows users to play and even organize online gaming tournaments.">
+    <meta name="description" content="Gamathon is an E-sports site focused to build a gaming community and environment, it allows users to play and even organize online gaming tournaments. Organize Pubg tournaments.">
     <meta property="og:title" content="Play Online Gaming Tournaments."/>
     <meta property="og:url" content="https://www.gamathon.gg"/>
     <meta property="og:description" content="Compete and Organize Online Gaming Tournaments on Gamathon.">
@@ -26,9 +27,11 @@
     <link href="https://fonts.googleapis.com/css?family=Play:400,700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fork-awesome@1.1.7/css/fork-awesome.min.css" integrity="sha256-gsmEoJAws/Kd3CjuOQzLie5Q3yshhvmo7YNtBG7aaEY=" crossorigin="anonymous">
-    <link rel="stylesheet" href="{% static 'slingshot/portal.css' %}">
-    <link rel="stylesheet" href="{% static 'slingshot/footer.css' %}">
-    
+    {% compress css %}
+        <link rel="stylesheet" href="{% static 'slingshot/portal.css' %}">
+        <link rel="stylesheet" href="{% static 'slingshot/footer.css' %}">
+    {% endcompress %}
+
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-156424721-1"></script>
     <script>
     window.dataLayer = window.dataLayer || [];
@@ -161,7 +164,8 @@
         </ul>
         <div class="company-name">Copyright &copy Gamathon pvt. LTD. All Rights Reserved.</div>
     </footer>
-
-    <script src="{% static 'slingshot/portal.js' %}"></script>
+    {% compress js %}
+        <script src="{% static 'slingshot/portal.js' %}"></script>
+    {% endcompress %}
 </body>
 </html>

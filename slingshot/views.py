@@ -241,11 +241,8 @@ def profile(request, username):
     context['most_played_game'] = most_played_game
 
     # Getting stats for all the games the player has played.
-    # Looping through all the games to find the 'GameStat' and
     # Storing it in a list called all_stats.
-    all_stats = []
-    for played_game in played_games:
-        all_stats.append(GameStat.objects.filter(game=played_game, user=user))
+    all_stats = GameStat.objects.filter(user=user)
     context['all_stats'] = all_stats
 
     try: 
@@ -271,9 +268,12 @@ def profile(request, username):
     section and then followed section.
     """
     followers = user.followers.all()
+    followerObjects = [i for i in followers]
     followers = [i.username for i in followers]
     print(followers)
+    print(followerObjects)
     context['followers'] = followers
+    context['followerObjects'] = followerObjects
     
     try:
         # Getting the logged_in user

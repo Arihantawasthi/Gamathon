@@ -48,26 +48,31 @@
     <div class="bg-validate-modal">
         <div class="validate-modal-content">
             <div class="validate-modal-close"><i class="fa fa-times"></i></div>
-            <div class="modal-heading">Add your game account</div>
+            <div class="modal-heading">Add your {{ tournament.tour_game.fullname }} in-game name</div>
             <form action="#" class="validate-modal-form" id='account-validate-form'>
-                <div class="name-head">Account Name</div>
-                <input type="input" name="game_id" class="acc-name-field" placeholder="Account Name" autofocus="on">
+                <div class="name-head">In-Game Name</div>
+                <div class="icon-name-container" style="position: relative; width: 90%;">
+                    <i class="fa fa-user" style="position: absolute; top: 0.7rem; left: 1.6rem; font-size: 18px;"></i>
+                    <input type="input" name="game_id" class="acc-name-field" placeholder="Account Name" autofocus="on">
+                </div>
                 
-                <div class="info">NOTE: This name must match your in-game name.</div>
+                <div class="info">NOTE: This name must match your in-game name. (eg:- awaxx534)</div>
                 <button class="validate-modal-button">Submit</button>
             </form>
         </div>
     </div>
     
     <div class="sponsor-banner">
-        <div class="sponsor-banner-side-bar"></div>
         <div class="sponsor-banner-head-info-wrapper">
             <div class="sponsor-banner-head">Sponsored By:</div>
-            <a href="" class="sponsor-banner-info">{{ tournament.sponsor }}</a>
+            <!-- <a href="" class="sponsor-banner-info"><img src="{% static 'slingshot/Site_Material/asus_logo.png' %}" alt="sponsor-logo"></a>
+            <a href="" class="sponsor-banner-info"><img src="{% static 'slingshot/Site_Material/HyperX-Logo.png' %}" alt="sponsor-logo"></a>
+            <a href="" class="sponsor-banner-info"><img src="{% static 'slingshot/Site_Material/oneplus-logo.png' %}" alt="sponsor-logo"></a>
+            <a href="" class="sponsor-banner-info"><img src="{% static 'slingshot/Site_Material/rheoTV_logo.jpg' %}" alt="sponsor-logo"></a> -->
+            <a href="" class="sponsor-banner-info">{{ tournament.organizer }}</a>
         </div>
     </div>
     <div class="organizer-banner">
-        <div class="organizer-banner-side-bar"></div>
         <div class="organizer-banner-head-info-wrapper">
             <div class="organizer-banner-head">Organized By:</div>
             <a href="" class="organizer-banner-info">{{ tournament.organizer }}</a>
@@ -279,7 +284,7 @@
                             <div class="img-name-head">Name</div>
                         </div>
                         <div class="right-section">
-                            <div class="win-perc-head">Rank</div>
+                            <div class="win-perc-head">POS.</div>
                             <div class="win-perc-head">Kills</div>
                             <div class="points-head">Points</div>
                         </div>
@@ -293,7 +298,8 @@
                                 <div class="s-no">{{ forloop.counter }}</div>
                                 <div class="img-name">
                                     <a href="{% url 'profile' participant.username %}" class="participant-name">
-                                        <div class="team-img" style="background-image: url('/media/{{ team.logo }}');"></div> {{ participant.name }}
+                                        <div class="team-img" style="background-image: url('/media/{{ participant.logo }}');"></div>{{ participant.name }}
+
                                     </a>
                                 </div>
                             </div>
@@ -313,7 +319,7 @@
                                 <div class="s-no">{{ forloop.counter }}</div>
                                 <div class="img-name">
                                     <a href="{% url 'team' team.name %}" class="participant-name">
-                                        <div class="team-img" style="background-image: url('/media/{{ team.logo }}');"></div> {{ team.name }}
+                                        <div class="team-img" style="background-image: url('/media/{{ team.logo }}');"></div>{{ team.name }}
                                     </a>
                                 </div>
                             </div>

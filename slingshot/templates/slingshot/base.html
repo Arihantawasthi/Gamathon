@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     {% load static %}
+    {% load compress %}
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <meta name="robot" content="index,follow">
@@ -21,10 +22,12 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fork-awesome@1.1.7/css/fork-awesome.min.css" integrity="sha256-gsmEoJAws/Kd3CjuOQzLie5Q3yshhvmo7YNtBG7aaEY=" crossorigin="anonymous">
     <link rel="shortcut icon" href="{% static 'slingshot/Site_Material/logo.png' %}" type="image/png">
     <link rel="apple-touch-icon" sizes="32x32" href="{% static 'slingshot/Site_Material/logo.png' %}">
-    {% block css %}{% endblock %}
-    <link rel="stylesheet" href="{% static 'slingshot/footer.css' %}">
-    <link rel="stylesheet" href="{% static 'slingshot/nav.css' %}">
-    <link rel="stylesheet" href="{% static 'slingshot/lgsum.css' %}">
+    {% compress css %}
+        {% block css %}{% endblock %}
+        <link rel="stylesheet" href="{% static 'slingshot/footer.css' %}">
+        <link rel="stylesheet" href="{% static 'slingshot/nav.css' %}">
+        <link rel="stylesheet" href="{% static 'slingshot/lgsum.css' %}">
+    {% endcompress %}
 
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-156424721-1"></script>
     <script>
@@ -308,6 +311,10 @@
                 <input type="password" name='conf-pass' id="conf-pass" class="pass-field" placeholder="Confirm Password" required minlength="5">
                 <div class="pass-warning" style="margin-top: 0.5rem;"></div>
 
+                <div class="agreement">
+                    <input type="checkbox" name="agree" class="agree-radio" required> I agree to the <a href="https://gamathon.gg/terms-of-use">terms of use</a>
+                </div>
+
                 <button class="reg-modal-button">Register</button>
                 <div class="reg-reminder">Have an account? <a href="{% url 'signIn' %}" style="font-weight: bold;">Login</a></div>
             </form>
@@ -337,17 +344,19 @@
         </div>
     </footer>
 
-    {% block javascript %}
-    {% endblock %}
+    {% compress js %}
+        {% block javascript %}
+        {% endblock %}
 
-    <script src="{% static 'slingshot/app.js' %}"></script>
-    <script>
-        $('#pass, #conf-pass').on('keyup', function () {
-            if ($('#pass').val() == $('#conf-pass').val()) {
-                $('.pass-warning').html('Matching').css('color', 'green');
-        } else 
-            $('.pass-warning').html("Passwords doesn't match!").css('color', 'red');
-        });
-    </script>
+        <script src="{% static 'slingshot/app.js' %}"></script>
+        <script>
+            $('#pass, #conf-pass').on('keyup', function () {
+                if ($('#pass').val() == $('#conf-pass').val()) {
+                    $('.pass-warning').html('Matching').css('color', 'green');
+            } else 
+                $('.pass-warning').html("Passwords doesn't match!").css('color', 'red');
+            });
+        </script>
+    {% endcompress %}
 </body>
 </html>

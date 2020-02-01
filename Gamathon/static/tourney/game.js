@@ -9,24 +9,27 @@ const loginClose = document.querySelector('.modal-close')
 const validateHead = document.querySelector('.validate-game-label')
 const validateMess = document.querySelector('.validate-game-sub-label')
 
-validate.addEventListener('click', function() {
-    if (sessionState.innerHTML === 'True') {
-        validateModal.style.display = 'block'
-        setTimeout(() => {
-            validateContent.style.transform = 'translate(0rem, 0rem)'
-        }, 100)
-    }
-    else {
-        login.style.display = 'block'
-    }
-});
+try {
+    validate.addEventListener('click', function() {
+        if (sessionState.innerHTML === 'True') {
+            validateModal.style.display = 'block'
+            setTimeout(() => {
+                validateContent.style.transform = 'translate(0rem, 0rem)'
+            }, 100)
+        }
+        else {
+            login.style.display = 'block'
+        }
+    });
 
-validateClose.addEventListener('click', function() {
-    validateContent.style.transform = 'translate(0rem, -5rem)'
-    setTimeout(() => {
-        validateModal.style.display = 'none';
-    }, 100)
-});
+    validateClose.addEventListener('click', function() {
+        validateContent.style.transform = 'translate(0rem, -5rem)'
+        setTimeout(() => {
+            validateModal.style.display = 'none';
+        }, 100)
+    });
+}
+catch(e) {}
 
 loginClose.addEventListener('click', () => {
     login.style.display = 'none'
