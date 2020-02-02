@@ -501,10 +501,14 @@ def search_results(request):
         org_term = Organization.objects.filter(org_name__icontains=query)
         org_term = [t.org_name for t in org_term]
 
+        team_term = Team.objects.filter(name__icontains=query)
+        team_term = [t.name for t in team_term]
+
         user_search_results = ''
         tourney_search_results = ''
         game_search_results = ''
         org_search_results = ''
+        team_search_results = ''
         for i in user_term:
             user_search_results += f"<a href='/profile/{i}'><li class='user-list'>{i}</li></a>"
         
@@ -517,10 +521,14 @@ def search_results(request):
         for i in org_term:
             org_search_results += f"<a href='/org-profile/{i}'><li class='user-list'>{i}</li></a>"
         
+        for i in team_term:
+            team_search_results += f"<a href='/team/{i}'><li class='user-list'>{i}</li></a>"
+        
         response_data['user_term'] = user_search_results
         response_data['tour_term'] = tourney_search_results
         response_data['game_term'] = game_search_results
         response_data['org_term'] = org_search_results
+        response_data['team-term'] = team_search_results
     
     return JsonResponse(response_data)
 
