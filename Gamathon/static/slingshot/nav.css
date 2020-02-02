@@ -153,17 +153,20 @@
 
 .search-bar input {
     font-size: 14px;
-    height: 30px;
+    padding: 0.5rem 0.3rem;
     width: 200px;
-    border-radius: 2px;
+    border-radius: 5px;
     padding-left: 30px;
     margin: 0px;
     border: 0;
-    background-color: #3e4554;
-    padding-top: 0.3rem;
-    padding-bottom: 0.3rem;
-    padding-right: 0.3rem;
+    background-color: #33373f;
     color: white;
+}
+
+.search-bar input:focus {
+    outline-width: 0;
+    background-color: #3c4250;
+    border: 1px solid rgb(19, 196, 19);
 }
 
 input:-webkit-autofill,

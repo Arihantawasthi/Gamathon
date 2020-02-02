@@ -7,5 +7,4 @@
 }
 
 catch(e) {
-    pass
 }
