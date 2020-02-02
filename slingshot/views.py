@@ -528,7 +528,7 @@ def search_results(request):
         response_data['tour_term'] = tourney_search_results
         response_data['game_term'] = game_search_results
         response_data['org_term'] = org_search_results
-        response_data['team-term'] = team_search_results
+        response_data['team_term'] = team_search_results
     
     return JsonResponse(response_data)
 
