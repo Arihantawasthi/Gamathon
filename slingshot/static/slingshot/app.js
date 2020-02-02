@@ -335,7 +335,7 @@ $('#search-input').keyup(function() {
             document.querySelector('.search-result-user').innerHTML = response_data.user_term
             document.querySelector('.search-result-tourney').innerHTML = response_data.tour_term
             document.querySelector('.search-result-game').innerHTML = response_data.game_term
-            document.querySelector('.search-result-org').innerHTML = response_data.
+            /* document.querySelector('.search-result-org').innerHTML = response_data. */
             document.querySelector('.search-result-team').innerHTML = response_data.team_term
         }
 
@@ -348,9 +348,9 @@ $('#search-input').keyup(function() {
         if (document.querySelector('.search-result-game').innerHTML === '') {
             document.querySelector('.search-result-game').innerHTML = '<li style="font-size: 14px; font-weight: normal;">No Game with that name exists in this hood.</li>'
         }
-        if (document.querySelector('.search-result-org').innerHTML === '') {
+        /* if (document.querySelector('.search-result-org').innerHTML === '') {
             document.querySelector('.search-result-org').innerHTML = '<li style="font-size: 14px; font-weight: normal;">No organization with that name exists in this hood.</li>'
-        }
+        } */
 
         if (document.querySelector('.search-result-team').innerHTML === '') {
             document.querySelector('.search-result-team').innerHTML = '<li style="font-size: 14px; font-weight: normal;">No Team with that name exists in this hood.</li>'
