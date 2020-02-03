@@ -79,7 +79,7 @@
         </div>
     </div>
     
-    <div class="bg-image" style="background-image: url('/media/{{ tournament.banner }}')"></div>
+    <div class="bg-image" style="background-image: url('{{ tournament.banner.url }}')"></div>
     <div class="container">
         {% if tournament.status == 0 %}
             <form action="{% url 'publishTourney' tournament.organizer.org_name %}" enctype="multipart/form-data" method="post">   
@@ -98,12 +98,12 @@
             </form>
         {% endif %}
         <div class="reg-tourney-section">
-            <div class="tourney-logo" style="background-image: url('/media/{{ tournament.banner }}')"></div>
+            <div class="tourney-logo" style="background-image: url('{{ tournament.banner.url }}')"></div>
             <div class="tourney-name">
                 {{ tournament.name }}
             </div>
             <div class="tourney-reward">
-                <div class="money-img" style="background-image: url('/media/{{ tournament.banner }}')"></div>
+                <div class="money-img" style="background-image: url('{{ tournament.banner.url }}')"></div>
                 <div class="reward">
                     <div class="heading">Tournament Rewards</div>
                     <div class="prize">&#8377 {{ tournament.prize_pool }} Prize Pool</div>
@@ -298,7 +298,7 @@
                                 <div class="s-no">{{ forloop.counter }}</div>
                                 <div class="img-name">
                                     <a href="{% url 'profile' participant.username %}" class="participant-name">
-                                        <div class="team-img" style="background-image: url('/media/{{ participant.profile_pic }}');"></div>{{ participant.name }}
+                                        <div class="team-img" style="background-image: url('{{ participant.profile_pic.url }}');"></div>{{ participant.name }}
                                     </a>
                                 </div>
                             </div>
@@ -318,7 +318,7 @@
                                 <div class="s-no">{{ forloop.counter }}</div>
                                 <div class="img-name">
                                     <a href="{% url 'team' team.name %}" class="participant-name">
-                                        <div class="team-img" style="background-image: url('/media/{{ team.logo }}');"></div>{{ team.name }}
+                                        <div class="team-img" style="background-image: url('{{ team.logo.url }}');"></div>{{ team.name }}
                                     </a>
                                 </div>
                             </div>
@@ -515,8 +515,8 @@
                     {% if tournament.tour_type == 'Solo' %}
                         {% for participant in participants %}
                             <a href="{% url 'profile' participant.username %}" class="players-card">
-                                <div class="up-section" style="background: url('/media/{{ participant.profile_back }}')">
-                                    <div class="player-img" style="background-image: url('/media/{{ participant.profile_pic }}"')></div>
+                                <div class="up-section" style="background-image: url('{{ participant.profile_back.url }}')">
+                                    <div class="player-img" style="background-image: url('{{ participant.profile_pic.url }}')"></div>
                                     <div class="player-name">{{ participant.name }}</div>
                                     <div class="player-user">{{ participant.username }}</div>
                                 </div>
@@ -537,8 +537,8 @@
                     {% else %}
                         {% for team in all_reg_teams %}
                         <a href="{% url 'team' team.name %}" class="players-card">
-                            <div class="up-section" style="background: url('/media/{{ team.team_banner }}')">
-                                <div class="player-img" style="background-image: url('/media/{{ team.logo }}"')></div>
+                            <div class="up-section" style="background: url('{{ team.team_banner.url }}')">
+                                <div class="player-img" style="background-image: url('{{ team.logo.url }}')"></div>
                                 <div class="player-name">{{ team.name }}</div>
                             </div>
                             <div class="bottom-section">
