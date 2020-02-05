@@ -256,6 +256,9 @@ $(document).on('submit','#account-validate-form', function(e) {
             notifyHead.innerHTML = response_data['status']
             notifyMessage.innerHTML = response_data['message']
             notifyDiv.style.right = '1rem'
+	    setTimeout(() => {
+	    	window.location.reload()
+	    }, 400)
         }, 200);
     })
 })
@@ -280,6 +283,9 @@ $(document).on('submit','#tour-registration-entry', function(e) {
                 notifyMessage.innerHTML = response_data.message
                 notifyDiv.style.height = '5.7rem'
                 notifyDiv.style.right = '1rem'
+		setTimeout(() => {
+			window.location.reload()
+		}, 100)
             }
             else {
                 notifyHead.innerHTML = 'Failed'
