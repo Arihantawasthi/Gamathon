@@ -31,8 +31,8 @@ $(document).on('submit','#create-team-form', function(e) {
     e.preventDefault();
 
     var formData = {
-        'name': $('input[name=team-name]').val(), 
-        'password': $('input[name=join-code]').val(),
+        'team_name': $('input[name=team-name]').val(), 
+        'join_code': $('input[name=join-code]').val(),
         'csrfmiddlewaretoken': $('input[name=csrfmiddlewaretoken]').val()
     }
     $.ajax({

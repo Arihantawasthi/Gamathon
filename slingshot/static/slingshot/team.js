@@ -34,8 +34,19 @@ try {
         }, 400)
     })
 }
-
 catch (e) {}
+
+function myFunction() {
+    var copyText = document.getElementById("shareLink");
+    copyText.select();
+    copyText.setSelectionRange(0, 99999)
+    document.execCommand("copy");
+}
+
+document.querySelector('.copyLink').addEventListener('click', function() {
+    myFunction();
+});
+
 members.addEventListener('click', ()=> {
     members.style.opacity = '1';
     overview.style.opacity = '0.6';

@@ -328,7 +328,11 @@ def team(request, team_name):
     total_notifications = len(context['invite_notifications']) + len(context['org_notifications']) + len(context['follow_notifications'])
     context['total_notifications'] = total_notifications
 
-    teamObject = Team.objects.get(name=team_name)
+    try:
+        teamObject = Team.objects.get(name=team_name)
+    except Team.DoesNotExist:
+        return render(request, 'slingshot/404.html')
+        
     context['teamObject'] = teamObject
     captainObject = User.objects.get(username=teamObject.captain)
     context['captainObject'] = captainObject

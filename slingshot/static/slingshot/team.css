@@ -1035,3 +1035,44 @@ input:-webkit-autofill:active  {
 .footer {
     margin-top: 3rem;
 }
+
+.share {
+    display: flex;
+    flex-direction: column;
+    margin-top: 1.5rem;
+    color: white;
+    font-size: 12px;
+    font-weight: normal;
+    text-align: center;
+}
+
+.share-heading {
+    text-transform: uppercase;
+}
+
+.share-link {
+    margin-top: 0.5rem;
+}
+
+.share-link input {
+    border-radius: 2px;
+    border: 0;
+    height: 1.2rem;
+    padding-left: 0.5rem;
+    margin-top: 0.3rem;
+    margin-right: 0.3rem;
+    background-color: #111010;
+    color: white;
+}
+
+.share-link button {
+    border-radius: 2px;
+    background: linear-gradient(90deg,#055ac2,#0487ac);
+    border: 0;
+    color: white;
+    height: 1.2rem;
+    padding-left: 0.4rem;
+    padding-right: 0.4rem;
+    padding-bottom: 0.1rem;
+    cursor: pointer;
+}
