@@ -723,9 +723,10 @@ body {
 .create-team-modal-content {
     background: linear-gradient(to bottom, rgb(40, 40, 49), rgb(10, 10, 10));
     border-radius: 4px;
-    margin: 3.5rem 1rem;
+    margin: 2rem 1rem;
     transition: all 0.3s ease-in-out;
     transform: translateY(-5rem);
+    border-top: solid 3px #fe0000;
 }
 
 .create-team-modal-form {

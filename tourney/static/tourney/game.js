@@ -60,13 +60,17 @@ $(document).on('submit','.validate-modal-form', function(e) {
         url: '/game/'+gamename,
         data: formData,
     }).done(function(response_data) {
-        validateModal.style.display = 'none';
+        localStorage.setItem('fire', true)
+        localStorage.setItem('recordHead', response_data['status'])
+        localStorage.setItem('recordMessage', response_data['message'])
+        window.location.reload()
+        /* validateModal.style.display = 'none';
         setTimeout(function(){ 
             validate.style.cursor = 'default'
             validate.style.background = 'linear-gradient(90deg,#6ccd00,#309100)'
             validateHead.innerHTML = response_data['status']
             validateMess.innerHTML = response_data['message']
             window.location.reload()
-        }, 200);
+        }, 200); */
     })
 })

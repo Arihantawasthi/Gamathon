@@ -133,11 +133,15 @@
                 url: '/withdraw/{{ request.session.username }}',
                 data: formData,
             }).done(function(response_data) {
-                setTimeout(function(){ 
+                localStorage.setItem('fire', true)
+                localStorage.setItem('recordHead', response_data['status'])
+                localStorage.setItem('recordMessage', response_data['message'])
+                window.location.reload()
+                /* setTimeout(function(){ 
                     notifyHead.innerHTML = response_data.status
                     notifyMessage.innerHTML = response_data.message
                     notifyDiv.style.right = '1rem' 
-                }, 200);
+                }, 200); */
             })
         })
     </script>

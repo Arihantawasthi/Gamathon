@@ -109,7 +109,7 @@ def teamWallet(request, team_name):
             deposit.team.add(team)
             deposit.save()
             response_data['status'] = 'Success'
-            response_data['message'] = 'Transaction was successful'
+            response_data['message'] = f'Rs. {amount} were successfully transferred to {team.name}'
             response_data['user_wallet'] = user.wallet
             response_data['team_wallet'] = team.wallet
 
@@ -196,8 +196,8 @@ def teamUserTXN(request, team_name):
             transfer.username.add(user)
             transfer.team.add(team)
             transfer.save()
-            response_data['status'] = 'Success'
-            response_data['message'] = 'Transaction was successful'
+            response_data['status'] = 'Success :)'
+            response_data['message'] = f'Rs {amount} were successfully transferred to {member}.'
         
         return JsonResponse(response_data)
 

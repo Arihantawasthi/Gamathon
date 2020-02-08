@@ -212,7 +212,11 @@ $(document).on('submit','#login-form-tourney', function(e) {
             loginWarning.innerHTML = response_data.message
         }
         else {
-            login.style.display = 'none';
+            localStorage.setItem('fire', true)
+            localStorage.setItem('recordHead', response_data['status'])
+            localStorage.setItem('recordMessage', response_data['message'])
+            window.location.reload()
+            /* login.style.display = 'none';
             notifyDiv.style.display ='block'
             setTimeout(function() { 
                 notifyHead.innerHTML = response_data.status
@@ -230,7 +234,7 @@ $(document).on('submit','#login-form-tourney', function(e) {
                     lowerProfile.style.display = 'none'
                 }
                 notifyDiv.style.right = '1rem' 
-            }, 200);
+            }, 200); */
         }
     })
 })
@@ -250,16 +254,17 @@ $(document).on('submit','#account-validate-form', function(e) {
         url: '/game/'+gamename.innerHTML,
         data: formData,
     }).done(function(response_data) {
-        validateModal.style.display = 'none';
+        localStorage.setItem('fire', true)
+        localStorage.setItem('recordHead', response_data['status'])
+        localStorage.setItem('recordMessage', response_data['message'])
+        window.location.reload()
+        /* validateModal.style.display = 'none';
         notifyDiv.style.display = 'block'
         setTimeout(function(){ 
             notifyHead.innerHTML = response_data['status']
             notifyMessage.innerHTML = response_data['message']
             notifyDiv.style.right = '1rem'
-            setTimeout(function() {
-                window.location.reload()
-            }, 200)
-        }, 200);
+        }, 200); */
     })
 })
 
@@ -276,7 +281,21 @@ $(document).on('submit','#tour-registration-entry', function(e) {
         url: '/tournament/'+tourid,
         data: formData,
     }).done(function(response_data) {
-        notifyDiv.style.display = 'block'
+        if (response_data['status'] === 1) {
+            localStorage.setItem('registerFire', true)
+            localStorage.setItem('recordHead', 'Success :)')
+            localStorage.setItem('recordMessage', response_data['message'])
+            window.location.reload()
+        }
+        else {
+            notifyDiv.style.display = 'block'
+            setTimeout(() => {
+                notifyHead.innerHTML = 'Failed :('
+                notifyMessage.innerHTML = 'Something went wrong!'
+                notifyDiv.style.right = '1rem'
+            }, 200)
+        }
+        /* notifyDiv.style.display = 'block'
         setTimeout(function(){ 
             if (response_data['status'] === 1) {
                 notifyHead.innerHTML = 'Success'
@@ -292,9 +311,24 @@ $(document).on('submit','#tour-registration-entry', function(e) {
                 notifyMessage.innerHTML = 'Something went wrong'
                 notifyDiv.style.right = '1rem'
             }
-        }, 200);
+        }, 200); */
     })
 })
+
+if(localStorage.getItem('registerFire')) {
+    document.querySelector('.notify-div').style.display = 'block'
+    document.querySelector('.notify-heading-content').innerHTML = localStorage.getItem('recordHead')
+    document.querySelector('.notify-message').innerHTML = localStorage.getItem('recordMessage')
+    document.querySelector('.notify-div').style.height = '5.7rem'
+    window.onload = () => {
+        setTimeout(() => {
+            document.querySelector('.notify-div').style.right = '1rem'
+        }, 200)
+    }
+    localStorage.removeItem('registerFire')
+    localStorage.removeItem('recordHead')
+    localStorage.removeItem('recordMessage')
+}
 
 /* LADDER SEARCH */
 const searchFun = () => {
@@ -332,4 +366,22 @@ const searchPlayersFun = () => {
             } 
         }
     }
+}
+
+/* Generating the notification when team registers the tournament
+   coming from -> choose_team.js 
+   local storage variables -> registerTeam, recordHead, recordMessage */
+if(localStorage.getItem('registerTeam')) {
+    document.querySelector('.notify-div').style.display = 'block'
+    document.querySelector('.notify-heading-content').innerHTML = localStorage.getItem('recordHead')
+    document.querySelector('.notify-message').innerHTML = localStorage.getItem('recordMessage')
+    document.querySelector('.notify-div').style.height = '5.7rem'
+    window.onload = () => {
+        setTimeout(() => {
+            document.querySelector('.notify-div').style.right = '1rem'
+        })
+    }
+    localStorage.removeItem('registerTeam')
+    localStorage.removeItem('recordHead')
+    localStorage.removeItem('recordMessage')
 }
