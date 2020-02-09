@@ -230,18 +230,27 @@
                     </div>
                 </a>
             {% for member in members %}
-                <a href="{% url 'profile' member.username %}" class="friends-card">
-                    <div class="friends-card-back-image" style="background-image: url('{{ member.profile_back.url }}')"></div>
-                    <div class="friend-pic" style="background-image: url('{{ member.profile_pic.url }}')">
-                        
-                    </div>
-                    <div class="friend-name">
-                        {{ member.username }}
-                    </div>
-                    <div class="friend-role">
-                        Member
-                    </div>
-                </a>
+                <div class="friends-card">
+                    <a href="{% url 'profile' member.username %}" class="friends-card">
+                        <div class="friends-card-back-image" style="background-image: url('{{ member.profile_back.url }}')"></div>
+                        <div class="friend-pic" style="background-image: url('{{ member.profile_pic.url }}')">
+                            
+                        </div>
+                        <div class="friend-name">
+                            {{ member.username }}
+                        </div>
+                        <div class="friend-role">
+                            Member
+                        </div>
+                    </a>
+                    {% if teamObject.captain == request.session.username %}
+                        <form action="{% url 'removeMember' member.username %}" class="remove-member-form" method="post">
+                            {% csrf_token %}
+                            <input type="hidden" name="team" value="{{ teamObject.name }}">
+                            <button class="remove-member-btn">Remove Member</button>
+                        </form>
+                    {% endif %}
+                </div>
             {% endfor %}
                 {% if request.session.username == teamObject.captain %}
                 <div class="invite-member-card">

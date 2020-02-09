@@ -699,3 +699,15 @@ def error_404(request, exception):
 
 def error_500(request):
     return render(request, 'slingshot/500.html')
+
+def removeMember(request, member):
+    if request.method == 'POST':
+        team = request.POST.get('team')
+        teamObject = Team.objects.get(name=team)
+        memberObject = User.objects.get(username=member)
+
+        teamObject.members.remove(member)
+
+        return redirect('team', team)
+    
+    return redirect('index')
