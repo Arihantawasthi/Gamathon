@@ -13,7 +13,16 @@ MERCHANT_KEY = config['PAYTM_MERCHANT_KEY']
 
 # Create your views here.
 def wallet(request, username):
-    context = {}
+    #Getting all the notifications of the users.
+    sendNoti = sendNotification(request)
+    context = {
+        'invite_notifications': sendNoti['invite_notifications'],
+        'follow_notifications': sendNoti['follow_notifications'],
+    }
+
+    total_notifications = len(context['invite_notifications']) + len(context['follow_notifications'])
+    context['total_notifications'] = total_notifications
+
     try:
         logged_in = request.session['logged_in']
             
@@ -64,7 +73,16 @@ def wallet(request, username):
     return render(request, 'wallet/wallet.html', context)
 
 def teamWallet(request, team_name):
-    context = {}
+    #Getting all the notifications of the user.
+    sendNoti = sendNotification(request)
+    context = {
+        'invite_notifications': sendNoti['invite_notifications'],
+        'follow_notifications': sendNoti['follow_notifications'],
+    }
+
+    total_notifications = len(context['invite_notifications']) + len(context['follow_notifications'])
+    context['total_notifications'] = total_notifications
+
     try: 
         loggin_true = request.session['logged_in']
     except KeyError:
@@ -109,7 +127,7 @@ def teamWallet(request, team_name):
             deposit.team.add(team)
             deposit.save()
             response_data['status'] = 'Success'
-            response_data['message'] = 'Transaction was successful'
+            response_data['message'] = f'Rs. {amount} were successfully transferred to {team.name}'
             response_data['user_wallet'] = user.wallet
             response_data['team_wallet'] = team.wallet
 
@@ -196,8 +214,8 @@ def teamUserTXN(request, team_name):
             transfer.username.add(user)
             transfer.team.add(team)
             transfer.save()
-            response_data['status'] = 'Success'
-            response_data['message'] = 'Transaction was successful'
+            response_data['status'] = 'Success :)'
+            response_data['message'] = f'Rs {amount} were successfully transferred to {member}.'
         
         return JsonResponse(response_data)
 

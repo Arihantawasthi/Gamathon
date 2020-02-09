@@ -67,15 +67,19 @@ games.addEventListener('click', ()=> {
 });
 
 modalClose.addEventListener('click', ()=> {
-    modal.style.display = 'none';
+    document.querySelector('.create-team-modal-content').style.transform = 'translateY(0rem)'
     setTimeout(() => {
         notifyDiv.style.display = 'none'
-    }, 500)
+        modal.style.display = 'none';
+    }, 200)
 });
 
 if (document.querySelector('#sessionUser').innerHTML === document.querySelector('.profile-name').innerHTML){
     createTeam.addEventListener('click', ()=> {
-    modal.style.display = 'block';
+        modal.style.display = 'block';
+        setTimeout(() => {
+            document.querySelector('.create-team-modal-content').style.transform = 'translateY(1rem)'
+        }, 200)
     });
 }
 
@@ -120,12 +124,16 @@ $(document).on('submit','#create-team-form', function(e) {
         url: '/profile/'+sessionUser.innerHTML,
         data: formData,
     }).done(function(response_data) {
-        notifyDiv.style.display = 'block'
+        localStorage.setItem('fire', true)
+        localStorage.setItem('recordHead', response_data['status'])
+        localStorage.setItem('recordMessage', response_data['message'])
+        window.location.reload()
+        /* notifyDiv.style.display = 'block'
         setTimeout(function(){ 
             notifyHead.innerHTML = response_data.status
             notifyMessage.innerHTML = response_data.message
             notifyDiv.style.right = '1rem' 
-        }, 200);
+        }, 200); */
     })
 })
 

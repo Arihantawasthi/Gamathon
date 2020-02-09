@@ -98,19 +98,10 @@
             {% endif %}
         {% endfor %}
 
-        {% for notification in org_notifications %}
-            {% if request.session.username == notification.org.org_owner %}
-                <li style="border-left-color: #fe0000; border-left-width: 0.2rem;">
-                    <div class="text"><a href="{% url 'profile' notification.user_2.username %}" style="font-weight: bold; text-decoration: none; color: white;;">{{ notification.user_2.username }}</a> started following <a href="{% url 'org-profile' notification.org.org_name%}" style="font-weight: bold; text-decoration: none; color: white;">{{ notification.org.org_name }}</a></div>
-                    <div class="notify-time">{{ notification.created }}</div>
-                </li>
-            {% endif %}
-        {% endfor %}
-
         {% for notification in follow_notifications %}
             {% if request.session.username == notification.user_1.username %}
                 <li style="border-left-color: #fe0000; border-left-width: 0.2rem;">
-                    <div class="text"><a href="{% url 'profile' notification.user_2.username %}" style="font-weight: bold; text-decoration: none; color: white">{{ notification.user_2.username }}</a> started following you.</div>
+                    <div class="text"><a href="{% url 'profile' notification.user_2.username %}" style="font-weight: bold; text-decoration: none; color: white">{{ notification.user_2.username }}</a> {{ notification.update }}</div>
                     <div class="notify-time">{{ notification.created }}</div>
                 </li>
             {% endif %}

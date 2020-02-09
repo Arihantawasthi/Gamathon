@@ -28,7 +28,7 @@
             <form action="#" class="create-team-modal-form" method="POST">
                 {% csrf_token %}
                 <div class="name-head">Username Of The Player</div>
-                <i class="fa fa-user" style="position: absolute; top: 8.1rem; left: 1.6rem; font-size: 18px;"></i>
+                <i class="fa fa-user" style="position: absolute; top: 9rem; left: 1.6rem; font-size: 18px;"></i>
                 <input type="input" class="acc-name-field" id='invite-search' placeholder="Enter the username of the player" autofocus="on">
             </form>
             <form action="#" class="create-team-modal-form" id='player-checkbox'>
@@ -47,7 +47,7 @@
             <form action="#" method="post" class="join-team-modal-form">
                 {% csrf_token %}
                 <div class="name-head">Enter the Join Code</div>
-                <div class="name-info"><i class="fa fa-warning"></i> You should should have join code provided by this team in order to be a member of this team.</div>
+                <div class="name-info"><i class="fa fa-warning"></i> You should have join code provided by this team in order to be a member of this team.</div>
                 <input type="text" class="acc-name-field" name='join-code' id="join-team-input" placeholder="Password / Join Code" autofocus="on">
                 <input type="hidden" name='username-input' value="{{ request.session.username }}">
                 <div class="join-code-error" style="margin-top: 0.5rem; color: red; margin-left: 1rem; margin-right: 1rem; font-size: 14px;"></div>
@@ -57,10 +57,10 @@
     </div>
 
     <div class="container">
-        <div class="team-back" style="background-image: url('/media/{{ teamObject.team_banner }}')"></div>
+        <div class="team-back" style="background-image: url('{{ teamObject.team_banner.url }}')"></div>
         
         <div class="team-info">
-            <div class="team-img" style="background-image: url('/media/{{ teamObject.logo }}')"></div>
+            <div class="team-img" style="background-image: url('{{ teamObject.logo.url }}')"></div>
             <div class="team-name-friend">
                 <div class="team-name">{{ teamObject.name }}
                 </div>
@@ -108,6 +108,14 @@
             {% endif %}
         </div>
 
+        <div class="share">
+            <div class="share-heading">Share this link and invite your friends to join your team!</div>
+            <div class="share-link">
+                <input type="text" value="https://gamathon.gg/team/{{ teamObject.name }}" id="shareLink">
+                <button class="copyLink">Copy Link</button>
+            </div>
+        </div>
+
         <div class="team-sec">
             <ul class='team-tabs'>
                 <li class="overview">Overview</li>
@@ -129,7 +137,7 @@
                     <div class="stats-card">
                         <div class="stats-card-back"></div>
                         <div class="stats-card-head">
-                            <div class="stats-card-img" style="background-image: url('/media/{{ most_played_game.card_image }}')"></div>
+                            <div class="stats-card-img" style="background-image: url('{{ most_played_game.card_image.url }}')"></div>
                             <div class="stats-card-head-info">
                                 <div class="stats-card-name">{{ most_played_game.fullname }}</div>
                                 <div class="stats-card-stats">Statistics</div>
@@ -176,7 +184,7 @@
                 {% for tour in tour_played %}
                     <a href="{% url 'tourney' tour.id %}" class="played-game-card">
                         <div class="played-game-card-up-sec">
-                            <div class="played-game-img" style="background-image: url('/media/{{ tour.banner }}');"></div>
+                            <div class="played-game-img" style="background-image: url('{{ tour.banner.url }}');"></div>
                             <div class="played-game-name-history">
                                 <div class="played-game-name">
                                     {{ tour.name }}
@@ -210,8 +218,8 @@
             <div class="line4"></div>
             <div class="friends-card-wrapper">
                 <a href="{% url 'profile' teamObject.captain %}" class="friends-card">
-                    <div class="friends-card-back-image" style="background-image: url('/media/{{ captainObject.profile_back }}')"></div>
-                    <div class="friend-pic" style="background-image: url('/media/{{ captainObject.profile_pic }}')">
+                    <div class="friends-card-back-image" style="background-image: url('{{ captainObject.profile_back.url }}')"></div>
+                    <div class="friend-pic" style="background-image: url('{{ captainObject.profile_pic.url }}')">
                         
                     </div>
                     <div class="friend-name">
@@ -222,18 +230,27 @@
                     </div>
                 </a>
             {% for member in members %}
-                <a href="{% url 'profile' member.username %}" class="friends-card">
-                    <div class="friends-card-back-image" style="background-image: url('/media/{{ member.profile_back }}')"></div>
-                    <div class="friend-pic" style="background-image: url('/media/{{ member.profile_pic }}')">
-                        
-                    </div>
-                    <div class="friend-name">
-                        {{ member.username }}
-                    </div>
-                    <div class="friend-role">
-                        Member
-                    </div>
-                </a>
+                <div class="friends-card">
+                    <a href="{% url 'profile' member.username %}" class="friends-card">
+                        <div class="friends-card-back-image" style="background-image: url('{{ member.profile_back.url }}')"></div>
+                        <div class="friend-pic" style="background-image: url('{{ member.profile_pic.url }}')">
+                            
+                        </div>
+                        <div class="friend-name">
+                            {{ member.username }}
+                        </div>
+                        <div class="friend-role">
+                            Member
+                        </div>
+                    </a>
+                    {% if teamObject.captain == request.session.username %}
+                        <form action="{% url 'removeMember' member.username %}" class="remove-member-form" method="post">
+                            {% csrf_token %}
+                            <input type="hidden" name="team" value="{{ teamObject.name }}">
+                            <button class="remove-member-btn">Remove Member</button>
+                        </form>
+                    {% endif %}
+                </div>
             {% endfor %}
                 {% if request.session.username == teamObject.captain %}
                 <div class="invite-member-card">
@@ -255,7 +272,7 @@
                 <div class="stats-card">
                     <div class="stats-card-back"></div>
                     <div class="stats-card-head">
-                        <div class="stats-card-img" style="background-image: url('/media/{{ stat.game.card_image }}');"></div>
+                        <div class="stats-card-img" style="background-image: url('{{ stat.game.card_image.url }}');"></div>
                         <div class="stats-card-head-info">
                             <div class="stats-card-name">{{ stat.game.fullname }}</div>
                             <div class="stats-card-stats">Statistics</div>
@@ -302,7 +319,7 @@
             <div class="games-card-container">
             {% for stat in all_stats %}
                 <a href="{% url 'game' stat.game.name %}" class="games-card">
-                    <div class="games-card-img" style="background-image: url('/media/{{ stat.game.card_image }}');"></div>
+                    <div class="games-card-img" style="background-image: url('{{ stat.game.card_image.url }}');"></div>
                     <div class="games-card-game">{{ stat.game.fullname }}</div>
                 </a>
             {% empty %}

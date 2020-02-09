@@ -44,7 +44,7 @@
                 {% for game in games %}
                     <a href="{% url 'game' game.name %}" class="game-card">
                         <div>
-			    <div class="game-img" style="background-image: url('/media/{{ game.card_image }}');"></div>
+			    <div class="game-img" style="background-image: url('{{ game.card_image.url }}');"></div>
                             <div class="game-name">{{ game.fullname }}</div>
                         </div>
                     </a>
@@ -59,7 +59,7 @@
             <div class="tourney-card-container">
             {% for tournament in tournaments %}
                 <a href="{% url 'tourney' tournament.id %}" class="tourney-card" id="tourney-tabs">
-                    <div class="tourney-card-image" style="background-image: url('/media/{{ tournament.banner }}');">
+                    <div class="tourney-card-image" style="background-image: url('{{ tournament.banner.url }}');">
                         <div class="tourney-card-time">{{ tournament.start_time }} |  <span style="margin-left: 0.2rem;">{{ tournament.start_date }}</span></div>
                         <div class="tourney-card-platform">PC</div>
                     </div>

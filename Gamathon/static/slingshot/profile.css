@@ -665,7 +665,10 @@ body {
 .create-team-modal-content {
     background: linear-gradient(to bottom, rgb(40, 40, 49), rgb(10, 10, 10));
     border-radius: 4px;
-    margin: 3rem 1rem;
+    margin: 0rem 1rem;
+    border-top: solid 3px #fe0000;
+    transition: all 0.3s ease-in-out;
+    overflow: auto;
 }
 
 .create-team-modal-form {
@@ -700,9 +703,16 @@ body {
     margin: 0 1rem;
     border-radius: 2px;
     border: 0;
-    height: 1.8rem;
-    padding-left: 1rem;
+    padding: 0.6rem 0.5rem;
     color: white;
+    border-radius: 6px;
+    background-color: #33373f;
+}
+
+.acc-name-field:focus {
+    background-color: #3c4250;
+    outline-width: 0;
+    border: solid 1px rgb(19, 196, 19);
 }
 
 .acc-name-field:focus {

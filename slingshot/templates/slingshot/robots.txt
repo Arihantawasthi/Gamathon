@@ -9,3 +9,5 @@ Disallow: /upload-team-profile/
 Disallow: /accounts/password/
 Disallow: /activate/
 Disallow: /following/
+Disallow: /terms-of-user/
+Disallow: /privacy-policy/

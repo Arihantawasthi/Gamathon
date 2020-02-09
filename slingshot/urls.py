@@ -25,5 +25,6 @@ urlpatterns = [
     path('accounts/password/<token>', views.resetPass, name='resetPass'),
     path('privacy-policy', views.privacyPolicy, name='privacyPolicy'),
     path('terms-of-use', views.termsOfUse, name='termsOfUse'),
+    path('remove-member/<member>', views.removeMember, name='removeMember'),
     path('robots.txt', TemplateView.as_view(template_name="slingshot/robots.txt", content_type="text/plain")),
 ]
