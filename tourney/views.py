@@ -8,6 +8,7 @@ from django.views.decorators.csrf import csrf_exempt
 from PayTm import Checksum
 import datetime
 import json
+from slingshot.views import sendNotification
 
 with open('/etc/gamathon_config.json') as config_file:
     config = json.load(config_file)
@@ -16,7 +17,14 @@ MERCHANT_KEY = config['PAYTM_MERCHANT_KEY']
 
 # Create your views here.
 def game(request, game_name):
-    context = {}
+    sendNoti = sendNotification(request)
+    context = {
+        'invite_notifications': sendNoti['invite_notifications'],
+        'follow_notifications': sendNoti['follow_notifications'],
+    }
+
+    total_notifications = len(context['invite_notifications']) + len(context['follow_notifications'])
+    context['total_notifications'] = total_notifications
     try:
         game = Game.objects.get(name=game_name)
         context['game'] = game
@@ -75,7 +83,16 @@ def game(request, game_name):
     return render(request, 'tourney/game.html', context)
 
 def tourney(request, tour_id):
-    context = {}
+    #Getting all the notifications of the user.
+    sendNoti = sendNotification(request)
+    context = {
+        'invite_notifications': sendNoti['invite_notifications'],
+        'follow_notifications': sendNoti['follow_notifications'],
+    }
+
+    total_notifications = len(context['invite_notifications']) + len(context['follow_notifications'])
+    context['total_notifications'] = total_notifications
+
     response_data = {}
     try:
         tournament = Tournament.objects.get(pk=tour_id)
@@ -120,10 +137,6 @@ def tourney(request, tour_id):
     #Checking if tournament is completed or not
     time = datetime.datetime.now().time()
     date = datetime.datetime.now().date()
-    print(f'Current Date -{date}')
-    print(f'Current Time -{time}')
-    print(f'Tourney Date -{tournament.start_date}')
-    print(f'Tourney Time -{tournament.start_time}')
 
     if date < tournament.start_date:
         tournament.status = 1
@@ -250,7 +263,15 @@ def tourney(request, tour_id):
 
 
 def chooseTeam(request, tour_id):
-    context = {}
+    sendNoti = sendNotification(request)
+    context = {
+        'invite_notifications': sendNoti['invite_notifications'],
+        'follow_notifications': sendNoti['follow_notifications'],
+    }
+
+    total_notifications = len(context['invite_notifications']) + len(context['follow_notifications'])
+    context['total_notifications'] = total_notifications
+    
     tournament = Tournament.objects.get(pk=tour_id)
     teams = Team.objects.filter(captain=request.session['username'])
     context['teams'] = teams

@@ -13,7 +13,16 @@ MERCHANT_KEY = config['PAYTM_MERCHANT_KEY']
 
 # Create your views here.
 def wallet(request, username):
-    context = {}
+    #Getting all the notifications of the users.
+    sendNoti = sendNotification(request)
+    context = {
+        'invite_notifications': sendNoti['invite_notifications'],
+        'follow_notifications': sendNoti['follow_notifications'],
+    }
+
+    total_notifications = len(context['invite_notifications']) + len(context['follow_notifications'])
+    context['total_notifications'] = total_notifications
+
     try:
         logged_in = request.session['logged_in']
             
@@ -64,7 +73,16 @@ def wallet(request, username):
     return render(request, 'wallet/wallet.html', context)
 
 def teamWallet(request, team_name):
-    context = {}
+    #Getting all the notifications of the user.
+    sendNoti = sendNotification(request)
+    context = {
+        'invite_notifications': sendNoti['invite_notifications'],
+        'follow_notifications': sendNoti['follow_notifications'],
+    }
+
+    total_notifications = len(context['invite_notifications']) + len(context['follow_notifications'])
+    context['total_notifications'] = total_notifications
+
     try: 
         loggin_true = request.session['logged_in']
     except KeyError:

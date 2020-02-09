@@ -751,14 +751,6 @@ body {
     cursor: pointer;
 }
 
-input:-webkit-autofill,
-input:-webkit-autofill:hover, 
-input:-webkit-autofill:focus, 
-input:-webkit-autofill:active  {
-    -webkit-box-shadow: 0 0 0 30px #3e4554 inset !important;
-    -webkit-text-fill-color: white;
-}
-
 .name-head {
     font-size: 13px;
     margin: 1.5rem 0 0.5rem 1rem;
@@ -774,14 +766,21 @@ input:-webkit-autofill:active  {
     padding-top: 0.5rem;
     padding-bottom: 0.5rem;
     padding-right: 0.5rem;
-    background-color: #3e4554;
+    background-color: #33373f;
     color: white;
+    border-radius: 6px;
 }
 
 .acc-name-field::placeholder {
     color: white;
     opacity: 0.5;
     font-size: 13px;
+}
+
+.acc-name-field:focus {
+    outline-width: 0;
+    border: solid 1px rgb(49, 196, 49);
+    background-color: #3c4250;
 }
 
 .info {

@@ -6,6 +6,7 @@ from .models import Organization, Notification
 from .tourneyManage import split, isPowerOfTwo, totalRounds
 from django.http import HttpResponse, JsonResponse
 import math
+from slingshot.views import sendNotification
 
 # Create your views here.
 def createOrg(request):
@@ -221,7 +222,14 @@ def orgProfile(request, orgName, username):
     return render(request, 'organize/org_profile.html', context)
 
 def organize(request):
-    context = {}
+    sendNoti = sendNotification(request)
+    context = {
+        'invite_notifications': sendNoti['invite_notifications'],
+        'follow_notifications': sendNoti['follow_notifications'],
+    }
+
+    total_notifications = len(context['invite_notifications']) + len(context['follow_notifications'])
+    context['total_notifications'] = total_notifications
     try: 
         user = request.session['username']
         user = User.objects.get(username=user)

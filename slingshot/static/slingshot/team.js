@@ -103,7 +103,7 @@ try {
     inviteBtn.addEventListener('click', ()=> {
         modal.style.display = 'block';
         setTimeout(() => {
-            modalContent.style.transform = 'translate(0rem, -2rem)'
+            modalContent.style.transform = 'translate(0rem, -1rem)'
         }, 100)
     });
 }
@@ -115,7 +115,7 @@ try {
     inviteMember.addEventListener('click', ()=> {
         modal.style.display = 'block';
         setTimeout(() => {
-            modalContent.style.transform = 'translate(0rem, -2rem)'
+            modalContent.style.transform = 'translate(0rem, -1rem)'
         }, 100)
     });
 }
@@ -151,7 +151,7 @@ $('#invite-search').keyup(function() {
         document.querySelector('.search-result-container').innerHTML = response_data.user_results
 
         if (response_data.user_results === undefined || response_data.user_results === '') {
-            document.querySelector('.search-result-container').innerHTML = "<div style='color: black; padding: 0.5rem 1rem; margin: auto;'>We could not find any players matching your search.</div>"
+            document.querySelector('.search-result-container').innerHTML = "<div style='color: black; padding: 0.5rem 1rem; margin: auto; font-size: 14px;'>We could not find any players matching your search. Maybe you already sent the invite or the player is already in your team</div>"
         }
     })
 })
@@ -174,6 +174,8 @@ $(document).on('submit','#player-checkbox', function(e) {
         data: formData,
     }).done(function(response_data) {
         modal.style.display = 'none'
+        document.querySelector('#invite-search').value = ''
+        document.querySelector('.search-result-container').innerHTML = ''
         notifyDiv.style.display = 'block'
         setTimeout(function(){ 
             notifyHead.innerHTML = 'Success :)'

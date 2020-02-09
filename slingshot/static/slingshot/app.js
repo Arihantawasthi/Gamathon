@@ -405,7 +405,11 @@ $(document).on('submit','#invite-form', function(e) {
         url: '/team/'+formData.team_name,
         data: formData,
     }).done(function(response_data) {
-        notificationContainer.style.transform = 'translate(-40rem)'
+        localStorage.setItem('fire', true)
+        localStorage.setItem('recordHead', 'Success :)')
+        localStorage.setItem('recordMessage', response_data['message'])
+        window.location.reload()
+        /* notificationContainer.style.transform = 'translate(-40rem)'
         notificationContainer.style.height = '0rem'
         notificationContainer.style.width = '0rem' 
         notifyDiv.style.display = 'block'
@@ -413,7 +417,7 @@ $(document).on('submit','#invite-form', function(e) {
             notifyHead.innerHTML = 'Success :)'
             notifyMessage.innerHTML = response_data.message
             notifyDiv.style.right = '1rem'
-        }, 200)
+        }, 200) */
     })
 })
 

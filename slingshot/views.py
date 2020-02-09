@@ -13,18 +13,17 @@ from . import amazonses
 secret_key = URLSafeTimedSerializer('thisisasecretkey!')
 
 def sendNotification(request):
-    notifications = Notification.objects.all()
+    try:
+        notifications = Notification.objects.filter(user_1=request.session['username'])
+    except KeyError:
+        notifications = []
     notification_all = {}
     notification_all['invite_notifications'] = []
-    notification_all['org_notifications'] = []
     notification_all['follow_notifications'] = []
 
     for notification in notifications:
         if notification.team != None:
             notification_all['invite_notifications'].append(notification)
-
-        elif notification.org != None:
-            notification_all['org_notifications'].append(notification)
         
         else:
             notification_all['follow_notifications'].append(notification)
@@ -39,11 +38,10 @@ def index(request):
     context = {
         'games': games,
         'invite_notifications': sendNoti['invite_notifications'],
-        'org_notifications': sendNoti['org_notifications'],
         'follow_notifications': sendNoti['follow_notifications'],
     }
 
-    total_notifications = len(context['invite_notifications']) + len(context['org_notifications']) + len(context['follow_notifications'])
+    total_notifications = len(context['invite_notifications']) + len(context['follow_notifications'])
     context['total_notifications'] = total_notifications
     
     tournaments = Tournament.objects.filter(status=1)
@@ -167,6 +165,16 @@ def profileSettings(request, username):
     except KeyError:
         return HttpResponse('Sorry Kiddo Not here')
     
+    sendNoti = sendNotification(request)
+    context = {
+        'games': games,
+        'invite_notifications': sendNoti['invite_notifications'],
+        'follow_notifications': sendNoti['follow_notifications'],
+    }
+
+    total_notifications = len(context['invite_notifications']) + len(context['follow_notifications'])
+    context['total_notifications'] = total_notifications
+    
     this_user = User.objects.get(username=username)
     context = {
         'email': this_user.email,
@@ -221,11 +229,10 @@ def profile(request, username):
         'user': user,
         'totalTeams': total_teams,
         'invite_notifications': sendNoti['invite_notifications'],
-        'org_notifications': sendNoti['org_notifications'],
         'follow_notifications': sendNoti['follow_notifications'],
     }
 
-    total_notifications = len(context['invite_notifications']) + len(context['org_notifications']) + len(context['follow_notifications'])
+    total_notifications = len(context['invite_notifications']) + len(context['follow_notifications'])
     context['total_notifications'] = total_notifications
 
     tournaments = user.participant.all()
@@ -321,11 +328,10 @@ def team(request, team_name):
     context = {
         'games': games,
         'invite_notifications': sendNoti['invite_notifications'],
-        'org_notifications': sendNoti['org_notifications'],
         'follow_notifications': sendNoti['follow_notifications'],
     }
 
-    total_notifications = len(context['invite_notifications']) + len(context['org_notifications']) + len(context['follow_notifications'])
+    total_notifications = len(context['invite_notifications']) + len(context['follow_notifications'])
     context['total_notifications'] = total_notifications
 
     try:
@@ -371,7 +377,7 @@ def team(request, team_name):
         status = request.POST.get('status')
         if query is not None:
             user_term = User.objects.filter(username__icontains=query)
-            user_term = [i.username for i in user_term if i not in teamObject.members.all()]
+            user_term = [i.username for i in user_term if i not in teamObject.members.all() and i not in [j.user for j in Invite.objects.filter(user=i, team=teamObject)]]
             user_results = ''
             for i in user_term:
                 print('yha2')
@@ -392,9 +398,14 @@ def team(request, team_name):
             invite.status = status
             invite.save()
             if status == '1':
+                for i in teamObject.members.all():
+                    noti = Notification(user_1=i, user_2=session_user, update=f' just joined your team {teamObject.name}!')
+                    noti.save()
                 team_object.members.add(session_user)
                 team_object.save()
                 notification.delete()
+                invite.delete()
+                team_cap = User.objects.get(username=team_object.captain)
                 response_data['message'] = f'You are now a member of {team_object.name}'
                 return JsonResponse(response_data)
 
@@ -477,7 +488,7 @@ def following(request, username):
         print(followed)
         print(follower)
         # Creating a notification that someone has started following you
-        notification = Notification(user_1=followed, user_2=follower, update=f"{followed} started following {follower}")
+        notification = Notification(user_1=followed, user_2=follower, update=f" started following you!")
         notification.save()
         return JsonResponse(response_data)
     

@@ -28,7 +28,7 @@
             <form action="#" class="create-team-modal-form" method="POST">
                 {% csrf_token %}
                 <div class="name-head">Username Of The Player</div>
-                <i class="fa fa-user" style="position: absolute; top: 8.1rem; left: 1.6rem; font-size: 18px;"></i>
+                <i class="fa fa-user" style="position: absolute; top: 9rem; left: 1.6rem; font-size: 18px;"></i>
                 <input type="input" class="acc-name-field" id='invite-search' placeholder="Enter the username of the player" autofocus="on">
             </form>
             <form action="#" class="create-team-modal-form" id='player-checkbox'>
@@ -47,7 +47,7 @@
             <form action="#" method="post" class="join-team-modal-form">
                 {% csrf_token %}
                 <div class="name-head">Enter the Join Code</div>
-                <div class="name-info"><i class="fa fa-warning"></i> You should should have join code provided by this team in order to be a member of this team.</div>
+                <div class="name-info"><i class="fa fa-warning"></i> You should have join code provided by this team in order to be a member of this team.</div>
                 <input type="text" class="acc-name-field" name='join-code' id="join-team-input" placeholder="Password / Join Code" autofocus="on">
                 <input type="hidden" name='username-input' value="{{ request.session.username }}">
                 <div class="join-code-error" style="margin-top: 0.5rem; color: red; margin-left: 1rem; margin-right: 1rem; font-size: 14px;"></div>
