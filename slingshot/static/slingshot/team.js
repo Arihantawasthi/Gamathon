@@ -36,6 +36,8 @@ try {
 }
 catch (e) {}
 
+document.querySelector('#shareLink').value = window.location.href
+
 function myFunction() {
     var copyText = document.getElementById("shareLink");
     copyText.select();
