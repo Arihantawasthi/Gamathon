@@ -57,7 +57,7 @@
     </div>
 
     <div class="container">
-        <div class="team-back" style="background-image: url('{{ teamObject.team_banner.url }}')"></div>
+        <div class="team-back" style="background-image: url('/media/{{ teamObject.team_banner }}')"></div>
         
         <div class="team-info">
             <div class="team-img" style="background-image: url('{{ teamObject.logo.url }}')"></div>
@@ -218,7 +218,7 @@
             <div class="line4"></div>
             <div class="friends-card-wrapper">
                 <a href="{% url 'profile' teamObject.captain %}" class="friends-card">
-                    <div class="friends-card-back-image" style="background-image: url('{{ captainObject.profile_back.url }}')"></div>
+                    <div class="friends-card-back-image" style="background-image: url('/media/{{ captainObject.profile_back }}')"></div>
                     <div class="friend-pic" style="background-image: url('{{ captainObject.profile_pic.url }}')">
                         
                     </div>
@@ -232,7 +232,7 @@
             {% for member in members %}
                 <div class="friends-card">
                     <a href="{% url 'profile' member.username %}" class="friends-card">
-                        <div class="friends-card-back-image" style="background-image: url('{{ member.profile_back.url }}')"></div>
+                        <div class="friends-card-back-image" style="background-image: url('/media/{{ member.profile_back }}')"></div>
                         <div class="friend-pic" style="background-image: url('{{ member.profile_pic.url }}')">
                             
                         </div>

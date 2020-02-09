@@ -264,14 +264,7 @@ $(document).on('submit','#account-validate-form', function(e) {
             notifyHead.innerHTML = response_data['status']
             notifyMessage.innerHTML = response_data['message']
             notifyDiv.style.right = '1rem'
-<<<<<<< HEAD
-	    setTimeout(() => {
-	    	window.location.reload()
-	    }, 400)
-        }, 200);
-=======
         }, 200); */
->>>>>>> 32217f159e022290fe7e7735938a181b5c540735
     })
 })
 
@@ -309,15 +302,14 @@ $(document).on('submit','#tour-registration-entry', function(e) {
                 notifyMessage.innerHTML = response_data.message
                 notifyDiv.style.height = '5.7rem'
                 notifyDiv.style.right = '1rem'
-<<<<<<< HEAD
+
 		setTimeout(() => {
 			window.location.reload()
 		}, 100)
-=======
+
                 setTimeout(() => {
                     window.location.reload()
                 }, 1000)
->>>>>>> 32217f159e022290fe7e7735938a181b5c540735
             }
             else {
                 notifyHead.innerHTML = 'Failed'
@@ -380,8 +372,6 @@ const searchPlayersFun = () => {
         }
     }
 }
-<<<<<<< HEAD
-=======
 
 /* Generating the notification when team registers the tournament
    coming from -> choose_team.js 
@@ -400,4 +390,3 @@ if(localStorage.getItem('registerTeam')) {
     localStorage.removeItem('recordHead')
     localStorage.removeItem('recordMessage')
 }
->>>>>>> 32217f159e022290fe7e7735938a181b5c540735

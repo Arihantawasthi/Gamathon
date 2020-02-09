@@ -82,7 +82,7 @@ $(document).on('submit', '#team-select', function(e) {
     }
     $.ajax({
         type:'POST',
-        url: 'http://127.0.0.1:8000/choose-team/registration/'+tourid,
+        url: 'https://gamathon.gg/choose-team/registration/'+tourid,
         data: formData,
     }).done(function(response_data) {
         document.querySelector('.form1').style.transform = 'translate(-110%)'
@@ -129,7 +129,7 @@ $(document).on('submit', "#team-register", function(e) {
         console.log(formData)
         $.ajax({
             type: "POST",
-            url: 'http://127.0.0.1:8000/choose-team/registration/'+tourid,
+            url: 'https://gamathon.gg/choose-team/registration/'+tourid,
             data: formData,
         }).done(function(response_data) {
             setTimeout(function() {
@@ -169,7 +169,7 @@ $(document).on('submit','#player-select', function(e) {
         console.log(formData)
         $.ajax({
             type:'POST',
-            url: 'http://127.0.0.1:8000/tournament/'+tourid,
+            url: 'https://gamathon.gg/tournament/'+tourid,
             data: formData,
         }).done(function(response_data) {
             setTimeout(function(){ 
@@ -177,7 +177,7 @@ $(document).on('submit','#player-select', function(e) {
                     localStorage.setItem('registerTeam', true)
                     localStorage.setItem('recordHead', 'Success :)')
                     localStorage.setItem('recordMessage', "You just registered for the Hunt. Climb your way to the top, it's time to show them what you got. Good Luck Homie!")
-                    window.location.replace('http://127.0.0.1:8000/tournament/'+tourid)
+                    window.location.replace('https://gamathon.gg/tournament/'+tourid)
                 }
     
                 else {
