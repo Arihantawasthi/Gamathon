@@ -299,10 +299,13 @@ body {
     background-image: url('./Site_Material/logo.png');
     background-size: cover;
     background-repeat: no-repeat;
-    background-color: black;
+    /* background-color: black; */
     height: 6rem;
-    width: 5rem;
+    width: 6rem;
     margin: auto;
+    border-radius: 5px;
+    margin-top: 1rem;
+    margin-bottom: -1rem;
 }
 
 .tourney-name {
@@ -793,6 +796,7 @@ body {
     height: 70%;
     background: linear-gradient(to bottom, rgb(56, 54, 54), #181717);
     border-radius: 4px;
+    background-size: cover;
 }
 
 .player-img {

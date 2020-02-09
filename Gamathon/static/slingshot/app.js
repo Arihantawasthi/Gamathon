@@ -195,7 +195,7 @@ notifyClose.addEventListener('click', ()=> {
     notifyDiv.style.right = '-100%';
     setTimeout(function () {
         notifyDiv.style.display = 'none'
-        window.location.reload()
+        /* window.location.reload() */
     }, 500)
 })
 
@@ -250,7 +250,11 @@ $(document).on('submit','#reg-form', function(e) {
         url: '/signup',
         data: formData,
     }).done(function(response_data) {
-        registerModal.style.display = 'none';
+        localStorage.setItem('fire', true)
+        localStorage.setItem('recordHead', response_data.status)
+        localStorage.setItem('recordMessage', response_data.message)
+        window.location.reload()
+        /* registerModal.style.display = 'none';
         notifyDiv.style.display = 'block'
         setTimeout(() => {          
             sideBar.style.display = 'none';
@@ -261,7 +265,7 @@ $(document).on('submit','#reg-form', function(e) {
             notifyHead.innerHTML = response_data.status
             notifyMessage.innerHTML = response_data.message
             notifyDiv.style.right = '1rem' 
-        }, 200);
+        }, 200); */
 
     })
 })
@@ -286,9 +290,14 @@ $(document).on('submit','#login-form', function(e) {
             warning.innerHTML = response_data.message
         }
         else {
-            loginModal.style.display = 'none';
+            /* loginModal.style.display = 'none';
             notifyDiv.style.display = 'block'
-            setTimeout(function() { 
+            notifyDiv.style.right = '1rem' */
+            localStorage.setItem('fire', true)
+            localStorage.setItem('recordHead', response_data.status)
+            localStorage.setItem('recordMessage', response_data.message)
+            window.location.reload()
+            /* setTimeout(function() { 
                 notifyHead.innerHTML = response_data.status
                 notifyMessage.innerHTML = response_data.message
                 sessionUser.innerHTML = formData['username']
@@ -309,10 +318,26 @@ $(document).on('submit','#login-form', function(e) {
                     document.querySelector('.wallet').href = "#"
                 }
                 notifyDiv.style.right = '1rem' 
-            }, 200);
+            }, 200); */
         }
     })
 })
+
+/* Showing the notification message if it
+   exists in the local storage.  */
+if (localStorage.getItem('fire')) {
+    notifyDiv.style.display = 'block'
+    notifyHead.innerHTML = localStorage.getItem('recordHead')
+    notifyMessage.innerHTML = localStorage.getItem('recordMessage')
+    window.onload = () => {
+        setTimeout(() => {
+            notifyDiv.style.right = '1rem'
+        }, 200)
+    }
+    localStorage.removeItem('fire')
+    localStorage.removeItem('recordHead')
+    localStorage.removeItem('recordMessage')
+}
 
 container.addEventListener('click', () => {
     document.querySelector('#search-results').style.display = 'none'
@@ -380,7 +405,11 @@ $(document).on('submit','#invite-form', function(e) {
         url: '/team/'+formData.team_name,
         data: formData,
     }).done(function(response_data) {
-        notificationContainer.style.transform = 'translate(-40rem)'
+        localStorage.setItem('fire', true)
+        localStorage.setItem('recordHead', 'Success :)')
+        localStorage.setItem('recordMessage', response_data['message'])
+        window.location.reload()
+        /* notificationContainer.style.transform = 'translate(-40rem)'
         notificationContainer.style.height = '0rem'
         notificationContainer.style.width = '0rem' 
         notifyDiv.style.display = 'block'
@@ -388,7 +417,7 @@ $(document).on('submit','#invite-form', function(e) {
             notifyHead.innerHTML = 'Success :)'
             notifyMessage.innerHTML = response_data.message
             notifyDiv.style.right = '1rem'
-        }, 200)
+        }, 200) */
     })
 })
 

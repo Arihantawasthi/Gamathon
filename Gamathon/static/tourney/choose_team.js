@@ -25,14 +25,13 @@ document.querySelector('.create-team-modal-close').addEventListener('click', ()=
     document.querySelector('.create-team-modal-content').style.transform = 'translate(0rem, -3rem)'
 })
 
-/* ---FORM TO REGISTERING TEAMS IN DATATBASE USING AJAX */
+/* ---FORM TO CREATE TEAM USING AJAX */
 let route = document.querySelector('#sessionUser').innerHTML
 $(document).on('submit','#create-team-form', function(e) {
     e.preventDefault();
-
     var formData = {
-        'name': $('input[name=team-name]').val(), 
-        'password': $('input[name=join-code]').val(),
+        'team_name': $('input[name=team-name]').val(), 
+        'join_code': $('input[name=join-code]').val(),
         'csrfmiddlewaretoken': $('input[name=csrfmiddlewaretoken]').val()
     }
     $.ajax({
@@ -40,15 +39,33 @@ $(document).on('submit','#create-team-form', function(e) {
         url: '/profile/'+route,
         data: formData,
     }).done(function(response_data) {
-        document.querySelector('.bg-create-team-modal').style.display = 'none';
+        localStorage.setItem('createTeam', true)
+        localStorage.setItem('recordHead', response_data['status'])
+        localStorage.setItem('recordMessage', response_data['message'])
+        window.location.reload()
+        /* document.querySelector('.bg-create-team-modal').style.display = 'none';
         document.querySelector('.notify-div').style.display = 'block'
         setTimeout(function(){ 
             document.querySelector('.notify-heading-content').innerHTML = response_data.status
             document.querySelector('.notify-message').innerHTML = response_data.message
             document.querySelector('.notify-div').style.right = '1rem' 
-        }, 200);
+        }, 200); */
     })
 })
+
+if(localStorage.getItem('createTeam')) {
+    document.querySelector('.notify-div').style.display = 'block'
+    document.querySelector('.notify-heading-content').innerHTML = localStorage.getItem('recordHead')
+    document.querySelector('.notify-message').innerHTML = localStorage.getItem('recordMessage')
+    window.onload = () => {
+        setTimeout(() => {
+            document.querySelector('.notify-div').style.right = '1rem'
+        }, 200)
+    }
+    localStorage.removeItem('createTeam')
+    localStorage.removeItem('recordHead')
+    localStorage.removeItem('recordMessage')
+}
 
 /* GETTING PLAYERS OF THE TEAM */
 $(document).on('submit', '#team-select', function(e) {
@@ -65,7 +82,7 @@ $(document).on('submit', '#team-select', function(e) {
     }
     $.ajax({
         type:'POST',
-        url: 'https://gamathon.gg/choose-team/registration/'+tourid,
+        url: 'http://127.0.0.1:8000/choose-team/registration/'+tourid,
         data: formData,
     }).done(function(response_data) {
         document.querySelector('.form1').style.transform = 'translate(-110%)'
@@ -112,11 +129,11 @@ $(document).on('submit', "#team-register", function(e) {
         console.log(formData)
         $.ajax({
             type: "POST",
-            url: 'https://gamathon.gg/choose-team/registration/'+tourid,
+            url: 'http://127.0.0.1:8000/choose-team/registration/'+tourid,
             data: formData,
         }).done(function(response_data) {
             setTimeout(function() {
-                window.location.replace('https://gamathon.gg/teamPaidRegistration/'+formData['team-name']+'/'+tourid)
+                window.location.replace('http://127.0.0.1:8000/teamPaidRegistration/'+formData['team-name']+'/'+tourid)
             },100)
         })
     }
@@ -152,12 +169,15 @@ $(document).on('submit','#player-select', function(e) {
         console.log(formData)
         $.ajax({
             type:'POST',
-            url: 'https://gamathon.gg/tournament/'+tourid,
+            url: 'http://127.0.0.1:8000/tournament/'+tourid,
             data: formData,
         }).done(function(response_data) {
             setTimeout(function(){ 
                 if (response_data['status'] === 1) {
-                    window.location.replace('https://gamathon.gg/tournament/'+tourid)
+                    localStorage.setItem('registerTeam', true)
+                    localStorage.setItem('recordHead', 'Success :)')
+                    localStorage.setItem('recordMessage', "You just registered for the Hunt. Climb your way to the top, it's time to show them what you got. Good Luck Homie!")
+                    window.location.replace('http://127.0.0.1:8000/tournament/'+tourid)
                 }
     
                 else {
