@@ -111,7 +111,7 @@
         <div class="share">
             <div class="share-heading">Share this link and invite your friends to join your team!</div>
             <div class="share-link">
-                <input type="text" value="https://gamathon.gg/team/{{ teamObject.name }}" id="shareLink">
+                <input type="text" value="" id="shareLink">
                 <button class="copyLink">Copy Link</button>
             </div>
         </div>
@@ -231,8 +231,8 @@
                 </a>
             {% for member in members %}
                 <div class="friends-card">
+		    <div class="friends-card-back-image" style="background-image: url('/media/{{ member.profile_back }}')"></div>
                     <a href="{% url 'profile' member.username %}" class="friends-card">
-                        <div class="friends-card-back-image" style="background-image: url('/media/{{ member.profile_back }}')"></div>
                         <div class="friend-pic" style="background-image: url('{{ member.profile_pic.url }}')">
                             
                         </div>

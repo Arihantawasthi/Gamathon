@@ -71,10 +71,6 @@ $(document).on('submit','.validate-modal-form', function(e) {
             validateHead.innerHTML = response_data['status']
             validateMess.innerHTML = response_data['message']
             window.location.reload()
-<<<<<<< HEAD
-        }, 200);
-=======
         }, 200); */
->>>>>>> 32217f159e022290fe7e7735938a181b5c540735
     })
 })

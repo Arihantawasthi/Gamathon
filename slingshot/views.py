@@ -167,7 +167,6 @@ def profileSettings(request, username):
     
     sendNoti = sendNotification(request)
     context = {
-        'games': games,
         'invite_notifications': sendNoti['invite_notifications'],
         'follow_notifications': sendNoti['follow_notifications'],
     }

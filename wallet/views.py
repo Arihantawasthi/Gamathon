@@ -5,7 +5,7 @@ from .models import Withdrawals, Deposit, OrderId
 from django.views.decorators.csrf import csrf_exempt
 from PayTm import Checksum
 import json
-
+from slingshot.views import sendNotification
 with open('/etc/gamathon_config.json') as config_file:
     config = json.load(config_file)
 
