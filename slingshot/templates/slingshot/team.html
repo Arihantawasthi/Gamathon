@@ -231,8 +231,8 @@
                 </a>
             {% for member in members %}
                 <div class="friends-card">
+                    <div class="friends-card-back-image" style="background-image: url('{{ member.profile_back.url }}')"></div>
                     <a href="{% url 'profile' member.username %}" class="friends-card">
-                        <div class="friends-card-back-image" style="background-image: url('{{ member.profile_back.url }}')"></div>
                         <div class="friend-pic" style="background-image: url('{{ member.profile_pic.url }}')">
                             
                         </div>
