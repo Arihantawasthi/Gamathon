@@ -454,13 +454,15 @@ $(document).on('submit','#recover-form', function(e) {
 
 document.onreadystatechange = function () {
     var state = document.readyState
-    document.getElementById('loading-hud').style.display="block"
+    document.querySelector('#loading-hud').style.display = 'block'
     document.querySelector('.loading-wrapper').style.display = 'block'
+    document.querySelector('body').style.overflow = 'hidden'
     if (state == 'complete') {
         setTimeout(function(){
            document.getElementById('interactive');
-           $('#loading-hud').fadeOut()
-           $('.loading-wrapper').fadeOut()
+           $('#loading-hud').fadeOut(800)
+           $('.loading-wrapper').fadeOut(800)
+           document.querySelector('body').style.overflow = 'auto'
         },0);
     }
   }

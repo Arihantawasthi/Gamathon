@@ -111,7 +111,7 @@
                             <div class="registered">{{ tournament.participants }} Payers registered</div>
                         {% endif %}
 
-                        {% if tournament.status != 2 %}
+                        {% if tournament.status == 1 %}
                             <div class="registration-status"><i class="fa fa-check" style="margin-right: 0.3rem"></i>Registration Open</div>
                         {% else %}    
                             <div class="registration-status"><i class="fa fa-cross" style="margin-right: 0.3rem"></i>Registration Closed</div>

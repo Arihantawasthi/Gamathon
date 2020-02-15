@@ -29,7 +29,7 @@ class Tournament(models.Model):
     player = models.ManyToManyField(User, related_name='participant', blank=True)
     participants = models.PositiveIntegerField(default=0, blank=True)
     sponsor = models.CharField(max_length=50, blank=True)
-    organizer = models.CharField(max_length=10, blank=True, default='Gamathon')
+    organizer = models.CharField(max_length=20, blank=True, default='Gamathon')
     entry_fee = models.PositiveSmallIntegerField(default=0, blank=True)
     team = models.ManyToManyField(Team, related_name='team', blank=True)
     banner = models.ImageField(upload_to='tournament/banners', default='tournament/banners/default-banner.jpg')
