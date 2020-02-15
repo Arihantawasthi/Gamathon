@@ -184,15 +184,22 @@
                     <div class="register-now" style="margin-top: 0.8rem; cursor: default;">This is Draft</div>
                 </div>
             {% elif tournament.status == 2 %}
-                <div class="tourney-registration-done">
-                    <div class="register-now" style="margin-top: 0.8rem; cursor: default;">Registration Closed!</div> <!-- Comptleted Tournament -->
+                <div class="tourney-live-card">
+                    <div class="register-now" style="margin-top: 0.2rem; cursor: not-allowed;">Tournament is Live!</div>
+                    <div class="entry" style="cursor: not-allowed;">Registration is closed</div>
                 </div>
             {% elif tournament.participants >= tournament.limit %}
                 <div class="tourney-registration-done">
                     <div class="register-now" style="margin-top: 0.8rem; cursor: default;">Registration Closed!</div>
                 </div>
+            {% else %}
+                <div class="tourney-registration-done">
+                    <div class="register-now" style="margin-top: 0.8rem; cursor: default;">Tournament Completed!</div>
+                </div>
             {% endif %}
-            <div class="date-time">Registration Ends {{ tournament.start_date }},  {{ tournament.start_time }}</div>
+            <div class="date-time">Registration Ends <span class="datetime">{{ tournament.start_date|date:"M d, Y" }} {{ tournament.start_time|time:"H:i" }}</span></div>
+            <p id="timer"></p>
+            <!-- <p id="demo" style="color: red;"></p> -->
         </div>
 
         <div class="share">

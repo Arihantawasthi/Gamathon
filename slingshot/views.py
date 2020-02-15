@@ -44,7 +44,7 @@ def index(request):
     total_notifications = len(context['invite_notifications']) + len(context['follow_notifications'])
     context['total_notifications'] = total_notifications
     
-    tournaments = Tournament.objects.filter(status=1)
+    tournaments = Tournament.objects.filter(status=1) | Tournament.objects.filter(status=2)
     context['tournaments'] = tournaments
     
     return render(request, 'slingshot/index.html', context)

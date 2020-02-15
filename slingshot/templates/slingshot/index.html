@@ -113,8 +113,10 @@
 
                         {% if tournament.status == 1 %}
                             <div class="registration-status"><i class="fa fa-check" style="margin-right: 0.3rem"></i>Registration Open</div>
-                        {% else %}    
-                            <div class="registration-status"><i class="fa fa-cross" style="margin-right: 0.3rem"></i>Registration Closed</div>
+                        {% elif tournament.status == 2 %}    
+                            <div class="registration-status"><i class="fa fa-caret-right" style="margin-right: 0.3rem"></i>Ongoing</div>
+                        {% else %}
+                            <div class="registration-status"><i class="fa fa-times" style="margin-right: 0.3rem"></i>Registration Closed!</div>
                         {% endif %}
                     </div>
                 </a>
