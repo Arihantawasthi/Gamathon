@@ -79,7 +79,7 @@
                     </div>
                     <div class="tourney-card-organizer-sponsor-info">
                         <div class="tourney-card-organizer">
-                            <div class="organizer-img"></div>
+                            <div class="organizer-img" style="background-image: url('{{ tournament.organizer_logo.url }}');"></div>
                             <div class="organizer-info">
                                 <div class="organizer">Organizer</div>
                                 <div class="organizer-name">{{ tournament.organizer }}</div>
@@ -93,7 +93,7 @@
                                 <div class="sponsor-name">{{ tournament.sponsor }}</div>
                             </div>
                             {% else %}
-                            <div class="sponsor-img"></div>
+                            <div class="sponsor-img" style="background-image: url('{{ tournament.sponsor_logo.url }}');"></div>
                             <div class="sponsor-info">
                                 <div class="sponsor">Sponsor</div>
                                 <div class="sponsor-name">{{ tournament.sponsor }}</div>
@@ -111,10 +111,12 @@
                             <div class="registered">{{ tournament.participants }} Payers registered</div>
                         {% endif %}
 
-                        {% if tournament.status != 2 %}
+                        {% if tournament.status == 1 %}
                             <div class="registration-status"><i class="fa fa-check" style="margin-right: 0.3rem"></i>Registration Open</div>
-                        {% else %}    
-                            <div class="registration-status"><i class="fa fa-cross" style="margin-right: 0.3rem"></i>Registration Closed</div>
+                        {% elif tournament.status == 2 %}    
+                            <div class="registration-status"><i class="fa fa-caret-right" style="margin-right: 0.3rem"></i>Ongoing</div>
+                        {% else %}
+                            <div class="registration-status"><i class="fa fa-times" style="margin-right: 0.3rem"></i>Registration Closed!</div>
                         {% endif %}
                     </div>
                 </a>

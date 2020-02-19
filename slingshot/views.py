@@ -44,7 +44,7 @@ def index(request):
     total_notifications = len(context['invite_notifications']) + len(context['follow_notifications'])
     context['total_notifications'] = total_notifications
     
-    tournaments = Tournament.objects.filter(status=1)
+    tournaments = Tournament.objects.filter(status=1) | Tournament.objects.filter(status=2)
     context['tournaments'] = tournaments
     
     return render(request, 'slingshot/index.html', context)
@@ -134,23 +134,24 @@ def login(request):
 
         response_data = {}
         #Checking if password is same of not
-        try:
-            user = User.objects.get(username=username)
+        user = User.objects.filter(username=username) | User.objects.filter(email=username)
+        user = list(user)
+        if len(user) > 0:
+            user = user[0]
             if check_password(password, user.password):    
                 request.session['logged_in'] = True
-                request.session['username'] = username
+                request.session['username'] = user.username
 
                 response_data['status'] = 'Success!!'
-                response_data['message'] = 'You Are Successfully Logged In.'              
-                response_data['logged_in'] = True
-                response_data['sessionUser'] = username
+                response_data['message'] = 'You Are Successfully Logged In.'           
+                response_data['sessionUser'] = user.username
                 return JsonResponse(response_data)
             else:
                 response_data['status'] = 0
                 response_data['message'] = 'Password is Not Correct'
                 return JsonResponse(response_data)
 
-        except User.DoesNotExist:
+        else:
             response_data['status'] = 0
             response_data['message'] = 'Username Or Password Is Incorrect'
             return JsonResponse(response_data)
@@ -191,13 +192,11 @@ def profileSettings(request, username):
         
         if queryFor == 'email':
             #Checking whether email is already taken or not
-            print(query)
             if query in [i.email for i in users]:
                 response_data['status'] = 'Failed :('
                 response_data['message'] = 'Email is Already Taken'
                 return JsonResponse(response_data)
             else:
-                print(user)
                 user.email = query
                 user.save()
                 response_data['status'] = 'Success :)'
@@ -276,8 +275,6 @@ def profile(request, username):
     followers = user.followers.all()
     followerObjects = [i for i in followers]
     followers = [i.username for i in followers]
-    print(followers)
-    print(followerObjects)
     context['followers'] = followers
     context['followerObjects'] = followerObjects
     
@@ -303,7 +300,6 @@ def profile(request, username):
             return JsonResponse(response_data)         
 
         #Checking if the team name already exists and promting user if it does
-        print('Yha')
         try:
             if team_name == Team.objects.get(name=team_name).name:
                 response_data['status'] = 'Failed :('
@@ -379,7 +375,6 @@ def team(request, team_name):
             user_term = [i.username for i in user_term if i not in teamObject.members.all() and i not in [j.user for j in Invite.objects.filter(user=i, team=teamObject)]]
             user_results = ''
             for i in user_term:
-                print('yha2')
                 user_results += f"""<label class='player-result-container'>
                                     {i}
                                     <input type='checkbox' name='players' value='{i}'>
@@ -484,8 +479,6 @@ def following(request, username):
 
         followed = User.objects.get(username=followed)
         follower = User.objects.get(username=follower)
-        print(followed)
-        print(follower)
         # Creating a notification that someone has started following you
         notification = Notification(user_1=followed, user_2=follower, update=f" started following you!")
         notification.save()
@@ -639,8 +632,6 @@ def uploadProfile(request, username):
             user.profile_pic = profile_pic
         elif profile_pic == None:
             user.profile_back = profile_back
-        print(profile_back)
-        print(profile_pic)
         user.save()
         return redirect('profile', username)
     

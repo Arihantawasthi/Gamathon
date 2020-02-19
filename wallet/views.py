@@ -1,11 +1,13 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse, JsonResponse
 from slingshot.models import User, Team
+from slingshot.views import sendNotification
 from .models import Withdrawals, Deposit, OrderId
 from django.views.decorators.csrf import csrf_exempt
 from PayTm import Checksum
 import json
 from slingshot.views import sendNotification
+
 with open('/etc/gamathon_config.json') as config_file:
     config = json.load(config_file)
 
