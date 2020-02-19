@@ -140,7 +140,7 @@ def tourney(request, tour_id):
     if date < tournament.start_date:
         tournament.status = 1
         tournament.save()
-    elif date < tournament.start_date:
+    elif date >= tournament.start_date:
         if time < tournament.start_time:
             tournament.status = 1
             tournament.save()
