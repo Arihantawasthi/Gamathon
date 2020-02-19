@@ -69,7 +69,7 @@ def game(request, game_name):
         for game in games_validate:
             players.append(game.userName)
         
-        tournaments = Tournament.objects.filter(tour_game=game_name, status=1)                    #Getting all the tournaments related to this game
+        tournaments = Tournament.objects.filter(tour_game=game_name, status=1) | Tournament.objects.filter(tour_game=game_name, status=2)                    #Getting all the tournaments related to this game
 
         #Getting the tournament with highest players participants(Trending Tourney)
         trending_tour = tournaments.order_by('-participants').first()

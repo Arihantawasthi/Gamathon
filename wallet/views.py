@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse, JsonResponse
 from slingshot.models import User, Team
+from slingshot.views import sendNotification
 from .models import Withdrawals, Deposit, OrderId
 from django.views.decorators.csrf import csrf_exempt
 from PayTm import Checksum
