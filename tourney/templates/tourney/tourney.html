@@ -526,7 +526,7 @@
                     {% if tournament.tour_type == 'Solo' %}
                         {% for participant in participants %}
                             <a href="{% url 'profile' participant.username %}" class="players-card">
-                                <div class="up-section" style="background-image: url('/media/{{ participant.profile_back }}')">
+                                <div class="up-section" style="background-image: url('{{ participant.profile_back.url }}')">
                                     <div class="player-img" style="background-image: url('{{ participant.profile_pic.url }}')"></div>
                                     <div class="player-name">{{ participant.name }}</div>
                                     <div class="player-user">{{ participant.username }}</div>
@@ -548,7 +548,7 @@
                     {% else %}
                         {% for team in all_reg_teams %}
                         <a href="{% url 'team' team.name %}" class="players-card">
-                            <div class="up-section" style="background: url('/media/{{ team.team_banner }}')">
+                            <div class="up-section" style="background: url('{{ team.team_banner.url }}')">
                                 <div class="player-img" style="background-image: url('{{ team.logo.url }}')"></div>
                                 <div class="player-name">{{ team.name }}</div>
                             </div>

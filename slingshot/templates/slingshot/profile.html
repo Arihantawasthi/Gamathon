@@ -42,7 +42,7 @@
         </div>
 
         <div class="container">
-            <div class="profile-back" style="background-image: url('/media/{{ user.profile_back }}')"></div>
+            <div class="profile-back" style="background-image: url('{{ user.profile_back.url }}')"></div>
             <div class="profile-info">
                 <div class="flex-divider1">
                     <div class="profile-img" style="background-image: url('{{ user.profile_pic.url }}')">    
@@ -175,7 +175,7 @@
                     
                     {% for follow in followerObjects %}
                         <a href="{% url 'profile' follow %}" class="friends-card">
-                            <div class="friends-card-back-image" style="background-image: url('/media/{{ follow.profile_back }}')"></div>
+                            <div class="friends-card-back-image" style="background-image: url('{{ follow.profile_back.url }}')"></div>
                             <div class="friend-pic" style="background-image: url('{{ follow.profile_pic.url }}')">
                                 
                             </div>
@@ -238,7 +238,7 @@
                 <div class="team-card-container">
                     {% for team in totalTeams %}
                     <a href="{% url 'team' team.name%}" class="team-card">    
-                        <div class="team-background" style="background-image: url('/media/{{ team.team_banner }}');">
+                        <div class="team-background" style="background-image: url('{{ team.team_banner.url }}');">
                             <div class="team-img" style="background-image: url('{{ team.logo.url }}');"></div>
                         </div>
                         <div class="team-name">{{ team.name }}</div>
