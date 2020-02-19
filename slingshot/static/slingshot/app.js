@@ -208,7 +208,7 @@ $('#reg-username').keyup(function() {
 
     document.querySelector('.username-warning-unavailable').style.display = 'none'
     document.querySelector('.username-warning-available').style.display = 'none'
-    if (formData.query.length > 4) {
+    if (formData.query.length > 4 && /^[0-9a-zA-Z\_]+$/.test(formData.query)) {
         $.ajax({
             type: "POST",
             url: "/usernameCheck",
@@ -221,16 +221,28 @@ $('#reg-username').keyup(function() {
             if (response_data.status === 0) {
                 document.querySelector('.username-warning-unavailable').style.display = 'block'
                 document.querySelector('.username-warning-available').style.display = 'none'
+                document.querySelector('.special-char-warn').style.display = 'none'
                 document.querySelector('.username-warning-unavailable').innerHTML = '<i class="fa fa-times" style="margin-right: 0.2rem"></i>'+response_data.message
                 document.querySelector('.username-warning-unavailable').style.color = 'red'
             }
             else if (response_data.status === 1) {
                 document.querySelector('.username-warning-unavailable').style.display = 'none'
                 document.querySelector('.username-warning-available').style.display = 'block'
+                document.querySelector('.special-char-warn').style.display = 'none'
                 document.querySelector('.username-warning-available').innerHTML = '<i class="fa fa-check" style="margin-right: 0.2rem"></i>'+response_data.message
                 document.querySelector('.username-warning-available').style.color = 'green'
             }
         })
+    }
+    else if (!/^[0-9a-zA-Z\_]+$/.test(formData.query)){
+        if (document.querySelector('#reg-username').value.length > 5) {
+            document.querySelector('.special-char-warn').style.display = 'block'
+            document.querySelector('.special-char-warn').innerHTML = '<i class="fa fa-times" style="margin-right: 0.2rem"></i>'+"Special Characters and spaces not allowed!"
+            document.querySelector('.special-char-warn').style.color = 'red'
+        }
+        else {
+            document.querySelector('.special-char-warn').style.display = 'none'
+        }
     }
 })
 
@@ -268,6 +280,18 @@ $(document).on('submit','#reg-form', function(e) {
         }, 200); */
 
     })
+})
+
+$('.username-field').keyup(function() {
+    if (document.querySelector('.username-field').value.length < 4 || document.querySelector('.pass-field').value.length === 0) {
+        warning.style.display = 'none'
+    }
+})
+
+$('.pass-field').keyup(function() {
+    if (document.querySelector('.username-field').value.length < 4 || document.querySelector('.pass-field').value.length === 0) {
+        warning.style.display = 'none'
+    }
 })
 
 
@@ -456,13 +480,13 @@ document.onreadystatechange = function () {
     var state = document.readyState
     document.querySelector('#loading-hud').style.display = 'block'
     document.querySelector('.loading-wrapper').style.display = 'block'
-    document.querySelector('body').style.overflow = 'hidden'
+    document.querySelector('body').style.overflowY = 'hidden'
     if (state == 'complete') {
         setTimeout(function(){
            document.getElementById('interactive');
            $('#loading-hud').fadeOut(800)
            $('.loading-wrapper').fadeOut(800)
-           document.querySelector('body').style.overflow = 'auto'
+           document.querySelector('body').style.overflowY = 'auto'
         },0);
     }
   }

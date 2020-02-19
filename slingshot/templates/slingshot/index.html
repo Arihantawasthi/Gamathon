@@ -79,7 +79,7 @@
                     </div>
                     <div class="tourney-card-organizer-sponsor-info">
                         <div class="tourney-card-organizer">
-                            <div class="organizer-img"></div>
+                            <div class="organizer-img" style="background-image: url('{{ tournament.organizer_logo.url }}');"></div>
                             <div class="organizer-info">
                                 <div class="organizer">Organizer</div>
                                 <div class="organizer-name">{{ tournament.organizer }}</div>
@@ -93,7 +93,7 @@
                                 <div class="sponsor-name">{{ tournament.sponsor }}</div>
                             </div>
                             {% else %}
-                            <div class="sponsor-img"></div>
+                            <div class="sponsor-img" style="background-image: url('{{ tournament.sponsor_logo.url }}');"></div>
                             <div class="sponsor-info">
                                 <div class="sponsor">Sponsor</div>
                                 <div class="sponsor-name">{{ tournament.sponsor }}</div>

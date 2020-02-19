@@ -134,23 +134,24 @@ def login(request):
 
         response_data = {}
         #Checking if password is same of not
-        try:
-            user = User.objects.get(username=username)
+        user = User.objects.filter(username=username) | User.objects.filter(email=username)
+        user = list(user)
+        if len(user) > 0:
+            user = user[0]
             if check_password(password, user.password):    
                 request.session['logged_in'] = True
-                request.session['username'] = username
+                request.session['username'] = user.username
 
                 response_data['status'] = 'Success!!'
-                response_data['message'] = 'You Are Successfully Logged In.'              
-                response_data['logged_in'] = True
-                response_data['sessionUser'] = username
+                response_data['message'] = 'You Are Successfully Logged In.'           
+                response_data['sessionUser'] = user.username
                 return JsonResponse(response_data)
             else:
                 response_data['status'] = 0
                 response_data['message'] = 'Password is Not Correct'
                 return JsonResponse(response_data)
 
-        except User.DoesNotExist:
+        else:
             response_data['status'] = 0
             response_data['message'] = 'Username Or Password Is Incorrect'
             return JsonResponse(response_data)
@@ -167,7 +168,6 @@ def profileSettings(request, username):
     
     sendNoti = sendNotification(request)
     context = {
-        'games': games,
         'invite_notifications': sendNoti['invite_notifications'],
         'follow_notifications': sendNoti['follow_notifications'],
     }
