@@ -34,6 +34,7 @@ class Tournament(models.Model):
     team = models.ManyToManyField(Team, related_name='team', blank=True)
     banner = models.ImageField(upload_to='tournament/banners', default='tournament/banners/default-banner.jpg')
     logo = models.ImageField(upload_to='tournament/logos', default='tournament/logos/default-logo.png')
+    sponsor_logo = models.ImageField(upload_to='tournament/logos', default='tournament/sponsors/default-sponsor-logo.png')
     prize_pool = models.PositiveIntegerField(default=0, blank=True)
     start_date = models.DateField(blank=True)
     start_time = models.TimeField(blank=True)
