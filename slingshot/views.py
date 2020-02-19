@@ -701,3 +701,6 @@ def removeMember(request, member):
         return redirect('team', team)
     
     return redirect('index')
+
+def maintenance(request):
+    return render(request, 'slingshot/maintenance.html')
