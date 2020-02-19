@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'slingshot/maintenance.css' %}">
+    <link rel="shortcut icon" href="{% static 'slingshot/Site_Material/logo.png' %}" type="image/png">
+    <link rel="apple-touch-icon" sizes="32x32" href="{% static 'slingshot/Site_Material/logo.png' %}">
+    <link href="https://fonts.googleapis.com/css?family=Play:400,700&display=swap" rel="stylesheet">
+    <title>Under Maintenance | Gamathon</title>
+</head>
+<body>
+    <div class='container'>
+        <div class="logo">
+            <img src="{% static 'slingshot/Site_Material/logo.png' %}" alt="">
+        </div>
+        <div class="font-logo">
+            <img src="{% static 'slingshot/Site_Material/font-logo.png' %}" alt="">
+        </div>
+        <div class="hud">
+            <img src="{% static 'slingshot/Site_Material/hud.svg' %}" alt="">
+        </div>
+        <div>
+            Gamathon is currently under maintenance. This may take a while!
+        </div>
+    </div>
+</body>
+</html>
