@@ -302,46 +302,46 @@
                     </div>
 
                     <div class="top-team-table">
-                    {% if tournament.tour_type == 'Solo' %}
-                        {% for participant in participants %}
-                        <div class="top-team-element">
-                            <div class="left-section">
-                                <div class="s-no">{{ forloop.counter }}</div>
-                                <div class="img-name">
-                                    <a href="{% url 'profile' participant.username %}" class="participant-name">
-                                        <div class="team-img" style="background-image: url('{{ participant.profile_pic.url }}');"></div>{{ participant.name }}
-                                    </a>
+                    {% if tournament.status == 2 %}
+                        {% if tournament.tour_type == 'Solo' %}
+                            {% for participant in participants %}
+                            <div class="top-team-element">
+                                <div class="left-section">
+                                    <div class="s-no">{{ forloop.counter }}</div>
+                                    <div class="img-name">
+                                        <a href="{% url 'profile' participant.username %}" class="participant-name">
+                                            <div class="team-img" style="background-image: url('{{ participant.profile_pic.url }}');"></div>{{ participant.name }}
+                                        </a>
+                                    </div>
+                                </div>
+                                <div class="right-section">
+                                    <div class="win-perc">{{ participant.wins }}</div>
+                                    <div class="win-perc">{{ participant.kills }}</div>
+                                    <div class="points">{{ participant.kills }}</div>
                                 </div>
                             </div>
-                            <div class="right-section">
-                                <div class="win-perc">{{ participant.wins }}</div>
-                                <div class="win-perc">{{ participant.kills }}</div>
-                                <div class="points">{{ participant.kills }}</div>
+                            {% endfor %}
+                        {% else %}
+                            {% for team in all_reg_teams %}
+                            <div class="top-team-element">
+                                <div class="left-section">
+                                    <div class="s-no">{{ forloop.counter }}</div>
+                                    <div class="img-name">
+                                        <a href="{% url 'team' team.name %}" class="participant-name">
+                                            <div class="team-img" style="background-image: url('{{ team.logo.url }}');"></div>{{ team.name }}
+                                        </a>
+                                    </div>
+                                </div>
+                                <div class="right-section">
+                                    <div class="win-perc">{{ team.wins }}</div>
+                                    <div class="win-perc">{{ team.kills }}</div>
+                                    <div class="points">{{ team.kills }}</div>
+                                </div>
                             </div>
-                        </div>
-                        {% empty %}
-                        <div style="color: white; text-align: center;">Ladder will be available when tournament begins.</div>
-                        {% endfor %}
+                            {% endfor %}
+                        {% endif %}
                     {% else %}
-                        {% for team in all_reg_teams %}
-                        <div class="top-team-element">
-                            <div class="left-section">
-                                <div class="s-no">{{ forloop.counter }}</div>
-                                <div class="img-name">
-                                    <a href="{% url 'team' team.name %}" class="participant-name">
-                                        <div class="team-img" style="background-image: url('{{ team.logo.url }}');"></div>{{ team.name }}
-                                    </a>
-                                </div>
-                            </div>
-                            <div class="right-section">
-                                <div class="win-perc">{{ team.wins }}</div>
-                                <div class="win-perc">{{ team.kills }}</div>
-                                <div class="points">{{ team.kills }}</div>
-                            </div>
-                        </div>
-                        {% empty %}
-                        <div style="color: white; text-align: center;">Ladder will be available when tournament begins.</div>
-                        {% endfor %}
+                        <div style="color: rgba(233, 221, 221, 0.7); text-align: center; font-size: 14px; margin-top: 2rem; margin-bottom: 3rem;">Ladder will be available when tournament begins.</div>
                     {% endif %}
                     </div>
                 </div>
@@ -382,7 +382,7 @@
                     <div class="schedule-heading">Schedule</div>
                     <div class="line"></div>
 
-                    <div class="schedule-round-container">
+                    <!-- <div class="schedule-round-container">
                         <div class="schedule-round">
                             <div class="schedule-round-head">
                                 <div class="schedule-round-name">
@@ -517,7 +517,8 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </div> -->
+                    <div style="text-align: center; color: rgba(233, 221, 221, 0.7); font-size: 14px;">Schedule will be generated after regisration closes.</div>
                 </div>
                 
                 <div class="players-content">
