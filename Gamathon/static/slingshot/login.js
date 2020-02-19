@@ -4,6 +4,18 @@ const notifyMessage = document.querySelector('.notify-message')
 const notifyClose = document.querySelector('.notify-close');
 const warning = document.querySelector('.warning')
 
+$('.username-field').keyup(function() {
+    if (document.querySelector('.username-field').value.length < 4 || document.querySelector('.pass-field').value.length === 0) {
+        warning.style.display = 'none'
+    }
+})
+
+$('.pass-field').keyup(function() {
+    if (document.querySelector('.username-field').value.length < 4 || document.querySelector('.pass-field').value.length === 0) {
+        warning.style.display = 'none'
+    }
+})
+
 /* ---FORM TO LOGIN USER USING AJAX */
 $(document).on('submit','#login-form', function(e) {
     e.preventDefault();
@@ -13,6 +25,7 @@ $(document).on('submit','#login-form', function(e) {
         'password': $('input[name=loginPass]').val(),
         'csrfmiddlewaretoken': $('input[name=csrfmiddlewaretoken]').val()
     }
+
     $.ajax({
         type:'POST',
         url: '/login',

@@ -104,7 +104,6 @@ def tourney(request, tour_id):
     context['participants'] = participants
 
     all_reg_teams = tournament.team.all()
-    print(type(all_reg_teams))
     context['all_reg_teams'] = all_reg_teams
 
     game = tournament.tour_game.name
@@ -280,12 +279,10 @@ def chooseTeam(request, tour_id):
     if request.method == 'POST':
         response_data = {}
         team_name = request.POST.get('team-name')
-        print(team_name)
         request_type = request.POST.get('request-type')
 
         if request_type == 'get-players':
             if team_name == '':
-                print('yha pe nhi')
                 response_data['status'] = 0
                 response_data['message'] = 'Please select a team.'
                 return JsonResponse(response_data)
