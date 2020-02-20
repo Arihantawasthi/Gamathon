@@ -42,7 +42,7 @@ class Tournament(models.Model):
     limit = models.PositiveIntegerField(default=0, blank=True)
     winner = models.ManyToManyField(User, related_name="winner", blank=True)
     status = models.PositiveSmallIntegerField(default=0, blank=True )
-    rules = models.TextField(max_length=500, blank=True)
+    rules = models.TextField(max_length=50000, blank=True)
     contact  = models.TextField(max_length=400, blank=True)
     schedule = models.TextField(max_length=600, blank=True)
     tour_nature = models.CharField(max_length=60, blank=True)

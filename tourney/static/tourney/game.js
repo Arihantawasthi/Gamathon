@@ -55,6 +55,7 @@ $(document).on('submit','.validate-modal-form', function(e) {
         'gameid': $('input[name=gameid]').val(),
         'csrfmiddlewaretoken': $('input[name=csrfmiddlewaretoken]').val()
     }
+    document.querySelector('.validate-modal-button').disabled=true;
     $.ajax({
         type:'POST',
         url: '/game/'+gamename,

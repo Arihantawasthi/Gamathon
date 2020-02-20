@@ -249,6 +249,7 @@ $(document).on('submit','#account-validate-form', function(e) {
         'gameid': $('input[name=game_id]').val(),
         'csrfmiddlewaretoken': $('input[name=csrfmiddlewaretoken]').val()
     }
+    document.querySelector('.validate-modal-button').disabled=true;
     $.ajax({
         type:'POST',
         url: '/game/'+gamename.innerHTML,
