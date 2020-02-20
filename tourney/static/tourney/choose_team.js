@@ -68,7 +68,7 @@ if(localStorage.getItem('createTeam')) {
 }
 
 /* GETTING PLAYERS OF THE TEAM */
-$(document).on('submit', '#team-select', function(e) {
+/* $(document).on('submit', '#team-select', function(e) {
     e.preventDefault();
     for(let i =0; i < teams.length; i++) {
         if (teams[i].checked === true) {
@@ -78,8 +78,8 @@ $(document).on('submit', '#team-select', function(e) {
     var formData = {
         'team-name': team_name,
         'request-type': document.querySelector('input[name="request-type"]').value,
-        'csrfmiddlewaretoken': document.querySelector('input[name="csrfmiddlewaretoken"]').value,
     }
+
     $.ajax({
         type:'POST',
         url: 'https://gamathon.gg/choose-team/registration/'+tourid,
@@ -107,7 +107,7 @@ $(document).on('submit', '#team-select', function(e) {
             }, 200)
         })
     })
-})
+}) */
 
 /* TOURNEY REGISTRATION FORM FOR PAID TOURNAMENTS */
 $(document).on('submit', "#team-register", function(e) {
@@ -151,7 +151,6 @@ $(document).on('submit', "#team-register", function(e) {
 
 /* ---FORM TO REGISTER TEAM NAME FOR FREE ENTRY USING USING AJAX */
 $(document).on('submit','#player-select', function(e) {
-    e.preventDefault();
     const members = document.querySelectorAll('.member-names')
     const team_name = document.querySelector('.team-name-input').value
     var selectedMembers = []
@@ -161,13 +160,13 @@ $(document).on('submit','#player-select', function(e) {
         }
     }
     if(selectedMembers.length >= 4 && selectedMembers.length <=5) {
-        var formData = {
-            'team_name': team_name,
-            'selected_members[]': selectedMembers,
-            'csrfmiddlewaretoken': $('input[name=csrfmiddlewaretoken]').val()
-        }
-        console.log(formData)
-        $.ajax({
+        localStorage.setItem('registerTeam', true)
+        localStorage.setItem('recordHead', 'Success :)')
+        localStorage.setItem('recordMessage', "You just registered for the Hunt. Climb your way to the top, it's time to show them what you got. Good Luck Homie!")
+
+        return true
+        
+        /* $.ajax({
             type:'POST',
             url: 'https://gamathon.gg/tournament/'+tourid,
             data: formData,
@@ -189,7 +188,7 @@ $(document).on('submit','#player-select', function(e) {
                     }, 200);
                 }
             }, 200);
-        }); 
+        });  */
     }
     else {
         notifyDiv.style.display = 'block'
@@ -198,5 +197,6 @@ $(document).on('submit','#player-select', function(e) {
             document.querySelector('.notify-message').innerHTML = 'Team should have at least 4 members to play this tournament!'
             document.querySelector('.notify-div').style.right = '1rem'
         }, 200)
+        return false
     }
 })
