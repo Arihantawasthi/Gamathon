@@ -44,7 +44,7 @@
                 <div class="name-head-teamRegister">NOTE: You must be a captain of a team to register.</div>
                 <form action="{% url 'tourney' tour.id %}" id="player-select" class="form2" method="post">
                     {% csrf_token %}
-                    <div style="color: white; font-size: 13px; margin-top: 0.2rem; margin-bottom: 0.7rem; margin-left: 1rem;">If you don't see all the players of the team. It's beacuse they haven't added {{ tour.tour_game.fullname }} Account in Gamathon.</div>
+                    <div style="color: white; font-size: 13px; margin-top: 0.2rem; margin-bottom: 0.7rem; margin-left: 1rem; margin-right: 1rem;">If you don't see all the players of the team. It's beacuse they <span style="color: red;">haven't</span> added <span style="color: red;">{{ tour.tour_game.fullname }} Account</span> in Gamathon. Tell them to <span style="color: red;">validate their account</span> <a href="{% url 'game' tour.tour_game.name %}" style="color: red;">here.</a></div>
                     <input type="hidden" name="request-type" value="register">
                     <div class="player-container-wrapper">
                         <input type="hidden" class="team-name-input" name='team-name' value='{{ team.name }}'>

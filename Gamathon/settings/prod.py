@@ -1,7 +1,7 @@
 from Gamathon.settings.base import *
 
 # Override base settings here for production environment.
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['gamathon.gg', 'www.gamathon.gg', '127.0.0.1', '192.168.43.50']
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
