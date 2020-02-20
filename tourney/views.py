@@ -168,21 +168,15 @@ def tourney(request, tour_id):
         response_data['status'] = 0
 
         if tournament.tour_type == 'Squad':    
-            team_name = request.POST.get('team_name')
-            selected_members = request.POST.getlist('selected_members[]')
-            
+            team_name = request.POST.get('team-name')
+            selected_members = request.POST.getlist('players')
+            print(selected_members)
             if team_name == '':
                 response_data['status'] = 0
                 response_data['message'] = 'Please select a team.'
                 return JsonResponse(response_data)
 
             selected_team = Team.objects.get(name=team_name)
-
-            if len(selected_members) > 5 and len(selected_members) <= 5:
-                response_data['status'] = 0
-                response_data['message'] = 'Team should have at least 4 members and 5 members at max to play this tournament!'
-                return JsonResponse(response_data) 
-            
             for member in selected_members:
                 tournament.player.add(member)
                 try:
@@ -208,7 +202,7 @@ def tourney(request, tour_id):
             tournament.participants += 1
             tournament.save()
             
-            return JsonResponse(response_data)
+            return redirect('tourney', tournament.id)
 
         else:
             #Paid tourney registration for single user.
@@ -341,6 +335,27 @@ def chooseTeam(request, tour_id):
                 return redirect('tourney', tournament.id)
 
     return render(request, 'tourney/choose_team.html', context)
+
+
+def choosePlayers(request, team_name, tour_id):
+    team = Team.objects.get(name=team_name)
+    tour = Tournament.objects.get(id=tour_id)
+    members = team.members.all()
+    valid_members = []
+    for member in members:
+        try:
+            game_valid = Game_validate.objects.get(userName=member, gameName=tour.tour_game.name)
+            valid_members.append(member)
+        except Game_validate.DoesNotExist:
+            pass
+
+    context = {
+        'members': valid_members,
+        'team': team,
+        'tour': tour
+    } 
+
+    return render(request, 'tourney/choose_members.html', context)
 
 # Method for registering single user.
 @csrf_exempt

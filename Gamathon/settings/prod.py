@@ -1,9 +1,9 @@
 from Gamathon.settings.base import *
 
 # Override base settings here for production environment.
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = ['gamathon.gg', 'www.gamathon.gg', '127.0.0.1']
+ALLOWED_HOSTS = ['gamathon.gg', 'www.gamathon.gg', '127.0.0.1', '192.168.43.50']
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
 INSTALLED_APPS.append('compressor')

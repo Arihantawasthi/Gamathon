@@ -12,9 +12,9 @@
     {% endblock %}
     <meta name="robot" content="noindex,nofollow">
     <meta name="googlebot" content="noindex,nofollow">
-    <title>{% block title %} Choose Team | Gamathon{% endblock %}</title>
+    <title>{% block title %} Choose Players | {{ team.name }} | Gamathon{% endblock %}</title>
 </head>
-{% block body %}
+{% block body %}    
     <!-- Create Team validation Modal -->
     <div class="bg-create-team-modal">
         <div class="create-team-modal-content">
@@ -35,25 +35,34 @@
             </form>
         </div>
     </div>
-    
+
     <div class='container'>
         <div class="bg-validate-modal-teamRegister">
             <div class="validate-modal-content-teamRegister">
-                <div class="modal-heading">Choose a Team</div>
-                {% if teams|length == 0 %}
-                    <div class="modal-heading-createTeam">Create New Team</div>
-                {% endif %}
+                <div class="modal-heading">Choose Members</div>
                 <input type="hidden" name="request-type" value="get-players">
                 <div class="name-head-teamRegister">NOTE: You must be a captain of a team to register.</div>
-                    <div class="select-container-wrapper">
-                    {% for team in teams %}
-                        <a href="{% url 'choosePlayers' team.name tournament.id %}" style="color: white; text-decoration: none;">
-                            <label class="radio-container">{{ team.name }}
-                                <div class="members">{{ team.members.count }} members</div>
-                                <span class="checkmark"></span>
+                <form action="{% url 'tourney' tour.id %}" id="player-select" class="form2" method="post">
+                    {% csrf_token %}
+                    <div style="color: white; font-size: 13px; margin-top: 0.2rem; margin-bottom: 0.7rem; margin-left: 1rem;">If you don't see all the players of the team. It's beacuse they haven't added {{ tour.tour_game.fullname }} Account in Gamathon.</div>
+                    <input type="hidden" name="request-type" value="register">
+                    <div class="player-container-wrapper">
+                        <input type="hidden" class="team-name-input" name='team-name' value='{{ team.name }}'>
+                        {% for member in members %}
+                            <label class='player-result-container'>
+                                {{ member.username }}
+                                <div class="members">{{ member.name }}</div>
+                                <input type='checkbox' class="member-names" name='players' value='{{ member.username }}'>
+                                <span class='player-result-checkmark'></span>
                             </label>
-                    {% endfor %}
-                </div>
+                        {% empty %}
+                            <div>You don't have any members currently</div>
+                        {% endfor %}
+                        <div style="display: flex; justify-content: space-around"; width: 100%"; background-color: black";>
+                            <button class="createTeam-modal-nxt-btn" id='register-btn'>Register</button>
+                        </div>
+                    </div>
+                </form>
             </div>
         </div>
     </div>

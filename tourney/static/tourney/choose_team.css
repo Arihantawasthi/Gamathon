@@ -135,7 +135,8 @@ input:-webkit-autofill:active  {
     width: 100%;
     transition: all 0.3s ease-in-out;
     margin-top: 5rem;
-    max-height: 20rem;
+    max-height: 40rem;
+    overflow-y: auto;
     padding-top: 2rem;
     padding-bottom: 0.5rem;
     box-shadow: 0px 5px 10px 0px rgba(0, 0, 0, 0.5)
@@ -273,12 +274,9 @@ input:-webkit-autofill:active  {
 }
 
 .form2 {
-    display: none;
-    transform: translateX(110%);
+    display: block;
     margin-top: 0rem;
     transition: all 0.3s ease-in-out;
-    max-height: 15rem;
-    overflow-y: auto;
 }
 
 .members {
@@ -291,10 +289,10 @@ input:-webkit-autofill:active  {
     overflow-y: auto;
 }
 
-#player-select {
+/* #player-select {
     max-height: 15rem;
     overflow-y: auto;
-}
+} */
 
 /* CHECKBOX FOR SELECTING PLAYERS */
 .player-result-container {
