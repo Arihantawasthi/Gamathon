@@ -88,7 +88,7 @@
             {% if tournaments|length > 0 %}    
                 <div class="trending-tourney" style="background-image: url('{{ trending_tour.banner.url }}');">
                     <div class="date-platform">
-                        <div class="date-time">27th Aug, 3:30 PM</div>
+                        <div class="date-time">{{ trending_tour.start_time }} | <span style="margin-left: 0.2rem;">{{ trending_tour.start_date }}</span></div>
                         <div class="platform">PC</div>
                     </div>
                     <div class="open-entry-info">
@@ -146,7 +146,7 @@
         {% for tournament in tournaments %}
             <a href="{% url 'tourney' tournament.id %}" class="tourney-card">
                 <div class="tourney-card-image" style="background-image: url('{{ tournament.banner.url }}');">
-                    <div class="tourney-card-time">11:00 AM, 19 Aug</div>
+                    <div class="tourney-card-time">{{ tournament.start_time }} | <span style="margin-left: 0.2rem;">{{ tournament.start_date }}</span></div>
                     <div class="tourney-card-platform">PC</div>
                 </div>
                 <div class="tourney-card-title">

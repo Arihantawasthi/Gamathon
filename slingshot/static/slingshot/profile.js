@@ -119,6 +119,10 @@ $(document).on('submit','#create-team-form', function(e) {
         'join_code': $('input[name=join-code]').val(),
         'csrfmiddlewaretoken': $('input[name=csrfmiddlewaretoken]').val()
     }
+    if (formData.team_name.slice(-1) === ' ') {
+        formData.team_name = formData.team_name.substring(0, formData.team_name.length - 1)
+    } 
+    console.log(formData.team_name)
     $.ajax({
         type:'POST',
         url: '/profile/'+sessionUser.innerHTML,
