@@ -18,6 +18,9 @@ class User(models.Model):
     kills = models.PositiveIntegerField(default=0)
     is_active = models.BooleanField(default=False)
     followers = models.ManyToManyField('User', related_name='followed_by')
+    
+    class Meta:
+        indexes = [models.Index(fields=['username'])]
 
     def __str__(self):
         return self.username

@@ -328,7 +328,7 @@
                                     <div class="s-no">{{ forloop.counter }}</div>
                                     <div class="img-name">
                                         <a href="{% url 'team' team.name %}" class="participant-name">
-                                            <div class="team-img" style="background-image: url('{{ team.logo.url }}');"></div>{{ team.name }}
+                                            <div class="team-img" style="background-image: url('/media/{{ team.logo }}');"></div>{{ team.name }}
                                         </a>
                                     </div>
                                 </div>
@@ -550,7 +550,7 @@
                         {% for team in all_reg_teams %}
                         <a href="{% url 'team' team.name %}" class="players-card">
                             <div class="up-section" style="background: url('{{ team.team_banner.url }}')">
-                                <div class="player-img" style="background-image: url('{{ team.logo.url }}')"></div>
+                                <div class="player-img" style="background-image: url('/media/{{ team.logo }}')"></div>
                                 <div class="player-name">{{ team.name }}</div>
                             </div>
                             <div class="bottom-section">

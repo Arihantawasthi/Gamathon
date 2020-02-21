@@ -34,6 +34,9 @@ $(document).on('submit','#create-team-form', function(e) {
         'join_code': $('input[name=join-code]').val(),
         'csrfmiddlewaretoken': $('input[name=csrfmiddlewaretoken]').val()
     }
+    if (formData.team_name.slice(-1) === ' ') {
+	    formData.team_name = formData.team_name.substring(0, formData.team_name.length - 1)
+    }
     $.ajax({
         type:'POST',
         url: '/profile/'+route,
@@ -194,7 +197,7 @@ $(document).on('submit','#player-select', function(e) {
         notifyDiv.style.display = 'block'
         setTimeout(()=> {
             document.querySelector('.notify-heading-content').innerHTML = 'Failed'
-            document.querySelector('.notify-message').innerHTML = 'Team should have at least 4 members to play this tournament!'
+            document.querySelector('.notify-message').innerHTML = 'Team should have at least 4 members and maximum 5 members to play this tournament!'
             document.querySelector('.notify-div').style.right = '1rem'
         }, 200)
         return false

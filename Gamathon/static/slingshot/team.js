@@ -170,6 +170,7 @@ $(document).on('submit','#player-checkbox', function(e) {
         'players[]' : players,
         'csrfmiddlewaretoken': $('input[name=csrfmiddlewaretoken]').val()
     }
+    document.querySelector('.create-team-modal-button').disabled=true
     $.ajax({
         type: "POST",
         url: window.location.href,
@@ -179,6 +180,7 @@ $(document).on('submit','#player-checkbox', function(e) {
         document.querySelector('#invite-search').value = ''
         document.querySelector('.search-result-container').innerHTML = ''
         notifyDiv.style.display = 'block'
+	document.querySelector('.create-team-modal-button').disabled=true
         setTimeout(function(){ 
             notifyHead.innerHTML = 'Success :)'
             notifyMessage.innerHTML = response_data.message
