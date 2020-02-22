@@ -71,24 +71,6 @@
 
         <!-- Player Leaderboard -->
         <div class="top-player-table">
-            {% for user in users %}
-                <div class="top-team-element">
-                    <div class="left-section">
-                        <div class="s-no">{{ forloop.counter }}</div>
-                        <div class="img-name">
-                            <a href="{% url 'profile' user.username %}">
-                                <div class="team-img" style="background-image: url('{{ user.profile_pic.url }}');"></div> <div class="user-name">{{ user.username }}</div>
-                            </a>
-                        </div>
-                    </div>
-                    <div class="right-section">
-                        <div class="win-perc">{{ user.wins }}</div>
-                        <div class="points">{{ user.kills }}</div>
-                    </div>
-                </div>
-            {% empty %}
-            <div style="margin: auto; color: rgba(233, 221, 221, 0.7); text-align: center; font-size: 14px;">Oops! There are no teams to show.</div>
-            {% endfor %}
         </div>
     </div>
 {% endblock %}

@@ -4,7 +4,6 @@ from slingshot.models import User
 from tourney.models import Game, Tournament, GameStat, Round, Stage, Match, ScoreCard
 from .models import Organization, Notification
 from .tourneyManage import split, isPowerOfTwo, totalRounds
-from django.http import HttpResponse, JsonResponse
 import math
 from slingshot.views import sendNotification
 
