@@ -257,6 +257,9 @@ $(document).on('submit','#reg-form', function(e) {
         'email': $('input[name=emails]').val(),
         'csrfmiddlewaretoken': $('input[name=csrfmiddlewaretoken]').val()
     }
+    if (formData.username.slice(-1) === ' ') {
+	    formData.username = formData.username.substring(0, formData.username.length - 1)
+    }
     $.ajax({
         type:'POST',
         url: '/signup',
