@@ -152,13 +152,9 @@ def tourney(request, tour_id):
         tournament.save()
         
     try:
-        reg_team_members = [i.members.all() for i in all_reg_teams]
-        if tournament.tour_type == 'Squad':
-            for participants in reg_team_members:
-                for participant in participants:
-                    if participant.username == request.session['username']:
-                        context['team_registered'] = True
-                        break
+        for participant in participants:
+            if participant.username == request.session['username']:
+                context['team_registered'] = True
     except KeyError:
         pass
 
@@ -434,3 +430,14 @@ def teamPaidRegistration(request, team_name, tour_id):
     }
     data_dict['CHECKSUMHASH'] = Checksum.generate_checksum(data_dict, MERCHANT_KEY)
     return render(request, 'wallet/paytm.html', {'data_dict': data_dict})
+
+def loadParticipants(request, tour_id):
+    tournament = Tournament.objects.get(id=tour_id)
+    all_reg_teams = tournament.team.all()
+    participants = tournament.player.all()
+    context = {
+        'all_reg_teams': all_reg_teams,
+        'participants': participants
+    }
+
+    return render(request, 'tourney/load_participants.html', context)    

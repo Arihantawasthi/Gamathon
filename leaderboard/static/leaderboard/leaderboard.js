@@ -40,6 +40,6 @@ players.addEventListener('click', () => {
         url: window.location.href + '/top-players',  // URL to your view that serves new info
     })
     .done(function(response) {
-        $('.top-player-table').append(response);
+        document.querySelector('.top-player-table').innerHTML = response
     });
 })

@@ -522,53 +522,7 @@
                 </div>
                 
                 <div class="players-content">
-                    <input type="text" id="players-search-bar" placeholder="Search..." onkeyup="searchPlayersFun()"><br>
-                    <div class="players-card-wrapper">
-                    {% if tournament.tour_type == 'Solo' %}
-                        {% for participant in participants %}
-                            <a href="{% url 'profile' participant.username %}" class="players-card">
-                                <div class="up-section" style="background-image: url('{{ participant.profile_back.url }}')">
-                                    <div class="player-img" style="background-image: url('{{ participant.profile_pic.url }}')"></div>
-                                    <div class="player-name">{{ participant.name }}</div>
-                                    <div class="player-user">{{ participant.username }}</div>
-                                </div>
-                                <div class="bottom-section">
-                                    <div class="won">
-                                        <div class="won-text">Won</div>
-                                        <div class="won-score">{{ participant.wins }}</div>
-                                    </div>
-                                    <div class="lost">
-                                        <div class="lost-text">Lost</div>
-                                        <div class="lost-score">{{ participant.loss }}</div>
-                                    </div>
-                                </div>
-                            </a>
-                        {% empty %}
-                            <div class="no-shit" style="width: 100%; padding: 1rem 2rem; margin-top: 0.8rem; color: white; background-color: #313030;">No Participants yet.</div>
-                        {% endfor %}
-                    {% else %}
-                        {% for team in all_reg_teams %}
-                        <a href="{% url 'team' team.name %}" class="players-card">
-                            <div class="up-section" style="background: url('{{ team.team_banner.url }}')">
-                                <div class="player-img" style="background-image: url('{{ team.logo.url }}')"></div>
-                                <div class="player-name">{{ team.name }}</div>
-                            </div>
-                            <div class="bottom-section">
-                                <div class="won">
-                                    <div class="won-text">Won</div>
-                                    <div class="won-score">{{ team.wins }}</div>
-                                </div>
-                                <div class="lost">
-                                    <div class="lost-text">Lost</div>
-                                    <div class="lost-score">{{ team.loss }}</div>
-                                </div>
-                            </div>
-                        </a>
-                        {% empty %}
-                            <div class="no-shit" style=" width: 100%; padding: 1rem 2rem; margin-top: 0.8rem; color: white; background-color: #313030;">No Participants yet.</div>
-                        {% endfor %}
-                    {% endif %}
-                    </div>
+                    <!-- load participants here from tourney/load_participants.html -->
                 </div>
             </div>
             <div class="desk-right-section">
@@ -606,5 +560,6 @@
 
 {% block javascript %}
     <script src="{% static 'tourney/tourney.js' %}"></script>
+    <script src="{% static 'tourney/load_participants.js' %}"></script>
 {% endblock %}
 </html>
