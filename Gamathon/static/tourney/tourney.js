@@ -90,68 +90,68 @@ shareBtn.addEventListener('click', function() {
 
 ladder.addEventListener('click', function() {
     ladder.style.opacity = '1';
-    ladderCont.style.display = 'block';
+    $('.ladder-content').fadeIn();
     overview.style.opacity = '0.6';
-    overviewCont.style.display = 'none';
+    $('.overview-container').fadeOut();
     rules.style.opacity = '0.6';
-    rulesCont.style.display = 'none';
+    $('.rules-content').fadeOut();
     prizes.style.opacity = '0.6'
-    prizesCont.style.display = 'none'
+    $('.prizes-content').fadeOut();
     schedule.style.opacity = '0.6'
-    scheduleContent.style.display = 'none'
+    $('.schedule-content').fadeOut();
     players.style.opacity = '0.6';
-    playersCont.style.display = 'none';
+    $('.players-content').fadeOut();
     tracker.style.transform = 'translate(6rem)';
     tracker.style.width = '4rem';
 });
 
 overview.addEventListener('click', function() {
     ladder.style.opacity = '0.6';
-    ladderCont.style.display = 'none';
+    $('.ladder-content').fadeOut();
     overview.style.opacity = '1';
-    overviewCont.style.display = 'block';
+    $('.overview-container').fadeIn();
     rules.style.opacity = '0.6';
-    rulesCont.style.display = 'none';
+    $('.rules-content').fadeOut();
     prizes.style.opacity = '0.6'
-    prizesCont.style.display = 'none'
+    $('.prizes-content').fadeOut();
     schedule.style.opacity = '0.6'
-    scheduleContent.style.display = 'none'
+    $('.schedule-content').fadeOut();
     players.style.opacity = '0.6';
-    playersCont.style.display = 'none';
+    $('.players-content').fadeOut();
     tracker.style.transform = 'translate(0)';
     tracker.style.width = '4.8rem';
 });
 
 rules.addEventListener('click', function() {
     ladder.style.opacity = '0.6';
-    ladderCont.style.display = 'none';
+    $('.ladder-content').fadeOut();
     overview.style.opacity = '0.6';
-    overviewCont.style.display = 'none';
+    $('.overview-container').fadeOut();
     rules.style.opacity = '1';
-    rulesCont.style.display = 'block';
+    $('.rules-content').fadeIn();
     prizes.style.opacity = '0.6'
-    prizesCont.style.display = 'none'
+    $('.prizes-content').fadeOut();
     schedule.style.opacity = '0.6'
-    scheduleContent.style.display = 'none'
+    $('.schedule-content').fadeOut();
     players.style.opacity = '0.6';
-    playersCont.style.display = 'none';
+    $('.players-content').fadeOut();
     tracker.style.transform = 'translate(26.8rem)';
     tracker.style.width = '3.2rem';
 });
 
 prizes.addEventListener('click', function() {
     ladder.style.opacity = '0.6';
-    ladderCont.style.display = 'none';
+    $('.ladder-content').fadeOut();
     overview.style.opacity = '0.6';
-    overviewCont.style.display = 'none';
+    $('.overview-container').fadeOut();
     rules.style.opacity = '0.6';
-    rulesCont.style.display = 'none';
+    $('.rules-content').fadeOut();
     prizes.style.opacity = '1'
-    prizesCont.style.display = 'block'
+    $('.prizes-content').fadeIn();
     schedule.style.opacity = '0.6';
-    scheduleContent.style.display = 'none';
+    $('.schedule-content').fadeOut();
     players.style.opacity = '0.6';
-    playersCont.style.display = 'none';
+    $('.players-content').fadeOut();
     tracker.style.transform = 'translate(16.1rem)';
     tracker.style.width = '3.5rem';
 });
@@ -173,7 +173,7 @@ schedule.addEventListener('click', function() {
     tracker.style.width = '5rem';
 });
 
-players.addEventListener('click', function() {
+/* players.addEventListener('click', function() {
     ladder.style.opacity = '0.6';
     ladderCont.style.display = 'none';
     overview.style.opacity = '0.6';
@@ -188,7 +188,7 @@ players.addEventListener('click', function() {
     playersCont.style.display = 'block';
     tracker.style.transform = 'translate(11.1rem)';
     tracker.style.width = '4.2rem';
-});
+}); */
 
 var url = window.location.pathname;
 var tourid = url.substring(url.lastIndexOf('/')+1);
