@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse, JsonResponse
 from django.db.models import Max
-from .models import Game, Game_validate, Tournament, GameStat, Announcements, Prize
+from .models import Game, Game_validate, Tournament, GameStat, Announcements, Prize, Round, Stage, Match, ScoreCard
 from slingshot.models import User, Team
 from wallet.models import OrderId
 from django.views.decorators.csrf import csrf_exempt
@@ -157,6 +157,10 @@ def tourney(request, tour_id):
                 context['team_registered'] = True
     except KeyError:
         pass
+
+    context['groups'] = Round.objects.filter(tour=tournament)
+    context['stages'] = Stage.objects.filter(tour=tournament, stage_name='Qualifiers')
+    context['group_1_players'] = Round.objects.get(tour=tournament, round_name='Group_1').team.all()
 
     #Checking if the player has registered
     if request.method == 'POST':
@@ -441,3 +445,13 @@ def loadParticipants(request, tour_id):
     }
 
     return render(request, 'tourney/load_participants.html', context)    
+
+def loadLadder(request, tour_id):
+    tournament = Tournament.objects.get(id=tour_id)
+    round_name = request.GET.get('round_name')
+    group = Round.objects.get(tour=tournament, round_name=round_name)
+    all_participants = group.team.all()
+    context = {
+        'all_participants': all_participants
+    }
+    return render(request, 'tourney/load_ladder.html', context)

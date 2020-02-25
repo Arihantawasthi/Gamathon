@@ -22,3 +22,4 @@ document.querySelector('.players').addEventListener('click', () => {
         document.querySelector('.players-content').innerHTML = response;
     });
 })
+

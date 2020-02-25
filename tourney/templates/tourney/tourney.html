@@ -269,81 +269,82 @@
                 
                 <div class="ladder-content">
                     <div class="ladder-heading">Ladder</div>
-                    <div class="line"></div>
-                    <div class="participants-search">
-                        <input type="text" id="participants-search-bar" placeholder="Search..." onkeyup="searchFun()"><br>
-                        <select name="phases" id="phases-select">
-                            <option value="phase-1">Phase 1</option>
-                            <option value="phase-2">Phase 2</option>
-                            <option value="phase-3">Phase 3</option>
-                        </select>
-                        <select name="groups" id="groups-select">
-                            <option value="group-1">Group 1</option>
-                            <option value="group-2">Group 2</option>
-                            <option value="group-3">Group 3</option>
-                        </select>
-                        <select name="matches" id="matches-select">
-                            <option value="match-1">Match 1</option>
-                            <option value="match-2">Match 2</option>
-                            <option value="match-3">Match 3</option>
-                        </select>
-                    </div>
-
-                    <div class="top-team-heading">
-                        <div class="left-section">
-                            <div class="s-no-head">S.No.</div>
-                            <div class="img-name-head">Name</div>
+                        <div class="line"></div>
+                        <div class="participants-search">
+                            <input type="text" id="participants-search-bar" placeholder="Search..." onkeyup="searchFun()"><br>
+                            <select name="phases" id="phases-select">
+                                {% for stage in stages %}
+                                    <option value="{{ stage.stage_name }}">{{ stage.stage_name }}</option>
+                                {% endfor %}
+                            </select>
+                            <select name="groups" id="groups-select">
+                                {% for group in groups %}
+                                    <option value="{{ group.round_name }}">{{ group.round_name }}</option>
+                                {% endfor %}
+                            </select>
+                            <select name="matches" id="matches-select">
+                                <option value="match-1">Match 1</option>
+                            </select>
                         </div>
-                        <div class="right-section">
-                            <div class="win-perc-head">POS.</div>
-                            <div class="win-perc-head">Kills</div>
-                            <div class="points-head">Points</div>
-                        </div>
-                    </div>
 
-                    <div class="top-team-table">
-                    {% if tournament.status == 4 %}
-                        {% if tournament.tour_type == 'Solo' %}
-                            {% for participant in participants %}
-                            <div class="top-team-element">
-                                <div class="left-section">
-                                    <div class="s-no">{{ forloop.counter }}</div>
-                                    <div class="img-name">
-                                        <a href="{% url 'profile' participant.username %}" class="participant-name">
-                                            <div class="team-img" style="background-image: url('{{ participant.profile_pic.url }}');"></div>{{ participant.name }}
-                                        </a>
+                        <div class="top-team-heading">
+                            <div class="left-section">
+                                <div class="s-no-head">S.No.</div>
+                                <div class="img-name-head">Name</div>
+                            </div>
+                            <div class="right-section">
+                                <div class="win-perc-head">POS.</div>
+                                <div class="win-perc-head">Kills</div>
+                                <div class="points-head">Points</div>
+                            </div>
+                        </div>
+
+                        <div class="top-team-table">
+			{% if tournament.status >= 1 %}
+                            {% if tournament.tour_type == 'Solo' %}
+                                {% for participant in participants %}
+                                <div class="top-team-element">
+                                    <div class="left-section">
+                                        <div class="s-no">{{ forloop.counter }}</div>
+                                        <div class="img-name">
+                                            <a href="{% url 'profile' participant.username %}" class="participant-name">
+                                                <div class="team-img" style="background-image: url('{{ participant.profile_pic.url }}');"></div>{{ participant.name }}
+                                            </a>
+                                        </div>
+                                    </div>
+                                    <div class="right-section">
+                                        <div class="win-perc">{{ participant.wins }}</div>
+                                        <div class="win-perc">{{ participant.kills }}</div>
+                                        <div class="points">{{ participant.kills }}</div>
                                     </div>
                                 </div>
-                                <div class="right-section">
-                                    <div class="win-perc">{{ participant.wins }}</div>
-                                    <div class="win-perc">{{ participant.kills }}</div>
-                                    <div class="points">{{ participant.kills }}</div>
+                                {% endfor %}
+                            {% else %}
+                                {% for team in group_1_players %}
+                                <div class="top-team-element">
+                                    <div class="left-section">
+                                        <div class="s-no">{{ forloop.counter }}</div>
+                                        <div class="img-name">
+                                            <a href="{% url 'team' team.name %}" class="participant-name">
+                                                <div class="team-img" style="background-image: url('{{ team.logo.url }}');"></div>{{ team.name }}
+                                            </a>
+                                        </div>
+                                    </div>
+                                    <div class="right-section">
+                                        <div class="win-perc">{{ team.wins }}</div>
+                                        <div class="win-perc">{{ team.kills }}</div>
+                                        <div class="points">{{ team.kills }}</div>
+                                    </div>
                                 </div>
-                            </div>
-                            {% endfor %}
+                                {% endfor %}
+                            {% endif %}
                         {% else %}
-                            {% for team in all_reg_teams %}
-                            <div class="top-team-element">
-                                <div class="left-section">
-                                    <div class="s-no">{{ forloop.counter }}</div>
-                                    <div class="img-name">
-                                        <a href="{% url 'team' team.name %}" class="participant-name">
-                                            <div class="team-img" style="background-image: url('/media/{{ team.logo }}');"></div>{{ team.name }}
-                                        </a>
-                                    </div>
-                                </div>
-                                <div class="right-section">
-                                    <div class="win-perc">{{ team.wins }}</div>
-                                    <div class="win-perc">{{ team.kills }}</div>
-                                    <div class="points">{{ team.kills }}</div>
-                                </div>
-                            </div>
-                            {% endfor %}
+                            <div style="color: rgba(233, 221, 221, 0.7); text-align: center; font-size: 14px; margin-top: 2rem; margin-bottom: 3rem;">Ladder will be available when tournament begins.</div>
                         {% endif %}
                     {% else %}
-		    <div style="color: rgba(233, 221, 221, 0.7); text-align: center; font-size: 14px; margin-top: 2rem; margin-bottom: 3rem;">Ladder will be around 11:00 PM 25th Feb, 2020</div>
                     {% endif %}
                     </div>
+                        </div>
                 </div>
 
                 <div class="rules-content">
