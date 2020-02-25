@@ -417,3 +417,17 @@ var x = setInterval(function() {
     document.getElementById("timer").innerHTML = "Registration Closed!";
   }
 }, 1000);
+
+$('#groups-select').change(() => {
+    formData = {
+        'round_name': $('#groups-select').val()
+    }
+    $.ajax({
+        type: "GET",
+        url: window.location.href + '/ladder',  // URL to your view that serves new info
+        data: formData
+    })
+    .done(function(response) {
+        document.querySelector('.top-team-table').innerHTML = response;
+    });
+})

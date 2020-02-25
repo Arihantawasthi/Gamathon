@@ -97,7 +97,6 @@ class Round(models.Model):
     team = models.ManyToManyField(Team, related_name='team_round', blank=True)
     start_date = models.DateField(blank=True, null=True)
     start_time = models.TimeField(blank=True, null=True)
-    total_participants = models.PositiveIntegerField(default=0)
 
     def __str__(self):
         return f'{self.round_name}'
@@ -119,6 +118,7 @@ class Match(models.Model):
         return f'{self.match_name}'
 
 class ScoreCard(models.Model):
+    tour = models.ForeignKey(Tournament, on_delete=models.CASCADE, related_name='tourney_scorecard', blank=True, null=True)
     solo = models.ForeignKey(User, on_delete=models.CASCADE, related_name='solo_score_card', blank=True, null=True)
     team = models.ForeignKey(Team, on_delete=models.CASCADE, related_name='team_score_card', blank=True, null=True)
     match = models.ForeignKey(Match, on_delete=models.CASCADE, related_name='match_score_card', blank=True, null=True)
