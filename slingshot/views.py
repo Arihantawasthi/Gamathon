@@ -20,10 +20,14 @@ def sendNotification(request):
     notification_all = {}
     notification_all['invite_notifications'] = []
     notification_all['follow_notifications'] = []
+    notification_all['group_notifications'] = []
 
     for notification in notifications:
         if notification.team != None:
             notification_all['invite_notifications'].append(notification)
+        
+        elif notification.user_2 == None:
+            notification_all['group_notifications'].append(notification)
         
         else:
             notification_all['follow_notifications'].append(notification)
@@ -39,9 +43,10 @@ def index(request):
         'games': games,
         'invite_notifications': sendNoti['invite_notifications'],
         'follow_notifications': sendNoti['follow_notifications'],
+        'group_notifications': sendNoti['group_notifications']
     }
 
-    total_notifications = len(context['invite_notifications']) + len(context['follow_notifications'])
+    total_notifications = len(context['invite_notifications']) + len(context['follow_notifications']) + len(context['group_notifications'])
     context['total_notifications'] = total_notifications
     
     tournaments = Tournament.objects.filter(status=1) | Tournament.objects.filter(status=2)
@@ -170,9 +175,10 @@ def profileSettings(request, username):
     context = {
         'invite_notifications': sendNoti['invite_notifications'],
         'follow_notifications': sendNoti['follow_notifications'],
+        'group_notifications': sendNoti['group_notifications'],
     }
 
-    total_notifications = len(context['invite_notifications']) + len(context['follow_notifications'])
+    total_notifications = len(context['invite_notifications']) + len(context['follow_notifications']) + len(context['group_notifications'])
     context['total_notifications'] = total_notifications
     
     this_user = User.objects.get(username=username)
@@ -228,9 +234,10 @@ def profile(request, username):
         'totalTeams': total_teams,
         'invite_notifications': sendNoti['invite_notifications'],
         'follow_notifications': sendNoti['follow_notifications'],
+        'group_notifications': sendNoti['group_notifications'],
     }
 
-    total_notifications = len(context['invite_notifications']) + len(context['follow_notifications'])
+    total_notifications = len(context['invite_notifications']) + len(context['follow_notifications']) + len(context['group_notifications'])
     context['total_notifications'] = total_notifications
 
     tournaments = user.participant.all()
@@ -324,9 +331,10 @@ def team(request, team_name):
         'games': games,
         'invite_notifications': sendNoti['invite_notifications'],
         'follow_notifications': sendNoti['follow_notifications'],
+        'group_notifications': sendNoti['group_notifications'],
     }
 
-    total_notifications = len(context['invite_notifications']) + len(context['follow_notifications'])
+    total_notifications = len(context['invite_notifications']) + len(context['follow_notifications']) + len(context['group_notifications'])
     context['total_notifications'] = total_notifications
 
     try:

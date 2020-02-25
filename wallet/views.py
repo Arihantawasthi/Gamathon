@@ -20,9 +20,10 @@ def wallet(request, username):
     context = {
         'invite_notifications': sendNoti['invite_notifications'],
         'follow_notifications': sendNoti['follow_notifications'],
+        'group_notifications': sendNoti['group_notifications'],
     }
 
-    total_notifications = len(context['invite_notifications']) + len(context['follow_notifications'])
+    total_notifications = len(context['invite_notifications']) + len(context['follow_notifications']) + len(context['group_notifications'])
     context['total_notifications'] = total_notifications
 
     try:
@@ -80,9 +81,10 @@ def teamWallet(request, team_name):
     context = {
         'invite_notifications': sendNoti['invite_notifications'],
         'follow_notifications': sendNoti['follow_notifications'],
+        'group_notifications': sendNoti['group_notifications'],
     }
 
-    total_notifications = len(context['invite_notifications']) + len(context['follow_notifications'])
+    total_notifications = len(context['invite_notifications']) + len(context['follow_notifications']) + len(context['group_notifications'])
     context['total_notifications'] = total_notifications
 
     try: 

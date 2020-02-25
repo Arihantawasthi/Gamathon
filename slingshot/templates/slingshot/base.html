@@ -99,6 +99,15 @@
             {% endif %}
         {% endfor %}
 
+        {% for notification in group_notifications %}
+            {% if request.session.username == notification.user_1.username %}
+                <li style="border-left-color: #fe0000; border-left-width: 0.2rem;">
+                    <div class="text">{{ notification.update }}</div>
+                    <div class="notify-time">{{ notification.created }}</div>
+                </li>
+            {% endif %}
+        {% endfor %}
+
         {% for notification in follow_notifications %}
             {% if request.session.username == notification.user_1.username %}
                 <li style="border-left-color: #fe0000; border-left-width: 0.2rem;">
