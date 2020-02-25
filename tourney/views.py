@@ -160,7 +160,7 @@ def tourney(request, tour_id):
 
     context['groups'] = Round.objects.filter(tour=tournament)
     context['stages'] = Stage.objects.filter(tour=tournament, stage_name='Qualifiers')
-    context['group_1_players'] = Round.objects.get(tour=tournament, round_name='Group_1').team.all()
+    context['group_1_players'] = Round.objects.get(tour=tournament, round_name='Group 28').team.all()
 
     #Checking if the player has registered
     if request.method == 'POST':

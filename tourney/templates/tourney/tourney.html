@@ -326,7 +326,7 @@
                                         <div class="s-no">{{ forloop.counter }}</div>
                                         <div class="img-name">
                                             <a href="{% url 'team' team.name %}" class="participant-name">
-                                                <div class="team-img" style="background-image: url('{{ team.logo.url }}');"></div>{{ team.name }}
+                                                <div class="team-img" style="background-image: url('/media/{{ team.logo }}');"></div>{{ team.name }}
                                             </a>
                                         </div>
                                     </div>
@@ -341,8 +341,6 @@
                         {% else %}
                             <div style="color: rgba(233, 221, 221, 0.7); text-align: center; font-size: 14px; margin-top: 2rem; margin-bottom: 3rem;">Ladder will be available when tournament begins.</div>
                         {% endif %}
-                    {% else %}
-                    {% endif %}
                     </div>
                         </div>
                 </div>
