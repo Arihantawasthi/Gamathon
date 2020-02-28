@@ -1451,6 +1451,10 @@ body {
     width: 50%;
 }
 
+.win-per-head {
+    margin-left: -0.5rem;
+}
+
 .win-perc, .points {
     margin-left: 0.5rem;
 }

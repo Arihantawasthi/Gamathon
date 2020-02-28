@@ -293,14 +293,14 @@
                                 <div class="img-name-head">Name</div>
                             </div>
                             <div class="right-section">
-                                <div class="win-perc-head">POS.</div>
+                                <div class="win-perc-head">Rank Pts</div>
                                 <div class="win-perc-head">Kills</div>
                                 <div class="points-head">Points</div>
                             </div>
                         </div>
 
                         <div class="top-team-table">
-                        {% if tournament.status == 2 %}
+                        {% if tournament.status == 1 %}
                             {% if tournament.tour_type == 'Solo' %}
                                 {% for participant in participants %}
                                 <div class="top-team-element">
@@ -320,20 +320,20 @@
                                 </div>
                                 {% endfor %}
                             {% else %}
-                                {% for team in group_1_players %}
+                                {% for team in score_card %}
                                 <div class="top-team-element">
                                     <div class="left-section">
                                         <div class="s-no">{{ forloop.counter }}</div>
                                         <div class="img-name">
-                                            <a href="{% url 'team' team.name %}" class="participant-name">
-                                                <div class="team-img" style="background-image: url('{{ team.logo.url }}');"></div>{{ team.name }}
+                                            <a href="{% url 'team' team.team.name %}" class="participant-name">
+                                                <div class="team-img" style="background-image: url('{{ team.team.logo.url }}');"></div>{{ team.team.name }}
                                             </a>
                                         </div>
                                     </div>
                                     <div class="right-section">
-                                        <div class="win-perc">{{ team.wins }}</div>
+                                        <div class="win-perc">{{ team.in_game_rank }}</div>
                                         <div class="win-perc">{{ team.kills }}</div>
-                                        <div class="points">{{ team.kills }}</div>
+                                        <div class="points">{{ team.points }}</div>
                                     </div>
                                 </div>
                                 {% endfor %}
@@ -1208,7 +1208,7 @@
                                                 March 2, 2020 9:00 PM IST <br>
                                                 <div class="best-teams">Best 8 teams of 25 teams.</div>
                                                 <span class="map-name">Map |  -Erangel</span>
-                                                
+
                                             </div>
                                         </div>
                                     </div>

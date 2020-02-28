@@ -162,7 +162,16 @@ def tourney(request, tour_id):
 
     context['groups'] = Round.objects.filter(tour=tournament)
     context['stages'] = Stage.objects.filter(tour=tournament, stage_name='Qualifiers')
-    context['group_1_players'] = Round.objects.get(tour=tournament, round_name='Group_1').team.all()
+    g1_players = Round.objects.get(tour=tournament, round_name='Group_1').team.all()
+    g1 = Round.objects.get(round_name='Group_1', tour=tournament, stage=Stage.objects.get(stage_name='Qualifiers'))
+    score_card = []
+    for p in g1_players:
+        score = ScoreCard.objects.get(tour=tournament, match=Match.objects.get(tour=tournament, round_id=g1), team=p)
+        score_card.append(score)
+    
+    score_card = sorted(score_card, key=lambda x: x.points, reverse=True)
+
+    context['score_card'] = score_card
 
     #Checking if the player has registered
     if request.method == 'POST':
@@ -452,8 +461,15 @@ def loadLadder(request, tour_id):
     tournament = Tournament.objects.get(id=tour_id)
     round_name = request.GET.get('round_name')
     group = Round.objects.get(tour=tournament, round_name=round_name)
-    all_participants = group.team.all()
+    match = Match.objects.get(tour=tournament, round_id=group)
+    all_teams = group.team.all()
+    score_card = []
+    for team in all_teams:
+        score = ScoreCard.objects.get(tour=tournament, match=match, team=team)
+        score_card.append(score)
+        
+    score_card = sorted(score_card, key=lambda x: x.points, reverse=True)
     context = {
-        'all_participants': all_participants
+        'score_card': score_card,
     }
     return render(request, 'tourney/load_ladder.html', context)
