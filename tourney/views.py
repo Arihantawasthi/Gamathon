@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse, JsonResponse
 from django.db.models import Max
-from .models import Game, Game_validate, Tournament, GameStat, Announcements, Prize, Round, Stage, Match, ScoreCard
+from .models import Game, Game_validate, Tournament, GameStat, Announcements, Prize, Round, Stage, Match
 from slingshot.models import User, Team
 from wallet.models import OrderId
 from django.views.decorators.csrf import csrf_exempt

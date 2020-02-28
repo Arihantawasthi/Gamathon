@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse, JsonResponse
 from slingshot.models import User
-from tourney.models import Game, Tournament, GameStat, Round, Stage, Match, ScoreCard
+from tourney.models import Game, Tournament, GameStat, Round, Stage, Match
 from .models import Organization, Notification
 from .tourneyManage import split, isPowerOfTwo, totalRounds
 import math

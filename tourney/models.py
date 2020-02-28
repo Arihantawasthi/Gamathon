@@ -118,16 +118,16 @@ class Match(models.Model):
         return f'{self.match_name}'
 
 class ScoreCard(models.Model):
-    tour = models.ForeignKey(Tournament, on_delete=models.CASCADE, related_name='tour_scorecard', blank=True, null=True)
+    tour = models.ForeignKey(Tournament, on_delete=models.CASCADE, related_name='tourney_scorecard', blank=True, null=True)
     solo = models.ForeignKey(User, on_delete=models.CASCADE, related_name='solo_score_card', blank=True, null=True)
     team = models.ForeignKey(Team, on_delete=models.CASCADE, related_name='team_score_card', blank=True, null=True)
     match = models.ForeignKey(Match, on_delete=models.CASCADE, related_name='match_score_card', blank=True, null=True)
-    kills = models.PositiveSmallIntegerField(blank=True)
-    wins = models.PositiveSmallIntegerField(blank=True)
-    loss = models.PositiveSmallIntegerField(blank=True)
-    tie = models.PositiveSmallIntegerField(blank=True)
-    in_game_rank = models.PositiveSmallIntegerField(blank=True)
-    points = models.PositiveSmallIntegerField(blank=True)
-
+    kills = models.PositiveSmallIntegerField(default=0)
+    wins = models.PositiveSmallIntegerField(default=0)
+    loss = models.PositiveSmallIntegerField(default=0)
+    tie = models.PositiveSmallIntegerField(default=0)
+    in_game_rank = models.PositiveSmallIntegerField(default=0)
+    points = models.PositiveSmallIntegerField(default=0)
+    
     def __str__(self):
         return f'{self.solo} {self.team} score card in {self.match}'
