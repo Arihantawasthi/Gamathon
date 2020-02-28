@@ -1,17 +1,17 @@
-{% for team in all_participants %}
+{% for team in score_card %}
     <div class="top-team-element">
         <div class="left-section">
             <div class="s-no">{{ forloop.counter }}</div>
             <div class="img-name">
-                <a href="{% url 'team' team.name %}" class="participant-name">
-                    <div class="team-img" style="background-image: url('/media/{{ team.logo }}');"></div>{{ team.name }}
+                <a href="{% url 'team' team.team.name %}" class="participant-name">
+                    <div class="team-img" style="background-image: url('/media/{{ team.team.logo }}');"></div>{{ team.team.name }}
                 </a>
             </div>
         </div>
         <div class="right-section">
-            <div class="win-perc">{{ team.wins }}</div>
+            <div class="win-perc">{{ team.in_game_rank }}</div>
             <div class="win-perc">{{ team.kills }}</div>
-            <div class="points">{{ team.kills }}</div>
+            <div class="points">{{ team.points }}</div>
         </div>
     </div>
 {% endfor %}

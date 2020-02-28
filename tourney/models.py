@@ -128,6 +128,6 @@ class ScoreCard(models.Model):
     tie = models.PositiveSmallIntegerField(default=0)
     in_game_rank = models.PositiveSmallIntegerField(default=0)
     points = models.PositiveSmallIntegerField(default=0)
-    
+
     def __str__(self):
         return f'{self.solo} {self.team} score card in {self.match}'
