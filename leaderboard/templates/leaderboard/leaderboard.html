@@ -43,8 +43,8 @@
                 <div class="img-name-head">Name</div>
             </div>
             <div class="right-section">
-                <div class="win-perc-head">Win%</div>
-                <div class="points-head">Kills</div>
+                <div class="win-perc-head">Kills</div>
+                <div class="points-head">Points</div>
             </div>
         </div>
 
@@ -55,13 +55,13 @@
                         <div class="s-no">{{ forloop.counter }}</div>
                         <div class="img-name">
                             <a href="{% url 'team' team.name %}">
-                                <div class="team-img" style="background-image: url('{{ team.logo.url }}');"></div> <div class="team-name">{{ team.name}}</div>
+                                <div class="team-img" style="background-image: url('{{ team.logo.url }}');"></div> <div class="team-name">{{ team.name }}</div>
                             </a>
                         </div>
                     </div>
                     <div class="right-section">
-                        <div class="win-perc">{{ team.wins }}</div>
-                        <div class="points">{{ team.kills }}</div>
+                        <div class="win-perc">{{ team.kills }}</div>
+                        <div class="points">{{ team.points }}</div>
                     </div>
                 </div>
             {% empty %}

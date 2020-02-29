@@ -64,19 +64,20 @@ def game(request, game_name):
         pass
     
     try:
-        #Getting validated users(TOP PLAYERS)
-        games_validate = Game_validate.objects.filter(gameName=game_name)
-        players = []
-        for game in games_validate:
-            players.append(game.userName)
+        #Getting TOP Players
+        top_players = []
+        all_stats = GameStat.objects.filter(game=game).order_by('-points')
+        for i in all_stats:
+            if i.user != None:
+                top_players.append(i)
         
         tournaments = Tournament.objects.filter(tour_game=game_name, status=1) | Tournament.objects.filter(tour_game=game_name, status=2)                    #Getting all the tournaments related to this game
 
         #Getting the tournament with highest players participants(Trending Tourney)
         trending_tour = tournaments.order_by('-participants').first()
         context['tournaments'] = tournaments
-        context['players'] = players[0:5]
         context['trending_tour'] = trending_tour
+        context['top_players'] = top_players
 
     except (Game_validate.DoesNotExist, Tournament.DoesNotExist):
         return render(request, 'tourney/game.html', context)
@@ -169,7 +170,7 @@ def tourney(request, tour_id):
         score = ScoreCard.objects.get(tour=tournament, match=Match.objects.get(tour=tournament, round_id=g1), team=p)
         score_card.append(score)
     
-    score_card = sorted(score_card, key=lambda x: x.points, reverse=True)
+    score_card = sorted(score_card, key=lambda x: (x.points, x.kills), reverse=True)
 
     context['score_card'] = score_card
 
@@ -468,7 +469,7 @@ def loadLadder(request, tour_id):
         score = ScoreCard.objects.get(tour=tournament, match=match, team=team)
         score_card.append(score)
         
-    score_card = sorted(score_card, key=lambda x: x.points, reverse=True)
+    score_card = sorted(score_card, key=lambda x: (x.points, x.kills), reverse=True)
     context = {
         'score_card': score_card,
     }

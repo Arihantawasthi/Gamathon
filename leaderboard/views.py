@@ -5,7 +5,7 @@ from slingshot.views import sendNotification
 
 # Create your views here
 def leaderboard(request):
-    teams = Team.objects.all().order_by('-wins')[0:20]
+    teams = Team.objects.all().order_by('-points')[0:20]
 
     sendNoti = sendNotification(request)
     context = {
@@ -21,7 +21,7 @@ def leaderboard(request):
 
 
 def topPlayers(request):
-    users = User.objects.all().order_by('-wins')[0:20]
+    users = User.objects.all().order_by('-points')[0:20]
     context = {
         'users': users
     }

@@ -16,6 +16,7 @@ class User(models.Model):
     loss = models.PositiveSmallIntegerField(default=0, blank=True)
     tie = models.PositiveSmallIntegerField(default=0, blank=True)
     kills = models.PositiveIntegerField(default=0)
+    points = models.PositiveIntegerField(default=0)
     is_active = models.BooleanField(default=False)
     followers = models.ManyToManyField('User', related_name='followed_by')
 
@@ -38,6 +39,7 @@ class Team(models.Model):
     loss = models.PositiveSmallIntegerField(default=0, blank=True)
     tie = models.PositiveSmallIntegerField(default=0, blank=True)
     kills = models.PositiveIntegerField(default=0)
+    points = models.PositiveIntegerField(default=0)
 
     def __str__(self):
         return self.name
