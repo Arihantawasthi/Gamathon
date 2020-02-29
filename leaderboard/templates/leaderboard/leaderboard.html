@@ -43,8 +43,8 @@
                 <div class="img-name-head">Name</div>
             </div>
             <div class="right-section">
-                <div class="win-perc-head">Win%</div>
-                <div class="points-head">Kills</div>
+                <div class="win-perc-head">Kills</div>
+                <div class="points-head">Points</div>
             </div>
         </div>
 
@@ -55,13 +55,13 @@
                         <div class="s-no">{{ forloop.counter }}</div>
                         <div class="img-name">
                             <a href="{% url 'team' team.name %}">
-                                <div class="team-img" style="background-image: url('/media/{{ team.logo }}');"></div> <div class="team-name">{{ team.name}}</div>
+                                <div class="team-img" style="background-image: url('/media/{{ team.logo }}');"></div> <div class="team-name">{{ team.name }}</div>
                             </a>
                         </div>
                     </div>
                     <div class="right-section">
-                        <div class="win-perc">{{ team.wins }}</div>
-                        <div class="points">{{ team.kills }}</div>
+                        <div class="win-perc">{{ team.kills }}</div>
+                        <div class="points">{{ team.points }}</div>
                     </div>
                 </div>
             {% empty %}
@@ -71,27 +71,6 @@
 
         <!-- Player Leaderboard -->
         <div class="top-player-table">
-<<<<<<< HEAD
-            {% for user in users %}
-                <div class="top-team-element">
-                    <div class="left-section">
-                        <div class="s-no">{{ forloop.counter }}</div>
-                        <div class="img-name">
-                            <a href="{% url 'profile' user.username %}">
-                                <div class="team-img" style="background-image: url('/media/{{ user.profile_pic }}');"></div> <div class="user-name">{{ user.username }}</div>
-                            </a>
-                        </div>
-                    </div>
-                    <div class="right-section">
-                        <div class="win-perc">{{ user.wins }}</div>
-                        <div class="points">{{ user.kills }}</div>
-                    </div>
-                </div>
-            {% empty %}
-            <div style="margin: auto; color: rgba(233, 221, 221, 0.7); text-align: center; font-size: 14px;">Oops! There are no teams to show.</div>
-            {% endfor %}
-=======
->>>>>>> 412edc2bd3eea945b941122b0626eab485dfb85d
         </div>
     </div>
 {% endblock %}

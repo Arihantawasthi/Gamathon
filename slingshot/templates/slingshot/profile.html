@@ -140,21 +140,25 @@
                                         <div class="stats-game">Games Played</div>
                                     </div>
                                     <div class="stats-game-played-percentage">
-                                        <div class="stats-percentage">{{ wins_perc }}%</div>
-                                        <div class="stats-perc-name">Wins</div>
+                                        {% if stats.deaths == 0 %}
+                                            <div class="stats-percentage">100</div>
+                                        {% else %}
+                                            <div class="stats-percentage">{% widthratio stats.kills stats.deaths 1 %}</div>
+                                        {% endif %}
+                                        <div class="stats-perc-name">K/D Ratio</div>
                                     </div>
                                     <div class="stats-game-played-info">
                                         <div class="stats-played-names">
                                             <div class="stats-win">Wins: </div>
                                             <div class="stats-loss">Losses:</div>
-                                            <div class="stats-tied">Tied:</div>    
+                                            <div class="stats-tied">Deaths:</div>    
                                             <div class="stats-kills">Kills:</div>    
                                         </div>
             
                                         <div class="stats-played-nums">
                                             <div class="stats-win">{{ stats.wins }}</div>
                                             <div class="stats-loss">{{ stats.loss }}</div>
-                                            <div class="stats-tied">{{ stats.tie }}</div>                                            
+                                            <div class="stats-tied">{{ stats.deaths }}</div>                                            
                                             <div class="stats-kills">{{ stats.kills }}</div>                                            
                                         </div>
                                     </div>
@@ -294,25 +298,25 @@
                                 <div class="stats-game">Games Played</div>
                             </div>
                             <div class="stats-game-played-percentage">
-                                {% if stat.games_played == 0 %}
-                                    <div class="stats-percentage">0</div>
+                                {% if stat.deaths == 0 %}
+                                    <div class="stats-percentage">100</div>
                                 {% else %}
-                                    <div class="stats-percentage">{% widthratio stat.wins stat.games_played 1 %}%</div>
+                                    <div class="stats-percentage">{% widthratio stat.kills stat.deaths 1 %}</div>
                                 {% endif %}
-                                <div class="stats-perc-name">Win Ratio</div>
+                                <div class="stats-perc-name">K/D Ratio</div>
                             </div>
                             <div class="stats-game-played-info">
                                 <div class="stats-played-names">
                                     <div class="stats-win">Wins:</div>
                                     <div class="stats-loss">Losses:</div>
-                                    <div class="stats-tied">Tied:</div>    
+                                    <div class="stats-tied">Deaths:</div>    
                                     <div class="stats-kills">Kills:</div>    
                                 </div>
 
                                 <div class="stats-played-nums">
                                     <div class="stats-win">{{ stat.wins }}</div>
                                     <div class="stats-loss">{{ stat.loss }}</div>
-                                    <div class="stats-tied">{{ stat.tie }}</div>                                            
+                                    <div class="stats-tied">{{ stat.deaths }}</div>                                            
                                     <div class="stats-kills">{{ stat.kills }}</div>                                            
                                 </div>
                             </div>

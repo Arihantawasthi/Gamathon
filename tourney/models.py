@@ -73,6 +73,8 @@ class GameStat(models.Model):
     team = models.ForeignKey(Team, on_delete=models.CASCADE, related_name='team_stats', blank=True, null=True)
     games_played = models.PositiveIntegerField(default=0)
     kills = models.PositiveIntegerField(default=0)
+    points = models.PositiveIntegerField(default=0)
+    deaths = models.PositiveIntegerField(default=0)
     wins = models.PositiveIntegerField(default=0)
     loss = models.PositiveIntegerField(default=0)
     tie = models.PositiveIntegerField(default=0)

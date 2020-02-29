@@ -121,12 +121,12 @@
                 </div>
                 <div class="bar-line"></div>
                 <div class="leadboard-main">
-                {% for player in players %}
-                    <a href="{% url 'profile' player.username %}" class="leaderboard-stack">
-                        <div class="stack-img" style="background-image: url('{{ player.profile_pic.url }}');"></div>
+                {% for player in top_players %}
+                    <a href="{% url 'profile' player.user %}" class="leaderboard-stack">
+                        <div class="stack-img" style="background-image: url('{{ player.user.profile_pic.url }}');"></div>
                         <div class="stack-info">
-                            <div class="stack-name">{{ player.username }}</div>
-                            <div class="stack-score">{{ player.wins }}</div>
+                            <div class="stack-name">{{ player.user.username }}</div>
+                            <div class="stack-score">{{ player.points }}</div>
                         </div>
                     </a>
                 {% empty %}

@@ -24,7 +24,7 @@ for group in groups:
     g_dict = {}
     g_teams = group.team.all()
     g_players = group.solo.all()
-    
+
     for team in g_teams:
         g_dict[team.name] = []
         for i in team.members.all():
