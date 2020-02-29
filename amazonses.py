@@ -13,18 +13,18 @@ from tourney.models import Tournament, Round
 from organize.models import Notification
 
 tour= Tournament.objects.get(id=9)
-group = Round.objects.get(round_name='Group 18')
+group = Round.objects.get(round_name='Group 24')
 
-g18_dict = {}
-g18_teams = group.team.all()
-g18_players = group.solo.all()
-print(len(g18_players))
+g24_dict = {}
+g24_teams = group.team.all()
+g24_players = group.solo.all()
+print(len(g24_players))
 
-for team in g18_teams:
-    g18_dict[team.name] = []
+for team in g24_teams:
+    g24_dict[team.name] = []
     for i in team.members.all():
-        if i in g18_players:
-            g18_dict[team.name].append(i.email)
+        if i in g24_players:
+            g24_dict[team.name].append(i.email)
 
 # Replace sender@example.com with your "From" address. 
 # This address must be verified.
@@ -34,7 +34,7 @@ SENDERNAME = 'Gamathon'
 
 # Replace recipient@example.com with a "To" address. If your account 
 # is still in the sandbox, this address must be verified.
-RECIPIENTS = g18_dict
+RECIPIENTS = g24_dict
 print(RECIPIENTS)
 
 c = 0
@@ -42,7 +42,7 @@ for recipients, emails in RECIPIENTS.items():
     c += 1
     for em in emails:
         try:
-            noti = Notification(user_1=User.objects.get(email=em), update=f'Match info: RoomID: 2026727, Password: PMBC18, Slot No: {c}, Match Start Time: 10:00 PM')
+            noti = Notification(user_1=User.objects.get(email=em), update=f'Match info: RoomID: 5676206, Password: PMBC24, Slot No: {c}, Match Start Time: 10:00 PM')
             noti.save()
             print('DONE!')
         except Exception as e:
@@ -151,7 +151,7 @@ for recipient, emails in RECIPIENTS.items():
 		                                                                  <tr>
 		                                                                     <td align="center" width="100%" style="padding: 0 15px;text-align: justify;color: white;font-size: 12px;line-height: 18px;">
 		                                                                        <h3 style="font-weight: 600; padding: 0px; margin: 0px; font-size: 16px; line-height: 24px; text-align: center; color: white;" class="title-color">Hey Homie,</h3>
-		                                                                        <p style="margin: 20px 0 30px 0;font-size: 15px;text-align: center; color: white;">Room ID: 2026727 <br> Password: PMBC18 <br> Match Start Time: 10:00 PM <br> SlotNo: {0} <br><br> Note: Please be seated only in your slot otherwise your team will be kicked out.<br> Don't Share this ID and Password with you friends only registered members all allowed. <br><br> Good Look For the Match Homie!</p>
+		                                                                        <p style="margin: 20px 0 30px 0;font-size: 15px;text-align: center; color: white;">Room ID: 5676206 <br> Password: PMBC24 <br> Match Start Time: 10:00 PM <br> SlotNo: {0} <br><br> Note: Please be seated only in your slot otherwise your team will be kicked out.<br> Don't Share this ID and Password with you friends only registered members all allowed. <br><br> Good Look For the Match Homie!</p>
 		                                                                   
 		                                                                     </td>
 		                                                                  </tr>

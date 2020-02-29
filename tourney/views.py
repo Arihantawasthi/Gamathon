@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse, JsonResponse
 from django.db.models import Max
-from .models import Game, Game_validate, Tournament, GameStat, Announcements, Prize, Round, Stage, Match
+from .models import Game, Game_validate, Tournament, GameStat, Announcements, Prize, Round, Stage, Match, ScoreCard
 from slingshot.models import User, Team
 from wallet.models import OrderId
 from django.views.decorators.csrf import csrf_exempt
@@ -170,7 +170,7 @@ def tourney(request, tour_id):
         score = ScoreCard.objects.get(tour=tournament, match=Match.objects.get(tour=tournament, round_id=g1), team=p)
         score_card.append(score)
     
-    score_card = sorted(score_card, key=lambda x: x.points, reverse=True)
+    score_card = sorted(score_card, key=lambda x: (x.points, x.kills), reverse=True)
 
     context['score_card'] = score_card
 
@@ -469,7 +469,7 @@ def loadLadder(request, tour_id):
         score = ScoreCard.objects.get(tour=tournament, match=match, team=team)
         score_card.append(score)
         
-    score_card = sorted(score_card, key=lambda x: x.points, reverse=True)
+    score_card = sorted(score_card, key=lambda x: (x.points, x.kills), reverse=True)
     context = {
         'score_card': score_card,
     }
