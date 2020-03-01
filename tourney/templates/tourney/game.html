@@ -122,8 +122,8 @@
                 <div class="bar-line"></div>
                 <div class="leadboard-main">
                 {% for player in top_players %}
-                    <a href="{% url 'profile' player.user %}" class="leaderboard-stack">
-                        <div class="stack-img" style="background-image: url('{{ player.user.profile_pic.url }}');"></div>
+                    <a href="{% url 'profile' player.user.username %}" class="leaderboard-stack">
+                        <div class="stack-img" style="background-image: url('/media/{{ player.user.profile_pic }}');"></div>
                         <div class="stack-info">
                             <div class="stack-name">{{ player.user.username }}</div>
                             <div class="stack-score">{{ player.points }}</div>

@@ -77,7 +77,7 @@ def game(request, game_name):
         trending_tour = tournaments.order_by('-participants').first()
         context['tournaments'] = tournaments
         context['trending_tour'] = trending_tour
-        context['top_players'] = top_players
+        context['top_players'] = top_players[0:5]
 
     except (Game_validate.DoesNotExist, Tournament.DoesNotExist):
         return render(request, 'tourney/game.html', context)
