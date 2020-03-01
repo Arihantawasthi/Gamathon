@@ -52,10 +52,13 @@ $(document).on('submit','.validate-modal-form', function(e) {
     e.preventDefault();
 
     var formData = {
+        'changed': 'False',
         'gameid': $('input[name=gameid]').val(),
         'csrfmiddlewaretoken': $('input[name=csrfmiddlewaretoken]').val()
     }
-    document.querySelector('.validate-modal-button').disabled=true;
+    document.querySelector('.validate-modal-button').disabled=true
+    document.querySelector('.validate-modal-button').innerHTML = '<i class="fa fa-circle-o-notch fa-spin"></i>'
+
     $.ajax({
         type:'POST',
         url: '/game/'+gamename,
@@ -65,13 +68,45 @@ $(document).on('submit','.validate-modal-form', function(e) {
         localStorage.setItem('recordHead', response_data['status'])
         localStorage.setItem('recordMessage', response_data['message'])
         window.location.reload()
-        /* validateModal.style.display = 'none';
-        setTimeout(function(){ 
-            validate.style.cursor = 'default'
-            validate.style.background = 'linear-gradient(90deg,#6ccd00,#309100)'
-            validateHead.innerHTML = response_data['status']
-            validateMess.innerHTML = response_data['message']
-            window.location.reload()
-        }, 200); */
+    })
+})
+
+try {
+    document.querySelector('.change-ign').addEventListener('click', () => {
+        document.querySelector('#change-ign').style.display = 'block'
+        setTimeout(() => {
+            document.querySelector('#change-ign-content').style.transform = 'translate(0rem, 0rem)'
+        },100)
+        
+        document.querySelector('.change-ign-close').addEventListener('click', () => {
+            document.querySelector('#change-ign-content').style.transform = 'translate(0rem, -5rem)'
+            setTimeout(() => {
+                document.querySelector('#change-ign').style.display = 'none'
+            },100)
+        })
+    })
+}
+catch(e){}
+
+/* Form for sending changed game id to validate account */
+$(document).on('submit','#change-ign-form', function(e) {
+    e.preventDefault();
+
+    var formData = {
+        'changed': 'True',
+        'gameid': $('input[name=changed-game-id]').val(),
+        'csrfmiddlewaretoken': $('input[name=csrfmiddlewaretoken]').val()
+    }
+    document.querySelector('.change-modal-btn').disabled=true
+    document.querySelector('.change-modal-btn').innerHTML = '<i class="fa fa-circle-o-notch fa-spin"></i>'
+    $.ajax({
+        type:'POST',
+        url: '/game/'+gamename,
+        data: formData,
+    }).done(function(response_data) {
+        localStorage.setItem('fire', true)
+        localStorage.setItem('recordHead', response_data['status'])
+        localStorage.setItem('recordMessage', response_data['message'])
+        window.location.reload()
     })
 })

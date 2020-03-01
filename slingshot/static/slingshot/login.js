@@ -25,7 +25,7 @@ $(document).on('submit','#login-form', function(e) {
         'password': $('input[name=loginPass]').val(),
         'csrfmiddlewaretoken': $('input[name=csrfmiddlewaretoken]').val()
     }
-
+    document.querySelector('.login-modal-button').innerHTML = '<i class="fa fa-circle-o-notch fa-spin"></i>'
     $.ajax({
         type:'POST',
         url: '/login',

@@ -243,6 +243,7 @@ input:focus {
     padding-right: 0.5rem;
     background-color: #3e4554;
     color: white;
+    width: 90%;
 }
 
 .pass-head {
@@ -262,6 +263,7 @@ input:focus {
     padding-right: 0.5rem;
     background-color: #3e4554;
     color: white;
+    width: 90%;
 }
 
 .container {
