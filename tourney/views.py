@@ -33,24 +33,6 @@ def game(request, game_name):
     except Game.DoesNotExist:
         return render(request, 'slingshot/404.html')
 
-    #VALIDATING PLAYER
-    if request.method == 'POST':
-        #For validating game
-        response_data = {}
-        gameid = request.POST.get('gameid')
-
-        user = User.objects.get(username=request.session['username'])
-
-        game_val = Game_validate(userName=user, gameName=game_name, gameId=gameid)
-        game_val.save()
-        game_stat = GameStat(user=user, game=game)
-        game_stat.save()
-
-        response_data['status'] = 'Game Validated'
-        response_data['message'] = 'Connected account '+gameid
-
-        return JsonResponse(response_data)
-
     try:
         user = User.objects.get(username=request.session['username'])
         gid = Game_validate.objects.get(userName=user, gameName=game_name)
@@ -81,6 +63,37 @@ def game(request, game_name):
 
     except (Game_validate.DoesNotExist, Tournament.DoesNotExist):
         return render(request, 'tourney/game.html', context)
+    
+    #VALIDATING PLAYER
+    if request.method == 'POST':
+        #For validating game
+        response_data = {}
+        gameid = request.POST.get('gameid')
+        changed = request.POST.get('changed')
+        print(gameid+' Game Id')
+        print(changed+ ' Statues')
+
+        user = User.objects.get(username=request.session['username'])
+
+        #For Request for changing Game Account
+        if changed == 'True':
+            game_val = Game_validate.objects.get(userName=user, gameName=game_name)
+            game_val.gameId = gameid
+            game_val.save()
+            print(gameid+' changed')
+            response_data['status'] = 'Game Account Changed!'
+            response_data['message'] = 'Connected Account '+gameid
+
+        elif changed == 'False':
+            game_val = Game_validate(userName=user, gameName=game_name, gameId=gameid)
+            game_val.save()
+            game_stat = GameStat(user=user, game=game)
+            game_stat.save()
+            print(gameid+' validate')
+            response_data['status'] = 'Game Validated!'
+            response_data['message'] = 'Connected account '+gameid
+
+        return JsonResponse(response_data)
 
     return render(request, 'tourney/game.html', context)
 

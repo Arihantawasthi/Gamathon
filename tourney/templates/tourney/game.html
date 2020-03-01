@@ -45,6 +45,24 @@
         </div>
     </div>
 
+    <div class="bg-validate-modal" id='change-ign'>
+        <div class="validate-modal-content" id="change-ign-content">
+            <div class="top-shadow"></div>
+            <div class="validate-modal-close change-ign-close"><i class="fa fa-times"></i></div>
+            <div class="modal-heading" style="margin-left: 1rem; margin-right: 1rem;">Change your {{ game.fullname }} in-game name</div>
+            <form action="#" id="change-ign-form">
+                {% csrf_token %}
+                <div class="name-head">New In-Game Name</div>
+                <div class="icon-name-container" style="position: relative; width: 90%;">
+                    <i class="fa fa-user" style="position: absolute; top: 0.7rem; left: 1.6rem; font-size: 18px;"></i>
+                    <input type="input" name="changed-game-id" class="acc-name-field" placeholder="Account Name" autofocus="on">
+                </div>
+                <div class="info">NOTE: This name must match your in-game name. (eg:- awaxx534)</div>
+                <button class="validate-modal-button change-modal-btn">Submit</button>
+            </form>
+        </div>
+    </div>
+
     <div class="container">
         <div class="bg-image" style="background-image: url('{{ game.bg_image.url }}');"></div>
         <div class="path">Arena > GamesHub > Game</div>
@@ -55,26 +73,31 @@
             </div>
             {% if request.session.logged_in %}
                 {% if not gameidExists %}
-                    <div class="validate-game">
-                        <div class="validate-game-text-content">
-                            <div class="validate-game-label">
-                                Validate Game
-                            </div>
-                            <div class="validate-game-sub-label">
-                                Connect this to your account to start playing!
+                    <div class="change-ign-validate-container">
+                        <div class="validate-game">
+                            <div class="validate-game-text-content">
+                                <div class="validate-game-label">
+                                    Validate Game
+                                </div>
+                                <div class="validate-game-sub-label">
+                                    Connect this to your account to start playing!
+                                </div>
                             </div>
                         </div>
                     </div>
                 {% else %}
-                    <div class="validate-game" style="background: linear-gradient(90deg,#6ccd00,#309100); pointer-events: none; cursor: default;">
-                        <div class="validate-game-text-content">
-                            <div class="validate-game-label">
-                                Game Validated
-                            </div>
-                            <div class="validate-game-sub-label">
-                                Connected account <br><span style="font-weight: bold; font-size: 13px">{{ gameid }}</span>
+                    <div class="change-ign-validate-container">
+                        <div class="validate-game" style="background: linear-gradient(90deg,#6ccd00,#309100); pointer-events: none; cursor: default;">
+                            <div class="validate-game-text-content">
+                                <div class="validate-game-label">
+                                    Game Validated
+                                </div>
+                                <div class="validate-game-sub-label">
+                                    Connected account <br><span style="font-weight: bold; font-size: 13px">{{ gameid }}</span>
+                                </div>
                             </div>
                         </div>
+                        <div class="change-ign">Change you Account Name</div>
                     </div>
                 {% endif %}
             {% endif %}

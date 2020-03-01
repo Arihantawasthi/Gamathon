@@ -209,7 +209,7 @@ body {
     transform: translateY(-5rem)
 }
 
-.validate-modal-form {
+.validate-modal-form, #change-ign-form {
     display: flex;
     flex-direction: column;
     color: white;
@@ -370,6 +370,23 @@ input:-webkit-autofill:active  {
     text-shadow: 5px 5px 10px rgba(0, 0, 0, 0.5);
 }
 
+.change-ign-validate-container {
+    display: flex;
+    flex-direction: column;
+    width: 18rem;
+    margin: 2rem 0rem;
+    transition: 0.3s ease;
+    position: relative;
+}
+
+.change-ign {
+    color: white;
+    margin-top: 0.1rem;
+    cursor: pointer;
+    text-align: right;
+    font-size: 14px;
+}
+
 .validate-game {
     display: flex;
     flex-direction: row;
@@ -378,10 +395,9 @@ input:-webkit-autofill:active  {
     border-radius: 4px;
     cursor: pointer;
     box-shadow: 0 5px 10px 0px rgba(11,156,230,.3);
-    width: 18rem;
+    width: 100%;
     transition: 0.3s ease;
     position: relative;
-    margin: 2rem 0rem;
 }
 
 @media only screen and (min-width: 1048px) {
@@ -394,7 +410,7 @@ input:-webkit-autofill:active  {
         height: 9rem;
     }
 
-    .validate-game {
+    .change-ign-validate-container {
         height: 6rem;
         width: 20rem;
         margin: 1rem 1rem 0rem 5rem;
