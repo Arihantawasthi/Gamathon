@@ -260,6 +260,11 @@ $(document).on('submit','#reg-form', function(e) {
     if (formData.username.slice(-1) === ' ') {
 	    formData.username = formData.username.substring(0, formData.username.length - 1)
     }
+    if (!/^[0-9a-zA-Z\_]+$/.test(formData.username)) {
+        return false
+    }
+
+    document.querySelector('.reg-modal-button').innerHTML = '<i class="fa fa-circle-o-notch fa-spin"></i>'
     $.ajax({
         type:'POST',
         url: '/signup',
@@ -269,19 +274,6 @@ $(document).on('submit','#reg-form', function(e) {
         localStorage.setItem('recordHead', response_data.status)
         localStorage.setItem('recordMessage', response_data.message)
         window.location.reload()
-        /* registerModal.style.display = 'none';
-        notifyDiv.style.display = 'block'
-        setTimeout(() => {          
-            sideBar.style.display = 'none';
-        }, 300)
-        container.style.opacity = '1';
-        document.querySelector('body').style.overflowY = 'auto'
-        setTimeout(function(){ 
-            notifyHead.innerHTML = response_data.status
-            notifyMessage.innerHTML = response_data.message
-            notifyDiv.style.right = '1rem' 
-        }, 200); */
-
     })
 })
 
@@ -307,6 +299,8 @@ $(document).on('submit','#login-form', function(e) {
         'password': $('input[name=loginPass]').val(),
         'csrfmiddlewaretoken': $('input[name=csrfmiddlewaretoken]').val()
     }
+    document.querySelector('.login-modal-button').innerHTML = '<i class="fa fa-circle-o-notch fa-spin"></i>'
+
     $.ajax({
         type:'POST',
         url: '/login',
@@ -317,35 +311,10 @@ $(document).on('submit','#login-form', function(e) {
             warning.innerHTML = response_data.message
         }
         else {
-            /* loginModal.style.display = 'none';
-            notifyDiv.style.display = 'block'
-            notifyDiv.style.right = '1rem' */
             localStorage.setItem('fire', true)
             localStorage.setItem('recordHead', response_data.status)
             localStorage.setItem('recordMessage', response_data.message)
             window.location.reload()
-            /* setTimeout(function() { 
-                notifyHead.innerHTML = response_data.status
-                notifyMessage.innerHTML = response_data.message
-                sessionUser.innerHTML = formData['username']
-                if (response_data.sessionLogged_in === true) {
-                    lowerLogin.style.display = 'none'
-                    lowerProfile.style.display = 'block'
-                    document.querySelector('.my-profile').href = `/profile/${sessionUser.innerHTML}`
-                    document.querySelector('.acc-settings').href = `/profile-settings/${sessionUser.innerHTML}`
-                    document.querySelector('.wallet').href = `/wallet/${sessionUser.innerHTML}`
-                    navClose.style.transform = 'rotate(720deg)' 
-                    container.style.opacity = '1';
-                }
-                else {
-                    lowerLogin.style.display = 'block'
-                    lowerProfile.style.display = 'none'
-                    document.querySelector('.my-profile').href = "#"
-                    document.querySelector('.acc-settings').href = "#"
-                    document.querySelector('.wallet').href = "#"
-                }
-                notifyDiv.style.right = '1rem' 
-            }, 200); */
         }
     })
 })
@@ -436,15 +405,6 @@ $(document).on('submit','#invite-form', function(e) {
         localStorage.setItem('recordHead', 'Success :)')
         localStorage.setItem('recordMessage', response_data['message'])
         window.location.reload()
-        /* notificationContainer.style.transform = 'translate(-40rem)'
-        notificationContainer.style.height = '0rem'
-        notificationContainer.style.width = '0rem' 
-        notifyDiv.style.display = 'block'
-        setTimeout(() => {
-            notifyHead.innerHTML = 'Success :)'
-            notifyMessage.innerHTML = response_data.message
-            notifyDiv.style.right = '1rem'
-        }, 200) */
     })
 })
 

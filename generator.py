@@ -9,11 +9,11 @@ from slingshot.models import User, Team
 from tourney.models import Tournament, Game_validate, GameStat, Round, ScoreCard, Stage, Match
 
 tour = Tournament.objects.get(id=9)
-group = Round.objects.get(tour=tour, stage=Stage.objects.get(stage_name='Qualifiers'), round_name='Group 18')
+group = Round.objects.get(tour=tour, stage=Stage.objects.get(stage_name='Qualifiers'), round_name='Group 24')
 match = Match.objects.get(tour=tour, round_id=group)
 scs_all = ScoreCard.objects.filter(tour=tour, match=match)
 
-with open ('../tour_info/Updated_csv/Group 18.csv', 'r') as f:
+with open ('../tour_info/Updated_csv/Group 24.csv', 'r') as f:
     reader = csv.reader(f)
     next(reader)
     for r in reader:
