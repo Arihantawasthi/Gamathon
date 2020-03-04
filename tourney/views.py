@@ -481,7 +481,7 @@ def loadLadder(request, tour_id):
 
     stage = Stage.objects.get(tour=tournament, stage_name=stage_name)
     group = Round.objects.get(tour=tournament, round_name=round_name, stage=stage)
-    match = Match.objects.get(tour=tournament, round_id=group, stage=stage)
+    match = Match.objects.get(tour=tournament, round_id=group, stage=stage, match_name=match_name)
     all_teams = group.team.all()
     score_card = []
     for team in all_teams:
