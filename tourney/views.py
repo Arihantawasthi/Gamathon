@@ -182,7 +182,7 @@ def tourney(request, tour_id):
     g1 = Round.objects.get(round_name='Group 1', tour=tournament, stage=stage)
     score_card = []
     for p in g1_players:
-        score = ScoreCard.objects.get(tour=tournament, match=Match.objects.get(tour=tournament, round_id=g1), team=p)
+        score = ScoreCard.objects.get(tour=tournament, match=Match.objects.get(tour=tournament, round_id=g1, match_name='Match 1'), team=p)
         score_card.append(score)
     
     score_card = sorted(score_card, key=lambda x: (x.points, x.kills), reverse=True)
