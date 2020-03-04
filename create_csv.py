@@ -8,7 +8,7 @@ django.setup()
 from tourney.models import Game_validate, Tournament, Round, Match
 
 groups = Round.objects.filter(tour=Tournament.objects.get(id=9))
-groups = groups[0:4]
+groups = groups[22:28]
 print(groups) 
 
 reg_users = Tournament.objects.get(id=9).player.all()
