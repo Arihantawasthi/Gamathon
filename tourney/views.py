@@ -174,9 +174,9 @@ def tourney(request, tour_id):
     except KeyError:
         pass
 
-    context['groups'] = Round.objects.filter(tour=tournament, stage=Stage.objects.get(stage_name='Quater-Final', tour=tournament))
-    context['stages'] = Stage.objects.filter(tour=tournament, stage_name='Quater-Final')
-    context['matches'] = Match.objects.filter(tour=tournament, round_id=Round.objects.get(round_name='Group 1', tour=tournament))
+    context['groups'] = Round.objects.only(round_name).filter(tour=tournament, stage=Stage.objects.get(stage_name='Quater-Final', tour=tournament))
+    context['stages'] = Stage.objects.only(stage_name).filter(tour=tournament, stage_name='Quater-Final')
+    context['matches'] = Match.objects.only('match_name').filter(tour=tournament, round_id=Round.objects.get(round_name='Group 1', tour=tournament), stage=Stage.objects.get(stage_name='Quater-Final'))
     g1_players = Round.objects.get(tour=tournament, round_name='Group 1').team.all()
     g1 = Round.objects.get(round_name='Group 1', tour=tournament, stage=Stage.objects.get(stage_name='Quater-Final'))
     score_card = []
