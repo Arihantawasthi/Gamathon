@@ -283,7 +283,9 @@
                                 {% endfor %}
                             </select>
                             <select name="matches" id="matches-select">
-                                <option value="match-1">Match 1</option>
+                                {% for match in matches %}
+                                    <option value="{{ match.match_name }}">{{ match.match_name }}</option>
+                                {% endfor %}
                             </select>
                         </div>
 

@@ -425,7 +425,41 @@ var x = setInterval(function() {
 
 $('#groups-select').change(() => {
     formData = {
-        'round_name': $('#groups-select').val()
+        'round_name': $('#groups-select').val(),
+        'stage_name': $('#phases-select').val(),
+        'match_name': $('#matches-select').val(),
+    }
+    $.ajax({
+        type: "GET",
+        url: window.location.href + '/ladder',  // URL to your view that serves new info
+        data: formData
+    })
+    .done(function(response) {
+        document.querySelector('.top-team-table').innerHTML = response;
+    });
+})
+
+$('#phases-select').change(() => {
+    formData = {
+        'round_name': $('#groups-select').val(),
+        'stage_name': $('#phases-select').val(),
+        'match_name': $('#matches-select').val()
+    }
+    $.ajax({
+        type: "GET",
+        url: window.location.href + '/ladder',  // URL to your view that serves new info
+        data: formData
+    })
+    .done(function(response) {
+        document.querySelector('.top-team-table').innerHTML = response;
+    });
+})
+
+$('#matches-select').change(() => {
+    formData = {
+        'round_name': $('#groups-select').val(),
+        'match_name': $('#matches-select').val(),
+        'stage_name': $('#phases-select').val()
     }
     $.ajax({
         type: "GET",
