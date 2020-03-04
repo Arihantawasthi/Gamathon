@@ -174,10 +174,11 @@ def tourney(request, tour_id):
     except KeyError:
         pass
 
-    context['groups'] = Round.objects.filter(tour=tournament)
-    context['stages'] = Stage.objects.filter(tour=tournament, stage_name='Qualifiers')
-    g1_players = Round.objects.get(tour=tournament, round_name='Group_1').team.all()
-    g1 = Round.objects.get(round_name='Group_1', tour=tournament, stage=Stage.objects.get(stage_name='Qualifiers'))
+    context['groups'] = Round.objects.filter(tour=tournament, stage=Stage.objects.get(stage_name='Qualifiers', tour=tournament))
+    context['stages'] = Stage.objects.filter(tour=tournament)
+    context['matches'] = Match.objects.filter(match_name='Match 1', tour=tournament, round_id=Round.objects.get(round_name='Group 28', tour=tournament))
+    g1_players = Round.objects.get(tour=tournament, round_name='Group 28').team.all()
+    g1 = Round.objects.get(round_name='Group 28', tour=tournament, stage=Stage.objects.get(stage_name='Qualifiers'))
     score_card = []
     for p in g1_players:
         score = ScoreCard.objects.get(tour=tournament, match=Match.objects.get(tour=tournament, round_id=g1), team=p)
@@ -474,8 +475,12 @@ def loadParticipants(request, tour_id):
 def loadLadder(request, tour_id):
     tournament = Tournament.objects.get(id=tour_id)
     round_name = request.GET.get('round_name')
-    group = Round.objects.get(tour=tournament, round_name=round_name)
-    match = Match.objects.get(tour=tournament, round_id=group)
+    stage_name = request.GET.get('stage_name')
+    match_name = request.GET.get('match_name')
+
+    stage = Stage.objects.get(tour=tournament, stage_name=stage_name)
+    group = Round.objects.get(tour=tournament, round_name=round_name, stage=stage)
+    match = Match.objects.get(tour=tournament, round_id=group, stage=stage)
     all_teams = group.team.all()
     score_card = []
     for team in all_teams:
