@@ -5,13 +5,13 @@ import django
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'Gamathon.settings.prod')
 django.setup()
 
-from tourney.models import Game_validate, Tournament, Round, Match
-
-groups = Round.objects.filter(tour=Tournament.objects.get(id=9))
-groups = groups[22:28]
+from tourney.models import Game_validate, Tournament, Round, Match, Stage
+tour = Tournament.objects.get(id=9)
+groups = Round.objects.filter(tour=tour, stage=Stage.objects.get(stage_name='Quater-Final', tour=tour))
+groups = groups[0:1]
 print(groups) 
 
-reg_users = Tournament.objects.get(id=9).player.all()
+reg_users = tour.player.all()
 
 for group in groups:
     for team in group.team.all():
