@@ -40,12 +40,6 @@ for match in matches:
                     s = ScoreCard(tour=tour, match=match, solo=Game_validate.objects.get(gameId=r[2])[0].userName)
                 except:
                     continue
-            s.save()
-            s.kills += int(r[4])
-            s.points += int(r[5])
-            s.in_game_rank += int(r[3])
-            s.save()
-            print('Updating User!')
 
     teams = group.team.all()
     print(len(teams))
