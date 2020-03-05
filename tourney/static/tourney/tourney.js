@@ -430,15 +430,15 @@ $('#groups-select').change(() => {
         data: formData
     })
     .done(function(response) {
-        document.querySelector('.top-team-table').innerHTML = response;
+        document.querySelector('.break-point').innerHTML = response;
     });
 })
 
 $('#phases-select').change(() => {
     formData = {
-        'round_name': $('#groups-select').val(),
+        'round_name': 'Group 1',
         'stage_name': $('#phases-select').val(),
-        'match_name': $('#matches-select').val()
+        'match_name': 'Match 1'
     }
     $.ajax({
         type: "GET",
@@ -446,7 +446,7 @@ $('#phases-select').change(() => {
         data: formData
     })
     .done(function(response) {
-        document.querySelector('.top-team-table').innerHTML = response;
+        document.querySelector('.break-point').innerHTML = response;
     });
 })
 
@@ -462,6 +462,6 @@ $('#matches-select').change(() => {
         data: formData
     })
     .done(function(response) {
-        document.querySelector('.top-team-table').innerHTML = response;
+        document.querySelector('.break-point').innerHTML = response;
     });
 })

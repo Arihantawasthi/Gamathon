@@ -5,10 +5,9 @@ import django
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'Gamathon.settings.prod')
 django.setup()
 
-from tourney.models import Game_validate, Tournament, Round, Match
+from tourney.models import Game_validate, Tournament, Round, Match, Stage
 
-groups = Round.objects.filter(tour=Tournament.objects.get(id=1))
-groups = groups[0:4]
+groups = Round.objects.filter(tour=Tournament.objects.get(id=1), stage=Stage.objects.get(stage_name='Semi-Finals'))
 print(groups)
 
 reg_users = Tournament.objects.get(id=1).player.all()
@@ -30,7 +29,7 @@ for group in groups:
         for i in team.members.all():
             if i in g_players:
                 g_dict[team.name].append(Game_validate.objects.get(userName=i, gameName='PUBGM').gameId)
-    with open(f'../tour_info/{group.round_name}.csv', 'w') as f:
+    with open(f'./{group.round_name}.csv', 'w') as f:
         w = csv.writer(f)
         w.writerow(['SNo.', 'Team Name', 'Player IGN', 'Rank', 'Kills', 'Points'])
         counter = 0

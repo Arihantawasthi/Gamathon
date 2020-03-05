@@ -174,15 +174,16 @@ def tourney(request, tour_id):
     except KeyError:
         pass
 
-    stage = Stage.objects.get(stage_name='Quater-Final', tour=tournament)
+    stage = Stage.objects.get(tour=tournament, stage_name='Qualifiers')
     context['groups'] = Round.objects.only('round_name').filter(tour=tournament, stage=stage)
-    context['stages'] = Stage.objects.only('stage_name').filter(tour=tournament, stage_name='Quater-Final')
+    context['stages'] = Stage.objects.only('stage_name').filter(tour=tournament)
     context['matches'] = Match.objects.only('match_name').filter(tour=tournament, round_id=Round.objects.get(round_name='Group 1', tour=tournament, stage=stage))
-    g1_players = Round.objects.get(tour=tournament, round_name='Group 1', stage=stage).team.all()
-    g1 = Round.objects.get(round_name='Group 1', tour=tournament, stage=stage)
+    g1_players = Round.objects.filter(tour=tournament, stage=stage)[5].team.all()
+    g1 = Round.objects.filter(tour=tournament, stage=stage)[5]
     score_card = []
     for p in g1_players:
-        score = ScoreCard.objects.get(tour=tournament, match=Match.objects.get(tour=tournament, round_id=g1, match_name='Match 1'), team=p)
+        match = Match.objects.get(tour=tournament, round_id=g1, match_name='Match 1')
+        score = ScoreCard.objects.get(tour=tournament, match=match, team=p)
         score_card.append(score)
     
     score_card = sorted(score_card, key=lambda x: (x.points, x.kills), reverse=True)
@@ -474,14 +475,25 @@ def loadParticipants(request, tour_id):
     return render(request, 'tourney/load_participants.html', context)    
 
 def loadLadder(request, tour_id):
+    context = {}
     tournament = Tournament.objects.get(id=tour_id)
     stage_name = request.GET.get('stage_name')
     match_name = request.GET.get('match_name')
     round_name = request.GET.get('round_name')
 
     stage = Stage.objects.get(tour=tournament, stage_name=stage_name)
-    group = Round.objects.get(tour=tournament, round_name=round_name, stage=stage)
-    match = Match.objects.get(tour=tournament, round_id=group, stage=stage, match_name=match_name)
+    try:
+        group = Round.objects.get(tour=tournament, round_name=round_name, stage=stage)
+        match = Match.objects.get(tour=tournament, round_id=group, stage=stage, match_name=match_name)
+    except:
+        context['note'] = f'{stage_name} hasn\'t started yet.'
+        context['status'] = 1
+        return render(request, 'tourney/load_ladder.html', context)
+
+    r = Round.objects.get(round_name='Group 1', tour=tournament, stage=stage)
+    context['groups'] = Round.objects.only('round_name').filter(tour=tournament, stage=stage)
+    context['matches'] = Match.objects.only('match_name').filter(tour=tournament, round_id=r)
+
     all_teams = group.team.all()
     score_card = []
     for team in all_teams:
@@ -489,7 +501,5 @@ def loadLadder(request, tour_id):
         score_card.append(score)
         
     score_card = sorted(score_card, key=lambda x: (x.points, x.kills), reverse=True)
-    context = {
-        'score_card': score_card,
-    }
+    context['score_card'] = score_card
     return render(request, 'tourney/load_ladder.html', context)
