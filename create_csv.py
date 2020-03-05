@@ -8,7 +8,7 @@ django.setup()
 from tourney.models import Game_validate, Tournament, Round, Match, Stage
 tour = Tournament.objects.get(id=9)
 groups = Round.objects.filter(tour=tour, stage=Stage.objects.get(stage_name='Quater-Final', tour=tour))
-groups = groups[0:1]
+groups = groups[1:12]
 print(groups) 
 
 reg_users = tour.player.all()
