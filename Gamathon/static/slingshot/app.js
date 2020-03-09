@@ -258,7 +258,7 @@ $(document).on('submit','#reg-form', function(e) {
         'csrfmiddlewaretoken': $('input[name=csrfmiddlewaretoken]').val()
     }
     if (formData.username.slice(-1) === ' ') {
-	    formData.username = formData.username.substring(0, formData.username.length - 1)
+        formData.username = formData.username.substring(0, formData.username.length - 1)
     }
     if (!/^[0-9a-zA-Z\_]+$/.test(formData.username)) {
         return false

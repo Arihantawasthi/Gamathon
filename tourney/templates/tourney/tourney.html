@@ -292,50 +292,50 @@
                                 </select>
                             </div>
 
-                            <div class="top-team-table">
-		            {% if tournament.status > 1 %}
-                                {% if tournament.tour_type == 'Solo' %}
-                                    {% for participant in participants %}
-                                    <div class="top-team-element">
-                                        <div class="left-section">
-                                            <div class="s-no">{{ forloop.counter }}</div>
-                                            <div class="img-name">
-                                                <a href="{% url 'profile' participant.username %}" class="participant-name">
-                                                    <div class="team-img" style="background-image: url('/media/{{ participant.profile_pic }}');"></div>{{ participant.name }}
-                                                </a>
-                                            </div>
-                                        </div>
-                                        <div class="right-section">
-                                            <div class="win-perc">{{ participant.in_game_rank }}</div>
-                                            <div class="win-perc">{{ participant.kills }}</div>
-                                            <div class="points">{{ participant.points }}</div>
+                        <div class="top-team-table">
+                        {% if tournament.status == 1 %}
+                            {% if tournament.tour_type == 'Solo' %}
+                                {% for participant in participants %}
+                                <div class="top-team-element">
+                                    <div class="left-section">
+                                        <div class="s-no">{{ forloop.counter }}</div>
+                                        <div class="img-name">
+                                            <a href="{% url 'profile' participant.username %}" class="participant-name">
+                                                <div class="team-img" style="background-image: url('{{ participant.profile_pic.url }}');"></div>{{ participant.name }}
+                                            </a>
                                         </div>
                                     </div>
-                                    {% endfor %}
-                                {% else %}
-                                    {% for team in score_card %}
-                                    <div class="top-team-element">
-                                        <div class="left-section">
-                                            <div class="s-no">{{ forloop.counter }}</div>
-                                            <div class="img-name">
-                                                <a href="{% url 'team' team.team.name %}" class="participant-name">
-                                                    <div class="team-img" style="background-image: url('/media/{{ team.team.logo }}');"></div>{{ team.team.name }}
-                                                </a>
-                                            </div>
-                                        </div>
-                                        <div class="right-section">
-                                            <div class="win-perc">{{ team.in_game_rank }}</div>
-                                            <div class="win-perc">{{ team.kills }}</div>
-                                            <div class="points">{{ team.points }}</div>
-                                        </div>
+                                    <div class="right-section">
+                                        <div class="win-perc">{{ participant.in_game_rank }}</div>
+                                        <div class="win-perc">{{ participant.kills }}</div>
+                                        <div class="points">{{ participant.points }}</div>
                                     </div>
-                                    {% endfor %}
-                                {% endif %}
+                                </div>
+                                {% endfor %}
                             {% else %}
-                                <div style="color: rgba(233, 221, 221, 0.7); text-align: center; font-size: 14px; margin-top: 2rem; margin-bottom: 3rem;">Ladder will be available when tournament begins.</div>
+                                {% for team in score_card %}
+                                <div class="top-team-element">
+                                    <div class="left-section">
+                                        <div class="s-no">{{ forloop.counter }}</div>
+                                        <div class="img-name">
+                                            <a href="{% url 'team' team.team.name %}" class="participant-name">
+                                                <div class="team-img" style="background-image: url('{{ team.team.logo.url }}');"></div>{{ team.team.name }}
+                                            </a>
+                                        </div>
+                                    </div>
+                                    <div class="right-section">
+                                        <div class="win-perc">{{ team.in_game_rank }}</div>
+                                        <div class="win-perc">{{ team.kills }}</div>
+                                        <div class="points">{{ team.points }}</div>
+                                    </div>
+                                </div>
+                                {% endfor %}
                             {% endif %}
                     	</div>
                             </div>
+                        {% else %}
+                            <div style="color: rgba(233, 221, 221, 0.7); text-align: center; font-size: 14px; margin-top: 2rem; margin-bottom: 3rem;">Ladder will be available when tournament begins.</div>
+                        {% endif %}
                         </div>
                 </div>
                 <div class="rules-content">

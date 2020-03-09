@@ -423,35 +423,38 @@ var x = setInterval(function() {
   }
 }, 1000);
 
-$('#groups-select').change(() => {
+document.querySelector('#groups-select').addEventListener('change', () => {
+    console.log('Yha pe?')
     formData = {
         'round_name': $('#groups-select').val(),
         'stage_name': $('#phases-select').val(),
         'match_name': $('#matches-select').val(),
     }
+    console.log(formData)
     $.ajax({
         type: "GET",
-        url: window.location.href + '/ladder',  // URL to your view that serves new info
+        url: window.location.href + '/options',  // URL to your view that serves new info
         data: formData
     })
     .done(function(response) {
-        document.querySelector('.break-point').innerHTML = response;
+        document.querySelector('#matches-select').innerHTML = response;
     });
 })
 
 $('#phases-select').change(() => {
     formData = {
-        'round_name': 'Group 1',
+        'round_name': $('#groups-select').val(),
         'stage_name': $('#phases-select').val(),
-        'match_name': 'Match 1'
+        'match_name': 'Match 1',
     }
+    console.log(formData)
     $.ajax({
         type: "GET",
-        url: window.location.href + '/ladder',  // URL to your view that serves new info
+        url: window.location.href + '/options',  // URL to your view that serves new info
         data: formData
     })
     .done(function(response) {
-        document.querySelector('.break-point').innerHTML = response;
+        document.querySelector('#groups-select').innerHTML = response;
     });
 })
 
@@ -459,7 +462,8 @@ $('#matches-select').change(() => {
     formData = {
         'round_name': $('#groups-select').val(),
         'match_name': $('#matches-select').val(),
-        'stage_name': $('#phases-select').val()
+        'stage_name': $('#phases-select').val(),
+        'g': 1
     }
     $.ajax({
         type: "GET",
@@ -467,6 +471,6 @@ $('#matches-select').change(() => {
         data: formData
     })
     .done(function(response) {
-        document.querySelector('.break-point').innerHTML = response;
+        document.querySelector('.top-team-table').innerHTML = response;
     });
 })

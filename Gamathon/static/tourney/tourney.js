@@ -423,7 +423,8 @@ var x = setInterval(function() {
   }
 }, 1000);
 
-$('#groups-select').change(() => {
+document.querySelector('#groups-select').addEventListener('change', () => {
+    console.log('Yha pe?')
     formData = {
         'round_name': $('#groups-select').val(),
         'stage_name': $('#phases-select').val(),
@@ -452,14 +453,18 @@ $('#phases-select').change(() => {
     })
     .done(function(response) {
         document.querySelector('.break-point').innerHTML = response;
-    });
+        'round_name': $('#groups-select').val(),
+        'stage_name': $('#phases-select').val(),
+        'match_name': 'Match 1',
+    })
 })
 
 $('#matches-select').change(() => {
     formData = {
         'round_name': $('#groups-select').val(),
         'match_name': $('#matches-select').val(),
-        'stage_name': $('#phases-select').val()
+        'stage_name': $('#phases-select').val(),
+        'g': 1
     }
     $.ajax({
         type: "GET",

@@ -48,7 +48,7 @@ $(document).on('submit','#create-team-form', function(e) {
     }
     if (formData.team_name.slice(-1) === ' ') {
 	formData.team_name = formData.team_name.substring(0, formData.team_name.length - 1)
-    }} 
+    }
     if (!/^[0-9a-zA-Z\_]+$/.test(query)) {
         return false
     }
