@@ -121,11 +121,6 @@ def tourney(request, tour_id):
 
     game = tournament.tour_game.name
     context['game'] = game
-    #Checking if user is logged in
-    try:
-        user = User.objects.get(username=request.session['username'])
-    except KeyError:
-        pass
 
     prizes = tournament.tour_prize.all()
     context['prizes'] = tournament.tour_prize.all().order_by('place')
@@ -134,6 +129,7 @@ def tourney(request, tour_id):
     context['announcements'] = tournament.tour_ann.all()
     #Checking if user has validated game
     try:
+        user = User.objects.get(username=request.session['username'])
         game_val = Game_validate.objects.get(userName=user, gameName=game)
         context['game_validated'] = True
         #Checking if user is registered
