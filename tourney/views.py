@@ -178,8 +178,8 @@ def tourney(request, tour_id):
     context['groups'] = Round.objects.only('round_name').filter(tour=tournament, stage=stage)
     context['stages'] = Stage.objects.only('stage_name').filter(tour=tournament)
     context['matches'] = Match.objects.only('match_name').filter(tour=tournament, round_id=Round.objects.get(round_name='Group 1', tour=tournament, stage=stage))
-    g1_players = Round.objects.filter(tour=tournament, stage=stage)[5].team.all()
-    g1 = Round.objects.filter(tour=tournament, stage=stage)[5]
+    g1_players = Round.objects.filter(tour=tournament, stage=stage)[0].team.all()
+    g1 = Round.objects.filter(tour=tournament, stage=stage)[0]
     score_card = []
     for p in g1_players:
         match = Match.objects.get(tour=tournament, round_id=g1, match_name='Match 1')
@@ -490,7 +490,7 @@ def loadLadder(request, tour_id):
         context['status'] = 1
         return render(request, 'tourney/load_ladder.html', context)
 
-    r = Round.objects.get(round_name='Group 1', tour=tournament, stage=stage)
+    r = Round.objects.get(round_name=round_name, tour=tournament, stage=stage)
     context['groups'] = Round.objects.only('round_name').filter(tour=tournament, stage=stage)
     context['matches'] = Match.objects.only('match_name').filter(tour=tournament, round_id=r)
 

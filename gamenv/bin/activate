@@ -46,7 +46,7 @@ deactivate () {
 # unset irrelevant variables
 deactivate nondestructive
 
-VIRTUAL_ENV="/home/heisenberg/Gamathon/gamenv"
+VIRTUAL_ENV="/home/ubuntu/Gamathon2/gamenv"
 export VIRTUAL_ENV
 
 _OLD_VIRTUAL_PATH="$PATH"

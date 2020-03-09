@@ -36,10 +36,18 @@ for match in matches:
                 s.in_game_rank += int(r[3])
                 s.save()
                 scs_all = ScoreCard.objects.filter(tour=tour, match=match)
-                try:
-                    s = ScoreCard(tour=tour, match=match, solo=Game_validate.objects.get(gameId=r[2])[0].userName)
-                except:
-                    continue
+
+            try:
+                s = ScoreCard(tour=tour, match=match, solo=Game_validate.objects.filter(gameId=r[2])[0].userName)
+                s.save()
+                s.kills += int(r[4])
+                s.points += int(r[5])
+                s.in_game_rank += int(r[3])
+                s.save()
+                print('Updating User!')
+            except:
+                print('Returned two users!')
+                pass
 
     teams = group.team.all()
     print(len(teams))
