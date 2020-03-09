@@ -25,6 +25,18 @@ document.querySelector('.create-team-modal-close').addEventListener('click', ()=
     document.querySelector('.create-team-modal-content').style.transform = 'translate(0rem, -3rem)'
 })
 
+$('input[name=team-name]').keyup(function() {
+    let query = $('input[name=team-name]').val()
+    if (!/^[0-9a-zA-Z\_]+$/.test(query)) {
+        document.querySelector('.special-char-warning').style.display = 'block';
+        document.querySelector('.special-char-warning').innerHTML = '<i class="fa fa-times" style="margin-right: 0.2rem"></i>'+"Special Characters and spaces not allowed!"
+        document.querySelector('.special-char-warning').style.color = 'red'
+    }
+    else {
+        document.querySelector('.special-char-warning').style.display = 'none'
+    }
+})
+
 /* ---FORM TO CREATE TEAM USING AJAX */
 let route = document.querySelector('#sessionUser').innerHTML
 $(document).on('submit','#create-team-form', function(e) {
@@ -34,6 +46,13 @@ $(document).on('submit','#create-team-form', function(e) {
         'join_code': $('input[name=join-code]').val(),
         'csrfmiddlewaretoken': $('input[name=csrfmiddlewaretoken]').val()
     }
+    if (formData.team_name.slice(-1) === ' ') {
+        formData.team_name = formData.team_name.substring(0, formData.team_name.length - 1)
+    } 
+    if (!/^[0-9a-zA-Z\_]+$/.test(query)) {
+        return false
+    }
+    
     $.ajax({
         type:'POST',
         url: '/profile/'+route,
@@ -43,13 +62,6 @@ $(document).on('submit','#create-team-form', function(e) {
         localStorage.setItem('recordHead', response_data['status'])
         localStorage.setItem('recordMessage', response_data['message'])
         window.location.reload()
-        /* document.querySelector('.bg-create-team-modal').style.display = 'none';
-        document.querySelector('.notify-div').style.display = 'block'
-        setTimeout(function(){ 
-            document.querySelector('.notify-heading-content').innerHTML = response_data.status
-            document.querySelector('.notify-message').innerHTML = response_data.message
-            document.querySelector('.notify-div').style.right = '1rem' 
-        }, 200); */
     })
 })
 

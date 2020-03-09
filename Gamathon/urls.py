@@ -19,6 +19,7 @@ from django.conf.urls.static import static
 from django.urls import path, include
 from django.conf.urls import handler404, handler500
 from slingshot import views
+import debug_toolbar
 
 handler404 = views.error_404
 handler500 = views.error_500
@@ -29,5 +30,6 @@ urlpatterns = [
     path('', include('leaderboard.urls')),
     path('', include('tourney.urls')),
     path('', include('wallet.urls')),
+    path(r'^__debug__', include(debug_toolbar.urls)),
     path('YWRtaWWta4====4/', admin.site.urls),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

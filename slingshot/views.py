@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse, JsonResponse
+from django.db.models import Q
 from django.core.mail import EmailMultiAlternatives
 from .models import User, Team, Invite
 from django.contrib.auth.hashers import make_password, check_password
@@ -14,7 +15,7 @@ secret_key = URLSafeTimedSerializer('thisisasecretkey!')
 
 def sendNotification(request):
     try:
-        notifications = Notification.objects.filter(user_1=request.session['username'])
+        notifications = Notification.objects.select_related('team', 'user_2', 'user_1').filter(user_1=request.session['username'])
     except KeyError:
         notifications = []
     notification_all = {}
@@ -31,7 +32,6 @@ def sendNotification(request):
         
         else:
             notification_all['follow_notifications'].append(notification)
-
     return notification_all
 
 
@@ -49,7 +49,9 @@ def index(request):
     total_notifications = len(context['invite_notifications']) + len(context['follow_notifications']) + len(context['group_notifications'])
     context['total_notifications'] = total_notifications
     
-    tournaments = Tournament.objects.filter(status=1) | Tournament.objects.filter(status=2)
+    #Making the INNER JOIN query for tournaments and it's game
+    #This will prevent making quries to get game on every iteration of tournament list in template 
+    tournaments = Tournament.objects.select_related('tour_game').filter(Q(status=1) | Q(status=2))
     context['tournaments'] = tournaments
     
     return render(request, 'slingshot/index.html', context)
@@ -221,12 +223,12 @@ def profileSettings(request, username):
 
 def profile(request, username):
     try:
-        user = User.objects.get(username=username)
+        user = User.objects.prefetch_related('members').get(username=username)
     except User.DoesNotExist:
         return render(request, 'slingshot/404.html')
 
     #Total teams that the user is in
-    total_teams = user.members.all()
+    total_teams = user.members.all().prefetch_related('members')
 
     sendNoti = sendNotification(request)
     context = {
@@ -240,7 +242,7 @@ def profile(request, username):
     total_notifications = len(context['invite_notifications']) + len(context['follow_notifications']) + len(context['group_notifications'])
     context['total_notifications'] = total_notifications
 
-    tournaments = user.participant.all()
+    tournaments = user.participant.all().select_related('tour_game')
     context['tournaments'] = tournaments
 
     #Getting the most played game
@@ -254,7 +256,7 @@ def profile(request, username):
 
     # Getting stats for all the games the player has played.
     # Storing it in a list called all_stats.
-    all_stats = GameStat.objects.filter(user=user)
+    all_stats = GameStat.objects.select_related('user', 'game').filter(user=user)
     context['all_stats'] = all_stats
 
     try: 
@@ -264,13 +266,9 @@ def profile(request, username):
             games.append(Game.objects.get(name=game.gameName))
         
         context['zipped'] = zip(games, games_validated)
-
-        stats = GameStat.objects.get(game=most_played_game, user=user)
+        
+        stats = GameStat.objects.select_related('game', 'user').get(game=most_played_game, user=user)
         context['stats'] = stats
-        if stats.games_played != 0:
-            context['wins_perc'] = (stats.wins // stats.games_played)*100
-        else:
-            context['wins_perc'] = 0
 
     except (Game_validate.DoesNotExist, GameStat.DoesNotExist):
         pass
@@ -279,16 +277,15 @@ def profile(request, username):
     to get the following data once it is searched in following
     section and then followed section.
     """
-    followers = user.followers.all()
-    followerObjects = [i for i in followers]
-    followers = [i.username for i in followers]
+    followerObjects = user.followers.all()
+    followers = [i.username for i in followerObjects]
     context['followers'] = followers
     context['followerObjects'] = followerObjects
     
     try:
         # Getting the logged_in user
         logged_in_user = User.objects.get(username=request.session['username'])
-        logged_in_user_followers = logged_in_user.followers.all()
+        logged_in_user_followers = logged_in_user.followers.all().prefetch_related('followers')
         logged_in_user_followers = [i.username for i in logged_in_user_followers]
         context['logged_in_user_followers'] = logged_in_user_followers
 

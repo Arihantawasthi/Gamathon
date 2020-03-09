@@ -111,6 +111,18 @@ $(document).on('submit','#follow-form', function(e) {
     })
 })
 
+$('input[name=team-name]').keyup(function() {
+    let query = $('input[name=team-name]').val()
+    if (!/^[0-9a-zA-Z\_]+$/.test(query)) {
+        document.querySelector('.special-char-warning').style.display = 'block';
+        document.querySelector('.special-char-warning').innerHTML = '<i class="fa fa-times" style="margin-right: 0.2rem"></i>'+"Special Characters and spaces not allowed!"
+        document.querySelector('.special-char-warning').style.color = 'red'
+    }
+    else {
+        document.querySelector('.special-char-warning').style.display = 'none'
+    }
+})
+
 $(document).on('submit','#create-team-form', function(e) {
     e.preventDefault();
 
@@ -119,6 +131,14 @@ $(document).on('submit','#create-team-form', function(e) {
         'join_code': $('input[name=join-code]').val(),
         'csrfmiddlewaretoken': $('input[name=csrfmiddlewaretoken]').val()
     }
+    if (formData.team_name.slice(-1) === ' ') {
+        formData.team_name = formData.team_name.substring(0, formData.team_name.length - 1)
+    } 
+    if (!/^[0-9a-zA-Z\_]+$/.test(formData.team_name)) {
+        return false
+    }
+
+    document.querySelector('.create-team-modal-button').innerHTML = '<i class="fa fa-circle-o-notch fa-spin"></i>'
     $.ajax({
         type:'POST',
         url: '/profile/'+sessionUser.innerHTML,
@@ -128,12 +148,6 @@ $(document).on('submit','#create-team-form', function(e) {
         localStorage.setItem('recordHead', response_data['status'])
         localStorage.setItem('recordMessage', response_data['message'])
         window.location.reload()
-        /* notifyDiv.style.display = 'block'
-        setTimeout(function(){ 
-            notifyHead.innerHTML = response_data.status
-            notifyMessage.innerHTML = response_data.message
-            notifyDiv.style.right = '1rem' 
-        }, 200); */
     })
 })
 

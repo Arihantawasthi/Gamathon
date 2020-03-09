@@ -58,6 +58,13 @@ $(document).on('submit','#reg-form', function(e) {
         'email': $('input[name=emails]').val(),
         'csrfmiddlewaretoken': $('input[name=csrfmiddlewaretoken]').val()
     }
+    if (formData.username.slice(-1) === ' ') {
+        formData.username = formData.username.substring(0, formData.username.length - 1)
+    }
+    if (!/^[0-9a-zA-Z\_]+$/.test(formData.username)) {
+        return false
+    }
+    document.querySelector('.reg-modal-button').innerHTML = '<i class="fa fa-circle-o-notch fa-spin"></i>'
     $.ajax({
         type:'POST',
         url: '/signup',

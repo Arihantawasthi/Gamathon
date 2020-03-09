@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse, JsonResponse
-from django.db.models import Max
+from django.db.models import Max, Q
 from .models import Game, Game_validate, Tournament, GameStat, Announcements, Prize, Round, Stage, Match, ScoreCard
 from slingshot.models import User, Team
 from wallet.models import OrderId
@@ -17,6 +17,7 @@ MERCHANT_KEY = config['PAYTM_MERCHANT_KEY']
 
 # Create your views here.
 def game(request, game_name):
+    #Getting notifications of the user
     sendNoti = sendNotification(request)
     context = {
         'invite_notifications': sendNoti['invite_notifications'],
@@ -39,21 +40,17 @@ def game(request, game_name):
         context['gameidExists'] = True
         context['gameid'] = gid.gameId
 
-    except Game_validate.DoesNotExist:
+    except (Game_validate.DoesNotExist, KeyError):
         context['gameidExists'] = False
     
-    except KeyError:
-        pass
-    
     try:
-        #Getting TOP Players
-        top_players = []
-        all_stats = GameStat.objects.filter(game=game).order_by('-points')
-        for i in all_stats:
-            if i.user != None:
-                top_players.append(i)
-        
-        tournaments = Tournament.objects.filter(tour_game=game_name, status=1) | Tournament.objects.filter(tour_game=game_name, status=2)                    #Getting all the tournaments related to this game
+        #Getting TOP Players of the Game
+        top_players = GameStat.objects.select_related('user').filter(
+            Q(game=game) & ~Q(user=None)
+        ).order_by('-points')[0:5]
+
+        #Getting all the tournaments related to this game
+        tournaments = Tournament.objects.filter(Q(tour_game=game, status=1) | Q(tour_game=game, status=2))
 
         #Getting the tournament with highest players participants(Trending Tourney)
         trending_tour = tournaments.order_by('-participants').first()
@@ -137,7 +134,6 @@ def tourney(request, tour_id):
     context['announcements'] = tournament.tour_ann.all()
     #Checking if user has validated game
     try:
-        user = User.objects.get(username=request.session['username'])
         game_val = Game_validate.objects.get(userName=user, gameName=game)
         context['game_validated'] = True
         #Checking if user is registered
@@ -153,19 +149,20 @@ def tourney(request, tour_id):
     time = datetime.datetime.now().time()
     date = datetime.datetime.now().date()
 
-    if date < tournament.start_date:
-        tournament.status = 1
-        tournament.save()
-    elif date >= tournament.start_date:
-        if time < tournament.start_time:
+    if tournament.status == 1:
+        if date < tournament.start_date:
             tournament.status = 1
             tournament.save()
+        elif date >= tournament.start_date:
+            if time < tournament.start_time:
+                tournament.status = 1
+                tournament.save()
+            else:
+                tournament.status = 2
+                tournament.save()
         else:
             tournament.status = 2
             tournament.save()
-    else:
-        tournament.status = 2
-        tournament.save()
         
     try:
         for participant in participants:
@@ -174,17 +171,17 @@ def tourney(request, tour_id):
     except KeyError:
         pass
 
-    stage = Stage.objects.get(tour=tournament, stage_name='Qualifiers')
+    """ stage = Stage.objects.get(tour=tournament, stage_name='Qualifiers')
     context['groups'] = Round.objects.only('round_name').filter(tour=tournament, stage=stage)
     context['stages'] = Stage.objects.only('stage_name').filter(tour=tournament)
     context['matches'] = Match.objects.only('match_name').filter(tour=tournament, round_id=Round.objects.get(round_name='Group 1', tour=tournament, stage=stage))
     g1_players = Round.objects.filter(tour=tournament, stage=stage)[5].team.all()
-    g1 = Round.objects.filter(tour=tournament, stage=stage)[5]
+    g1 = Round.objects.filter(tour=tournament, stage=stage)[5] """
     score_card = []
-    for p in g1_players:
+    """ for p in g1_players:
         match = Match.objects.get(tour=tournament, round_id=g1, match_name='Match 1')
         score = ScoreCard.objects.get(tour=tournament, match=match, team=p)
-        score_card.append(score)
+        score_card.append(score) """
     
     score_card = sorted(score_card, key=lambda x: (x.points, x.kills), reverse=True)
 
@@ -493,7 +490,6 @@ def loadLadder(request, tour_id):
     r = Round.objects.get(round_name='Group 1', tour=tournament, stage=stage)
     context['groups'] = Round.objects.only('round_name').filter(tour=tournament, stage=stage)
     context['matches'] = Match.objects.only('match_name').filter(tour=tournament, round_id=r)
-
     all_teams = group.team.all()
     score_card = []
     for team in all_teams:
@@ -503,3 +499,14 @@ def loadLadder(request, tour_id):
     score_card = sorted(score_card, key=lambda x: (x.points, x.kills), reverse=True)
     context['score_card'] = score_card
     return render(request, 'tourney/load_ladder.html', context)
+
+def loadOptions(request, tour_id):
+    context = {}
+    tour = Tournament.objects.get(id=tour_id)
+    stage_name = request.GET.get('stage_name')
+    round_name = request.GET.get('round_name')
+
+    stage = Stage.objects.get(stage_name=stage_name)
+    groups = Round.objects.only('round_name').filter(stage=stage, tour=tour)
+    context['groups'] = groups
+    return render(request, 'tourney/load_options.html', context)

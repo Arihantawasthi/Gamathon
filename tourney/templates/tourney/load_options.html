@@ -1,0 +1,6 @@
+{% for group in groups %}
+    <option value="{{ group.round_name }}">{{ group.round_name }}</option>
+{% endfor %}
+{% for match in matches %}
+    <option value="{{ match.match_name }}">{{ match.match_name }}</option>
+{% endfor %}
