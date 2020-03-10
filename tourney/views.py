@@ -160,12 +160,12 @@ def tourney(request, tour_id):
             tournament.status = 2
             tournament.save()
         
-    try:
-        for participant in participants:
-            if participant.username == request.session['username']:
-                context['team_registered'] = True
-    except KeyError:
-        pass
+    #try:
+    #    for participant in participants:
+    #        if participant.username == request.session['username']:
+    #            context['team_registered'] = True
+    #except KeyError:
+    #    pass
 
     """ stage = Stage.objects.get(tour=tournament, stage_name='Qualifiers')
     context['groups'] = Round.objects.only('round_name').filter(tour=tournament, stage=stage)

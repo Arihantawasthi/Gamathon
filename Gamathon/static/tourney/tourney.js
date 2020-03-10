@@ -430,33 +430,32 @@ document.querySelector('#groups-select').addEventListener('change', () => {
         'stage_name': $('#phases-select').val(),
         'match_name': $('#matches-select').val(),
     }
+    console.log(formData)
     $.ajax({
         type: "GET",
-        url: window.location.href + '/ladder',  // URL to your view that serves new info
+        url: window.location.href + '/options',  // URL to your view that serves new info
         data: formData
     })
     .done(function(response) {
-        document.querySelector('.break-point').innerHTML = response;
+        document.querySelector('#matches-select').innerHTML = response;
     });
 })
 
 $('#phases-select').change(() => {
     formData = {
-        'round_name': 'Group 1',
-        'stage_name': $('#phases-select').val(),
-        'match_name': 'Match 1'
-    }
-    $.ajax({
-        type: "GET",
-        url: window.location.href + '/ladder',  // URL to your view that serves new info
-        data: formData
-    })
-    .done(function(response) {
-        document.querySelector('.break-point').innerHTML = response;
         'round_name': $('#groups-select').val(),
         'stage_name': $('#phases-select').val(),
         'match_name': 'Match 1',
+    }
+    console.log(formData)
+    $.ajax({
+        type: "GET",
+        url: window.location.href + '/options',  // URL to your view that serves new info
+        data: formData
     })
+    .done(function(response) {
+        document.querySelector('#groups-select').innerHTML = response;
+    });
 })
 
 $('#matches-select').change(() => {
@@ -472,6 +471,6 @@ $('#matches-select').change(() => {
         data: formData
     })
     .done(function(response) {
-        document.querySelector('.break-point').innerHTML = response;
+        document.querySelector('.top-team-table').innerHTML = response;
     });
 })

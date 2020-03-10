@@ -1,7 +1,7 @@
 from Gamathon.settings.base import *
 
 # Override base settings here for production environment.
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ['gamathon.gg', 'www.gamathon.gg']
 
