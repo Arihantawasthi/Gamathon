@@ -113,11 +113,8 @@ def tourney(request, tour_id):
     except Tournament.DoesNotExist:
         return HttpResponse('Sorry Kiddo not here!')
 
-    participants = tournament.player.all()
+    participants = tournament.player.all().prefetch_related('user')
     context['participants'] = participants
-
-    all_reg_teams = tournament.team.all()
-    context['all_reg_teams'] = all_reg_teams
 
     game = tournament.tour_game.name
     context['game'] = game
@@ -159,13 +156,6 @@ def tourney(request, tour_id):
         else:
             tournament.status = 2
             tournament.save()
-        
-    try:
-        for participant in participants:
-            if participant.username == request.session['username']:
-                context['team_registered'] = True
-    except KeyError:
-        pass
 
     """ stage = Stage.objects.get(tour=tournament, stage_name='Qualifiers')
     context['groups'] = Round.objects.only('round_name').filter(tour=tournament, stage=stage)
