@@ -247,6 +247,7 @@ $(document).on('submit','#account-validate-form', function(e) {
 
     var formData = {
         'gameid': $('input[name=game_id]').val(),
+        'changed': 'False',
         'csrfmiddlewaretoken': $('input[name=csrfmiddlewaretoken]').val()
     }
     document.querySelector('.validate-modal-button').disabled=true;

@@ -28,12 +28,12 @@ document.querySelector('.create-team-modal-close').addEventListener('click', ()=
 $('input[name=team-name]').keyup(function() {
     let query = $('input[name=team-name]').val()
     if (!/^[0-9a-zA-Z\_]+$/.test(query)) {
-        document.querySelector('.special-char-warning').style.display = 'block';
-        document.querySelector('.special-char-warning').innerHTML = '<i class="fa fa-times" style="margin-right: 0.2rem"></i>'+"Special Characters and spaces not allowed!"
-        document.querySelector('.special-char-warning').style.color = 'red'
+        document.querySelector('#special-char-warn').style.display = 'block';
+        document.querySelector('#special-char-warn').innerHTML = '<i class="fa fa-times" style="margin-right: 0.2rem"></i>'+"Special Characters and spaces not allowed!"
+        document.querySelector('#special-char-warn').style.color = 'red'
     }
     else {
-        document.querySelector('.special-char-warning').style.display = 'none'
+        document.querySelector('#special-char-warn').style.display = 'none'
     }
 })
 
@@ -48,8 +48,8 @@ $(document).on('submit','#create-team-form', function(e) {
     }
     if (formData.team_name.slice(-1) === ' ') {
 	formData.team_name = formData.team_name.substring(0, formData.team_name.length - 1)
-    }} 
-    if (!/^[0-9a-zA-Z\_]+$/.test(query)) {
+    }}
+    if (!/^[0-9a-zA-Z\_]+$/.test(formData.team_name)) {
         return false
     }
     
