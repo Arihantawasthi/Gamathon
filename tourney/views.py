@@ -157,10 +157,6 @@ def tourney(request, tour_id):
             tournament.status = 2
             tournament.save()
 
-    score_card = []
-    score_card = sorted(score_card, key=lambda x: (x.points, x.kills), reverse=True)
-    context['score_card'] = score_card
-
     #Checking if the player has registered
     if request.method == 'POST':
         response_data = {}
@@ -484,7 +480,7 @@ def generateLadder(request, tour_id):
     match = Match.objects.get(round_id=group, tour=tour, match_name=match_name)
 
     score_card = ScoreCard.objects.prefetch_related('team').filter(Q(tour=tour) & Q(match=match) & Q(solo=None)).order_by('-points')
-    score_card = sorted(score_card, key=lambda x: x.kills, reverse=True)
+    score_card = sorted(score_card, key=lambda x: (x.points, x.kills), reverse=True)
     context = {
         'score_card': score_card
     }
