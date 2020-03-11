@@ -113,8 +113,12 @@ def tourney(request, tour_id):
     except Tournament.DoesNotExist:
         return HttpResponse('Sorry Kiddo not here!')
 
-    participants = tournament.player.all().prefetch_related('user')
-    context['participants'] = participants
+    #Checking whether the user has registered for the tournament or not.
+    try:
+        participants = tournament.player.filter(username=request.session['username'])[0]
+        context['registered'] = True
+    except:
+        context['registered'] = False
 
     game = tournament.tour_game.name
     context['game'] = game
@@ -129,11 +133,6 @@ def tourney(request, tour_id):
         user = User.objects.get(username=request.session['username'])
         game_val = Game_validate.objects.get(userName=user, gameName=game)
         context['game_validated'] = True
-        #Checking if user is registered
-        if user in participants:
-            context['registered'] = True
-        else:
-            context['registered'] = False
 
     except (Game_validate.DoesNotExist, KeyError):
         context['game_validated'] = False
@@ -145,11 +144,9 @@ def tourney(request, tour_id):
     if tournament.status == 1:
         if date < tournament.start_date:
             tournament.status = 1
-            tournament.save()
         elif date >= tournament.start_date:
             if time < tournament.start_time:
                 tournament.status = 1
-                tournament.save()
             else:
                 tournament.status = 2
                 tournament.save()
@@ -432,13 +429,26 @@ def teamPaidRegistration(request, team_name, tour_id):
 
 def loadParticipants(request, tour_id):
     tournament = Tournament.objects.get(id=tour_id)
-    all_reg_teams = tournament.team.all()
-    participants = tournament.player.all()
+    start = int(request.GET.get('start') or 0)
+    end = int(request.GET.get('end') or (start+1))
+    num_teams = 0
+    num_participants = 0
+
+    if tournament.tour_type == 'Squad':
+        all_reg_teams = tournament.team.all()[start:end]
+        num_teams = tournament.team.count()
+        participants = []
+    else:
+        all_reg_teams = []
+        num_participants = tournament.player.count()
+        participants = tournament.player.all()[start:end]
     context = {
         'all_reg_teams': all_reg_teams,
-        'participants': participants
+        'participants': participants,
+        'num_teams': num_teams,
+        'num_participants': num_participants,
+        'end': end
     }
-
     return render(request, 'tourney/load_participants.html', context)    
 
 def loadLadder(request, tour_id):
