@@ -157,20 +157,8 @@ def tourney(request, tour_id):
             tournament.status = 2
             tournament.save()
 
-    """ stage = Stage.objects.get(tour=tournament, stage_name='Qualifiers')
-    context['groups'] = Round.objects.only('round_name').filter(tour=tournament, stage=stage)
-    context['stages'] = Stage.objects.only('stage_name').filter(tour=tournament)
-    context['matches'] = Match.objects.only('match_name').filter(tour=tournament, round_id=Round.objects.get(round_name='Group 1', tour=tournament, stage=stage))
-    g1_players = Round.objects.filter(tour=tournament, stage=stage)[5].team.all()
-    g1 = Round.objects.filter(tour=tournament, stage=stage)[5] """
     score_card = []
-    """ for p in g1_players:
-        match = Match.objects.get(tour=tournament, round_id=g1, match_name='Match 1')
-        score = ScoreCard.objects.get(tour=tournament, match=match, team=p)
-        score_card.append(score) """
-    
     score_card = sorted(score_card, key=lambda x: (x.points, x.kills), reverse=True)
-
     context['score_card'] = score_card
 
     #Checking if the player has registered
@@ -459,40 +447,45 @@ def loadParticipants(request, tour_id):
 
 def loadLadder(request, tour_id):
     context = {}
-    tournament = Tournament.objects.get(id=tour_id)
-    stage_name = request.GET.get('stage_name')
-    match_name = request.GET.get('match_name')
-    round_name = request.GET.get('round_name')
+    tour = Tournament.objects.get(pk=tour_id)
+    incoming_stage = request.GET.get('stage_name')
 
-    stage = Stage.objects.get(tour=tournament, stage_name=stage_name)
-    try:
-        group = Round.objects.get(tour=tournament, round_name=round_name, stage=stage)
-        match = Match.objects.get(tour=tournament, round_id=group, stage=stage, match_name=match_name)
-    except:
-        context['note'] = f'{stage_name} hasn\'t started yet.'
-        context['status'] = 1
-        return render(request, 'tourney/load_ladder.html', context)
+    if incoming_stage == None:
+        stages = Stage.objects.only('stage_name').filter(tour=tour)
+        context['stages'] = stages
+    elif incoming_stage != None:
+        stage = Stage.objects.get(stage_name=incoming_stage, tour=tour)
+        groups = Round.objects.only('round_name').filter(stage=stage, tour=tour).reverse()
 
-    r = Round.objects.get(round_name='Group 1', tour=tournament, stage=stage)
-    context['groups'] = Round.objects.only('round_name').filter(tour=tournament, stage=stage)
-    context['matches'] = Match.objects.only('match_name').filter(tour=tournament, round_id=r)
-    all_teams = group.team.all()
-    score_card = []
-    for team in all_teams:
-        score = ScoreCard.objects.get(tour=tournament, match=match, team=team)
-        score_card.append(score)
-        
-    score_card = sorted(score_card, key=lambda x: (x.points, x.kills), reverse=True)
-    context['score_card'] = score_card
+        #Catching the error and throwing output that Stage hasn't started yet.
+        try:
+            matches = groups[0].round_match.all()
+        except:
+            context['empty'] = f"{incoming_stage} haven't started yet."
+            return render(request, 'tourney/load_options.html', context)
+
+        context['groups'] = groups
+        context['matches'] = matches
+        score_card = ScoreCard.objects.prefetch_related('team').filter(Q(tour=tour) & Q(match=matches[0]) & Q(solo=None)).order_by('-points')
+        score_card = sorted(score_card, key=lambda x: x.kills, reverse=True)
+        context['score_card'] = score_card
+        return render(request, 'tourney/load_options.html', context)
+    
     return render(request, 'tourney/load_ladder.html', context)
 
-def loadOptions(request, tour_id):
-    context = {}
-    tour = Tournament.objects.get(id=tour_id)
+def generateLadder(request, tour_id):
+    tour = Tournament.objects.get(pk=tour_id)
+    group_name = request.GET.get('group_name')
+    match_name = request.GET.get('match_name')
     stage_name = request.GET.get('stage_name')
-    round_name = request.GET.get('round_name')
 
-    stage = Stage.objects.get(stage_name=stage_name)
-    groups = Round.objects.only('round_name').filter(stage=stage, tour=tour)
-    context['groups'] = groups
-    return render(request, 'tourney/load_options.html', context)
+    stage = Stage.objects.get(stage_name=stage_name, tour=tour)
+    group = Round.objects.get(stage=stage, tour=tour, round_name=group_name)
+    match = Match.objects.get(round_id=group, tour=tour, match_name=match_name)
+
+    score_card = ScoreCard.objects.prefetch_related('team').filter(Q(tour=tour) & Q(match=match) & Q(solo=None)).order_by('-points')
+    score_card = sorted(score_card, key=lambda x: x.kills, reverse=True)
+    context = {
+        'score_card': score_card
+    }
+    return render(request, 'tourney/generate_ladder.html', context)

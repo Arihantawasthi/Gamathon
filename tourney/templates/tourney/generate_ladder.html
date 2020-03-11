@@ -1,35 +1,4 @@
-<div class="participants-search">
-    <select name="groups" id="groups-select">
-        {% for group in groups %}
-            <option value="{{ group.round_name }}">{{ group.round_name }}</option>
-        {% empty %}
-            <option value="">Select Group</option>
-        {% endfor %}
-    </select>
-    <select name="matches" id="matches-select">
-        {% for match in matches %}
-            <option value="{{ match.match_name }}">{{ match.match_name }}</option>
-        {% empty %}
-            <option value="">Select Match</option>
-        {% endfor %}
-    </select>
-</div>
-
-<div class="top-team-heading">
-    <div class="left-section">
-        <div class="s-no-head">S.No.</div>
-        <div class="img-name-head">Name</div>
-    </div>
-    <div class="right-section">
-        <div class="win-perc-head">Rank Pts</div>
-        <div class="win-perc-head">Kills</div>
-        <div class="points-head">Points</div>
-    </div>
-</div>
-
-
-<div class="top-team-table">
-    <div style="font-size: 14px; text-align: center; color: rgba(233, 221, 221, 0.7)">{{ empty }}</div>
+<div style="font-size: 14px; text-align: center; color: rgba(233, 221, 221, 0.7)">{{ empty }}</div>
 {% if tournament.status != 1 %}
     {% if tournament.tour_type == 'Solo' %}
         {% for participant in participants %}
@@ -71,4 +40,3 @@
 {% else %}
     <div style="color: rgba(233, 221, 221, 0.7); text-align: center; font-size: 14px; margin-top: 2rem; margin-bottom: 3rem;">Ladder will be available when tournament begins.</div>
 {% endif %}
-</div>

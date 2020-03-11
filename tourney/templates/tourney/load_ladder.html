@@ -1,47 +1,14 @@
-{% if g != 1 %}
-    <div class="top-team-table">
-        {% if status == 1 %}
-            <div style="color: white; text-align: center; font-size: 14px; margin-top: 1rem;">{{ note }}</div>
-        {% endif %}
-        {% for team in score_card %}
-            <div class="top-team-element">
-                <div class="left-section">
-                    <div class="s-no">{{ forloop.counter }}</div>
-                    <div class="img-name">
-                        <a href="{% url 'team' team.team.name %}" class="participant-name">
-                            <div class="team-img" style="background-image: url('{{ team.team.logo.url }}');"></div>{{ team.team.name }}
-                        </a>
-                    </div>
-                </div>
-                <div class="right-section">
-                    <div class="win-perc">{{ team.in_game_rank }}</div>
-                    <div class="win-perc">{{ team.kills }}</div>
-                    <div class="points">{{ team.points }}</div>
-                </div>
-            </div>
+<div class="ladder-heading">Ladder</div>
+<div class="line"></div>
+<div class="participants-search">
+    <input type="text" id="participants-search-bar" placeholder="Search..." onkeyup="searchFun()"><br>
+    <select name="phases" id="phases-select">
+        <option value="">Choose Stage</option>
+        {% for stage in stages %}
+            <option value="{{ stage.stage_name }}">{{ stage.stage_name }}</option>
         {% endfor %}
-    </div>
-{% else %}
-    <div class="top-team-table">
-        {% if status == 1 %}
-            <div style="color: white; text-align: center; font-size: 14px; margin-top: 1rem;">{{ note }}</div>
-        {% endif %}
-        {% for team in score_card %}
-            <div class="top-team-element">
-                <div class="left-section">
-                    <div class="s-no">{{ forloop.counter }}</div>
-                    <div class="img-name">
-                        <a href="{% url 'team' team.team.name %}" class="participant-name">
-                            <div class="team-img" style="background-image: url('{{ team.team.logo.url }}');"></div>{{ team.team.name }}
-                        </a>
-                    </div>
-                </div>
-                <div class="right-section">
-                    <div class="win-perc">{{ team.in_game_rank }}</div>
-                    <div class="win-perc">{{ team.kills }}</div>
-                    <div class="points">{{ team.points }}</div>
-                </div>
-            </div>
-        {% endfor %}
-    </div>
-{% endif %}
+    </select>
+</div>
+<div class="break-point">
+    
+</div>
