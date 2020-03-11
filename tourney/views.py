@@ -463,7 +463,7 @@ def loadLadder(request, tour_id):
         context['groups'] = groups
         context['matches'] = matches
         score_card = ScoreCard.objects.prefetch_related('team').filter(Q(tour=tour) & Q(match=matches[0]) & Q(solo=None)).order_by('-points')
-        score_card = sorted(score_card, key=lambda x: x.kills, reverse=True)
+        score_card = sorted(score_card, key=lambda x: (x.points, x.kills), reverse=True)
         context['score_card'] = score_card
         return render(request, 'tourney/load_options.html', context)
     
