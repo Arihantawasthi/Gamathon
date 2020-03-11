@@ -157,18 +157,6 @@ def tourney(request, tour_id):
             tournament.status = 2
             tournament.save()
 
-<<<<<<< HEAD
-    """ stage = Stage.objects.get(tour=tournament, stage_name='Qualifiers')
-    context['groups'] = Round.objects.only('round_name').filter(tour=tournament, stage=stage)
-    context['stages'] = Stage.objects.only('stage_name').filter(tour=tournament)
-    context['matches'] = Match.objects.only('match_name').filter(tour=tournament, round_id=Round.objects.get(round_name='Group 1', tour=tournament, stage=stage))
-    g1_players = Round.objects.filter(tour=tournament, stage=stage)[0].team.all()
-    g1 = Round.objects.filter(tour=tournament, stage=stage)[0]
-=======
-    g1_players = Round.objects.filter(tour=tournament, stage=stage)[5].team.all()
-    g1 = Round.objects.filter(tour=tournament, stage=stage)[5] """
-=======
->>>>>>> 0d05a121f651da2557a5736aa9581a04c60daa70
     score_card = []
     score_card = sorted(score_card, key=lambda x: (x.points, x.kills), reverse=True)
     context['score_card'] = score_card

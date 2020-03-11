@@ -88,7 +88,7 @@ shareBtn.addEventListener('click', function() {
     myFunction();
 });
 
-ladder.addEventListener('click', function() {
+/* ladder.addEventListener('click', function() {
     ladder.style.opacity = '1';
     $('.ladder-content').fadeIn();
     overview.style.opacity = '0.6';
@@ -103,7 +103,7 @@ ladder.addEventListener('click', function() {
     $('.players-content').fadeOut();
     tracker.style.transform = 'translate(6rem)';
     tracker.style.width = '4rem';
-});
+}); */
 
 overview.addEventListener('click', function() {
     ladder.style.opacity = '0.6';
@@ -247,6 +247,7 @@ $(document).on('submit','#account-validate-form', function(e) {
 
     var formData = {
         'gameid': $('input[name=game_id]').val(),
+        'changed': 'False',
         'csrfmiddlewaretoken': $('input[name=csrfmiddlewaretoken]').val()
     }
     document.querySelector('.validate-modal-button').disabled=true;
@@ -423,51 +424,73 @@ var x = setInterval(function() {
   }
 }, 1000);
 
-document.querySelector('#groups-select').addEventListener('change', () => {
-    console.log('Yha pe?')
-    formData = {
-        'round_name': $('#groups-select').val(),
-        'stage_name': $('#phases-select').val(),
-        'match_name': $('#matches-select').val(),
-    }
-    console.log(formData)
-    $.ajax({
-        type: "GET",
-        url: window.location.href + '/options',  // URL to your view that serves new info
-        data: formData
-    })
-    .done(function(response) {
-        document.querySelector('#matches-select').innerHTML = response;
-    });
-})
+$(document).on('click', '.ladder', () => {
+    ladder.style.opacity = '1';
+    $('.ladder-content').fadeIn();
+    overview.style.opacity = '0.6';
+    $('.overview-container').fadeOut();
+    rules.style.opacity = '0.6';
+    $('.rules-content').fadeOut();
+    prizes.style.opacity = '0.6'
+    $('.prizes-content').fadeOut();
+    schedule.style.opacity = '0.6'
+    $('.schedule-content').fadeOut();
+    players.style.opacity = '0.6';
+    $('.players-content').fadeOut();
+    tracker.style.transform = 'translate(6rem)';
+    tracker.style.width = '4rem';
 
-$('#phases-select').change(() => {
-    formData = {
-        'round_name': $('#groups-select').val(),
-        'stage_name': $('#phases-select').val(),
-        'match_name': 'Match 1',
-    }
-    console.log(formData)
-    $.ajax({
-        type: "GET",
-        url: window.location.href + '/options',  // URL to your view that serves new info
-        data: formData
-    })
-    .done(function(response) {
-        document.querySelector('#groups-select').innerHTML = response;
-    });
-})
-
-$('#matches-select').change(() => {
-    formData = {
-        'round_name': $('#groups-select').val(),
-        'match_name': $('#matches-select').val(),
-        'stage_name': $('#phases-select').val(),
-        'g': 1
-    }
     $.ajax({
         type: "GET",
         url: window.location.href + '/ladder',  // URL to your view that serves new info
+    })
+    .done(function(response) {
+        document.querySelector('.ladder-content').innerHTML = response;
+    });
+})
+
+$(document).on('change', '#phases-select', () => {
+    var formData = {
+        'stage_name': $('#phases-select').val()
+    }
+    console.log(formData)
+    $.ajax({
+        type: "GET",
+        url: window.location.href + '/ladder',
+        data: formData
+    })
+    .done(function(response) {
+        document.querySelector('.break-point').innerHTML = response
+    })
+})
+
+$(document).on('change', '#groups-select', () => {
+    var formData = {
+        'stage_name': $('#phases-select').val(),
+        'group_name': $('#groups-select').val(),
+        'match_name': $('#matches-select').val()
+    }
+    console.log(formData)
+    $.ajax({
+        type: "GET",
+        url: window.location.href + '/generate-ladder',
+        data: formData
+    })
+    .done(function(response) {
+        document.querySelector('.top-team-table').innerHTML = response
+    })
+})
+
+$(document).on('change', '#matches-select', () => {
+    var formData = {
+        'stage_name': $('#phases-select').val(),
+        'group_name': $('#groups-select').val(),
+        'match_name': $('#matches-select').val()
+    }
+    console.log(formData)
+    $.ajax({
+        type: "GET",
+        url: window.location.href + '/generate-ladder',
         data: formData
     })
     .done(function(response) {
