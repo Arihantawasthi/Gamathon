@@ -453,7 +453,6 @@ $(document).on('change', '#phases-select', () => {
     var formData = {
         'stage_name': $('#phases-select').val()
     }
-    console.log(formData)
     $.ajax({
         type: "GET",
         url: window.location.href + '/ladder',
@@ -470,7 +469,6 @@ $(document).on('change', '#groups-select', () => {
         'group_name': $('#groups-select').val(),
         'match_name': $('#matches-select').val()
     }
-    console.log(formData)
     $.ajax({
         type: "GET",
         url: window.location.href + '/generate-ladder',
@@ -487,7 +485,6 @@ $(document).on('change', '#matches-select', () => {
         'group_name': $('#groups-select').val(),
         'match_name': $('#matches-select').val()
     }
-    console.log(formData)
     $.ajax({
         type: "GET",
         url: window.location.href + '/generate-ladder',
