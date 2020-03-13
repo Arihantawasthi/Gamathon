@@ -1,0 +1,15 @@
+<div class="schedule-heading">Schedule</div>
+<div class="line"></div>
+
+{% if tour.status > 1 %}
+    <select name="phases" id="phases-select-sch">
+        <option value="">Choose a Stage</option>
+        {% for stage in stages %}
+            <option value="{{ stage.stage_name }}">{{ stage.stage_name }}</option>
+        {% endfor %}
+    </select>
+
+    <div class="groups-container"></div>
+{% else %}
+    <div style="text-align: center; color: rgba(233, 221, 221, 0.7); font-size: 14px;">Schedule will be generated after regisration closes.</div>
+{% endif %}

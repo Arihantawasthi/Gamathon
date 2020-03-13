@@ -7,6 +7,7 @@ urlpatterns = [
     path('tournament/<int:tour_id>/participants', views.loadParticipants, name='loadParticipants'),
     path('tournament/<int:tour_id>/ladder', views.loadLadder, name='loadLadder'),
     path('tournament/<int:tour_id>/generate-ladder', views.generateLadder, name='generateLadder'),
+    path('tournament/<int:tour_id>/load-schedule', views.loadSchedule, name='loadSchedule'),
     path('choose-team/registration/<int:tour_id>', views.chooseTeam, name='chooseTeam'),
     path('choose-players/registration/<team_name>/<int:tour_id>', views.choosePlayers, name='choosePlayers'),
     path('handleRegisterRequestUser/<username>/<int:tour_id>', views.handleRegisterRequestUser, name='handleRegisterRequestUser'),

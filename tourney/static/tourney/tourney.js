@@ -171,6 +171,14 @@ schedule.addEventListener('click', function() {
     playersCont.style.display = 'none';
     tracker.style.transform = 'translate(20.7rem)';
     tracker.style.width = '5rem';
+
+    $.ajax({
+        type: 'GET',
+        url: window.location.href + '/load-schedule'
+    })
+    .done(function(response) {
+        scheduleContent.innerHTML = response
+    })
 });
 
 /* players.addEventListener('click', function() {
@@ -487,5 +495,20 @@ $(document).on('change', '#matches-select', () => {
     })
     .done(function(response) {
         document.querySelector('.top-team-table').innerHTML = response
+    })
+})
+
+$(document).on('change', '#phases-select-sch', () => {
+    var formData = {
+        'stage_name': $('#phases-select-sch').val()
+    }
+    $.ajax({
+        type: 'GET',
+        url: window.location.href + '/load-schedule',
+        data: formData
+    })
+    .done(function(response) {
+        console.log('Request Completed')
+        document.querySelector('.groups-container').innerHTML = response
     })
 })
