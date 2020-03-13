@@ -62,6 +62,7 @@ class Announcements(models.Model):
 class Prize(models.Model):
     tour = models.ForeignKey(Tournament, on_delete=models.CASCADE, related_name='tour_prize', blank=True, null=True)
     place = models.PositiveSmallIntegerField(blank=True, default=1)
+    position = models.CharField(max_length=50, blank=True)
     prize = models.CharField(max_length=10, blank=True)
 
     def __str__(self):

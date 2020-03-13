@@ -1,0 +1,39 @@
+<div class="matches-heading">{{ stage_name }}</div>
+<div class="line"></div>
+
+{% for group in groups %}
+    <div class="schedule-matches">
+        <div class="schedule-matches-head">
+            <div class="schedule-matches-name">
+                {{ group.round_name }}
+            </div>
+            <div class="schedule-matches-icon">
+                <i class="fa fa-angle-down"></i>
+            </div>
+        </div>    
+        <div class="schedule-matches-list">
+            {% with matches=group.round_match.all %}
+                {% for match in matches %}
+                    <div class="schedule-matches-list-element">
+                        <div class="schedule-list-element-head">
+                            <div class="schedule-list-element-name">
+                                {{ match_name }}
+                            </div>
+                            <!-- <div class="schedule-list-element-status">
+                                Completed
+                            </div> -->
+                        </div>
+                        <div class="schedule-list-element-body">
+                            <div class="schedule-list-element-date">
+                                {{ match.start_date }}, {{ match.start_time }} IST <br>
+                                <span class="map-name">Map |  -{{ match.map_name }}</span>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            {% endwith %}
+        </div>
+    </div>
+{% empty %}
+    <div style="text-align: center; color: rgba(233, 221, 221, 0.7); font-size: 14px;">{{ note }}</div>
+{% endfor %}

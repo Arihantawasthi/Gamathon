@@ -136,23 +136,12 @@ def tourney(request, tour_id):
 
     except (Game_validate.DoesNotExist, KeyError):
         context['game_validated'] = False
-    
-    #Checking if tournament is completed or not
-    time = datetime.datetime.now().time()
-    date = datetime.datetime.now().date()
 
+    #Checking if tournament registration start time is passed and if yes updating the status
     if tournament.status == 1:
-        if date < tournament.start_date:
-            tournament.status = 1
-        elif date >= tournament.start_date:
-            if time < tournament.start_time:
-                tournament.status = 1
-            else:
-                tournament.status = 2
-                tournament.save()
-        else:
+        if datetime.datetime.now() > datetime.datetime.combine(tournament.start_date,tournament.start_time):
             tournament.status = 2
-            tournament.save()
+            tournament.save(update_fields=['status'])
 
     #Checking if the player has registered
     if request.method == 'POST':
@@ -495,3 +484,24 @@ def generateLadder(request, tour_id):
         'score_card': score_card
     }
     return render(request, 'tourney/generate_ladder.html', context)
+
+def loadSchedule(request, tour_id):
+    context = {}
+    tour = Tournament.objects.get(pk=tour_id)
+    stages = Stage.objects.only('stage_name').filter(tour=tour)
+    stage_name = request.GET.get('stage_name')
+
+    if stage_name != None:
+        stage = Stage.objects.get(stage_name=stage_name)
+        groups = Round.objects.filter(tour=tour, stage=stage)
+        
+        context['stage_name'] = stage_name
+        if groups.exists():
+            context['groups'] = groups
+        else:
+            context['note'] = f"{stage_name} hasn't started yet!"
+        return render(request, 'tourney/generate_schedule.html', context)
+
+    context['stages'] = stages
+    context['tour'] = tour
+    return render(request, 'tourney/load_schedule.html', context)
