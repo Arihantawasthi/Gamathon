@@ -73,6 +73,7 @@ $(document).on('submit','#reg-form', function(e) {
         document.querySelector('.notify-div').style.display = 'block'
         if (response_data.status === 'Failed :(') {
             setTimeout(() => {
+                document.querySelector('.reg-modal-button').innerHTML = 'Register'
                 document.querySelector('.notify-heading-content').innerHTML = response_data.status
                 document.querySelector('.notify-message').innerHTML = response_data.message
                 document.querySelector('.notify-div').style.right = '1rem'

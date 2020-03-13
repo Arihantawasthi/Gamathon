@@ -181,23 +181,6 @@ schedule.addEventListener('click', function() {
     })
 });
 
-/* players.addEventListener('click', function() {
-    ladder.style.opacity = '0.6';
-    ladderCont.style.display = 'none';
-    overview.style.opacity = '0.6';
-    overviewCont.style.display = 'none';
-    rules.style.opacity = '0.6';
-    rulesCont.style.display = 'none';
-    prizes.style.opacity = '0.6'
-    prizesCont.style.display = 'none'
-    schedule.style.opacity = '0.6'
-    scheduleContent.style.display = 'none'
-    players.style.opacity = '1';
-    playersCont.style.display = 'block';
-    tracker.style.transform = 'translate(11.1rem)';
-    tracker.style.width = '4.2rem';
-}); */
-
 var url = window.location.pathname;
 var tourid = url.substring(url.lastIndexOf('/')+1);
 
