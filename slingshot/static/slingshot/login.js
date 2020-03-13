@@ -34,6 +34,7 @@ $(document).on('submit','#login-form', function(e) {
         if (response_data.status === 0) {
             warning.style.display = 'block'
             warning.innerHTML = response_data.message
+            document.querySelector('.login-modal-button').innerHTML = "Login"
         }
         else {
             window.location.replace('https://gamathon.gg')
