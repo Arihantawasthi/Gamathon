@@ -9,17 +9,17 @@ from tourney.models import Game_validate, Tournament, Round, Match, Stage
 
 tour = Tournament.objects.get(id=9)
 groups = Round.objects.filter(tour=tour, stage=Stage.objects.get(stage_name='Quater-Final', tour=tour))
-groups = groups[1:12]
+groups = groups[0:12]
 print(groups) 
 
 reg_users = tour.player.all()
 
-for group in groups:
-    for team in group.team.all():
-        team_all_members = team.members.all()
-        for i in team_all_members:
-            if i in reg_users:
-                group.solo.add(i)
+#for group in groups:
+#    for team in group.team.all():
+#        team_all_members = team.members.all()
+#        for i in team_all_members:
+#            if i in reg_users:
+#                group.solo.add(i)
 
 for group in groups:
     g_dict = {}
@@ -31,7 +31,7 @@ for group in groups:
         for i in team.members.all():
             if i in g_players:
                 g_dict[team.name].append(Game_validate.objects.get(userName=i, gameName='PUBGM').gameId)
-    with open(f'./{group.round_name}.csv', 'w') as f:
+    with open(f'../tour_info/{group.round_name}.csv', 'w') as f:
         w = csv.writer(f)
         w.writerow(['SNo.', 'Team Name', 'Player IGN', 'Rank', 'Kills', 'Points'])
         counter = 0

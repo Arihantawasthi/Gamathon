@@ -9,11 +9,12 @@ os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'Gamathon.settings.prod')
 django.setup()
 
 from slingshot.models import User, Team
-from tourney.models import Tournament, Round
+from tourney.models import Tournament, Round, Stage
 from organize.models import Notification
 
 tour= Tournament.objects.get(id=9)
-group = Round.objects.get(round_name='Group 6')
+stage = Stage.objects.get(stage_name='Quater-Final', tour=tour)
+group = Round.objects.get(round_name='Group 1', stage=stage)
 
 g26_dict = {}
 g26_teams = group.team.all()
@@ -42,7 +43,7 @@ for recipients, emails in RECIPIENTS.items():
     c += 1
     for em in emails:
         try:
-            noti = Notification(user_1=User.objects.get(email=em), update=f'Match info: RoomID: 3708211, Password: PMBC6, Slot No: {c}, Match Start Time: 10:00 PM')
+            noti = Notification(user_1=User.objects.get(email=em), update=f'Match info: RoomID: 2538647, Password: PMBC1, Slot No: {c}, Match Start Time: 8:00 PM')
             noti.save()
             print('DONE!')
         except Exception as e:
@@ -151,7 +152,7 @@ for recipient, emails in RECIPIENTS.items():
 		                                                                  <tr>
 		                                                                     <td align="center" width="100%" style="padding: 0 15px;text-align: justify;color: white;font-size: 12px;line-height: 18px;">
 		                                                                        <h3 style="font-weight: 600; padding: 0px; margin: 0px; font-size: 16px; line-height: 24px; text-align: center; color: white;" class="title-color">Hey Homie,</h3>
-		                                                                        <p style="margin: 20px 0 30px 0;font-size: 15px;text-align: center; color: white;">Room ID: 3708211 <br> Password: PMBC6 <br> Match Start Time: 10:00 PM <br> SlotNo: {0} <br><br> Note: Please be seated only in your slot otherwise your team will be kicked out.<br> Don't Share this ID and Password with you friends only registered members all allowed. <br><br> Good Look For the Match Homie!</p>
+		                                                                        <p style="margin: 20px 0 30px 0;font-size: 15px;text-align: center; color: white;">Room ID: 2538647<br> Password: PMBC1 <br> Match Start Time: 8:00 PM <br> SlotNo: {0} <br><br> Note: Please be seated only in your slot otherwise your team will be kicked out.<br> Don't Share this ID and Password with you friends only registered members all allowed. <br><br> Good Look For the Match Homie!</p>
 		                                                                   
 		                                                                     </td>
 		                                                                  </tr>

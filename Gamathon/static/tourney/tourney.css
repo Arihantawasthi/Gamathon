@@ -400,7 +400,7 @@ body {
 
 .tourney-register {
     background: linear-gradient(90deg,#1571df,#05b6e8);
-    border-radius: 4px;
+    border-radius: 8px;
     box-shadow: 0 0 12px #1570da;
     margin: 1.5rem auto;
     height: 4.5rem;
@@ -412,9 +412,10 @@ body {
 }
 
 .tourney-registration-done, .tourney-live-card {
-    background: linear-gradient(90deg,#1571df,#05b6e8);
-    border-radius: 4px;
-    box-shadow: 0 0 12px #1570da;
+    /*background: linear-gradient(90deg,#1571df,#05b6e8); */
+    background: linear-gradient(90deg,#5cac01,#267001);
+    border-radius: 8px;
+    box-shadow: 0 0 12px rgb(19, 196, 19);
     margin: 1.5rem auto;
     height: 4.5rem;
     width: 17rem;
@@ -426,11 +427,12 @@ body {
 
 .tourney-live-card {
     background: #405b72;
+    box-shadow: 0 0 12px #1570da;
 }
 
 .tourney-register-entry {
     background: linear-gradient(90deg,#1571df,#05b6e8);
-    border-radius: 4px;
+    border-radius: 8px;
     box-shadow: 0 0 12px #1570da;
     margin: 1.5rem auto;
     height: 4.5rem;
@@ -443,7 +445,7 @@ body {
 
 .tourney-register-team {
     background: linear-gradient(90deg,#1571df,#05b6e8);
-    border-radius: 4px;
+    border-radius: 8px;
     box-shadow: 0 0 12px #1570da;
     margin: 1.5rem auto;
     height: 4.5rem;
@@ -456,7 +458,7 @@ body {
 
 .tourney-register-validate {
     background: linear-gradient(90deg,#1571df,#05b6e8);
-    border-radius: 4px;
+    border-radius: 8px;
     box-shadow: 0 0 12px #1570da;
     margin: 1.5rem auto;
     height: 4.5rem;
@@ -469,7 +471,7 @@ body {
 
 .tourney-registered {
     background: linear-gradient(90deg,#6ccd00,#309100);
-    border-radius: 4px;
+    border-radius: 8px;
     box-shadow: 0 0 12px #6ccd00;
     margin: 1.5rem auto;
     height: 4.5rem;
@@ -639,15 +641,30 @@ body {
 }
 
 .announce-content {
-    background-color: #2e2e3a;
+    background-color: #1571df;
     color:rgba(255, 255, 255, 0.877);
-    padding: 1.2rem 0.5rem 1.2rem 0.5rem;
     font-size: 14px;
     letter-spacing: 0.02rem;
     line-height: 1.2rem;
     box-shadow: 0px 5px 10px 0px rgba(0, 0, 0, 0.5);
-    border-radius: 6px;
     margin-bottom: 0.3rem;
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+}
+
+.announce-icon {
+    text-align: center;
+    width: 15%;
+    margin-right: 0.8rem;
+    /* background-color: #1365c8; */
+}
+
+.announcement {
+    width: 85%;
+    padding: 0.5rem 0rem;
+    overflow-wrap: break-word;
 }
 
 .tourney-desc-head::first-letter {
@@ -1382,7 +1399,6 @@ body {
 
 .top-team-element {
     width: 100%;
-    background-color: black;
     border-radius: 6px;
     color: white;
     display: flex;
@@ -1394,16 +1410,22 @@ body {
     margin-bottom: 0.2rem;
 }
 
-.top-team-element:first-child {
-    border-left: 5px solid gold;
-}
-
 .top-team-element:nth-child(2) {
-    border-left: 5px solid silver;
+    border-left: 5px solid gold;
+    /* box-shadow: 0px 2px 5px 0px rgba(255,223,0, 0.3);
+    margin-bottom: 0.5rem; */
 }
 
 .top-team-element:nth-child(3) {
+    border-left: 5px solid silver;
+    /* box-shadow: 0px 2px 5px 0px rgba(192,192,192, 0.3);
+    margin-bottom: 0.5rem; */
+}
+
+.top-team-element:nth-child(4) {
     border-left: 5px solid brown;
+    /* box-shadow: 0px 2px 5px 0px rgba(205,127,50, 0.3);
+    margin-bottom: 0.5rem; */
 }
 
 .left-section {
@@ -1495,6 +1517,12 @@ input:-webkit-autofill:active  {
     color: white;
 }
 
+#phases-select:focus, #groups-select:focus, #phases-select-sch:focus , #matches-select:focus {
+    outline-width: 0;
+    border: 1px solid rgb(19, 196, 19);
+    color: white;
+}
+
 #phases-select {
     margin-top: 1rem;
     padding: 0.8rem 0.5rem;
@@ -1503,6 +1531,18 @@ input:-webkit-autofill:active  {
     border-radius: 6px;
     color: white;
     width: 40%;
+    box-shadow: 0px 2px 5px 0px rgba(0, 0, 0, 0.5);
+    margin-right: 10%;
+}
+
+#phases-select-sch {
+    margin-top: 0rem;
+    padding: 1rem 0.5rem;
+    border: 0;
+    background: rgb(38, 38, 43);
+    border-radius: 6px;
+    color: white;
+    width: 100%;
     box-shadow: 0px 2px 5px 0px rgba(0, 0, 0, 0.5);
     margin-right: 10%;
 }

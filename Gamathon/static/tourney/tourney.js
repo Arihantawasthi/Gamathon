@@ -171,24 +171,15 @@ schedule.addEventListener('click', function() {
     playersCont.style.display = 'none';
     tracker.style.transform = 'translate(20.7rem)';
     tracker.style.width = '5rem';
-});
 
-/* players.addEventListener('click', function() {
-    ladder.style.opacity = '0.6';
-    ladderCont.style.display = 'none';
-    overview.style.opacity = '0.6';
-    overviewCont.style.display = 'none';
-    rules.style.opacity = '0.6';
-    rulesCont.style.display = 'none';
-    prizes.style.opacity = '0.6'
-    prizesCont.style.display = 'none'
-    schedule.style.opacity = '0.6'
-    scheduleContent.style.display = 'none'
-    players.style.opacity = '1';
-    playersCont.style.display = 'block';
-    tracker.style.transform = 'translate(11.1rem)';
-    tracker.style.width = '4.2rem';
-}); */
+    $.ajax({
+        type: 'GET',
+        url: window.location.href + '/load-schedule'
+    })
+    .done(function(response) {
+        scheduleContent.innerHTML = response
+    })
+});
 
 var url = window.location.pathname;
 var tourid = url.substring(url.lastIndexOf('/')+1);
@@ -493,4 +484,19 @@ $(document).on('change', '#matches-select', () => {
     .done(function(response) {
         document.querySelector('.top-team-table').innerHTML = response;
     });
+})
+
+$(document).on('change', '#phases-select-sch', () => {
+    var formData = {
+        'stage_name': $('#phases-select-sch').val()
+    }
+    $.ajax({
+        type: 'GET',
+        url: window.location.href + '/load-schedule',
+        data: formData
+    })
+    .done(function(response) {
+        console.log('Request Completed')
+        document.querySelector('.groups-container').innerHTML = response
+    })
 })

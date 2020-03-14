@@ -10,8 +10,8 @@ from tourney.models import Tournament, Game_validate, GameStat, Round, ScoreCard
 
 tour = Tournament.objects.get(id=9)
 
-#ADD GROUP SPECIFIC CARDS HERE AFTERWARDS
-match = Match.objects.get(round_id=Round.objects.get(round_name='Group 6'))
+stage = Stage.objects.get(stage_name='Quater-Final', tour=tour)
+match = Match.objects.get(round_id=Round.objects.get(round_name='Group 1', stage=stage), match_name='Overall', tour=tour)
 s = ScoreCard.objects.filter(match=match)
 
 for i in s:
