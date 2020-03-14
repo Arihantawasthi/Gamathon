@@ -14,22 +14,24 @@
         <div class="schedule-matches-list">
             {% with matches=group.round_match.all %}
                 {% for match in matches %}
-                    <div class="schedule-matches-list-element">
-                        <div class="schedule-list-element-head">
-                            <div class="schedule-list-element-name">
-                                {{ match_name }}
+                    {% if match.match_name != 'Overall' %}
+                        <div class="schedule-matches-list-element">
+                            <div class="schedule-list-element-head">
+                                <div class="schedule-list-element-name">
+                                    {{ match.match_name }}
+                                </div>
+                                <!-- <div class="schedule-list-element-status">
+                                    Completed
+                                </div> -->
                             </div>
-                            <!-- <div class="schedule-list-element-status">
-                                Completed
-                            </div> -->
-                        </div>
-                        <div class="schedule-list-element-body">
-                            <div class="schedule-list-element-date">
-                                {{ match.start_date }}, {{ match.start_time }} IST <br>
-                                <span class="map-name">Map |  -{{ match.map_name }}</span>
+                            <div class="schedule-list-element-body">
+                                <div class="schedule-list-element-date">
+                                    {{ match.start_date }}, {{ match.start_time }} IST <br>
+                                    <span class="map-name">Map |  -{{ match.map_name }}</span>
+                                </div>
                             </div>
                         </div>
-                    </div>
+                    {% endif %}
                 {% endfor %}
             {% endwith %}
         </div>
