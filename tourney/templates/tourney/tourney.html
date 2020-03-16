@@ -9,7 +9,7 @@
     {% block metatags %}
         <meta name="description" content="{{ tournament.name }} Hosted in Gamathon is an online {{ game }} tournament. Hurry! Register for glory, cash and prizes.">
         <meta property="og:title" content="{{ tournament.name}} is an online {{ game }} tournament hosted in Gamathon."/>
-        <meta property="og:url" content="https://www.gamathon.gg/tourney/{tournament.id}"/>
+        <meta property="og:url" content="https://www.gamathon.gg/tourney/{{tournament.id}}"/>
         <meta property="og:description" content="{{ tournament.name }} Hosted in Gamathon is an online {{ game }} tournament.">
     {% endblock %}
 
