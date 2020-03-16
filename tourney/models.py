@@ -25,7 +25,7 @@ class Game_validate(models.Model):
 
 class Tournament(models.Model):
     name = models.CharField(max_length=60, blank=True)
-    desc = models.CharField(max_length=500, blank=True, null=True)
+    desc = models.CharField(max_length=50000, blank=True, null=True)
     player = models.ManyToManyField(User, related_name='participant', blank=True)
     participants = models.PositiveIntegerField(default=0, blank=True)
     sponsor = models.CharField(max_length=50, blank=True)
