@@ -76,8 +76,8 @@
         <div class="organizer-banner-head-info-wrapper">
             <div class="organizer-banner-head">Organized By:</div>
             <div class="img-container">
-                <div class="imgs">
-                    <img src="{% static 'slingshot/Site_Material/logo.png' %}" width="60px" height="40px" alt="organizer-logo">
+                <div class="imgs" style="height: 40px; width: 60px"> 
+                    <img src="{{ tournament.organizer_logo.url }}" width="60px" height="40px" alt="organizer-logo">
                 </div>
             </div>
         </div>
@@ -259,15 +259,15 @@
                             </div>
                             <div class="overview-table-row">
                                 <div class="overview-table-column">Game</div>
-                                <div class="overview-table-column">PUBG Mobile</div>
+                                <div class="overview-table-column">{{ tournament.tour_game.fullname }}</div>
                             </div>
                             <div class="overview-table-row">
                                 <div class="overview-table-column">Registration Close</div>
-				<div class="overview-table-column">{{ tournament.start_date }}  {{ tournament.start_time }}</div>
+                                <div class="overview-table-column">{{ tournament.start_date }}, {{ tournament.start_time }}</div>
                             </div>
                             <div class="overview-table-row">
                                 <div class="overview-table-column">Tournament Type</div>
-                                <div class="overview-table-column">Battle Royale</div>
+                                <div class="overview-table-column">{{ tournament.tour_nature }}</div>
                             </div>
                         </div>
                     </div>
