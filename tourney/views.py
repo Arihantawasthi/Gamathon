@@ -492,7 +492,7 @@ def loadSchedule(request, tour_id):
     stage_name = request.GET.get('stage_name')
 
     if stage_name != None:
-        stage = Stage.objects.get(stage_name=stage_name)
+        stage = Stage.objects.get(stage_name=stage_name, tour=tour)
         groups = Round.objects.filter(tour=tour, stage=stage)
         
         context['stage_name'] = stage_name
