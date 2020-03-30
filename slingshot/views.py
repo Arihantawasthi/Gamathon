@@ -53,7 +53,7 @@ def index(request):
     #This will prevent making quries to get game on every iteration of tournament list in template 
     tournaments = Tournament.objects.select_related('tour_game').filter(Q(status=1) | Q(status=2)).order_by('-pk')
     context['tournaments'] = tournaments
-    
+
     return render(request, 'slingshot/index.html', context)
 
 def portal(request):

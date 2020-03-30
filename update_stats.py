@@ -8,10 +8,10 @@ django.setup()
 from slingshot.models import User, Team
 from tourney.models import Tournament, Game_validate, GameStat, Round, ScoreCard, Stage, Match
 
-tour = Tournament.objects.get(id=9)
+tour = Tournament.objects.get(id=11)
 
-stage = Stage.objects.get(stage_name='Quater-Final', tour=tour)
-match = Match.objects.get(round_id=Round.objects.get(round_name='Group 2', stage=stage), match_name='Match 3', tour=tour)
+stage = Stage.objects.get(stage_name='Qualifiers', tour=tour)
+match = Match.objects.get(round_id=Round.objects.get(round_name='Group 9', stage=stage), match_name='Match 2', tour=tour)
 s = ScoreCard.objects.filter(match=match, tour=tour)
 
 for i in s:
