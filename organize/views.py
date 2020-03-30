@@ -6,6 +6,8 @@ from .models import Organization, Notification
 from .tourneyManage import split, isPowerOfTwo, totalRounds
 import math
 from slingshot.views import sendNotification
+from django.template.loader import get_template
+from slingshot import amazonses
 
 # Create your views here.
 def createOrg(request):
@@ -277,3 +279,77 @@ def uploadOrgBackground(request, org_name, username):
         return redirect('orgProfile', org_name, username)
 
     return redirect('index')
+
+#For sending Room Id and passwords to users
+def orgPortal(request, tour_id):
+    tour = Tournament.objects.get(pk=tour_id)
+    stage = Stage.objects.get(stage_name='Qualifiers', tour=tour)
+    groups = Round.objects.filter(stage=stage, tour=tour)
+    context = {
+        'tour': tour,
+        'stage': stage,
+        'groups': groups
+    }
+    
+    if request.method == 'POST':
+        response_data = {}
+        stage_name = request.POST.get('stage_name')
+        group_name = request.POST.get('group_name')
+        room_id = request.POST.get('roomid')
+        password = request.POST.get('password')
+        time = request.POST.get('time')
+
+        response_data['stage_name'] = stage_name
+        response_data['group_name'] = group_name
+        response_data['room_id'] = room_id
+        response_data['password'] = password
+        response_data['time'] = time
+
+        tour= Tournament.objects.get(id=tour_id)
+        stage = Stage.objects.get(stage_name=stage_name, tour=tour)
+        group = Round.objects.get(round_name=group_name, stage=stage)
+
+        g_dict = {}
+        g_teams = group.team.all()
+        g_players = group.solo.all()
+        print(len(g_players))
+
+        for team in g_teams:
+            g_dict[team.name] = []
+            for i in team.members.all():
+                if i in g_players:
+                    g_dict[team.name].append(i.email)
+
+        print(g_dict)
+
+        c = 0
+        for recipients, emails in g_dict.items():
+            c += 1
+            for em in emails:
+                try:
+                    noti = Notification(user_1=User.objects.get(email=em), update=f'Match info: RoomID: {room_id}, Password: {password}, Slot No: {c}, Match Start Time: {time}')
+                    noti.save()
+                    print('DONE!')
+                except Exception as e:
+                    print(e)
+
+        htmly = get_template('organize/room_email.html')
+        context =  {
+            'room_id': room_id,
+            'password': password,
+            'time': time
+        }
+        amazonses.SUBJECT = 'Information Regarding Room ID and Password'
+
+        counter = 0
+        for recipents, emails in g_dict.items():
+            counter += 1
+            context['counter'] = counter
+            html_content = htmly.render(context)
+            amazonses.RECIPIENTS = emails
+            amazonses.BODY_HTML = html_content
+            amazonses.sendEmail()
+            amazonses.RECIPIENTS.clear()
+
+        return JsonResponse(response_data)
+    return render(request, 'organize/draft_tourney.html', context)

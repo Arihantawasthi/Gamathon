@@ -1,0 +1,89 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Play', 'sans-serif'; 
+}
+
+body {
+    background: linear-gradient(to left, rgb(12, 12, 12), #3b3939);
+    overflow-x: hidden;
+}
+
+.tour-heading {
+    color: white;
+    margin-top: 2rem;
+}
+
+.container {
+    margin: 0rem 1rem;
+}
+
+#stage-select {
+    margin-top: 2rem;
+    background-color: rgb(38,38,43);
+    width: 80%;
+    border-radius: 5px;
+    color: white;
+    padding: 0.8rem 0.5rem;
+    box-shadow: 0pc 3px 6px 0px rgba(0,0,0,0.5);
+
+}
+
+#group-select {
+    margin-top: 2rem;
+    background-color: rgb(38,38,43);
+    width: 80%;
+    color: white;
+    border-radius: 5px;
+    padding: 0.8rem 0.5rem;
+    box-shadow: 0pc 3px 6px 0px rgba(0,0,0,0.5);
+}
+
+.container {
+    margin-bottom: 8rem;
+}
+
+.room-id-field, .m-pass-field, .time-field {
+    margin-top: 2rem;
+    color: white;
+    margin-bottom: 0.3rem;
+}
+
+.room-id, .password, .time {
+    width: 100%;
+    background-color: rgb(38,38,43);
+    color: white;
+    border: 0;
+    border-radius: 5px;
+    padding: 0.8rem 0.5rem;
+    box-shadow: 0pc 3px 6px 0px rgba(0,0,0,0.5);
+}
+
+.room-id:focus, .password:focus, .time:focus {
+    background-color: rgb(38,38,43);
+}
+
+.send-roomid-pass {
+    background-color: #fe0000;
+    color: white;
+    padding: 0.6rem 1rem;
+    border: 0;
+    border-radius: 4px;
+    margin-top: 2rem;
+    box-shadow: 0px 2px 5px 0px rgba(0, 0, 0, 0.5)
+}
+
+@media only screen and (min-width: 1048px) {
+    .stage-select-container {
+       width: 80%;
+    }
+
+    .group-select-container {
+        width: 80%;
+    }
+
+    .room-id, .password, .time {
+        width: 80%;
+    }
+}
