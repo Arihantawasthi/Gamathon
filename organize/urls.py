@@ -3,6 +3,7 @@ from . import views
 
 urlpatterns = [
     path('create-organization', views.createOrg, name='createOrg'),
+    path('orgPortal/tournament/<int:tour_id>', views.orgPortal, name=''),
     path('create-tournament/<organization>', views.createTourney, name='createTourney'),
     path('publish-tourney/<organization>', views.publishTourney, name='publishTourney'),
     path('org-profile/<orgName>/<username>', views.orgProfile, name='orgProfile'),
