@@ -282,6 +282,11 @@ def uploadOrgBackground(request, org_name, username):
 
 #For sending Room Id and passwords to users
 def orgPortal(request, tour_id):
+    try:
+        if request['username'] != 'naman1234':
+            return redirect('index')
+    except:
+        return redirect('index')
     tour = Tournament.objects.get(pk=tour_id)
     stage = Stage.objects.get(stage_name='Qualifiers', tour=tour)
     groups = Round.objects.filter(stage=stage, tour=tour)
