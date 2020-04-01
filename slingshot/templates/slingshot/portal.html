@@ -58,6 +58,7 @@
                 <h1 style="display: none">Online Gaming Tournaments</h1>
                 <div class="heading">The Playground for Competitive Gaming.</div>
                 <div class="desc">Your E-sports journey begins here.</div>
+                <div class="desc" style="margin-top: 2rem; -moz-transform: rotate(180deg); -o-transform: rotate(180deg); -webkit-transform: rotate(180deg);">Why? Cuz it's 1st April I mean what else did you expect? Enjoy your stay ;)</div>
 
                 <div class="login-play-container">
                     <div class="create-acc">
@@ -139,17 +140,21 @@
             </div>        
         </div>
 
-        <div class="heading1 anim" data-delay="0s">
+        <!-- <div class="heading1 anim" data-delay="0s">
             Ready to Sign Up? It's Free!
-        </div>
+        </div> -->
 
-        <div class="register-btn anim" data-delay="0s">
+        <!-- <div class="register-btn anim" data-delay="0s">
             <a href="{% url 'register' %}">Create Account</a>
-        </div>
+        </div> -->
     </div>
+    <audio controls style="display: none;">
+        <source src="../../static/slingshot/Site_Material/april_fool.mp3" type="audio/mp3">
+    </audio>
 
     <footer class="footer" style="margin-left: 0px; width: 100%;">
-        <div class="footer-img-container">
+        <div class="footer-img-container" style="display: block;">
+            <div class="april-fool" style="color: white; background-color: #fe0000; border-radius: 5px; padding: 0.7rem 1.2rem; margin: 0.8rem auto; width: 50%;">WIN NOW!</div>
             <div class="footer-img"></div>
         </div>
         <div class="connect">
@@ -162,8 +167,12 @@
             <li><a href="{% url 'about' %}">About</a></li>
             <li><a href="{% url 'termsOfUse' %}">Terms Of Use</a></li>
             <li><a href="{% url 'privacyPolicy' %}">Privacy Policy</a></li>
+
+            <div class="desc" style="color: white; margin-top: 2rem; -moz-transform: rotate(180deg); -o-transform: rotate(180deg); -webkit-transform: rotate(180deg);">Why? Cuz it's 1st April, I mean what else did you expect? Enjoy your stay ;)</div>
+        
         </ul>
-        <div class="company-name">Copyright &copy Gamathon pvt. LTD. All Rights Reserved.</div>
+        <div class="company-name">Gamathon</div>
+        <div class="version">v <span style="color: white;">0.9</span></div>
     </footer>
     {% compress js %}
         <script src="{% static 'slingshot/portal.js' %}"></script>

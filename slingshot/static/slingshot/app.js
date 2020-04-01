@@ -84,6 +84,7 @@ document.querySelector('.recover-modal-close').addEventListener('click', ()=> {
 if (session.innerHTML === "") {document.querySelector('.notification-wrapper').style.display = 'none'}
 
 mobileNotification.addEventListener('click', ()=> {
+    notificationContainer.style.display = 'block'
     notificationContainer.style.transform = 'translate(0rem)'
     notificationContainer.style.width = '90%'
     setTimeout(function() {
@@ -101,6 +102,9 @@ notificationClose.addEventListener('click', () => {
     notificationContainer.style.transform = 'translate(-40rem)'
     notificationContainer.style.height = '0rem'
     notificationContainer.style.width = '0rem'    
+    setTimeout(function() {
+        notificationContainer.style.display = 'none'
+    }, 100)
 })
 
 container.addEventListener('click', () => {
@@ -454,3 +458,9 @@ document.onreadystatechange = function () {
         },0);
     }
   }
+
+document.querySelector('.april-fool').addEventListener('click', () => {
+    document.querySelector('audio').play()
+
+})
+
