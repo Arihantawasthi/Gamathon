@@ -32,7 +32,7 @@ const loginWarning = document.querySelector('.loginWarning')
 function myFunction() {
     var copyText = document.getElementById("shareLink");
     copyText.select();
-    copyText.setSelectionRange(0, 99999)
+    copyText.setSelectionRange(0, 99999);
     document.execCommand("copy");
 }
 try {
