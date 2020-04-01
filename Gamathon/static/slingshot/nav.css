@@ -1,3 +1,8 @@
+body {
+    -moz-transform: rotate(180deg);
+    -webkit-transform: rotate(180deg);
+    -o-transform: rotate(180deg);
+}
 /* ----NOTIFICATION BLOCK STARTS------ */
 .notify-div {
     display: none;
@@ -238,8 +243,8 @@ input:-webkit-autofill:active  {
 .indicator {
     height: 0.5rem;
     width: 0.5rem;
-    color: red;
-    /* background-color: #ec3333; */
+    color: white;
+    background-color: #ec3333;
     border-radius: 50%;
     font-size: 10px;
     position: absolute;
@@ -271,6 +276,7 @@ input:-webkit-autofill:active  {
     padding: 0.5rem 1rem;
     z-index: 4;
     transition: all 0.5s ease-in-out;
+    display: none;
     color: white;
 }
 
