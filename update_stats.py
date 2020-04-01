@@ -11,7 +11,7 @@ from tourney.models import Tournament, Game_validate, GameStat, Round, ScoreCard
 tour = Tournament.objects.get(id=11)
 
 stage = Stage.objects.get(stage_name='Qualifiers', tour=tour)
-match = Match.objects.get(round_id=Round.objects.get(round_name='Group 9', stage=stage), match_name='Match 2', tour=tour)
+match = Match.objects.get(round_id=Round.objects.get(round_name='Group 18', stage=stage), match_name='Match 2', tour=tour)
 s = ScoreCard.objects.filter(match=match, tour=tour)
 
 for i in s:

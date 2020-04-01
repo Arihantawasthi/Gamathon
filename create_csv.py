@@ -9,7 +9,7 @@ from tourney.models import Game_validate, Tournament, Round, Match, Stage
 
 tour = Tournament.objects.get(id=11)
 groups = Round.objects.filter(tour=tour, stage=Stage.objects.get(stage_name='Qualifiers', tour=tour))
-groups = groups[6:9]
+groups = groups[15:18]
 print(groups) 
 
 reg_users = tour.player.all()
