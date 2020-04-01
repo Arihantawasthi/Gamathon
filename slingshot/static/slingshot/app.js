@@ -458,8 +458,3 @@ document.onreadystatechange = function () {
         },0);
     }
   }
-
-document.querySelector('.april-fool').addEventListener('click', () => {
-    document.querySelector('audio').play()
-
-})

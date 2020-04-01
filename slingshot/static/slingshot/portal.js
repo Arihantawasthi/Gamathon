@@ -32,7 +32,3 @@ observer = new IntersectionObserver((entries) => {
 objects.forEach(object => {
     observer.observe(object)
 })
-
-document.querySelector('.april-fool').addEventListener('click', () => {
-    document.querySelector('audio').play()
-})

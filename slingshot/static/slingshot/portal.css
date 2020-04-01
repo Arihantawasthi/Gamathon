@@ -9,9 +9,6 @@ body {
     background: linear-gradient(to left, rgb(12, 12, 12), #3b3939);
     -webkit-font-smoothing: antialiased;
     text-rendering: optimizelegibility;
-    -moz-transform: rotate(180deg);
-    -webkit-transform: rotate(180deg);
-    -o-transform: rotate(180deg);
 }
 
 .loading-wrapper {
