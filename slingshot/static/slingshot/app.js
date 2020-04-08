@@ -457,10 +457,5 @@ document.onreadystatechange = function () {
            document.querySelector('body').style.overflowY = 'auto'
         },0);
     }
-  }
-
-document.querySelector('.april-fool').addEventListener('click', () => {
-    document.querySelector('audio').play()
-
-})
+}
 

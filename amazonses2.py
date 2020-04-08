@@ -12,25 +12,27 @@ from slingshot.models import User, Team
 from tourney.models import Tournament, Round, Stage
 from organize.models import Notification
 
-tour= Tournament.objects.get(id=11)
-stage = Stage.objects.get(stage_name='Qualifiers', tour=tour)
-group = Round.objects.get(round_name='Group 6', stage=stage, tour=tour)
-players = group.solo.all()
-print(group)
+#tour= Tournament.objects.get(id=11)
+#stage = Stage.objects.get(stage_name='Qualifiers', tour=tour)
+#group = Round.objects.get(round_name='Group 6', stage=stage, tour=tour)
+#players = group.solo.all()
+#print(group)
 
-print(stage)
-players = [i.email for i in players]
-print(players)
+#print(stage)
+#players = [i.email for i in players]
+#print(players)
 # Replace sender@example.com with your "From" address. 
 # This address must be verified.
 SENDER = 'support@gamathon.gg'  
 SENDERNAME = 'Gamathon'
 
-
+users = User.objects.all()
+emails = [i.email for i in users]
 # Replace recipient@example.com with a "To" address. If your account 
 # is still in the sandbox, this address must be verified.
-RECIPIENTS = players
+RECIPIENTS = emails
 print(RECIPIENTS)
+print(len(RECIPIENTS))
 
 #c = 0
 #for recipients, emails in RECIPIENTS.items():
@@ -61,10 +63,11 @@ HOST = "email-smtp.ap-south-1.amazonaws.com"
 PORT = 587
 
 # The subject line of the email.
-SUBJECT = 'Register for Rising Era Tournament'
+SUBJECT = 'Gamathon Users Survey'
 
 BODY_TEXT = """
-	Room Id Password
+	Please Fill out the this survey form which is exclusively for Gamathon Users it will help us improve our services and provide you better experience
+        <a href='https://forms.gle/DDHwHodSg7SeSCeZA'>Fill Form</a>
 """
 counter = 0
 # The HTML body of the email.
@@ -144,8 +147,11 @@ for recipient in RECIPIENTS:
 		                                                               <tbody>
 		                                                                  <tr>
 		                                                                     <td align="center" width="100%" style="padding: 0 15px;text-align: justify;color: white;font-size: 12px;line-height: 18px;">
-		                                                                        <h3 style="font-weight: 600; padding: 0px; margin: 0px; font-size: 16px; line-height: 24px; text-align: center; color: white;" class="title-color">Hey Homie,</h3>
-		                                                                        <p style="margin: 20px 0 30px 0;font-size: 15px;text-align: center; color: white;">We would like to inform you that today's matches of your group has been rescheduled as we noticed really high ping in PUBG Mobile. There seems to be a litte problem in PUBG Mobile's server. New dates will be announcend soon. Stay Tuned.</p>
+		                                                                        <h3 style="font-weight: 600; padding: 0px; margin: 0px; font-size: 16px; line-height: 24px; text-align: center; color: white;" class="title-color">Hope you doing well Homie,</h3>
+		                                                                        <p style="margin: 20px 0 30px 0;font-size: 15px;text-align: center; color: white;">I request you to fill out the given form so that we can improve our services and provide you a better experience altogether.</p>
+                                                                                     <br>
+                                                                                     <p>
+                                                                                     <a href='https://forms.gle/DDHwHodSg7SeSCeZA' style='font-weight: bold; color: white; padding: 0.6rem 1rem; margin-left: 36%; background-color: #f81b1b; border-radius: 6px;'>Fill Out Form</a></p>
 		                                                                     </td>
 		                                                                  </tr>
 		                                                               </tbody>

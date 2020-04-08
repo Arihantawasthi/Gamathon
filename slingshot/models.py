@@ -23,9 +23,6 @@ class User(models.Model):
     class Meta:
         indexes = [models.Index(fields=['username'])]
 
-    class Meta:
-        indexes = [models.Index(fields=['username'])]
-
     def __str__(self):
         return self.username
 

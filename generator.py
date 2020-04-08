@@ -9,7 +9,7 @@ from slingshot.models import User, Team
 from tourney.models import Tournament, Game_validate, GameStat, Round, ScoreCard, Stage, Match
 
 tour = Tournament.objects.get(id=11)
-group = Round.objects.get(tour=tour, stage=Stage.objects.get(stage_name='Qualifiers', tour=tour), round_name='Group 18')
+group = Round.objects.get(tour=tour, stage=Stage.objects.get(stage_name='Qualifiers', tour=tour), round_name='Group 39')
 match = Match.objects.get(tour=tour, round_id=group, match_name='Overall')
 #groups = Round.objects.filter(tour=tour, stage=Stage.objects.get(stage_name='Qualifiers', tour=tour))
 scs_all = ScoreCard.objects.filter(tour=tour, match=match)
